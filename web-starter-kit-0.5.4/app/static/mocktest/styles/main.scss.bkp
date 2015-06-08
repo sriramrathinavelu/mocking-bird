@@ -1,0 +1,670 @@
+/*
+ * Web Starter Kit
+ *
+ * Multi-screen layout styles for your page. Brought to you by the
+ * Web Starter Kit team.
+ *
+ */
+@import '_h5bp';
+
+/*
+ * Visual Style Guide styles
+ * Remove if you prefer to use a CSS library, like Bootstrap
+ */
+@import 'components/components';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  background-color: #fff;
+  box-sizing: border-box;
+  min-height: 100%;
+  background-image: url(../images/background.jpg);
+  background-size: cover;
+  color: #FFFFFF;
+}
+
+body.open {
+  overflow: hidden;
+}
+
+.app-bar {
+  display: block;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /*background-color: #4285f4;*/
+  overflow: hidden;
+  z-index: 1;
+}
+
+.app-bar-container {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 60px;
+  position: relative;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin: 0 auto;
+}
+
+.app-bar.open,
+.app-bar.open ~ main,
+.app-bar.open ~ .acting-main {
+  -webkit-transform: translate(250px, 0);
+          transform: translate(250px, 0);
+}
+
+.app-bar .logo {
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  font-size: 2em;
+  line-height: 60px;
+  margin: 0 16px;
+  padding: 0;
+  color: #fefefe;
+  float: none;
+  max-width: none;
+  font-weight: 300;
+  display: initial;
+}
+
+.app-bar .logo a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: normal;
+}
+
+.app-bar-actions {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  z-index: 2;
+}
+
+.app-bar button {
+  width: 60px;
+  height: 60px;
+  background-image: none;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  display: inline-block;
+  -webkit-transition: background-color 0.2s ease-out;
+          transition: background-color 0.2s ease-out;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-bar button img {
+  height: 24px;
+  width: 24px;
+}
+
+.app-bar button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.app-bar button:focus {
+  background-color: rgba(255, 255, 255, 0.2);
+  outline: 0;
+}
+
+.app-bar button:active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.promote-layer {
+  /*
+  This may promote the layer to a composited
+  layer.
+
+  Replace with will-change when available
+
+  #perfmatters
+  */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.base,
+p,
+ul,
+ol {
+  font-size: 19px;
+}
+
+.navdrawer-container,
+.offcanvas-container {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 250px;
+  height: 100%;
+  padding-top: 40px;
+  background-color: #404040;
+  color: #fefefe;
+  -webkit-transform: translate(-250px, 0);
+          transform: translate(-250px, 0);
+  overflow-y: auto;
+}
+
+.navdrawer-container.open,
+.offcanvas-container.open {
+  -webkit-transform: translate(0, 0);
+          transform: translate(0, 0);
+}
+
+.app-bar,
+.navdrawer-container.opened,
+.offcanvas-container.opened,
+main,
+.acting-main{
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+          transition: transform 0.3s ease-out;
+}
+
+.navdrawer-container h4,
+.navdrawer-container ul li a,
+.offcanvas-container h4,
+.offcanvas-container ul li a {
+  height: 60px;
+  padding: 17px 20px;
+  line-height: 1.4;
+}
+
+.navdrawer-container h4,
+.offcanvas-container h4 {
+  background-color: white;
+  color: #404040;
+}
+
+.navdrawer-container ul,
+.offcanvas-container ul {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.navdrawer-container ul li a,
+.offcanvas-container ul li a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  -webkit-transition: background-color 0.2s ease-out;
+          transition: background-color 0.2s ease-out;
+  white-space: nowrap;
+}
+
+.navdrawer-container ul li,
+.offcanvas-container ul li {
+  border-bottom-style: solid;
+  border-width: 1px;
+  border-color: white;
+  padding: 0;
+}
+
+.navdrawer-container ul li::before,
+.offcanvas-container ul li::before {
+  content: none;
+}
+
+.navdrawer-container ul li a:hover,
+.offcanvas-container ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.navdrawer-container ul li a:focus,
+.offcanvas-container ul li a:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  outline: 0;
+}
+
+.navdrawer-container ul li a:active,
+.offcanvas-container ul li a:active {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.mediachecker {  
+  opacity: 0;
+  float:left;
+}
+
+#contentcollapser {
+  display: none;  
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+}
+
+#content{
+  display : block;
+}
+
+.centered-icon {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centered-div{  
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  width: 100%;
+  color: black;
+  padding-left: 18px;
+  padding-right: 18px;
+  text-align: center;  
+}
+
+.centered-input {
+  margin-top: 13px;
+  margin-bottom: 13px;  
+  width: 100%;
+  height: 40px;
+}
+
+.centered-input-text {
+  text-align: center;
+}
+
+.centered-button {  
+  width: 100%;  
+  display: block; 
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+
+.right-align {
+  position: absolute;
+  right: 0px;
+  margin-right: 10px;
+}
+
+.top {
+  display: flex;
+  margin-top: 0px;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-bottom: 10px;
+}
+
+.middle {
+  /*float:right;*/
+ }
+
+ .middle-item {
+  margin-top: 10px;
+  width: 100%;
+ }
+
+.full-width {
+  width: 100%;
+}
+
+.greyed-input {
+  color: #606060;
+}
+
+.valid-input {
+  background: white url('/static/mocktest/images/icons/accept.png') left no-repeat;
+  padding-left: 40px;
+}
+
+.invalid-input {
+  background: white url('/static/mocktest/images/icons/warning.png') left no-repeat;
+  padding-left: 40px;
+}
+
+.form-error {
+  color: #FFFE00;
+}
+
+.hidden-element {
+  display: none;
+}
+
+#time-text {
+  padding-top: 0px;
+}
+
+#answer-space {
+  height: 150px;
+}
+
+
+#my-fb-login {
+  background-color: #3b5998;
+  border-color: #3b5998;
+}
+
+#signup {
+  color: white;  
+  display: block;
+  outline-color: transparent;
+}
+
+#username {
+  background: white url('/static/mocktest/images/icons/user.png') left no-repeat;
+  padding-left: 40px;
+}
+
+
+#password {
+  background: white url('/static/mocktest/images/icons/closed-lock.png') left no-repeat;
+  padding-left: 40px;
+}
+
+#controls{
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  width: 100%;
+  color: black;
+}
+
+#companyinput{
+  margin: inherit;
+  width: 100%;
+  height: 40px;
+}
+
+#positionselect{    
+  margin: inherit;
+  background-color: #fff;
+  width: 100%;
+  height:40px;
+}
+
+#buttoncontrols{
+  width: 100%;
+  display: block;
+}
+
+#begintest {  
+  width: 100%; 
+}
+
+#schedtest {  
+  width: 100%;
+}
+
+.acting-main {
+  margin: 0 auto;
+  /* Height of the header */
+  padding: 0px 16px 16px 16px;
+  min-height: 85%;
+  color: white;
+}
+
+main {
+  margin: 0 auto;
+  /* Height of the header */
+  padding: 60px 16px 16px 16px;
+  min-height: 100%;
+  color: white;
+}
+
+@media screen and (min-width: 550px) {
+  #content {
+    display: block;
+  }
+
+  #contentcollapser {
+    display: none;
+  }
+
+  #buttoncontrols {
+    display: flex;
+  }
+
+  #begintest #schedtest {
+    width: 50%;
+  }
+
+  .mediachecker {
+    display: none;
+    float:none;
+  }
+
+  .centered-small-div {
+    max-width: 400px;
+    margin: 0 auto; 
+  }
+
+}
+
+/** Larger Screens - desktops and tablets **/
+@media all and (min-width: 990px) {
+
+  .mobile {
+    display: none;
+  }
+
+  .mediachecker {
+    display: none;
+    float: right;
+  }
+
+  #contentcollapser {
+    display: none;
+  }
+
+  .app-bar {
+    position: relative;
+  }
+
+  .top {
+    float:right;
+  }
+
+  .app-bar.open,
+  .app-bar.open ~ main,
+  .app-bar.open ~ .acting-main {
+    -webkit-transform: translate(0px, 0);
+            transform: translate(0px, 0);
+  }
+
+  .navdrawer-container,
+  .offcanvas-container {
+    background-color: transparent;
+    padding-top: 0px;
+  }
+
+  .app-bar-container {
+    display: block;
+    height: 130px;
+    max-width: 864px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    //background-color: #4285f4;
+  }
+
+  .app-bar .logo {
+    float: left;
+    margin: 0;
+    padding: 0;
+    line-height: 130px;
+    font-size: 46px;
+  }
+
+  .app-bar-actions {
+    float: right;
+  }
+
+  .app-bar::after {
+    content: ' ';
+    display: block;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+  }
+
+  button.menu {
+    display: none;
+  }
+
+  img.menu {
+    display: none;
+  }
+
+  .navdrawer-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+    -webkit-transition: none;
+            transition: none;
+    overflow-y: auto;
+  }
+
+
+
+  .offcanvas-container {    
+    position: relative;
+    float: left;
+    width: 200px;
+    height: auto;
+    margin-top: 0;
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+    -webkit-transition: none;
+            transition: none;
+    overflow-y: auto;
+  }
+
+
+
+
+  .navdrawer-container h4{
+    display: none;
+  }
+
+
+  .offcanvas-container ul,
+  .offcanvas-container h4 {
+    max-width: 200px;
+  }
+
+  .navdrawer-container ul {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 864px;
+    margin: 0 auto;
+    -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+
+  .navdrawer-container ul li {
+    border: none;
+  }
+
+  .acting-main {
+    width: 100%;
+    max-width: 864px;
+    padding-top: 0;
+    min-height: initial;        
+  }
+
+
+  main {
+    max-width: 864px;
+    padding-top: 0;
+    min-height: initial;    
+  }
+
+  .centered-small-div {
+    max-width: 400px;
+    margin: 0 auto; 
+  }
+
+  body {
+    overflow-y: scroll;
+  }
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 300;
+  src: url(/static/mocktest/fonts/RobotoCondensed-Light.eot);
+  src: local('Roboto Condensed Light'), 
+  	   local('RobotoCondensed-Light'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-Light.eot) format('embedded-opentype'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-Light.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/static/mocktest/fonts/RobotoCondensed-Regular.eot);
+  src: local('Roboto Condensed Regular'), 
+  	   local('RobotoCondensed-Regular'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-Regular.eot) format('embedded-opentype'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-Regular.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  src: url(/static/mocktest/fonts/RobotoCondensed-Bold.eot);
+  src: local('Roboto Condensed Regular'), 
+  	   local('RobotoCondensed-Bold'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-Bold.eot) format('embedded-opentype'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-Bold.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: italic;
+  font-weight: 300;
+  src: url(/static/mocktest/fonts/RobotoCondensed-LightItalic.eot);
+  src: local('Roboto Condensed Light Italic'), 
+  	   local('RobotoCondensed-LightItalic'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-LightItalic.eot) format('embedded-opentype'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-LightItalic.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: italic;
+  font-weight: 400;
+  src: url(/static/mocktest/fonts/RobotoCondensed-Italic.eot);
+  src: local('Roboto Condensed Italic'), 
+  	   local('RobotoCondensed-Italic'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-Italic.eot) format('embedded-opentype'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-Italic.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto Condensed';
+  font-style: italic;
+  font-weight: 700;
+  src: url(/static/mocktest/fonts/RobotoCondensed-BoldItalic.eot);
+  src: local('Roboto Condensed Bold Italic'), 
+  	   local('RobotoCondensed-BoldItalic'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-BoldItalic.eot) format('embedded-opentype'), 
+	   url(/static/mocktest/fonts/RobotoCondensed-BoldItalic.woff) format('woff');
+}

@@ -1,0 +1,76 @@
+[30/May/2015 19:35:00] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2
+[30/May/2015 19:35:00] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:35:01] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:35:02] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:37:02] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2
+[30/May/2015 19:37:02] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:37:05] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:37:06] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:41:54] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:41:55] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:17] WARNING [py.warnings:220] /usr/local/lib/python2.7/dist-packages/django/db/utils.py:238: RemovedInDjango19Warning: In Django 1.9 the TEST_NAME connection setting will be moved to a NAME entry in the TEST setting
+  self.prepare_test_settings(alias)
+
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:741] Connecting to cluster, contact points: ['localhost']; protocol version: 2
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:106] Host localhost is now marked up
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1910] [control connection] Opening new connection to localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60260752) to localhost because compression is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.io.libevreactor:97] Starting libev event loop
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60260752) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1915] [control connection] Established new connection <LibevConnection(60260752) localhost:9042>, registering watchers and refreshing schema and topology
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2164] [control connection] Refreshing node list and token map using preloaded results
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2235] [control connection] Finished fetching ring info
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2237] [control connection] Rebuilding token map due to topology changes
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2311] [control connection] Attempting to use preloaded results for schema agreement
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2378] [control connection] Schemas match
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:756] Control connection created
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:404] Initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60782416) to localhost because compression is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60782416) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60783440) to localhost because compression is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60783440) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:416] Finished initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1633] Added pool for host localhost to session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:130] cqlengine connection initialized with internally created session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMIT 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMIT 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMIT 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMIT 10000
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2463] Shutting down Cluster Scheduler
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2003] Shutting down control connection
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60260752) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2497] Not executing scheduled task due to Scheduler shutdown
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60782416) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60783440) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:118] All Connections currently closed, event loop ended
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:136] Waiting for event loop thread to join...
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:143] Event loop thread was joined
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:56:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:56:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:56:23] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:56:23] DEBUG [mocktest.standalone:71] Retrieved 2 questions

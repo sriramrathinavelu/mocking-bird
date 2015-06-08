@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="../compiled/flipclock.css">
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+		<script src="../compiled/flipclock.js"></script>		
+	</head>
+	<body>
+		<div class="clock" style="margin:2em;height:100px;"></div>
+
+		<script type="text/javascript">
+			var clock;
+
+			$(document).ready(function() {
+
+				// Instantiate a counter
+				clock = new FlipClock($('.clock'), 10, {
+					clockFace: 'HourlyCounter',
+					autoStart: true,
+					countdown: true
+				});
+
+				clock.setTime(3600);
+				
+			});
+		</script>
+		
+	</body>
+</html> 

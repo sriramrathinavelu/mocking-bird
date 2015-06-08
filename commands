@@ -1,0 +1,7 @@
+#STARTING WSK
+
+gulp serve
+
+#STARTING DJANGO
+
+python manage.py runserver

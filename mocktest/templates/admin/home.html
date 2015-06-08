@@ -1,0 +1,50 @@
+{% extends "admin/formbase.html" %}
+
+{%block jquery %}
+    $("#addquestion").click(function(){
+        window.location="/admin/addQuestion.html?companyId=" + $("#companyName").val()
+    });
+    $("#moderateQuestion").click(function(){
+        window.location="/admin/moderateQuestionTable.html?" + $("#moderateIds").val()
+    });
+    $("#editQuestion").click(function(){
+        window.location="/admin/editQuestion.html?" +
+        "companyId=" + $("#companyId").val() +
+        "&positionId=" + $("#positionId").val() +
+        "&questionId=" + $("#questionId").val()
+    });
+{% endblock %}
+
+{% block content %}
+    <h4> Admin Page </h4>
+    <ul>
+    <li>
+    <a href="/admin/addCompany.html">Add Company</a>
+    </li>
+    <li>
+    <a href="/admin/addPosition.html">Add Position</a>
+    </li>
+    <li>
+    <a id="addquestion" href="#">Add Questions</a> for company 
+    <select id="companyName">
+        {% for key, value in companyNames.iteritems %}
+            <option value="{{key}}">{{value}}</option>
+        {% endfor %}
+    </select>
+    </li>
+    <li>
+    <a id="editQuestion" href="#">Edit Question</a> for UUIDS'
+    <input id="companyId" type="text" value="Company ID"/>
+    <input id="positionId" type="text" value="Position ID"/>
+    <input id="questionId" type="text" value="Question ID"/>
+    </li>
+    <li>
+    <a id="moderateQuestion" href="#">Moderate Question</a> for company/position
+    <select id="moderateIds">
+        {% for key, value in moderateIds.iteritems %}
+            <option value="{{key}}">{{value}}</option>
+        {% endfor %}
+    </select>
+    </li>
+    </ul>
+{% endblock %}
