@@ -1,6 +1,6 @@
 /* jQuery Countdown styles 2.0.0. */
 #defaultCountdown {
-    background-color: #121617;
+    background-color: #272822; /*#121617;*/
     color: #FFFFFF;
     font-family: sans-serif;
 }

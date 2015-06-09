@@ -20,12 +20,22 @@ class LinearByTime(BaseTest):
     def getQuestions(self, numQ=3):
         # Find the last question asked for that user
         lastQuestion = self.__getLastQuestion()
+        questionsList = []
         # Find numQ questions later than the last question
         if lastQuestion:
             questions = QuestionBank.objects.\
                 filter(companyid=self.companyId,
                        positionid=self.positionId,
                        questionid__gt=lastQuestion).limit(numQ)
+            questionsList = [q for q in questions]
+            if len(questions) < numQ:
+                # If not go back and add questions at the beginning
+                questions = QuestionBank.objects.\
+                                         filter(companyid=self.companyId,
+                                                positionid=self.positionId).\
+                                         limit(numQ-len(questions))
+                for q in questions:
+                    questionsList.append(q)
         else:
             # Maybe there were no test taken for this
             # company/position by the user
@@ -33,11 +43,6 @@ class LinearByTime(BaseTest):
                                      filter(companyid=self.companyId,
                                             positionid=self.positionId).\
                                      limit(numQ)
-        # If not go back and add questions at the beginning
-        if len(questions) < numQ:
-            questions.extend(QuestionBank.objects.
-                             filter(companyid=self.companyId,
-                                    positionid=self.positionId).
-                             limit(numQ-len(questions)))
+            questionsList = [q for q in questions]
         self.numQ = len(questions)
-        self.questions = questions
+        self.questions = questionsList

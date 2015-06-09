@@ -33,3 +33,18 @@
 [05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
 [05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
 [05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[09/Jun/2015 07:10:55] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 07:29:09] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 07:44:50] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:56:00] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:56:09] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 07:57:03] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:57:16] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 07:57:16] DEBUG [mocktest.DAOUtil:114] Existing Company: False Existing Position: False Existing combination: False
+[09/Jun/2015 08:17:52] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 08:18:02] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 08:18:02] DEBUG [mocktest.DAOUtil:114] Existing Company: False Existing Position: True Existing combination: False
+[09/Jun/2015 08:27:20] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:106] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:109] Existing Company: False Existing Position: True Existing combination: False
+[09/Jun/2015 08:31:51] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]

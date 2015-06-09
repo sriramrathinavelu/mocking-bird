@@ -84,7 +84,6 @@ def addQuestion(request):
         form = adminForms.addQuestionForm(companyId=companyId)
     else:
         form = adminForms.addQuestionForm(request.POST)
-
         if form.is_valid():
             if form.cleaned_data['choices']:
                 choices = ','.split(form.cleaned_data['choices'])

@@ -8,6 +8,13 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# UTILITY CHOICE WIDGET FOR DYNAMIC CHOICES
+
+
+class DynamicChoiceField(forms.ChoiceField):
+    def valid_value(self, value):
+        return True
+
 
 class addCompanyForm (forms.Form):
     companyName = forms.CharField(label='Company Name')
@@ -34,24 +41,25 @@ class addQuestionForm (forms.Form):
             positions = []
             for company in companies:
                 positions.append((company.positionid, company.positionname))
-            self.fields['companyId'] = forms.CharField(initial=companyId,
-                                                       widget=forms.HiddenInput)
+            self.fields['companyId'].initial = companyId
             self.fields['positionName'].choices = positions
-            
 
-    positionName = forms.ChoiceField(label='Position Name')
+    companyId = forms.CharField(widget=forms.HiddenInput)
+    positionName = DynamicChoiceField(label='Poforms.CharField(sition Name')
     question = forms.CharField(label='Question', widget=forms.Textarea)
     questionType = forms.ChoiceField(label='Question Type',
-                                     choices=[('1', 'Multiple Choice Single Answer'),
-                                              ('2', 'Multiple Choice Multiple Answer'),
-                                              ('3', 'Descriptive Answer'),
-                                              ('4', 'Program')])
+                                     choices=[
+                                      ('1', 'Multiple Choice Single Answer'),
+                                      ('2', 'Multiple Choice Multiple Answer'),
+                                      ('3', 'Descriptive Answer'),
+                                      ('4', 'Program')])
     answer = forms.CharField(label='Answer', widget=forms.Textarea)
     choices = forms.CharField(label='Choices', required=False)
-    input = forms.CharField(label='Input', widget=forms.Textarea, required=False)
+    input = forms.CharField(label='Input',
+                            widget=forms.Textarea,
+                            required=False)
     key = forms.CharField(label='Key', widget=forms.Textarea, required=False)
     timeToSolve = forms.CharField(label='Time to Solve', required=False)
-
 
 
 class editQuestionForm (forms.Form):
@@ -80,18 +88,20 @@ class editQuestionForm (forms.Form):
                                widget=forms.Textarea(attrs={'rows': 10,
                                                             'cols': 140}))
     questionType = forms.ChoiceField(label='Question Type',
-                                     choices=[('1', 'Multiple Choice Single Answer'),
-                                              ('2', 'Multiple Choice Multiple Answer'),
-                                              ('3', 'Descriptive Answer'),
-                                              ('4', 'Program')])
+                                     choices=[
+                                      ('1', 'Multiple Choice Single Answer'),
+                                      ('2', 'Multiple Choice Multiple Answer'),
+                                      ('3', 'Descriptive Answer'),
+                                      ('4', 'Program')])
     answer = forms.CharField(label='Answer',
                              widget=forms.Textarea(attrs={'rows': 10,
                                                           'cols': 140}))
     choices = forms.CharField(label='Choices', required=False)
-    input = forms.CharField(label='Input', widget=forms.Textarea, required=False)
+    input = forms.CharField(label='Input',
+                            widget=forms.Textarea,
+                            required=False)
     key = forms.CharField(label='Key', widget=forms.Textarea, required=False)
     timeToSolve = forms.CharField(label='Time to Solve', required=False)
-
 
 
 class moderateQuestionForm(forms.Form):
@@ -142,32 +152,38 @@ class moderateQuestionForm(forms.Form):
         if timeToSolveVal:
             self.fields['timeToSolve'].initial = timeToSolveVal
         if companyId:
-            self.fields['companyId'] = forms.CharField(initial=companyId,
-                                                       widget=forms.HiddenInput())
+            self.fields['companyId'] = forms.CharField(
+                                        initial=companyId,
+                                        widget=forms.HiddenInput())
         if positionId:
-            self.fields['positionId'] = forms.CharField(initial=positionId,
-                                                       widget=forms.HiddenInput())
+            self.fields['positionId'] = forms.CharField(
+                                         initial=positionId,
+                                         widget=forms.HiddenInput())
         if questionId:
-            self.fields['questionId'] = forms.CharField(initial=questionId,
-                                                       widget=forms.HiddenInput())
+            self.fields['questionId'] = forms.CharField(
+                                         initial=questionId,
+                                         widget=forms.HiddenInput())
         if page:
-            self.fields['page'] = forms.CharField(initial=page,
-                                                  widget=forms.HiddenInput())
-
+            self.fields['page'] = forms.CharField(
+                                   initial=page,
+                                   widget=forms.HiddenInput())
 
     question = forms.CharField(label='Question',
                                widget=forms.Textarea(attrs={'rows': 10,
                                                             'cols': 140}))
     questionType = forms.ChoiceField(label='Question Type',
-                                     choices=[('1', 'Multiple Choice Single Answer'),
-                                              ('2', 'Multiple Choice Multiple Answer'),
-                                              ('3', 'Descriptive Answer'),
-                                              ('4', 'Program')])
+                                     choices=[
+                                      ('1', 'Multiple Choice Single Answer'),
+                                      ('2', 'Multiple Choice Multiple Answer'),
+                                      ('3', 'Descriptive Answer'),
+                                      ('4', 'Program')])
     url = forms.CharField(widget=forms.URLInput(attrs={'size': 120}))
     answer = forms.CharField(label='Answer',
                              widget=forms.Textarea(attrs={'rows': 10,
                                                           'cols': 140}))
     choices = forms.CharField(label='Choices', required=False)
-    input = forms.CharField(label='Input', widget=forms.Textarea, required=False)
+    input = forms.CharField(label='Input',
+                            widget=forms.Textarea,
+                            required=False)
     key = forms.CharField(label='Key', widget=forms.Textarea, required=False)
     timeToSolve = forms.CharField(label='Time to Solve', required=False)

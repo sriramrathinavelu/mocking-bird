@@ -13,15 +13,23 @@ class BaseTest(object):
         self.username = username
         self.companyId = companyId
         self.positionId = positionId
+        self.numQ = None
+        self.questions = None
 
     @abstractmethod
     def getQuestions(self, numQ=3):
         pass
 
+    def getEndTime(self):
+        return utils.fututeTime(self.numQ*30)
+
+    def getStartTime(self):
+        return datetime.now()
+
     def createTest(self,
-                   numQ=3,
-                   startTime=datetime.now(),
-                   endTime=utils.ninetyMinsFromNow()):
+                   startTime,
+                   endTime,
+                   numQ=3):
         self.getQuestions(numQ)
         curQ = 0
         newTest = Tests()
@@ -42,8 +50,8 @@ class BaseTest(object):
         newTest.isevaluated = False
         newTest.totalmarks = 100
         newTest.scoredmarks = 0
-        newTest.teststarttime = startTime
-        newTest.testendtime = endTime
+        newTest.teststarttime = self.getStartTime()
+        newTest.testendtime = self.getEndTime()
         newTest.userstarttime = None
         newTest.userendtime = None
         # Time for Questions

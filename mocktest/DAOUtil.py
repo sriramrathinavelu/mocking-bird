@@ -65,12 +65,10 @@ def jsonReady(obj):
         return __jsonReady(obj)
 
 
-
 def __addPositionCompany(companyId,
                          companyName,
                          positionId,
-                         positionName,
-                         cache={}):
+                         positionName):
     posComp = PositionCompany()
     posComp.positionid = positionId
     posComp.positionname = positionName
@@ -80,8 +78,7 @@ def __addPositionCompany(companyId,
 
 
 def __addPositionRevLookup(positionName,
-                           positionId,
-                           cache={}):
+                           positionId):
     positionLookup = PositionRevLookup()
     positionLookup.positionname = positionName
     positionLookup.positionid = positionId
@@ -90,10 +87,8 @@ def __addPositionRevLookup(positionName,
 
 def __addNewPosition(companyId,
                      companyName,
-                     positionName,
-                     cache={}):
+                     positionName):
     positionId = TimeUUID.from_datetime(datetime.now())
-    cache['positionId'] = positionId
     __addPositionCompany(companyId,
                          companyName,
                          positionId,
@@ -103,11 +98,15 @@ def __addNewPosition(companyId,
 
 
 @cleanInput
-def addCompanyPosition(companyName, positionName, cache={}):
+def addCompanyPosition(companyName, positionName):
     # Check if combination exists
     isCompany, isPosition, isBoth = isPresent(companyName,
-                                              positionName,
-                                              cache)
+                                              positionName)
+    logger.debug("Adding company " + str(companyName) +
+                 " and position " + str(positionName))
+    logger.debug("Existing Company: " + str(isCompany) +
+                 " Existing Position: " + str(isPosition) +
+                 " Existing combination: " + str(isBoth))
     if (not isBoth):
         if (not isCompany):
             # Add New Company
@@ -119,15 +118,14 @@ def addCompanyPosition(companyName, positionName, cache={}):
                 # Add New Position
                 __addNewPosition(companyId,
                                  companyName,
-                                 positionName,
-                                 cache)
+                                 positionName)
             else:
                 # Add company to existing Position
                 __addPositionCompany(companyId,
                                      companyName,
-                                     cache['positionId'],
+                                     getPositionId(positionName),
                                      positionName)
-            compPos.positionId = cache['positionId']
+            compPos.positionid = getPositionId(positionName)
             compPos.positionname = positionName
             compPos.save()
             companyLookup = CompanyRevLookup()
@@ -137,15 +135,14 @@ def addCompanyPosition(companyName, positionName, cache={}):
         else:
             if not isPosition:
                 # Add New Position
-                __addNewPosition(cache['companyId'],
+                __addNewPosition(getCompanyId(companyName),
                                  companyName,
-                                 positionName,
-                                 cache)
+                                 positionName)
             else:
                 # Add company position map
                 compPos = CompanyPosition()
-                compPos.companyid = cache['companyId']
-                compPos.positionid = cache['positionId']
+                compPos.companyid = getCompanyId(companyName)
+                compPos.positionid = getPositionId(positionName)
                 compPos.companyname = companyName
                 compPos.positionName = positionName
                 compPos.save()
@@ -231,7 +228,7 @@ def addRawQuestion(companyId,
 
 
 @cleanInput
-def getUserRating(username, cache={}):
+def getUserRating(username):
     user = Users.objects.get(username=username)
     if user:
         return user.rating
@@ -239,38 +236,34 @@ def getUserRating(username, cache={}):
 
 
 @cleanInput
-def getCompanyId(companyName, cache={}):
+def getCompanyId(companyName):
     companyLookup = CompanyRevLookup.objects.filter(companyname=companyName)
     if companyLookup:
-        cache['companyId'] = companyLookup[0].companyid
         return companyLookup[0].companyid
     return None
 
 
 @cleanInput
-def getPositionId(positionName, cache={}):
+def getPositionId(positionName):
     positionLookup = PositionRevLookup.objects.filter(
                         positionname=positionName)
     if positionLookup:
-        cache['positionId'] = positionLookup[0].positionid
         return positionLookup[0].positionid
     return None
 
 
 @cleanInput
-def getCompanyName(companyId, cache={}):
+def getCompanyName(companyId):
     comp = CompanyPosition.objects.filter(companyid=companyId)
     if comp:
-        cache['companyName'] = comp[0].companyname
         return comp[0].companyname
     return None
 
 
 @cleanInput
-def getPositionName(positionId, cache={}):
+def getPositionName(positionId):
     pos = PositionCompany.objects.filter(positionid=positionId)
     if pos:
-        cache['positionName'] = pos[0].positionname
         return pos[0].positionname
     return None
 
@@ -283,27 +276,28 @@ def isPositionPresent(positionName):
     return isValidPosition(positionName)
 
 
-def isPresent(companyName, positionName, cache={}):
-    if not isCompanyPresent(companyName):
-        return (False, False, False)
-    if not isPositionPresent(positionName):
-        return (True, False, False)
-    companyId = getCompanyId(companyName, cache)
-    positionId = getPositionId(positionName, cache)
-    if isIdPresent(companyId, positionId, cache):
-        return (True, True, True)
-    return (True, True, False)
+def isPresent(companyName, positionName):
+    isCompany = isCompanyPresent(companyName)
+    isPosition = isPositionPresent(positionName)
+    if isCompany and isPosition:
+        companyId = getCompanyId(companyName)
+        positionId = getPositionId(positionName)
+        if isIdPresent(companyId, positionId):
+            return (True, True, True)
+        return (True, True, False)
+    else:
+        return (isCompany, isPosition, False)
 
 
 @cleanInput
-def isValidQuestionId(companyId, positionId, questionId, cache={}):
+def isValidQuestionId(companyId, positionId, questionId):
     return __isPresentInDB(table='QuestionBank',
                            column=['companyid', 'positionid', 'questionid'],
                            value=[companyId, positionId, questionId])
 
 
 @cleanInput
-def isIdPresent(companyId, positionId, cache={}):
+def isIdPresent(companyId, positionId):
     return __isPresentInDB(table='CompanyPosition',
                            column=['companyid', 'positionid'],
                            value=[companyId, positionId])

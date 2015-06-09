@@ -2,9 +2,9 @@ from datetime import datetime
 from datetime import timedelta
 
 
-def ninetyMinsFromNow():
+def fututeTime(minutes):
     now = datetime.now()
-    return now + timedelta(minutes=90)
+    return now + timedelta(minutes=minutes)
 
 
 def threeHoursFromNow():

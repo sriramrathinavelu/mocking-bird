@@ -46,14 +46,14 @@ def createTest(request):
     #   Number of Questions (3)
     numQ = request.GET.get('numQ', 3)
     #   Start Time (now ())
-    startTime = request.GET.get('startTime', datetime.datetime.now())
+    startTime = request.GET.get('startTime')
     #   End Time (now() + 90 mins)
-    endTime = request.GET.get('endTime', utils.ninetyMinsFromNow())
+    endTime = request.GET.get('endTime')
     #   Generating Algorithm (Recent Questions)
     testAlgo = LinearByTime.LinearByTime(username, companyId, positionId)
-    testId = testAlgo.createTest(numQ,
-                                 startTime,
-                                 endTime)
+    testId = testAlgo.createTest(startTime,
+                                 endTime,
+                                 numQ)
     return HttpResponseRedirect("test.html?testId=" + str(testId))
 
 
