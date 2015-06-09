@@ -86,7 +86,8 @@
             data: logindata,
             success: function (data, status, jqxhr) {
               if (data === 'ok') {
-                window.location="/"+getURLParameter("redirect_url");  
+                console.log("Am redirecting to " + getURLParameter("redirect_url"))
+                window.location=getURLParameter("redirect_url");  
               } else {
                 $("#validation-error").html(
                   "Your credentials didn't match. Please Try again");

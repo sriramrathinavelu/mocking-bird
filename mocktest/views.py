@@ -133,7 +133,7 @@ def login(request):
             logger.debug("User already authenticated.Redirect url is",
                          request.GET.get("redirect_url"))
             if request.GET.get("redirect_url"):
-                return HttpResponseRedirect(request.GET.get("redirect_url"))
+                return render(request, request.GET.get("redirect_url"), {})
             else:
                 return HttpResponseRedirect("home.html")
         return render(request, 'mocktest/login.html', {})

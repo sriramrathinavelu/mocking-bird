@@ -48,3 +48,4 @@
 [09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:106] Adding company Microsoft and positionSoftware Developer
 [09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:109] Existing Company: False Existing Position: True Existing combination: False
 [09/Jun/2015 08:31:51] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 14:04:34] DEBUG [mocktest.backend:21] Authenticating user: sriram1

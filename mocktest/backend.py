@@ -18,13 +18,14 @@ class MockBackend(object):
     def authenticate(self, username, password, fbid):
         user = Users.objects.filter(username=username).get()
         if (user):
-            logger.debug("Authenticating user", user)
+            logger.debug("Authenticating user: " + username)
             if (user.password == password):
                 if ((user.fbid and user.fbid == fbid) or (not user.fbid)):
                     try:
                         authUser = User.objects.get(username=username)
                     except User.DoesNotExist:
-                        authUser = User(username=username, password='mockingsite')
+                        authUser = User(username=username,
+                                        password='mockingsite')
                         authUser.is_staff = True
                         authUser.save()
                     return authUser
