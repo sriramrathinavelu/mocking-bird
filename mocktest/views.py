@@ -132,7 +132,10 @@ def login(request):
         if request.user.is_authenticated():
             logger.debug("User already authenticated.Redirect url is",
                          request.GET.get("redirect_url"))
-            return HttpResponseRedirect(request.GET.get("redirect_url"))
+            if request.GET.get("redirect_url"):
+                return HttpResponseRedirect(request.GET.get("redirect_url"))
+            else:
+                return HttpResponseRedirect("home.html")
         return render(request, 'mocktest/login.html', {})
     else:
         # POST
@@ -186,6 +189,8 @@ def signup(request):
         authUser = User(username=request.POST["username"],
                         password='mockingsite')
         authUser.is_staff = True
+        # Hack to make it work in openshift
+        authUser.last_login = datetime.datetime.now()
         authUser.save()
         if (request.POST.get("redirect_url")):
             return HttpResponseRedirect(request.POST.get("redirect_url"))
