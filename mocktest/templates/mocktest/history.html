@@ -98,7 +98,7 @@
       $("#positionName").autocomplete({
         source: {{positionNames|safe}},
         select: function(event, ui){
-          $.getJSON("/ajaxUtil/userPositionTests.html?positionId=" + positionMap[ui.item.value],function (data, status){
+          $.getJSON("/ajaxUtil/userPositionTests.html?positionName=" + positionMap[ui.item.value],function (data, status){
             if (status === "success") {              
               $(".articles-list").html("");
               makeListTitle(data.length);
@@ -108,7 +108,7 @@
             }
           });
           /*Get the positions for the company*/
-          $.get("/ajaxUtil/userPositionCompany.html?positionId=" + positionMap[ui.item.value], function (data, status){
+          $.get("/ajaxUtil/userPositionCompany.html?positionName=" + positionMap[ui.item.value], function (data, status){
             if (status === "success") {
               $("#company-select-1").html(data);
               if ($("#company-select-1 option").length > 0) {
@@ -125,7 +125,7 @@
       $("#companyName").autocomplete({
         source: {{companyNames|safe}},
         select: function(event, ui){
-          $.getJSON("/ajaxUtil/userCompanyTests.html?companyId=" + companyMap[ui.item.value],function (data, status){
+          $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + companyMap[ui.item.value],function (data, status){
             if (status === "success") {              
               $(".articles-count").html("");
               $(".articles-list").html("");
@@ -136,7 +136,7 @@
             }
           });
           /*Get the positions for the company*/
-          $.get("/ajaxUtil/userCompanyPosition.html?companyId=" + companyMap[ui.item.value], function(data, status){
+          $.get("/ajaxUtil/userCompanyPosition.html?companyName=" + companyMap[ui.item.value], function(data, status){
             if (status === "success") {
               $("#position-select-1").html(data);
               if ($("#position-select-1 option").length > 0) {
@@ -175,7 +175,7 @@
       $("#position-select-1").change(function(){
         /*Load Test data based on the company and position*/
         if (!$("#position-select-1").val().match("^Please")) {
-          $.getJSON("/ajaxUtil/userCompanyTests.html?companyId=" + companyMap[$("#companyName").val()] + "&positionId=" + $("#position-select-1").val(),function (data, status){
+          $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + companyMap[$("#companyName").val()] + "&positionName=" + $("#position-select-1").val(),function (data, status){
             if (status === "success") {              
               makeListTitle(data.length);
               $(".articles-list").html("");
@@ -189,7 +189,7 @@
       $("#company-select-1").change(function(){
         /*Load Test data based on the company and position*/
         if (!$("#company-select-1").val().match("^Please")) {
-          $.getJSON("/ajaxUtil/userPositionTests.html?companyId=" + $("#company-select-1").val() + "&positionId=" + positionMap[$("#positionName").val()],function (data, status){
+          $.getJSON("/ajaxUtil/userPositionTests.html?companyName=" + $("#company-select-1").val() + "&positionName=" + positionMap[$("#positionName").val()],function (data, status){
             if (status === "success") {              
               makeListTitle(data.length);
               $(".articles-list").html("");

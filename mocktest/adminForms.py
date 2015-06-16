@@ -1,7 +1,7 @@
-from models import CompanyRevLookup
 from models import RawQuestionBank
 from models import CompanyPosition
 from django.forms import ModelForm
+from django.db import connections
 from django import forms
 import collections
 import logging
@@ -22,29 +22,39 @@ class addCompanyForm (forms.Form):
 
 
 class addPositionForm (forms.Form):
-    companies = CompanyRevLookup.objects.all()
-    companyNames = map(lambda x: (x.companyname, x.companyname), companies)
-    companyName = forms.ChoiceField(label='Company Name',
-                                    choices=tuple(companyNames))
+
+    def __init__(self, *args, **kwargs):
+        super(addPositionForm, self).__init__(*args, **kwargs)
+        cursor = connections["cassandra"].cursor()
+        companies = cursor.execute("""
+            SELECT DISTINCT companyname
+            FROM company_position
+            """)
+        companyNames = map(lambda x: (x['companyname'], x['companyname']),
+                           companies)
+        cursor.close()
+        self.fields['companyName'].choices = tuple(companyNames)
+
+    companyName = DynamicChoiceField(label='Company Name')
     positionName = forms.CharField(label='Position Name')
 
 
 class addQuestionForm (forms.Form):
 
     def __init__(self, *args, **kwargs):
-        companyId = None
-        if 'companyId' in kwargs:
-            companyId = kwargs.pop('companyId')
+        companyName = None
+        if 'companyName' in kwargs:
+            companyName = kwargs.pop('companyName')
         super(addQuestionForm, self).__init__(*args, **kwargs)
-        if companyId:
-            companies = CompanyPosition.objects.filter(companyid=companyId)
+        if companyName:
+            companies = CompanyPosition.objects.filter(companyname=companyName)
             positions = []
             for company in companies:
-                positions.append((company.positionid, company.positionname))
-            self.fields['companyId'].initial = companyId
+                positions.append((company.positionname, company.positionname))
+            self.fields['companyName'].initial = companyName
             self.fields['positionName'].choices = positions
 
-    companyId = forms.CharField(widget=forms.HiddenInput)
+    companyName = forms.CharField(widget=forms.HiddenInput)
     positionName = DynamicChoiceField(label='Position Name')
     question = forms.CharField(label='Question', widget=forms.Textarea)
     questionType = forms.ChoiceField(label='Question Type',
@@ -70,8 +80,8 @@ class editQuestionForm (forms.Form):
             questionObj = kwargs.pop('question')
         super(editQuestionForm, self).__init__(*args, **kwargs)
         if questionObj:
-            self.fields['companyId'].initial = questionObj.companyid
-            self.fields['positionId'].initial = questionObj.positionid
+            self.fields['companyName'].initial = questionObj.companyname
+            self.fields['positionName'].initial = questionObj.positionname
             self.fields['questionId'].initial = questionObj.questionid
             self.fields['question'].initial = questionObj.question
             self.fields['questionType'].initial = questionObj.questiontype
@@ -81,8 +91,8 @@ class editQuestionForm (forms.Form):
             self.fields['key'].initial = questionObj.key
             self.fields['timeToSolve'].initial = questionObj.timetosolve
 
-    companyId = forms.CharField(widget=forms.HiddenInput)
-    positionId = forms.CharField(widget=forms.HiddenInput)
+    companyName = forms.CharField(widget=forms.HiddenInput)
+    positionName = forms.CharField(widget=forms.HiddenInput)
     questionId = forms.CharField(widget=forms.HiddenInput)
     question = forms.CharField(label='Question',
                                widget=forms.Textarea(attrs={'rows': 10,
@@ -115,8 +125,8 @@ class moderateQuestionForm(forms.Form):
         inputVal = None
         keyVal = None
         timeToSolveVal = None
-        companyId = None
-        positionId = None
+        companyName = None
+        positionName = None
         questionId = None
         page = 1
         if 'page' in kwds:
@@ -131,8 +141,8 @@ class moderateQuestionForm(forms.Form):
             inputVal = rawQuestion.input
             keyVal = rawQuestion.key
             timeToSolveVal = rawQuestion.timetosolve
-            companyId = rawQuestion.companyid
-            positionId = rawQuestion.positionid
+            companyName = rawQuestion.companyname
+            positionName = rawQuestion.positionname
             questionId = rawQuestion.questionid
         super(moderateQuestionForm, self).__init__(*args, **kwds)
         if questionVal:
@@ -151,14 +161,14 @@ class moderateQuestionForm(forms.Form):
             self.fields['key'].value = keyVal
         if timeToSolveVal:
             self.fields['timeToSolve'].initial = timeToSolveVal
-        if companyId:
-            self.fields['companyId'] = forms.CharField(
-                                        initial=companyId,
-                                        widget=forms.HiddenInput())
-        if positionId:
-            self.fields['positionId'] = forms.CharField(
-                                         initial=positionId,
-                                         widget=forms.HiddenInput())
+        if companyName:
+            self.fields['companyName'] = forms.CharField(
+                                            initial=companyName,
+                                            widget=forms.HiddenInput())
+        if positionName:
+            self.fields['positionName'] = forms.CharField(
+                                            initial=positionName,
+                                            widget=forms.HiddenInput())
         if questionId:
             self.fields['questionId'] = forms.CharField(
                                          initial=questionId,

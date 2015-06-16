@@ -65,3 +65,61 @@
 [15/Jun/2015 19:09:07] DEBUG [mocktest.views:59] Start Time: 1434396000 End Time: 1434399600
 [15/Jun/2015 19:22:54] DEBUG [mocktest.views:163] testId = b97cefd9-1085-11e5-9210-4025c2cdc7f8 choice = 2
 [15/Jun/2015 19:23:47] DEBUG [mocktest.views:163] testId = b97cefd9-1085-11e5-9210-4025c2cdc7f8 choice = 1
+[16/Jun/2015 18:20:34] DEBUG [mocktest.DAOUtil:111] Adding company Amazon and position Software Developer
+[16/Jun/2015 18:20:34] ERROR [mocktest.DAOUtil:118] Encounter exception Can't resolve column name: 'companyName'
+[16/Jun/2015 19:16:17] DEBUG [mocktest.DAOUtil:111] Adding company Amazon and position Software Developer
+[16/Jun/2015 19:40:11] DEBUG [mocktest.standalone:61] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=1
+[16/Jun/2015 19:40:11] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5658654214717440
+[16/Jun/2015 19:40:12] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5126565916573696
+[16/Jun/2015 19:40:13] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5646512375726080
+[16/Jun/2015 19:40:14] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5687400464384000
+[16/Jun/2015 19:40:14] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5129818670628864
+[16/Jun/2015 19:40:15] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5758712897601536
+[16/Jun/2015 19:40:16] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5652423706148864
+[16/Jun/2015 19:40:18] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5743870841192448
+[16/Jun/2015 19:40:20] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5674416807608320
+[16/Jun/2015 19:40:22] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5631469919666176
+[16/Jun/2015 19:40:23] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5145121580384256
+[16/Jun/2015 19:40:25] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5706907457159168
+[16/Jun/2015 19:40:27] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5750606333476864
+[16/Jun/2015 19:40:31] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5737398201745408
+[16/Jun/2015 19:40:32] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5701363426131968
+[16/Jun/2015 19:40:33] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5651177001713664
+[16/Jun/2015 19:40:35] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5673265078992896
+[16/Jun/2015 19:40:37] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5138770022105088
+[16/Jun/2015 19:40:40] DEBUG [mocktest.standalone:61] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2
+[16/Jun/2015 19:40:40] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[16/Jun/2015 19:40:41] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[16/Jun/2015 19:40:42] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5717493200977920
+[16/Jun/2015 19:40:44] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5183920823861248
+[16/Jun/2015 19:40:47] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5647660555960320
+[16/Jun/2015 19:40:52] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5743544090230784
+[16/Jun/2015 19:40:53] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6203659591352320
+[16/Jun/2015 19:40:54] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6293669489410048
+[16/Jun/2015 19:40:56] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=4792707167813632
+[16/Jun/2015 19:40:57] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5726197774286848
+[16/Jun/2015 19:40:58] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5067220493271040
+[16/Jun/2015 19:40:59] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6312966362234880
+[16/Jun/2015 19:41:01] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5640618223075328
+[16/Jun/2015 19:41:02] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5192351949520896
+[16/Jun/2015 19:41:10] DEBUG [mocktest.standalone:61] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=3
+[16/Jun/2015 19:41:10] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5978736570662912
+[16/Jun/2015 19:41:11] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6535983075950592
+[16/Jun/2015 19:41:16] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6251247950626816
+[16/Jun/2015 19:41:20] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6218115968925696
+[16/Jun/2015 19:41:25] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6332980792393728
+[16/Jun/2015 19:41:27] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6331656331853824
+[16/Jun/2015 19:41:28] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5104398418051072
+[16/Jun/2015 19:41:29] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5142823074529280
+[16/Jun/2015 19:41:31] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5659044186423296
+[16/Jun/2015 19:41:33] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5128688001613824
+[16/Jun/2015 19:41:35] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5735545137266688
+[16/Jun/2015 19:41:36] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6276805505843200
+[16/Jun/2015 19:41:39] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=4691284505657344
+[16/Jun/2015 19:41:39] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5752996830904320
+[16/Jun/2015 19:41:43] DEBUG [mocktest.standalone:61] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=4
+[16/Jun/2015 19:41:43] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=6153780563279872
+[16/Jun/2015 19:41:44] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5125946302529536
+[16/Jun/2015 19:41:45] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5640239645196288
+[16/Jun/2015 19:41:48] DEBUG [mocktest.standalone:64] Scrapping Link: http://www.careercup.com/question?id=5720778041458688
+[16/Jun/2015 19:41:53] DEBUG [mocktest.standalone:78] Retrieved 50 questions

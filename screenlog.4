@@ -50,4 +50,420 @@ sriram@ubuntu:/space/hashincludetest/mocking-bird/web-starter-kit-0.5.4$ gulp st
 [[90m11:09:39[39m] Starting '[36mstyles[39m'...
 [[90m11:09:41[39m] '[36mstyles[39m' [32mall files[39m [35m99.84 kB[39m
 [[90m11:09:41[39m] Finished '[36mstyles[39m' after [35m2.69 s[39m
-sriram@ubuntu:/space/hashincludetest/mocking-bird/web-starter-kit-0.5.4$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/web-starter-kit-0.5.4$ sriram@ubuntu:/space/hashincludetest/mocking-bird$ cd /space/hashincludetest/mocking-bird; cd mocktest 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ v[Kls 
+adminForms.py   adminUrls.py    ajaxUrls.py    [0m[01;34malgo[0m         DAOUtil.py    mentorUrls.py    [01;34mmigrations[0m  [01;34mstandalone[0m  urls.pyc   views.pyc
+adminForms.pyc  adminUrls.pyc   ajaxUrls.pyc   auth.py      DAOUtil.pyc   mentorUrls.pyc   models.py   [01;34mtemplates[0m   utils.py
+admin.py        adminViews.py   ajaxUtils.py   backend.py   __init__.py   mentorViews.py   models.pyc  tests.py    utils.pyc
+admin.pyc       adminViews.pyc  ajaxUtils.pyc  backend.pyc  __init__.pyc  mentorViews.pyc  mysite.log  urls.py     views.py
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ vi adminUrls.py
+[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"adminUrls.py" 12L, 466C[1;1H[35mfrom[0m django.conf.urls [35mimport[0m url
+[35mfrom[0m . [35mimport[0m adminViews
+
+urlpatterns = [
+    url([31mr'addCompany.html$'[0m, adminViews.addCompany),
+    url([31mr'addPosition.html$'[0m, adminViews.addPosition),
+    url([31mr'addQuestion.html$'[0m, adminViews.addQuestion),
+    url([31mr'editQuestion.html'[0m, adminViews.editQuestion),
+    url([31mr'moderateQuestionTable.html'[0m, adminViews.moderateQuestionTable),
+    url([31mr'moderateQuestion.html'[0m, adminViews.moderateQuestion),
+    url([31mr'home.html$'[0m, adminViews.home),
+]
+[1m[34m~                                                                                                                                              [14;1H~                                                                                                                                              [15;1H~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H1,1[11CAll[1;1H[34h[?25h[?25l[38;126H2[2;1H[34h[?25h[?25l[38;126H3,0-1[3;1H[34h[?25h[?25l[38;126H4,1  [4;1H[34h[?25h[?25l[38;126H5[5;1H[34h[?25h[?25l[38;126H6[6;1H[34h[?25h[?25l[38;126H7[7;1H[34h[?25h[?25l[38;126H8[8;1H[34h[?25h[?25l[38;126H9,1-4[9;4H[34h[?25h[?25l[38;126H10,1-4[10;4H[34h[?25h[?25l[38;127H1[11;4H[34h[?25h[?25l[38;129H37-40[11;40H[34h[?25h[?25l[38;1H[1m-- INSERT --[0m[38;13H[K[38;126H11,37-40      All[11;40H[34h[?25h[?25l[38;130H8-41[11;41H[34h[?25h[?25l[12;37r[12;1H[L[1;38r[38;126H[K[38;126H12,2-5[8CAll[12;5H[34h[?25h[?25l u[38;129H3-6[12;6H[34h[?25h[?25lur[38;129H4-7[12;7H[34h[?25h[?25lrl[38;129H5-8[12;8H[34h[?25h[?25ll([38;129H6-9[12;9H[34h[?25h[?25l(r[38;129H7-10[12;10H[34h[?25h[?25l[31mr'
+][0m[38;129H8-11[12;11H[34h[?25h[?25l[31m''[0m
+][38;129H9-12[12;12H[34h[?25h[?25l[38;129H8-11[12;11H[34h[?25h[?25l[31m'e'[0m[38;129H9-12[12;12H[34h[?25h[?25l[31mer'[0m[38;129H10-13[12;13H[34h[?25h[?25l[31mrr'[0m[38;130H1-14[12;14H[34h[?25h[?25l[31mro'[0m[38;130H2-15[12;15H[34h[?25h[?25l[31mor'[0m[38;130H3-16[12;16H[34h[?25h[?25l[31mr.'[0m[38;130H4-17[12;17H[34h[?25h[?25l[31m.h'[0m[38;130H5-18[12;18H[34h[?25h[?25l[31mht'[0m[38;130H6-19[12;19H[34h[?25h[?25l[31mtm'[0m[38;130H7-20[12;20H[34h[?25h[?25l[31mml'[0m[38;130H8-21[12;21H[34h[?25h[?25l[31ml$'[0m[38;130H9-22[12;22H[34h[?25h[?25l[38;129H20-23[12;23H[34h[?25h[?25l[31m'[0m,[38;130H1-24[12;24H[34h[?25h[?25l[38;130H2-25[12;25H[34h[?25h[?25l a[38;130H3-26[12;26H[34h[?25h[?25lad[38;130H4-27[12;27H[34h[?25h[?25ldm[38;130H5-28[12;28H[34h[?25h[?25lmi[38;130H6-29[12;29H[34h[?25h[?25lin[38;130H7-30[12;30H[34h[?25h[?25lnV[38;130H8-31[12;31H[34h[?25h[?25l[38;4H[1mKeyword completion (^N^P) -- Searching...[0m[38;126H[K[12;30HViews[38;1H[32mScanning tags.[0m[38;15H[K[38;1H[1m-- Keyword completion (^N^P) The only match[12;35H[34h[?25h[?25l[0m[38;1H[K[38;1H[1m-- INSERT --[0m[113C12,32-35      All[12;34Hs.[38;130H3-36[12;36H[34h[?25h[?25l.e[38;130H4-37[12;37H[34h[?25h[?25ler[38;130H5-38[12;38H[34h[?25h[?25lrr[38;130H6-39[12;39H[34h[?25h[?25lro[38;130H7-40[12;40H[34h[?25h[?25lor[38;130H8-41[12;41H[34h[?25h[?25lr)[12;8H[46m([32C)[0m[38;130H9-42[12;42H[34h[?25h[?25l[46m)[0m,[12;8H([32C)[38;129H40-43[12;43H[34h[?25h[38;1H[K[?25l[38;126H12,39-42      All[12;42H[34h[?25h[?25l[38;126H[K[38;1H:[34h[?25hw[?25l[34h[?25hq[?25l[34h[?25h[?25l"adminUrls.py" 13L, 506C written
+[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ cd standalone/scrapy/codercareer/codercareer/[Kstandalone/
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ k[Kls
+careerCupScrapper.py   __init__.py   mysite.log   Scrapper.pyc       scrapQuestions.pyc  test.py
+careerCupScrapper.pyc  __init__.pyc  Scrapper.py  scrapQuestions.py  [0m[01;34mscrapy[0m
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ vi mysite.log 
+[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"mysite.log" 76L, 9119C[1;1H[46m[[0m30/May/2015 19:35:00[46m][0m DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-dd[2;1Heveloper-interview-questions&n=2
+[30/May/2015 19:35:00] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:35:01] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:35:02] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:37:02] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-dd[7;1Heveloper-interview-questions&n=2
+[30/May/2015 19:37:02] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:37:05] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:37:06] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[12;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:41:54] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:41:55] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:17] WARNING [py.warnings:220] /usr/local/lib/python2.7/dist-packages/django/db/utils.py:238: RemovedInDjango19Warning: In Djj[17;1Hango 1.9 the TEST_NAME connection setting will be moved to a NAME entry in the TEST setting
+  self.prepare_test_settings(alias)
+
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:741] Connecting to cluster, contact points: ['localhost']; protocol version: 2
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:106] Host localhost is now marked up
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1910] [control connection] Opening new connection to localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60260752) to localhost because compressii[24;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.io.libevreactor:97] Starting libev event loop
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60260752) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1915] [control connection] Established new connection <LibevConnection(60260752) localhost:90422[30;1H>, registering watchers and refreshing schema and topology
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2164] [control connection] Refreshing node list and token map using preloaded results
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2235] [control connection] Finished fetching ring info
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2237] [control connection] Rebuilding token map due to topology changes
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2311] [control connection] Attempting to use preloaded results for schema agreement
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2378] [control connection] Schemas match
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata[38;126H1,1[11CTop[1;1H[34h[?25h[?25l[23m[24m[0m[H[J[1;1H[46m[[0m30/May/2015 19:47:17[46m][0m DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:756] Control connection created
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:404] Initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60782416) to localhost because compressii[6;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60782416) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60783440) to localhost because compressii[11;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60783440) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:416] Finished initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1633] Added pool for host localhost to session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:130] cqlengine connection initialized with internally created session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMITT[19;1H 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMM[21;1HIT 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMITT[23;1H 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMM[25;1HIT 10000
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[27;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[29;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2463] Shutting down Cluster Scheduler
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2003] Shutting down control connection[38;126H30,1[10C61%[1;1H[34h[?25h[?25l[23m[24m[0m[H[J[1;1H[46m[[0m30/May/2015 19:47:19[46m][0m DEBUG [cassandra.cluster:2463] Shutting down Cluster Scheduler
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2003] Shutting down control connection
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60260752) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2497] Not executing scheduled task due to Scheduler shutdown
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60782416) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60783440) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:118] All Connections currently closed, event loop ended
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:136] Waiting for event loop thread to join...
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:143] Event loop thread was joined
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[14;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[16;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:56:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:56:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:56:23] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:56:23] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[1m[34m~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H57,1[10CBot[1;1H[34h[?25h[?25l[23m[24m[0m[H[J[1;1H[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:756] Control connection created
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:404] Initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60782416) to localhost because compressii[6;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60782416) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60783440) to localhost because compressii[11;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60783440) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:416] Finished initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1633] Added pool for host localhost to session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:130] cqlengine connection initialized with internally created session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMITT[19;1H 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMM[21;1HIT 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMITT[23;1H 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMM[25;1HIT 10000
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[27;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[29;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2463] Shutting down Cluster Scheduler
+[46m[[0m30/May/2015 19:47:19[46m][0m DEBUG [cassandra.cluster:2003] Shutting down control connection[38;126H58,1[10C61%[37;1H[34h[?25h[?25l[23m[24m[0m[H[J[1;1H[30/May/2015 19:35:00] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-dd[2;1Heveloper-interview-questions&n=2
+[30/May/2015 19:35:00] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:35:01] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:35:02] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:37:02] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-dd[7;1Heveloper-interview-questions&n=2
+[30/May/2015 19:37:02] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:37:05] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:37:06] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[12;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:41:54] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:41:55] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:17] WARNING [py.warnings:220] /usr/local/lib/python2.7/dist-packages/django/db/utils.py:238: RemovedInDjango19Warning: In Djj[17;1Hango 1.9 the TEST_NAME connection setting will be moved to a NAME entry in the TEST setting
+  self.prepare_test_settings(alias)
+
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:741] Connecting to cluster, contact points: ['localhost']; protocol version: 2
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:106] Host localhost is now marked up
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1910] [control connection] Opening new connection to localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60260752) to localhost because compressii[24;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.io.libevreactor:97] Starting libev event loop
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60260752) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1915] [control connection] Established new connection <LibevConnection(60260752) localhost:90422[30;1H>, registering watchers and refreshing schema and topology
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2164] [control connection] Refreshing node list and token map using preloaded results
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2235] [control connection] Finished fetching ring info
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2237] [control connection] Rebuilding token map due to topology changes
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2311] [control connection] Attempting to use preloaded results for schema agreement
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2378] [control connection] Schemas match
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[46m[[0m30/May/2015 19:47:17[46m][0m DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata[38;126H31,1[10CTop[37;1H[34h[?25h[?25l[34h[?25h[?25l[38;126H[K[38;1H:[34h[?25hq[?25l[34h[?25h![?25l[34h[?25h[?25l[38;1H[K[38;1H[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ ls
+careerCupScrapper.py   __init__.py   mysite.log   Scrapper.pyc       scrapQuestions.pyc  test.py
+careerCupScrapper.pyc  __init__.pyc  Scrapper.py  scrapQuestions.py  [0m[01;34mscrapy[0m
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ lsvi mysite.log 
+[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"mysite.log" 76L, 9119C[1;1H[30/May/2015 19:35:00] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-dd[2;1Heveloper-interview-questions&n=2
+[30/May/2015 19:35:00] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:35:01] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:35:02] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:37:02] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-dd[7;1Heveloper-interview-questions&n=2
+[30/May/2015 19:37:02] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:37:05] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:37:06] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[12;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:41:54] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:41:55] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:17] WARNING [py.warnings:220] /usr/local/lib/python2.7/dist-packages/django/db/utils.py:238: RemovedInDjango19Warning: In Djj[17;1Hango 1.9 the TEST_NAME connection setting will be moved to a NAME entry in the TEST setting
+  self.prepare_test_settings(alias)
+
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:741] Connecting to cluster, contact points: ['localhost']; protocol version: 2
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:106] Host localhost is now marked up
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1910] [control connection] Opening new connection to localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60260752) to localhost because compressii[24;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.io.libevreactor:97] Starting libev event loop
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60260752) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1915] [control connection] Established new connection <LibevConnection(60260752) localhost:90422[30;1H>, registering watchers and refreshing schema and topology
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2164] [control connection] Refreshing node list and token map using preloaded results
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2235] [control connection] Finished fetching ring info
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2237] [control connection] Rebuilding token map due to topology changes
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2311] [control connection] Attempting to use preloaded results for schema agreement
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2378] [control connection] Schemas match
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[46m[[0m30/May/2015 19:47:17[46m][0m DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata[38;126H31,1[10CTop[37;1H[34h[?25h[?25l[23m[24m[0m[H[J[1;1H[46m[[0m30/May/2015 19:47:17[46m][0m DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:756] Control connection created
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:404] Initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60782416) to localhost because compressii[6;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60782416) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60783440) to localhost because compressii[11;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60783440) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:416] Finished initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1633] Added pool for host localhost to session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:130] cqlengine connection initialized with internally created session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMITT[19;1H 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMM[21;1HIT 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMITT[23;1H 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMM[25;1HIT 10000
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[27;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[29;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2463] Shutting down Cluster Scheduler
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2003] Shutting down control connection[38;126H30,1[10C61%[1;1H[34h[?25h[?25l[23m[24m[0m[H[J[1;1H[46m[[0m30/May/2015 19:47:19[46m][0m DEBUG [cassandra.cluster:2463] Shutting down Cluster Scheduler
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2003] Shutting down control connection
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60260752) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2497] Not executing scheduled task due to Scheduler shutdown
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60782416) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:302] Closing connection (60783440) to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:118] All Connections currently closed, event loop ended
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:305] Closed socket to localhost
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:136] Waiting for event loop thread to join...
+[30/May/2015 19:47:19] DEBUG [cassandra.io.libevreactor:143] Event loop thread was joined
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[14;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[16;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:56:17] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:56:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:56:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:56:23] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:56:23] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[1m[34m~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H57,1[10CBot[1;1H[34h[?25h[?25l[23m[24m[0m[H[J[1;1H[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:756] Control connection created
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:404] Initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60782416) to localhost because compressii[6;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60782416) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60782416) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60783440) to localhost because compressii[11;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60783440) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60783440) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:416] Finished initializing new connection pool for host localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1633] Added pool for host localhost to session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:130] cqlengine connection initialized with internally created session
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMITT[19;1H 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMM[21;1HIT 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.company_rev_lookup WHERE "companyname" = %(0)s LIMITT[23;1H 10000
+[30/May/2015 19:47:17] DEBUG [cassandra.cqlengine.connection:166] SELECT * FROM mocking_db.position_rev_lookup WHERE "positionname" = %(0)s LIMM[25;1HIT 10000
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[27;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[29;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:18] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:19] DEBUG [cassandra.cluster:2463] Shutting down Cluster Scheduler
+[46m[[0m30/May/2015 19:47:19[46m][0m DEBUG [cassandra.cluster:2003] Shutting down control connection[38;126H58,1[10C61%[37;1H[34h[?25h[?25l[23m[24m[0m[H[J[1;1H[30/May/2015 19:35:00] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-dd[2;1Heveloper-interview-questions&n=2
+[30/May/2015 19:35:00] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:35:01] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:35:02] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:37:02] DEBUG [mocktest:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-dd[7;1Heveloper-interview-questions&n=2
+[30/May/2015 19:37:02] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:37:05] DEBUG [mocktest:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:37:06] DEBUG [mocktest:71] Retrieved 2 questions
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:56] Scrapping page: http://www.careercup.com/page?pid=amazon-interview-questions&job=softwaree[12;1H-engineer-developer-interview-questions&n=2
+[30/May/2015 19:41:53] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5765784060035072
+[30/May/2015 19:41:54] DEBUG [mocktest.standalone:59] Scrapping Link: http://www.careercup.com/question?id=5073763695591424
+[30/May/2015 19:41:55] DEBUG [mocktest.standalone:71] Retrieved 2 questions
+[30/May/2015 19:47:17] WARNING [py.warnings:220] /usr/local/lib/python2.7/dist-packages/django/db/utils.py:238: RemovedInDjango19Warning: In Djj[17;1Hango 1.9 the TEST_NAME connection setting will be moved to a NAME entry in the TEST setting
+  self.prepare_test_settings(alias)
+
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:741] Connecting to cluster, contact points: ['localhost']; protocol version: 2
+[30/May/2015 19:47:17] DEBUG [cassandra.pool:106] Host localhost is now marked up
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1910] [control connection] Opening new connection to localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:457] Not sending options message for new connection(60260752) to localhost because compressii[24;1Hon is disabled and a cql version was not specified
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:530] Sending StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:536] Sent StartupMessage on <LibevConnection(60260752) localhost:9042>
+[30/May/2015 19:47:17] DEBUG [cassandra.io.libevreactor:97] Starting libev event loop
+[30/May/2015 19:47:17] DEBUG [cassandra.connection:543] Got ReadyMessage on new connection (60260752) from localhost
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:1915] [control connection] Established new connection <LibevConnection(60260752) localhost:90422[30;1H>, registering watchers and refreshing schema and topology
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2164] [control connection] Refreshing node list and token map using preloaded results
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2235] [control connection] Finished fetching ring info
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2237] [control connection] Rebuilding token map due to topology changes
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2311] [control connection] Attempting to use preloaded results for schema agreement
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2378] [control connection] Schemas match
+[30/May/2015 19:47:17] DEBUG [cassandra.cluster:2135] [control connection] user types table not found
+[46m[[0m30/May/2015 19:47:17[46m][0m DEBUG [cassandra.cluster:2140] [control connection] Fetched schema, rebuilding metadata[38;126H31,1[10CTop[37;1H[34h[?25h[?25l[34h[?25h[?25l[38;126H[K[38;1H:[34h[?25hq[?25l[34h[?25h![?25l[34h[?25h[?25l[38;1H[K[38;1H[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ ls
+careerCupScrapper.py   __init__.py   mysite.log   Scrapper.pyc       scrapQuestions.pyc  test.py
+careerCupScrapper.pyc  __init__.pyc  Scrapper.py  scrapQuestions.py  [0m[01;34mscrapy[0m
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ vi test.py 
+[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"test.py" 10L, 350C[1;1H[35mimport[0m scrapQuestions
+scrapQuestions.main()
+
+inst = scrapQuestions.getInstance([31m'http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questt[5;1Hions&n=2'[0m,[31m'Amazon'[0m,[31m'Software Developer'[0m)
+
+gen = inst.getRawQuestions([31m50[0m)
+
+[33mfor[0m num, rawQuestion [33min[0m [36menumerate[0m(gen):
+    rawQuestion.save()
+    [36mprint[0m ([31m"Done "[0m + [36mstr[0m(num))
+[1m[34m~                                                                                                                                              [13;1H~                                                                                                                                              [14;1H~                                                                                                                                              [15;1H~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H1,1[11CAll[1;1H[34h[?25h[?25l[38;1H[K[38;1H:[34h[?25hw[?25l[34h[?25hq[?25l[34h[?25h[?25l"test.py" 10L, 350C written
+[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ vi test.py [Kls
+careerCupScrapper.py   __init__.py   mysite.log   Scrapper.pyc       scrapQuestions.pyc  test.py
+careerCupScrapper.pyc  __init__.pyc  Scrapper.py  scrapQuestions.py  [0m[01;34mscrapy[0m
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ vi scrapQuestions.py
+[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"scrapQuestions.py" 21L, 617C[1;1H[35mfrom[0m careerCupScrapper [35mimport[0m careerCupScrapper
+[35mimport[0m os
+[35mimport[0m django
+
+
+[33mdef[0m [36mgetInstance[0m(url, companyName, positionName):
+    [33mif[0m url [33mand[0m companyName [33mand[0m positionName:[8;8H [33mif[0m (careerCupScrapper.isSupported(url=url)):[9;12H [33mreturn[0m careerCupScrapper(url=url,[10;37H companyName=companyName,[11;37H positionName=positionName)
+    [33melse[0m:[13;8H [33mraise[0m [32mException[0m([31m"Need url, companyName and positionName parameter"[0m)
+
+
+[33mdef[0m [36mmain[0m():
+    os.environ[[31m"DJANGO_SETTINGS_MODULE"[0m] = [31m"mockingsite.settings"[0m
+    django.setup()
+
+[33mif[0m __name__ == [31m'__main__'[0m:
+    main()
+[1m[34m~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H1,1[11CAll[1;1H[34h[?25h[?25l[38;1H[K[38;1H:[34h[?25hq[?25l[34h[?25h![?25l[34h[?25h[?25l[38;1H[K[38;1H[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ vi scrapQuestions.pyls[Kvi scrapQuestions.py[Kvi test.py 
+[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"test.py" 10L, 350C[1;1H[35mimport[0m scrapQuestions
+scrapQuestions.main()
+
+inst = scrapQuestions.getInstance([31m'http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questt[5;1Hions&n=2'[0m,[31m'Amazon'[0m,[31m'Software Developer'[0m)
+
+gen = inst.getRawQuestions([31m50[0m)
+
+[33mfor[0m num, rawQuestion [33min[0m [36menumerate[0m(gen):
+    rawQuestion.save()
+    [36mprint[0m ([31m"Done "[0m + [36mstr[0m(num))
+[1m[34m~                                                                                                                                              [13;1H~                                                                                                                                              [14;1H~                                                                                                                                              [15;1H~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H1,1[11CAll[1;1H[34h[?25h[?25l[38;1H[K[38;1H:[34h[?25hs[?25l[34h[?25hp[?25l[34h[?25h[?25l [34h[?25hs[?25l[34h[?25hc[?25l[34h[?25hr[?25l[34h[?25h...[?25lapQuestions.py[34h[?25h[?25l"scrapQuestions.py" [38;21H[K[38;21H21L, 617C[1;1H[35mfrom[0m careerCupScrapper [35mimport[0m careerCupScrapper
+[35mimport[0m o[2;10H[K[3;1H[35mimport[0m django[4;1H[K[5;1H[K[6;1H[33mdef[0m [36mgetInstance[0m(url, companyName, positionName):
+    [33mif[0m url [33mand[0m companyName [33mand[0m positionName:[8;8H [33mif[0m (careerCupScrapper.isSupported(url=url)):
+            [33mreturn[0m careerCupScrapper(url=url,
+                      [14C companyName=companyName,
+                                     positionName=positionName)
+    [33melse[0m:[12;10H[K[13;1H        [33mraise[0m [32mException[0m([31m"Need url, companyName and positionName parameter"[0m)[13;76H[K[14;1H[K[15;1H[K[16;1H[33mdef[0m [36mmain[0m():[16;12H[K[17;1H    os.environ[[31m"DJANGO_SETTINGS_MODULE"[0m] = [31m"mockingsite.settings"[0m[17;66H[K[18;1H    django.setup()[18;19H[K[19;1H[1m[7mscrapQuestions.py                                                                                                            1,1            Top[0m[20;1H[35mimport[0m scrapQuestions[20;22H[K[21;1HscrapQuestions.main()[21;22H[K[22;1H[K[23;1Hinst = scrapQuestions.getInstance([31m'http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questt[24;1Hions&n=2'[0m,[31m'Amazon'[0m,[31m'Software Developer'[0m)[24;41H[K[25;1H[K[26;1Hgen = inst.getRawQuestions([31m50[0m)[26;31H[K[27;1H[K[28;1H[33mfor[0m num, rawQuestion [33min[0m [36menumerate[0m(gen):[28;40H[K[29;1H    rawQuestion.save()[29;23H[K[30;1H    [36mprint[0m ([31m"Done "[0m + [36mstr[0m(num))[30;31H[K[37;1H[7mtest.py                                                                                                                      1,1            All[1;1H[34h[?25h[?25l[0m[19;126H[1m[7m2[2;1H[34h[?25h[?25l[19;126H3[3;1H[34h[?25h[?25l[19;126H4,0-1[4;1H[34h[?25h[?25l[19;126H5[5;1H[34h[?25h[?25l[19;126H6,1  [6;1H[34h[?25h[?25l[19;126H7[7;1H[34h[?25h[?25l[19;126H8[8;1H[34h[?25h[?25l[19;126H9[9;1H[34h[?25h[?25l[19;126H10,1[10;1H[34h[?25h[?25l[19;127H1[11;1H[34h[?25h[?25l[19;127H2[12;1H[34h[?25h[?25l[19;127H3[13;1H[34h[?25h[?25l[19;127H4,0-1[14;1H[34h[?25h[?25l[19;127H5[15;1H[34h[?25h[?25l[19;127H6,1  [16;1H[34h[?25h[?25l[19;127H7[17;1H[34h[?25h[?25l[19;127H8[18;1H[34h[?25h[?25l[1;18r[0m[18;1H
+[1;38r[38;1H[K[19;127H[1m[7m9,0-1[9C33%[18;1H[34h[?25h[?25l[1;18r[0m[18;1H
+[1;38r[18;1H[33mif[0m __name__ == [31m'__main__'[0m:[19;126H[1m[7m20,1  [9C66[18;1H[34h[?25h[?25l[1;18r[0m[18;1H
+[1;38r[18;4H main()[19;127H[1m[7m1[13CBot[18;1H[34h[?25h[?25l[1;18r[0m[1;1H[3L[1;38r[1;1H[35mfrom[0m careerCupScrapper [35mimport[0m careerCupScrapper
+[35mimport[0m os
+[35mimport[0m django[19;126H[1m[7m5,0-1[10CTop[5;1H[34h[?25h[?25l[38;1H[0m:[34h[?25hq[?25l[34h[?25h![?25l[34h[?25h[?25l[1;1H[35mimport[0m scrapQuestions[1;22H[K[2;1HscrapQuestions.main()[3;1H[K[4;1Hinst = scrapQuestions.getInstance([31m'http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questt[5;1Hions&n=2'[0m,[31m'Amazon'[0m,[31m'Software Developer'[0m)[6;1H[K[7;1Hgen = inst.getRawQuestions([31m50[0m)[7;32H[K[8;9H[K[9;1H[33mfor[0m num, rawQuestion [33min[0m [36menumerate[0m(gen):[9;40H[K[10;4H rawQuestion.save()[10;38H[K[11;4H [36mprint[0m ([31m"Done "[0m + [36mstr[0m(num))[11;38H[K[12;1H[1m[34m~                                                                                                                                              [13;1H~                                                                                                                                              [14;1H~                                                                                                                                              [15;1H~                                                                                                                                              [16;1H~                                                                                                                                              [17;1H~                                                                                                                                              [18;1H~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H1,1[11CAll[1;1H[34h[?25h[?25l[38;126H2[2;1H[34h[?25h[?25l[38;126H3,0-1[3;1H[34h[?25h[?25l[38;126H4,1  [4;1H[34h[?25h[?25l[33C[46m([0m[108C[31mtt[5;1Hi[0m[38C[46m)[0m[38;129H83[5;40H[34h[?25h[?25l[4;34H([108C[31mtt[5;1Hi[0m[38C)[38;130H2[5;39H[34h[?25h[?25l[38;130H1[5;38H[34h[?25h[?25l[38;130H0[5;37H[34h[?25h[?25l[38;129H79[5;36H[34h[?25h[?25l[38;130H8[5;35H[34h[?25h[?25l[38;130H7[5;34H[34h[?25h[?25l[38;130H6[5;33H[34h[?25h[?25l[38;130H5[5;32H[34h[?25h[?25l[38;130H4[5;31H[34h[?25h[?25l[38;130H3[5;30H[34h[?25h[?25l[38;130H2[5;29H[34h[?25h[?25l[38;130H1[5;28H[34h[?25h[?25l[38;130H0[5;27H[34h[?25h[?25l[38;129H69[5;26H[34h[?25h[?25l[38;130H8[5;25H[34h[?25h[?25l[38;130H7[5;24H[34h[?25h[?25l[38;130H6[5;23H[34h[?25h[?25l[38;130H5[5;22H[34h[?25h[?25l[38;130H4[5;21H[34h[?25h[?25l[38;130H3[5;20H[34h[?25h[?25l[38;130H2[5;19H[34h[?25h[?25l[38;130H1[5;18H[34h[?25h[?25l[38;130H0[5;17H[34h[?25h[?25l[38;129H59[5;16H[34h[?25h[?25l[38;130H8[5;15H[34h[?25h[?25l[38;130H7[5;14H[34h[?25h[?25l[38;130H6[5;13H[34h[?25h[?25l[38;130H5[5;12H[34h[?25h[?25l[38;130H4[5;11H[34h[?25h[?25l[38;130H3[5;10H[34h[?25h[?25l[38;130H2[5;9H[34h[?25h[?25l[38;130H1[5;8H[34h[?25h[?25l[31m='[0m,[31m'Amazon'[0m,[31m'Software Developer'[0m)[5;40H[K[5;8H[34h[?25h[?25l[38;1H[1m-- INSERT --[0m[38;126H[K[38;126H4,151[9CAll[5;8H[34h[?25h[?25l[31m=1'[0m,[31m'Amazon'[0m,[31m'Software Developer'[0m)[38;130H2[5;9H[34h[?25h:[31m'[0m[38;1H[K[?25l[38;126H4,151[9CAll[5;8H[34h[?25h[?25l[38;126H[K[38;1H:w[34h[?25hq[?25l[34h[?25h[?25l"test.py" 10L, 350C written
+[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ vi test.py [1P[1P[1@p[1@y[1@t[1@h[1@o[1@n
+CompanyPosition.objects.filter(companyname='Amazon').limit(1)
+PositionCompany.objects.filter(positionname='Software Developer').limit(1)
+Done 0
+Done 1
+Done 2
+Done 3
+Done 4
+Done 5
+Done 6
+Done 7
+Done 8
+Done 9
+Done 10
+Done 11
+Done 12
+Done 13
+Done 14
+Done 15
+Done 16
+Done 17
+Done 18
+Done 19
+Done 20
+Done 21
+Done 22
+Done 23
+Done 24
+Done 25
+Done 26
+Done 27
+Done 28
+Done 29
+Done 30
+Done 31
+Done 32
+Done 33
+Done 34
+Done 35
+Done 36
+Done 37
+Done 38
+Done 39
+Done 40
+Done 41
+Done 42
+Done 43
+Done 44
+Done 45
+Done 46
+Done 47
+Done 48
+Done 49
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/standalone$ 

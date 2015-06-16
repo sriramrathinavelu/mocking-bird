@@ -68,4 +68,153 @@ Syncing mocktest.models.UserSavedTests
 Syncing mocktest.models.UserScheduledTests
 Syncing mocktest.models.UserTests
 Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ sriram@ubuntu:/space/hashincludetest/mocking-bird$ cd /space/hashincludetest/mocking-bird; cqlsh 
+Connected to [0;1;34mDevCluster[0m at localhost:9160.
+[cqlsh 4.1.1 | Cassandra 2.0.14 | CQL spec 3.1.1 | Thrift protocol 19.39.0]
+Use HELP for help.
+cqlsh> 
+cqlsh> 
+cqlsh> 
+cqlsh> [15@(reverse-i-search)`':[CU': UPDATE tests SET teststarttime = '2015-06-14 15:05:00-0700' , testendtime = '2015-06-15 12:05:00-0700' WHERE testid = 80554b911-11ee-11e5-a6b7-4025c2cdc7f8;MS': USE mocking_db ;[K
+[KM[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@E[C[C[C[18Pcqlsh>[C[C
+cqlsh:mocking_db> 
+cqlsh:mocking_db> 
+cqlsh:mocking_db> D[KDESCRIBE tables;
+
+company_position     raw_question_bank   user_position_tests   users
+company_rev_lookup   tests               user_question       
+position_company     user_company        user_saved_tests    
+position_rev_lookup  user_company_tests  user_scheduled_tests
+question_bank        user_position       user_tests          
+
+cqlsh:mocking_db> DROP TABLE company_position ;
+cqlsh:mocking_db> DROP TABLE company_position ;[K[Kcompany_rev_lookup ;
+cqlsh:mocking_db> DROP TABLE company_rev_lookup ;[K[Kposition_company ;
+cqlsh:mocking_db> DROP TABLE position_company ;[K[Kposition_rev_lookup ;
+cqlsh:mocking_db> DROP TABLE position_rev_lookup ;[K[Kquestion_bank ;
+cqlsh:mocking_db> DROP TABLE question_bank ;[K[Kraw_question_bank ;
+cqlsh:mocking_db> DROP TABLE raw_question_bank ;[K[Ktests ;
+cqlsh:mocking_db> DROP TABLE tests ;[K[Kuser_company;
+cqlsh:mocking_db> DROP TABLE user_company;[Kuser_Ccompany_tests ;
+cqlsh:mocking_db> DROP TABLE user_company_tests ;[K[Kuser_position;
+cqlsh:mocking_db> DROP TABLE user_position;[K_tests ;
+cqlsh:mocking_db> DROP TABLE user_position_tests ;[K[Kuser_question ;
+cqlsh:mocking_db> DROP TABLE user_question ;[K[Kuser_saved_tests ;
+cqlsh:mocking_db> DROP TABLE user_saved_tests ;[K[Kuser_scheduled_tests ;
+cqlsh:mocking_db> DROP TABLE user_scheduled_tests ;[K[Kuser_tests ;
+cqlsh:mocking_db> 
+cqlsh:mocking_db> 
+cqlsh:mocking_db> DROP TABLE user_tests ;[10@scheduled_[C[C[C[C[C[C[C[4Pav[C[C[C[C[C[C[C[C[C[C[3Pquestion[C[C[6@position_tests[C[C;[Kcompany_tests ;;[K[6Ptests ;[12@raw_question_bank[C[C[4P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[6@position_rev_lookup[C[C[3Pcompany[C[C[2@company_rev_lookup[C[C[2Pposition[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[13PESCRIBE tables;USE mocking_db ;DESCRIBE tables;
+
+company_position         tests                user_question       
+mentor_company_position  user_company         user_saved_tests    
+position_company         user_company_tests   user_scheduled_tests
+question_bank            user_position        user_tests          
+raw_question_bank        user_position_tests  users               
+
+cqlsh:mocking_db> SELE[K[K[K[KDESCRIBE TABLE cin[K[Kompany_position ;
+
+CREATE TABLE company_position (
+  companyname text,
+  positionname text,
+  PRIMARY KEY ((companyname), positionname)
+) WITH
+  bloom_filter_fp_chance=0.010000 AND
+  caching='KEYS_ONLY' AND
+  comment='' AND
+  dclocal_read_repair_chance=0.100000 AND
+  gc_grace_seconds=864000 AND
+  index_interval=128 AND
+  read_repair_chance=0.000000 AND
+  replicate_on_write='true' AND
+  populate_io_cache_on_flush='false' AND
+  default_time_to_live=0 AND
+  speculative_retry='99.0PERCENTILE' AND
+  memtable_flush_period_in_ms=0 AND
+  compaction={'class': 'SizeTieredCompactionStrategy'} AND
+  compression={'sstable_compression': 'LZ4Compressor'};
+
+cqlsh:mocking_db> SELEC [KT * FROM company_position ;
+
+(0 rows)
+
+cqlsh:mocking_db> SELECT * FROM company_position ; ;[Kp ;o ;s ;ition_company  ;
+
+(0 rows)
+
+cqlsh:mocking_db> SELECT * FROM position_company  ;[1Pcompany_position[C[C
+
+ [0;1;35mcompanyname[0m | [0;1;35mpositionname[0m
+-------------+--------------------
+      [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT * FROM company_position ;[1@position_company [C[C
+
+ [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+--------------------+-------------
+ [0;1;33mSoftware Developer[0m |      [0;1;33mAmazon[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT DISTINCT companyname
+              ...         FROM company_position ;
+
+ [0;1;35mcompanyname[0m
+-------------
+      [0;1;33mAmazon[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT DISTINCT companyname         FROM company_position ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[28P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K[K[KSELECT COUNT(1) FROM raw_question_bank ;
+
+ [0;1;35mcount[0m
+-------
+    [0;1;32m12[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT COUNT(1) FROM raw_question_bank ;
+
+ [0;1;35mcount[0m
+-------
+    [0;1;32m13[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT COUNT(1) FROM raw_question_bank ; ;[Kq ;u ;estion_bank  ;
+
+ [0;1;35mcount[0m
+-------
+     [0;1;32m1[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT COUNT(1) FROM question_bank  ;
+
+ [0;1;35mcount[0m
+-------
+     [0;1;32m2[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT COUNT(1) FROM question_bank  ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8P[1@q[1@u[1@e[1@s[1@t[1@i[1@o[1@n[1@o[1P[1@i[1@d
+
+ [0;1;35mquestionid[0m
+--------------------------------------
+ [0;1;32m0c481547-1462-11e5-bac8-4025c2cdc7f8[0m
+ [0;1;32m717094a8-1461-11e5-b236-4025c2cdc7f8[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT questionid FROM question_bank  ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@,[1@t[1@i[1@m[1@e[1@t[1@o[1@s[1@o[1@l[1@v[1@e
+
+ [0;1;35mquestionid[0m                           | [0;1;35mtimetosolve[0m
+--------------------------------------+-------------
+ [0;1;32m0c481547-1462-11e5-bac8-4025c2cdc7f8[0m |          [0;1;32m10[0m
+ [0;1;32m717094a8-1461-11e5-b236-4025c2cdc7f8[0m |          [0;1;32m20[0m
+
+(2 rows)
+
+cqlsh:mocking_db> 

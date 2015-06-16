@@ -1,7 +1,7 @@
 import scrapQuestions
 scrapQuestions.main()
 
-inst = scrapQuestions.getInstance('http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=2','Amazon','Software Developer')
+inst = scrapQuestions.getInstance('http://www.careercup.com/page?pid=amazon-interview-questions&job=software-engineer-developer-interview-questions&n=1','Amazon','Software Developer')
 
 gen = inst.getRawQuestions(50)
 

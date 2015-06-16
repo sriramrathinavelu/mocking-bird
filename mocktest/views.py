@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as loginuser
 from django.contrib.auth import logout as logoutuser
 from mocktest.algo.test import LinearByTime
-from models import CompanyRevLookup
 from models import UserCompany
 from models import UserPosition
 from django.shortcuts import render
@@ -22,10 +21,9 @@ logger = logging.getLogger(__name__)
 
 
 def home(request):
-    companies = CompanyRevLookup.objects.all()
+    companies = DAOUtil.getDistinctCompanies()
     context = {}
-    context['companies'] = json.dumps(map(lambda x: x.companyname,
-                                      companies))
+    context['companies'] = json.dumps(companies)
     context['username'] = ""
     context['isAuthenticated'] = False
     if request.user.is_authenticated():
@@ -42,11 +40,10 @@ def advancedTest(request):
 @login_required(redirect_field_name='redirect_url')
 def createTest(request):
     username = request.user.username
-    # Get the company ID
+    # Get the company Name
     companyName = request.GET['companyName']
-    companyId = DAOUtil.getCompanyId(companyName=companyName)
-    # Get the position ID
-    positionId = request.GET['positionId']
+    # Get the position Name
+    positionName = request.GET['positionName']
     # Get optional parameters
     numQ = int(request.GET.get('numQ', 3))
     if numQ > 5:
@@ -56,13 +53,14 @@ def createTest(request):
     startTime = request.GET.get('startTime')
     endTime = request.GET.get('endTime')
     testName = request.GET.get('testName')
-    logger.debug("Start Time: " + startTime + " End Time: " + endTime)
     if startTime:
         startTime = float(startTime)
     if endTime:
         endTime = float(endTime)
     #   Generating Algorithm (Recent Questions)
-    testAlgo = LinearByTime.LinearByTime(username, companyId, positionId)
+    testAlgo = LinearByTime.LinearByTime(username,
+                                         companyName,
+                                         positionName)
     testId = testAlgo.createTest(startTime,
                                  endTime,
                                  numQ)
@@ -71,9 +69,7 @@ def createTest(request):
     DAOUtil.addScheduledTest(username,
                              testId,
                              testName,
-                             companyId,
                              companyName,
-                             positionId,
                              firstQuestion.positionname,
                              firstQuestion.teststarttime,
                              firstQuestion.testendtime,
@@ -102,14 +98,14 @@ def viewHistory(request):
     context['companyMap'] = json.dumps(dict(
                                         map(lambda x:
                                             DAOUtil.jsonReady((x.companyname,
-                                                               x.companyid)),
+                                                               x.companyname)),
                                             userCompanies)))
     context['positionNames'] = json.dumps(map(lambda x: x.positionname,
                                               userPositions))
     context['positionMap'] = json.dumps(dict(
                                         map(lambda x:
                                             DAOUtil.jsonReady((x.positionname,
-                                                               x.positionid)),
+                                                               x.positionname)),
                                             userPositions)))
     return render(request, 'mocktest/history.html', context)
 
@@ -159,8 +155,11 @@ def congrats(request):
         return render(request, 'mocktest/congrats.html', context)
     else:
         testId = request.POST["testId"]
-        choice = request.POST["evaluation"]
+        choice = int(request.POST["evaluation"])
         logger.debug("testId = " + testId + " choice = " + choice)
+        if (choice == 2):
+            pass
+            # Enter to the pendingEvaluation Database
 
 
 @login_required(redirect_field_name='redirect_url')

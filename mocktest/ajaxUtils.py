@@ -1,6 +1,5 @@
 from django.contrib.auth.decorators import login_required
 from cassandra.cqlengine.query import DoesNotExist
-from models import CompanyRevLookup
 from django.shortcuts import render
 from collections import OrderedDict
 from models import CompanyPosition
@@ -31,7 +30,7 @@ def getUserCompany(request):
     companies = OrderedDict()
     companies["DEFAULT"] = "Please select a company"
     for comp in userCompanies:
-        companies[comp.companyid] = comp.companyname
+        companies[comp.companyname] = comp.companyname
     return render(request,
                   'mocktest/ajaxUtil/optionsFromDict.html',
                   {'theDict': companies})
@@ -44,7 +43,7 @@ def getUserPosition(request):
     positions = OrderedDict()
     positions["DEFAULT"] = "Please select a position"
     for pos in userPositions:
-        positions[pos.positionid] = pos.positionname
+        positions[pos.positionname] = pos.positionname
     return render(request,
                   'mocktest/ajaxUtil/optionsFromDict.html',
                   {'theDict': positions})
@@ -53,13 +52,14 @@ def getUserPosition(request):
 @login_required
 def getUserCompanyPosition(request):
     username = request.user.username
-    companyId = request.GET['companyId']
-    userCompPositions = UserCompanyTests.objects.filter(username=username,
-                                                        companyid=companyId)
+    companyName = request.GET['companyName']
+    userCompPositions = UserCompanyTests.objects.\
+        filter(username=username,
+               companyname=companyName)
     positions = OrderedDict()
     positions["DEFAULT"] = "Please select a position"
     for pos in userCompPositions:
-        positions[pos.positionid] = pos.positionname
+        positions[pos.positionname] = pos.positionname
     return render(request,
                   'mocktest/ajaxUtil/optionsFromDict.html',
                   {'theDict': positions})
@@ -68,13 +68,14 @@ def getUserCompanyPosition(request):
 @login_required
 def getUserPositionCompany(request):
     username = request.user.username
-    positionId = request.GET['positionId']
-    userPosCompanies = UserPositionTests.objects.filter(username=username,
-                                                        positionid=positionId)
+    positionName = request.GET['positionName']
+    userPosCompanies = UserPositionTests.objects.\
+        filter(username=username,
+               positionname=positionName)
     companies = OrderedDict()
     companies["DEFAULT"] = "Please select a company"
     for comp in userPosCompanies:
-        companies[comp.companyid] = comp.companyname
+        companies[comp.companyname] = comp.companyname
     return render(request,
                   'mocktest/ajaxUtil/optionsFromDict.html',
                   {'theDict': companies})
@@ -92,15 +93,17 @@ def getUserTests(request):
 @login_required
 def getUserCompanyTests(request):
     username = request.user.username
-    companyId = request.GET['companyId']
-    positionId = request.GET.get('positionId')
-    if not positionId:
-        userCompTests = UserCompanyTests.objects.filter(username=username,
-                                                        companyid=companyId)
+    companyName = request.GET['companyName']
+    positionName = request.GET.get('positionName')
+    if not positionName:
+        userCompTests = UserCompanyTests.objects.\
+            filter(username=username,
+                   companyname=companyName)
     else:
-        userCompTests = UserCompanyTests.objects.filter(username=username,
-                                                        companyid=companyId,
-                                                        positionid=positionId)
+        userCompTests = UserCompanyTests.objects.\
+            filter(username=username,
+                   companyname=companyName,
+                   positionname=positionName)
     tests = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
                            userCompTests))
     return HttpResponse(tests)
@@ -109,15 +112,17 @@ def getUserCompanyTests(request):
 @login_required
 def getUserPositionTests(request):
     username = request.user.username
-    positionId = request.GET['positionId']
-    companyId = request.GET.get('companyId')
-    if not companyId:
-        userPosTests = UserPositionTests.objects.filter(username=username,
-                                                        positionid=positionId)
+    positionName = request.GET['positionName']
+    companyName = request.GET.get('companyName')
+    if not companyName:
+        userPosTests = UserPositionTests.objects.\
+            filter(username=username,
+                   positionname=positionName)
     else:
-        userPosTests = UserPositionTests.objects.filter(username=username,
-                                                        positionid=positionId,
-                                                        companyid=companyId)
+        userPosTests = UserPositionTests.objects.\
+            filter(username=username,
+                   positionname=positionName,
+                   companyname=companyName)
     tests = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
                            userPosTests))
     return HttpResponse(tests)
@@ -162,9 +167,7 @@ def saveTest(request):
         saveTest.username = username
         saveTest.testid = testId
         saveTest.testname = testName
-        saveTest.companyid = testObj.companyid
         saveTest.companyname = testObj.companyname
-        saveTest.positionid = testObj.positionid
         saveTest.positionname = testObj.positionname
     saveTest.testdate = testObj.teststarttime
     saveTest.totalquestions = testObj.totalquestions
@@ -201,28 +204,24 @@ def submitTest(request):
     # usertests
     try:
         userCompanyObj = UserCompany.objects.get(username=username,
-                                                 companyid=testObj.companyid)
+                                                 companyname=testObj.companyname)
     except DoesNotExist:
         userCompanyObj = UserCompany()
         userCompanyObj.username = username
-        userCompanyObj.companyid = testObj.companyid
         userCompanyObj.companyname = testObj.companyname
         userCompanyObj.save()
     try:
         userPositionObj = UserPosition.objects.\
                           get(username=username,
-                              positionid=testObj.positionid)
+                              positionname=testObj.positionname)
     except DoesNotExist:
         userPositionObj = UserPosition()
         userPositionObj.username = username
-        userPositionObj.positionid = testObj.positionid
         userPositionObj.positionname = testObj.positionname
         userPositionObj.save()
     userCompanyTestObj = UserCompanyTests()
     userCompanyTestObj.username = username
-    userCompanyTestObj.companyid = testObj.companyid
     userCompanyTestObj.companyname = testObj.companyname
-    userCompanyTestObj.positionid = testObj.positionid
     userCompanyTestObj.positionname = testObj.positionname
     userCompanyTestObj.testid = testId
     userCompanyTestObj.testname = testName
@@ -235,9 +234,7 @@ def submitTest(request):
     userCompanyTestObj.save()
     userPositionTestObj = UserPositionTests()
     userPositionTestObj.username = username
-    userPositionTestObj.companyid = testObj.companyid
     userPositionTestObj.companyname = testObj.companyname
-    userPositionTestObj.positionid = testObj.positionid
     userPositionTestObj.positionname = testObj.positionname
     userPositionTestObj.testid = testId
     userPositionTestObj.testname = testName
@@ -252,9 +249,7 @@ def submitTest(request):
     userTests.username = username
     userTests.testid = testId
     userTests.testname = testName
-    userTests.companyid = testObj.companyid
     userTests.companyname = testObj.companyname
-    userTests.positionid = testObj.positionid
     userTests.positionname = testObj.positionname
     userTests.testdate = testObj.teststarttime
     userTests.totalquestions = testObj.totalquestions
@@ -313,13 +308,12 @@ def saveAnswer(request):
 
 
 def getPositions(request):
-    companyName = request.GET.get('company', None)
-    company = CompanyRevLookup.objects.get(companyname=companyName)
-    positionsDB = CompanyPosition.objects.filter(companyid=company.companyid)
+    companyName = request.GET.get('companyName', None)
+    positionsDB = CompanyPosition.objects.filter(companyname=companyName)
     positions = OrderedDict()
     positions["DEFAULT"] = "Search for a position"
     for position in positionsDB:
-        positions[position.positionid] = position.positionname
+        positions[position.positionname] = position.positionname
     return render(request,
                   'mocktest/ajaxUtil/optionsFromDict.html',
                   {'theDict': positions})

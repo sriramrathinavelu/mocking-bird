@@ -4,7 +4,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if rawQuestions.has_previous %}
-            <a href="?companyId={{companyId}}&positionId={{positionId}}&page={{ rawQuestions.previous_page_number }}">previous</a>
+            <a href="?companyName={{companyName}}&positionName={{positionName}}&page={{ rawQuestions.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -12,7 +12,7 @@
         </span>
 
         {% if rawQuestions.has_next %}
-            <a href="?companyId={{companyId}}&positionId={{positionId}}&page={{ rawQuestions.next_page_number }}">next</a>
+            <a href="?companyName={{companyName}}&positionName={{positionName}}&page={{ rawQuestions.next_page_number }}">next</a>
         {% endif %}
 
         <a href="/admin/home.html"> Home </a>
@@ -48,7 +48,7 @@
     <tr>
     <td>
     <pre>
-    <a id={{quest.questionid}} href="/admin/moderateQuestion.html?page={{rawQuestions.number}}&companyId={{companyId}}&positionId={{positionId}}&questionId={{quest.questionid}}">Moderate </a>
+    <a id={{quest.questionid}} href="/admin/moderateQuestion.html?page={{rawQuestions.number}}&companyName={{companyName}}&positionName={{positionName}}&questionId={{quest.questionid}}">Moderate </a>
     </pre>
     </td>
     </tr>
@@ -57,7 +57,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if rawQuestions.has_previous %}
-            <a href="?companyId={{companyId}}&positionId={{positionId}}&page={{ rawQuestions.previous_page_number }}">previous</a>
+            <a href="?companyName={{companyName}}&positionName={{positionName}}&page={{ rawQuestions.previous_page_number }}">previous</a>
         {% endif %}
 
         <span class="current">
@@ -65,7 +65,7 @@
         </span>
 
         {% if rawQuestions.has_next %}
-            <a href="?companyId={{companyId}}&positionId={{positionId}}&page={{ rawQuestions.next_page_number }}">next</a>
+            <a href="?companyName={{companyName}}&positionName={{positionName}}&page={{ rawQuestions.next_page_number }}">next</a>
         {% endif %}
 
         <a href="/admin/home.html"> Home </a>

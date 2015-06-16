@@ -45,6 +45,12 @@
     <script src="/static/mocktest/scripts/jquery.flipcountdown.js"></script>
     <script src="/static/bower_components/moment/min/moment.min.js"></script>
 
+    <!--Jquery counter -->    
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery.countdown.css">
+    <script src="/static/mocktest/scripts/jquery.plugin.min.js"></script>
+    <script src="/static/mocktest/scripts/jquery.countdown.js"></script>
+    <!--Jquery counter -->
+
     <script>
       function getURLParameter(name) {
         return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,''])[1].replace(/\+/g, '%20'))||null;
@@ -78,15 +84,36 @@
         console.log(startTime);
         console.log(cdFormat);
         startDateTime.subtract(now);
-        $("#digits").countdown({
-          image: "/static/mocktest/images/digits.png",
-          format: cdFormat,
-          startTime: startTime,
-          timerEnd: function() { 
-            window.location = "/test.html?testId=" +
-              getURLParameter("testId");
-          }
-        });        
+        if ($(".mediachecker").css("float") == "right" ){
+          // Large Screen
+          $("#smallCountDown").hide();
+          $("#digits").flipcountdown({
+            image: "/static/mocktest/images/digits.png",
+            format: cdFormat,
+            startTime: startTime,
+            timerEnd: function() { 
+              window.location = "/test.html?testId=" +
+                getURLParameter("testId");
+            }
+          });                
+          $("#digits").append(
+            "<div id='cntsep_8' class='cntSeparator' style='float: left;'> SS </div>"
+          );
+          $("#cntsep_2").html(" Days ");
+          $("#cntsep_4").html(" HH: ");
+          $("#cntsep_6").html(" MM: ");
+        } else {
+          // Small and Mid sized Screens
+          $("#digits").hide();
+          var startDateTime = moment.unix(getURLParameter("testStartTime"));
+          $('#smallCountDown').countdown({
+            until: startDateTime.toDate(),
+            onExpiry: function() { 
+              window.location = "/test.html?testId=" +
+                getURLParameter("testId");
+            }
+        }); 
+        }
       });
     </script>
 
@@ -123,9 +150,21 @@
     </nav>
 
 
-    <main>
-      <div id="digits" class="centered-flip-clock"></div>
-      <div id="defaultCountdown"></div>          
+    <main>      
+      <h1>Scheduled!</h1>
+      <p>
+        Your test will begin in         
+      </p>
+      <div id="digits" class="centered-flip-clock" style="margin-bottom: 100px; margin-top: 10px;"></div>
+      <div id="smallCountDown" style="width: 300px; margin-bottom: 50px; margin-top: 10px;"></div>      
+      <p>
+        Team <i>#inclue</i>&lt;test&gt; wishes you all the best.
+        <br/>
+        <br/>
+        Tip: You can find this test and all the other scheduled tests under "Scheduled Tests" tab.
+        <br/>
+        <br/>
+      </p>
     </main> 
 
 

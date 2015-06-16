@@ -11,8 +11,8 @@ class LinearByTime(BaseTest):
     def __getLastQuestion(self):
         lastQuestion = UserQuestion.objects.\
                         filter(username=self.username,
-                               companyid=self.companyId,
-                               positionid=self.positionId).limit(1)
+                               companyname=self.companyName,
+                               positionname=self.positionName).limit(1)
         if lastQuestion:
             return lastQuestion.questionid
         return None
@@ -24,24 +24,24 @@ class LinearByTime(BaseTest):
         # Find numQ questions later than the last question
         if lastQuestion:
             questions = QuestionBank.objects.\
-                filter(companyid=self.companyId,
-                       positionid=self.positionId,
+                filter(companyname=self.companyName,
+                       positionname=self.positionName,
                        questionid__gt=lastQuestion).limit(numQ)
             questionsList = [q for q in questions]
             if len(questions) < numQ:
                 # If not go back and add questions at the beginning
                 questions = QuestionBank.objects.\
-                                         filter(companyid=self.companyId,
-                                                positionid=self.positionId).\
-                                         limit(numQ-len(questions))
+                                filter(companyname=self.companyName,
+                                       positionname=self.positionName).\
+                                limit(numQ-len(questions))
                 for q in questions:
                     questionsList.append(q)
         else:
             # Maybe there were no test taken for this
             # company/position by the user
             questions = QuestionBank.objects.\
-                                     filter(companyid=self.companyId,
-                                            positionid=self.positionId).\
+                                     filter(companyname=self.companyName,
+                                            positionname=self.positionName).\
                                      limit(numQ)
             questionsList = [q for q in questions]
         self.numQ = len(questions)

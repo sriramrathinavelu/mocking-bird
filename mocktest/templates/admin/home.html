@@ -2,16 +2,16 @@
 
 {%block jquery %}
     $("#addquestion").click(function(){
-        window.location="/admin/addQuestion.html?companyId=" + $("#companyName").val()
+        window.location="/admin/addQuestion.html?companyName=" + $("#companyName").val()
     });
     $("#moderateQuestion").click(function(){
         window.location="/admin/moderateQuestionTable.html?" + $("#moderateIds").val()
     });
     $("#editQuestion").click(function(){
         window.location="/admin/editQuestion.html?" +
-        "companyId=" + $("#companyId").val() +
-        "&positionId=" + $("#positionId").val() +
-        "&questionId=" + $("#questionId").val()
+        "companyName=" + $("#companyNameText").val() +
+        "&positionName=" + $("#positionNameText").val() +
+        "&questionId=" + $("#questionIdText").val()
     });
 {% endblock %}
 
@@ -34,9 +34,9 @@
     </li>
     <li>
     <a id="editQuestion" href="#">Edit Question</a> for UUIDS'
-    <input id="companyId" type="text" value="Company ID"/>
-    <input id="positionId" type="text" value="Position ID"/>
-    <input id="questionId" type="text" value="Question ID"/>
+    <input id="companyNameText" type="text" value="Company Name"/>
+    <input id="positionNameText" type="text" value="Position Name"/>
+    <input id="questionIdText" type="text" value="Question ID"/>
     </li>
     <li>
     <a id="moderateQuestion" href="#">Moderate Question</a> for company/position

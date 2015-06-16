@@ -1,11 +1,11 @@
+from cassandra.cqlengine.query import DoesNotExist
 from cassandra.cqlengine.columns import TimeUUID
 from cassandra.cqlengine.models import Model
-from models import PositionRevLookup
-from models import CompanyRevLookup
 from models import CompanyPosition
 from models import PositionCompany
 from models import QuestionBank
 from models import Users
+from django.db import connections
 from models import UserScheduledTests
 from datetime import datetime
 import collections
@@ -66,91 +66,63 @@ def jsonReady(obj):
         return __jsonReady(obj)
 
 
-def __addPositionCompany(companyId,
-                         companyName,
-                         positionId,
-                         positionName):
+def __addPositionCompany(positionName,
+                         companyName):
     posComp = PositionCompany()
-    posComp.positionid = positionId
     posComp.positionname = positionName
-    posComp.companyid = companyId
     posComp.companyname = companyName
     posComp.save()
 
 
-def __addPositionRevLookup(positionName,
-                           positionId):
-    positionLookup = PositionRevLookup()
-    positionLookup.positionname = positionName
-    positionLookup.positionid = positionId
-    positionLookup.save()
+def __deletePositionCompany(positionName, companyName):
+    try:
+        posComp = PositionCompany.objects.get(positionname=positionName,
+                                              companyname=companyName)
+        posComp.delete()
+    except DoesNotExist:
+        pass
 
 
-def __addNewPosition(companyId,
-                     companyName,
-                     positionName):
-    positionId = TimeUUID.from_datetime(datetime.now())
-    __addPositionCompany(companyId,
-                         companyName,
-                         positionId,
-                         positionName)
-    __addPositionRevLookup(positionName,
-                           positionId)
+def __addCompanyPosition(companyName,
+                         positionName):
+    comPos = CompanyPosition()
+    comPos.companyname = companyName
+    comPos.positionname = positionName
+    comPos.save()
+
+
+def __deleteCompanyPosition(companyName, positionName):
+    try:
+        comPos = CompanyPosition.objects.get(companyname=companyName,
+                                             positionname=positionName)
+        comPos.delete()
+    except DoesNotExist:
+        pass
+
+
+def deleteCompanyPosition(companyName, positionName):
+    __deleteCompanyPosition(companyName, positionName)
+    __deletePositionCompany(positionName, companyName)
 
 
 @cleanInput
 def addCompanyPosition(companyName, positionName):
-    # Check if combination exists
-    isCompany, isPosition, isBoth = isPresent(companyName,
-                                              positionName)
     logger.debug("Adding company " + str(companyName) +
                  " and position " + str(positionName))
-    logger.debug("Existing Company: " + str(isCompany) +
-                 " Existing Position: " + str(isPosition) +
-                 " Existing combination: " + str(isBoth))
-    if (not isBoth):
-        if (not isCompany):
-            # Add New Company
-            compPos = CompanyPosition()
-            companyId = TimeUUID.from_datetime(datetime.now())
-            compPos.companyid = companyId
-            compPos.companyname = companyName
-            if not isPosition:
-                # Add New Position
-                __addNewPosition(companyId,
-                                 companyName,
-                                 positionName)
-            else:
-                # Add company to existing Position
-                __addPositionCompany(companyId,
-                                     companyName,
-                                     getPositionId(positionName),
-                                     positionName)
-            compPos.positionid = getPositionId(positionName)
-            compPos.positionname = positionName
-            compPos.save()
-            companyLookup = CompanyRevLookup()
-            companyLookup.companyname = companyName
-            companyLookup.companyid = companyId
-            companyLookup.save()
-        else:
-            if not isPosition:
-                # Add New Position
-                __addNewPosition(getCompanyId(companyName),
-                                 companyName,
-                                 positionName)
-            else:
-                # Add company position map
-                compPos = CompanyPosition()
-                compPos.companyid = getCompanyId(companyName)
-                compPos.positionid = getPositionId(positionName)
-                compPos.companyname = companyName
-                compPos.positionName = positionName
-                compPos.save()
+    try:
+        if not isCompanyPositionPresent(companyName, positionName):
+            __addCompanyPosition(companyName, positionName)
+        if not isPositionCompanyPresent(positionName, companyName):
+            __addPositionCompany(positionName, companyName)
+        return True
+    except Exception, e:
+        logger.error("Encounter exception " + str(e))
+        deleteCompanyPosition(companyName, positionName)
+        return False
 
 
-def addQuestion(companyId,
-                positionId,
+def addQuestion(companyName,
+                positionName,
                 question,
                 answer,
                 questionType=3,
@@ -158,10 +130,10 @@ def addQuestion(companyId,
                 input="",
                 key="",
                 timeToSolve=20):
-    if isIdPresent(companyId, positionId):
+    if isPresent(companyName, positionName):
         questionObj = QuestionBank()
-        questionObj.companyid = companyId
-        questionObj.positionid = positionId
+        questionObj.companyname = companyName
+        questionObj.positionname = positionName
         questionObj.questionid = TimeUUID.from_datetime(datetime.now())
         questionObj.questiontype = questionType
         questionObj.question = question
@@ -175,8 +147,8 @@ def addQuestion(companyId,
         raise Exception("Invalid company and position")
 
 
-def editQuestion(companyId,
-                 positionId,
+def editQuestion(companyName,
+                 positionName,
                  questionId,
                  question,
                  answer,
@@ -185,9 +157,9 @@ def editQuestion(companyId,
                  input="",
                  key="",
                  timeToSolve=20):
-    if isValidQuestionId(companyId, positionId, questionId):
-        questionObj = QuestionBank.objects.get(companyid=companyId,
-                                               positionid=positionId,
+    if isValidQuestion(companyName, positionName, questionId):
+        questionObj = QuestionBank.objects.get(companyname=companyName,
+                                               positionname=positionName,
                                                questionid=questionId)
         questionObj.questiontype = questionType
         questionObj.question = question
@@ -201,8 +173,8 @@ def editQuestion(companyId,
         raise Exception("Invalid company and/or position and/or question")
 
 
-def addRawQuestion(companyId,
-                   positionId,
+def addRawQuestion(companyName,
+                   positionName,
                    question,
                    answer,
                    url,
@@ -211,10 +183,10 @@ def addRawQuestion(companyId,
                    input="",
                    key="",
                    timeToSolve=20):
-    if isIdPresent(companyId, positionId):
+    if isPresent(companyName, positionName):
         question = QuestionBank()
-        question.companyid = companyId
-        question.positionid = positionId
+        question.companyname = companyName
+        question.positionname = positionName
         question.questionid = TimeUUID.from_datetime(datetime.now())
         question.questiontype = questionType
         question.question = question
@@ -231,9 +203,7 @@ def addRawQuestion(companyId,
 def addScheduledTest(username,
                      testId,
                      testName,
-                     companyId,
                      companyName,
-                     positionId,
                      positionName,
                      testStartTime,
                      testEndTime,
@@ -243,9 +213,7 @@ def addScheduledTest(username,
         scheduledTest.username = username
         scheduledTest.testid = testId
         scheduledTest.testname = testName
-        scheduledTest.companyid = companyId
         scheduledTest.companyname = companyName
-        scheduledTest.positionid = positionId
         scheduledTest.positionname = positionName
         scheduledTest.teststarttime = testStartTime
         scheduledTest.testendtime = testEndTime
@@ -254,10 +222,20 @@ def addScheduledTest(username,
 
 
 def deleteScheduledTest(username, testId):
-    scheduledTest = UserScheduledTests.objects.get(username=username,
-                                                   testid=testId)
-    if scheduledTest:
+    try:
+        scheduledTest = UserScheduledTests.objects.get(username=username,
+                                                       testid=testId)
         scheduledTest.delete()
+    except DoesNotExist:
+        pass
+
+
+def getDistinctCompanies():
+    cursor = connections["cassandra"].cursor()
+    results = cursor.execute("""
+        SELECT DISTINCT companyname
+        FROM company_position""")
+    return map(lambda x: x['companyname'], results)
 
 
 @cleanInput
@@ -268,58 +246,39 @@ def getUserRating(username):
     return None
 
 
-@cleanInput
-def getCompanyId(companyName):
-    companyLookup = CompanyRevLookup.objects.filter(companyname=companyName)
-    if companyLookup:
-        return companyLookup[0].companyid
-    return None
-
-
-@cleanInput
-def getPositionId(positionName):
-    positionLookup = PositionRevLookup.objects.filter(
-                        positionname=positionName)
-    if positionLookup:
-        return positionLookup[0].positionid
-    return None
-
-
-@cleanInput
-def getCompanyName(companyId):
-    comp = CompanyPosition.objects.filter(companyid=companyId)
-    if comp:
-        return comp[0].companyname
-    return None
-
-
-@cleanInput
-def getPositionName(positionId):
-    pos = PositionCompany.objects.filter(positionid=positionId)
-    if pos:
-        return pos[0].positionname
-    return None
+def isPresent(companyName, positionName):
+    if isCompanyPositionPresent(companyName, positionName):
+        if isPositionCompanyPresent(positionName, companyName):
+            return True
+        else:
+            __addPositionCompany(positionName, companyName)
+            return True
+    else:
+        return False
 
 
 def isCompanyPresent(companyName):
-    return isValidCompany(companyName)
+    return __isPresentInDB(table='CompanyPosition',
+                           column='companyname',
+                           value=companyName)
 
 
 def isPositionPresent(positionName):
-    return isValidPosition(positionName)
+    return __isPresentInDB(table='PositionCompany',
+                           column='positionname',
+                           value=positionName)
 
 
-def isPresent(companyName, positionName):
-    isCompany = isCompanyPresent(companyName)
-    isPosition = isPositionPresent(positionName)
-    if isCompany and isPosition:
-        companyId = getCompanyId(companyName)
-        positionId = getPositionId(positionName)
-        if isIdPresent(companyId, positionId):
-            return (True, True, True)
-        return (True, True, False)
-    else:
-        return (isCompany, isPosition, False)
+def isCompanyPositionPresent(companyName, positionName):
+    return __isPresentInDB(table='CompanyPosition',
+                           column=['companyname', 'positionname'],
+                           value=[companyName, positionName])
+
+
+def isPositionCompanyPresent(positionName, companyName):
+    return __isPresentInDB(table='PositionCompany',
+                           column=['positionname', 'companyname'],
+                           value=[positionName, companyName])
 
 
 @cleanInput
@@ -330,31 +289,15 @@ def isScheduledTestFound(username, testId):
 
 
 @cleanInput
-def isValidQuestionId(companyId, positionId, questionId):
+def isValidQuestion(companyName, positionName, questionId):
     return __isPresentInDB(table='QuestionBank',
-                           column=['companyid', 'positionid', 'questionid'],
-                           value=[companyId, positionId, questionId])
+                           column=['companyname',
+                                   'positionname',
+                                   'questionid'],
+                           value=[companyName,
+                                  positionName,
+                                  questionId])
 
-
-@cleanInput
-def isIdPresent(companyId, positionId):
-    return __isPresentInDB(table='CompanyPosition',
-                           column=['companyid', 'positionid'],
-                           value=[companyId, positionId])
-
-
-@cleanInput
-def isValidCompany(companyName):
-    return __isPresentInDB(table='CompanyRevLookup',
-                           column='companyname',
-                           value=companyName)
-
-
-@cleanInput
-def isValidPosition(positionName):
-    return __isPresentInDB(table='PositionRevLookup',
-                           column='positionname',
-                           value=positionName)
 
 
 def __isPresentInDB(*args, **kwds):
@@ -362,9 +305,9 @@ def __isPresentInDB(*args, **kwds):
         filterClause = ','.join(map(lambda cond: cond[0] + "='" + str(cond[1]) + "'",
                                     zip(kwds['column'], kwds['value'])))
         kwds['filterClause'] = filterClause
-        cmd = "%(table)s.objects.filter(%(filterClause)s)" % kwds
+        cmd = "%(table)s.objects.filter(%(filterClause)s).limit(1)" % kwds
     else:
-        cmd = "%(table)s.objects.filter(%(column)s='%(value)s')" % kwds
+        cmd = "%(table)s.objects.filter(%(column)s='%(value)s').limit(1)" % kwds
     print cmd
     obj = eval(cmd)
     return True if obj else False

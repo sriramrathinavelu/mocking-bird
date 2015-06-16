@@ -50,7 +50,7 @@
       $("#companyinput").autocomplete({
         source: {{companies|safe}},
         select: function(event, ui){                
-                $.get("ajaxUtil/getPositions.html?company=" + ui.item.value, function(data, status){
+                $.get("ajaxUtil/getPositions.html?companyName=" + ui.item.value, function(data, status){
                   $("#positionselect").html(data);
                   $("#positionselect").show();
                   if ($(".mediachecker").css("float") == "left" ){
@@ -72,12 +72,12 @@
       $("#begintest").click(function(){
         console.log($("#companyinput").val())
         window.location = "createtest.html?companyName=" +
-        $("#companyinput").val() + "&positionId=" +
+        $("#companyinput").val() + "&positionName=" +
         $("#positionselect").val()        
       });
       $("#schedtest").click(function(){
         window.location = "advancedtest.html?companyName=" +
-        $("#companyinput").val() + "&positionId=" +
+        $("#companyinput").val() + "&positionName=" +
         $("#positionselect").val()
       });
       $(document).on('click', "#logout-button-top", function(){

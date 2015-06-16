@@ -29,8 +29,8 @@ class Tests(Model):
     testname = columns.Text(static=True)
     username = columns.Text(static=True)
     retrorating = columns.Integer(static=True)  # Needs a better name
-    companyid = columns.TimeUUID(static=True)
-    positionid = columns.TimeUUID(static=True)
+    # companyid = columns.TimeUUID(static=True)
+    # positionid = columns.TimeUUID(static=True)
     companyname = columns.Text(static=True)
     positionname = columns.Text(static=True)
     # STATE: 0:Not Begun, 1:In progress, 2:Completed
@@ -81,8 +81,8 @@ class UserScheduledTests(Model):
     testid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
     testname = columns.Text(required=True, default="Test " +
                             datetime.now().strftime("%c"))
-    companyid = columns.TimeUUID(required=True)
-    positionid = columns.TimeUUID(required=True)
+    # companyid = columns.TimeUUID(required=True)
+    # positionid = columns.TimeUUID(required=True)
     companyname = columns.Text(required=True)
     positionname = columns.Text(required=True)
     teststarttime = columns.DateTime(required=True)
@@ -95,8 +95,8 @@ class UserSavedTests(Model):
     testid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
     testname = columns.Text(required=True, default="Test " +
                             datetime.now().strftime("%c"))
-    companyid = columns.TimeUUID(required=True)
-    positionid = columns.TimeUUID(required=True)
+    # companyid = columns.TimeUUID(required=True)
+    # positionid = columns.TimeUUID(required=True)
     companyname = columns.Text(required=True)
     positionname = columns.Text(required=True)
     testdate = columns.DateTime(required=True)
@@ -109,16 +109,16 @@ class UserSavedTests(Model):
 
 class UserCompany(Model):
     username = columns.Text(primary_key=True)
-    companyid = columns.TimeUUID(primary_key=True)
-    companyname = columns.Text(required=True)
+    # companyid = columns.TimeUUID(primary_key=True)
+    companyname = columns.Text(primary_key=True)
 
 
 class UserCompanyTests(Model):
     username = columns.Text(partition_key=True)
-    companyid = columns.TimeUUID(partition_key=True)
-    companyname = columns.Text(required=True)
-    positionid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
-    positionname = columns.Text(required=True)
+    # companyid = columns.TimeUUID(partition_key=True)
+    companyname = columns.Text(partition_key=True)
+    # positionid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
+    positionname = columns.Text(primary_key=True, clustering_order="DESC")
     testid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
     testname = columns.Text()
     testdate = columns.DateTime(required=True)
@@ -131,16 +131,16 @@ class UserCompanyTests(Model):
 
 class UserPosition(Model):
     username = columns.Text(primary_key=True)
-    positionid = columns.TimeUUID(primary_key=True)
-    positionname = columns.Text(required=True)
+    # positionid = columns.TimeUUID(primary_key=True)
+    positionname = columns.Text(primary_key=True)
 
 
 class UserPositionTests(Model):
     username = columns.Text(partition_key=True)
-    positionid = columns.TimeUUID(partition_key=True)
-    positionname = columns.Text(required=True)
-    companyid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
-    companyname = columns.Text()
+    # positionid = columns.TimeUUID(partition_key=True)
+    positionname = columns.Text(partition_key=True)
+    # companyid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
+    companyname = columns.Text(primary_key=True, clustering_order="DESC")
     testid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
     testname = columns.Text()
     testdate = columns.DateTime(required=True)
@@ -155,9 +155,9 @@ class UserTests(Model):
     username = columns.Text(primary_key=True)
     testid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
     testname = columns.Text()
-    companyid = columns.TimeUUID(required=True)
+    # companyid = columns.TimeUUID(required=True)
     companyname = columns.Text(required=True)
-    positionid = columns.TimeUUID(required=True)
+    # positionid = columns.TimeUUID(required=True)
     positionname = columns.Text(required=True)
     testdate = columns.DateTime(required=True)
     totalquestions = columns.Integer(required=True)
@@ -169,46 +169,50 @@ class UserTests(Model):
 
 class UserQuestion(Model):
     username = columns.Text(partition_key=True)
-    companyid = columns.TimeUUID(partition_key=True)
-    positionid = columns.TimeUUID(partition_key=True)
+    # companyid = columns.TimeUUID(partition_key=True)
+    # positionid = columns.TimeUUID(partition_key=True)
+    companyname = columns.Text(partition_key=True)
+    positionname = columns.Text(partition_key=True)
     questionid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
 
 
 class CompanyPosition(Model):
-    companyid = columns.TimeUUID(primary_key=True)
-    companyname = columns.Text(required=True)
-    positionid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
-    positionname = columns.Text(required=True)
+    # companyid = columns.TimeUUID(primary_key=True)
+    companyname = columns.Text(primary_key=True)
+    # positionid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
+    positionname = columns.Text(primary_key=True)
 
 
 class PositionCompany(Model):
-    positionid = columns.TimeUUID(primary_key=True)
-    positionname = columns.Text(required=True)
-    companyid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
-    companyname = columns.Text(required=True)
-
-
-class PositionRevLookup(Model):
+    # positionid = columns.TimeUUID(primary_key=True)
     positionname = columns.Text(primary_key=True)
-    positionid = columns.TimeUUID(required=True)
-
-
-class CompanyRevLookup(Model):
+    # companyid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
     companyname = columns.Text(primary_key=True)
-    companyid = columns.TimeUUID(required=True)
+
+
+# class PositionRevLookup(Model):
+#    positionname = columns.Text(primary_key=True)
+#    positionid = columns.TimeUUID(required=True)
+
+
+# class CompanyRevLookup(Model):
+#    companyname = columns.Text(primary_key=True)
+#    companyid = columns.TimeUUID(required=True)
 
 
 class MentorCompanyPosition(Model):
     username = columns.Text(partition_key=True)
-    companyid = columns.TimeUUID(primary_key=True)
-    positionid = columns.TimeUUID(primary_key=True)
-    companyname = columns.Text(required=True)
-    positionname = columns.Text(required=True)
+#    companyid = columns.TimeUUID(primary_key=True)
+#    positionid = columns.TimeUUID(primary_key=True)
+    companyname = columns.Text(primary_key=True)
+    positionname = columns.Text(primary_key=True)
 
 
 class QuestionBank(Model):
-    companyid = columns.TimeUUID(partition_key=True)
-    positionid = columns.TimeUUID(partition_key=True)
+    # companyid = columns.TimeUUID(partition_key=True)
+    # positionid = columns.TimeUUID(partition_key=True)
+    companyname = columns.Text(partition_key=True)
+    positionname = columns.Text(partition_key=True)
     questionid = columns.TimeUUID(primary_key=True,
                                   required=True,
                                   clustering_order="DESC")
@@ -223,8 +227,10 @@ class QuestionBank(Model):
 
 
 class RawQuestionBank(Model):
-    companyid = columns.TimeUUID(partition_key=True)
-    positionid = columns.TimeUUID(partition_key=True)
+    # companyid = columns.TimeUUID(partition_key=True)
+    # positionid = columns.TimeUUID(partition_key=True)
+    companyname = columns.Text(partition_key=True)
+    positionname = columns.Text(partition_key=True)
     questionid = columns.TimeUUID(primary_key=True,
                                   required=True,
                                   clustering_order="DESC")

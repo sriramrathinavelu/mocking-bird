@@ -9,4 +9,5 @@ urlpatterns = [
 	url(r'moderateQuestionTable.html', adminViews.moderateQuestionTable),
 	url(r'moderateQuestion.html', adminViews.moderateQuestion),
 	url(r'home.html$', adminViews.home),
+	url(r'error.html$', adminViews.error),
 ]

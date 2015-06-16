@@ -9,10 +9,10 @@ from mocktest import utils
 class BaseTest(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self, username, companyId, positionId):
+    def __init__(self, username, companyName, positionName):
         self.username = username
-        self.companyId = companyId
-        self.positionId = positionId
+        self.companyName = companyName
+        self.positionName = positionName
         self.numQ = None
         self.questions = None
         self.startTime = None
@@ -25,7 +25,10 @@ class BaseTest(object):
 
     def getEndTime(self):
         if not self.endTime:
-            return utils.fututeTime(self.numQ*30)
+            minutes = 0
+            for question in self.questions:
+                minutes += question.timetosolve
+            return utils.fututeTime(minutes)
         else:
             return datetime.utcfromtimestamp(self.endTime)
 
@@ -53,10 +56,8 @@ class BaseTest(object):
         newTest.username = self.username
         self.retrorating = DAOUtil.getUserRating(self.username)
         newTest.retrorating = self.retrorating
-        newTest.companyid = self.companyId
-        newTest.positionid = self.positionId
-        newTest.companyname = DAOUtil.getCompanyName(self.companyId)
-        newTest.positionname = DAOUtil.getPositionName(self.positionId)
+        newTest.companyname = self.companyName
+        newTest.positionname = self.positionName
         newTest.state = 0
         newTest.totalquestions = self.numQ
         newTest.questionsanswered = 0

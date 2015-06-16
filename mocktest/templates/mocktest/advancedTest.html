@@ -232,7 +232,19 @@
                     }
                   }
                 } else {
-                  if (document.getElementById("testendtime").innerHTML != "") {
+                  if (document.getElementById("teststarttime").innerHTML != "") {
+                    var startMoment = moment(document.getElementById("teststarttime").innerHTML,
+                                           "ddd, MMM Do, YYYY HH:mm");
+                    if (startMoment.isValid()) {
+                      dtPickerObj.dataObject.dCurrentDate = startMoment.toDate();
+                      dtPickerObj.dataObject.iCurrentDay = startMoment.date();
+                      dtPickerObj.dataObject.iCurrentMonth = startMoment.month();
+                      dtPickerObj.dataObject.iCurrentYear = startMoment.year();
+                      dtPickerObj.dataObject.iCurrentHour = startMoment.hour();
+                      dtPickerObj.dataObject.iCurrentMinutes = startMoment.minute();
+                    }
+                  }
+                  if (document.getElementById("testendtime").innerHTML != "") {                    
                     var endMoment = moment(document.getElementById("testendtime").innerHTML,
                                            "ddd, MMM Do, YYYY HH:mm");
                     if (endMoment.isValid()) {
@@ -258,7 +270,7 @@
                 e.preventDefault();
               } else {
                 window.location="createtest.html?companyName=" +
-                getURLParameter("companyName") + "&positionId=" + getURLParameter("positionId") + "&numQ=" + $("#testquestions").html() + "&startTime=" + startEpoch + "&endTime=" + endEpoch;
+                getURLParameter("companyName") + "&positionName=" + getURLParameter("positionName") + "&numQ=" + $("#testquestions").html() + "&startTime=" + startEpoch + "&endTime=" + endEpoch;
               }
             });
           });

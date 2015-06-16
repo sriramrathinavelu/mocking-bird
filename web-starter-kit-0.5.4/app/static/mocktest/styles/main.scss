@@ -316,19 +316,11 @@ main,
   height: 40px;
   margin-right: auto;
   margin-left: auto;
+  color: #000000;
 }
 
 .centered-input-text {
   text-align: center;
-}
-
-.centered-flip-clock {
-  transform: scale(0.5);
-  margin-left: -268px;
-  display: flex;
-  position: absolute;
-  top: 45%;
-  left: 50%;
 }
 
 .centered-button {  
@@ -604,14 +596,6 @@ main {
 /** Mid Sized Screens **/
 @media screen and (min-width: 550px) {
 
-  .centered-flip-clock {
-    transform: scale(0.6);
-    margin-left: -268px;
-    display: flex;
-    position: absolute;
-    top: 45%;
-  }
-
   .date-as-calendar {
     float: right;
     margin-right: 100px;
@@ -677,12 +661,8 @@ main {
 
 
   .centered-flip-clock {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -45px;
-    margin-left: -268px;
-    transform: scale(1);
+    margin-left: auto;
+    margin-right: auto;
   }
 
 

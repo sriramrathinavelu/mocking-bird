@@ -38,13 +38,14 @@ def favourite(request):
     positionCompany = PositionCompany.objects.all()
     mentorCompanyPosition = MentorCompanyPosition.objects.\
         filter(username=request.user.username)
-    mentorCompPosDict = {}
+    mentorCompPosDict = defaultdict(lambda: {})
     for obj in mentorCompanyPosition:
-
+        pass
+        # mentorCompPosDict[obj.companyname]
     compPosDict = {}
     posCompDict = {}
     for obj in companyPosition:
-
+        pass
 
     context['compPosDict'] = compPosDict
     context['posCompDict'] = posCompDict

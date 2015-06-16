@@ -65,7 +65,7 @@ var createDigits = function(where, options) {
 
       counter += 1;
     } else {
-      elem = $('<div class="cntSeparator"/>').css({float: 'left'})
+      elem = $('<div id="cntsep_' + counter + '" class="cntSeparator"/>').css({float: 'left'})
                .text(options.startTime[i]);
     }
     where.append(elem)
@@ -189,7 +189,7 @@ var pad = function(x){return (1e15+""+x).slice(-2)};
 
 var digits = [];
 var intervals = [];
-jQuery.fn.countdown = function(userOptions) {
+jQuery.fn.flipcountdown = function(userOptions) {
   // Default options
   var options = {
     stepTime: 60,

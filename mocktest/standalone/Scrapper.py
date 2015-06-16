@@ -13,12 +13,10 @@ class Scrapper(object):
         self.url = kwds.get('url')
         self.companyName = kwds.get('companyName')
         self.positionName = kwds.get('positionName')
-        if not DAOUtil.isValidCompany(self.companyName):
+        if not DAOUtil.isCompanyPresent(self.companyName):
             raise Exception("Invalid Company")
-        if not DAOUtil.isValidPosition(self.positionName):
+        if not DAOUtil.isPositionPresent(self.positionName):
             raise Exception("Invalid Position")
-        self.companyId = DAOUtil.getCompanyId(self.companyName)
-        self.positionId = DAOUtil.getPositionId(self.positionName)
 
     def _open(self):
         opener = urllib2.build_opener()

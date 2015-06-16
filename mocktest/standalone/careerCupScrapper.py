@@ -64,8 +64,8 @@ class careerCupScrapper(Scrapper):
                     logger.debug("Scrapping Link: " + link)
                     (question, answer) = self._parseQuestion(link)
                     rawQuestionBank = RawQuestionBank()
-                    rawQuestionBank.companyid = self.companyId
-                    rawQuestionBank.positionid = self.positionId
+                    rawQuestionBank.companyname = self.companyName
+                    rawQuestionBank.positionname = self.positionName
                     rawQuestionBank.questionid = TimeUUID.from_datetime(
                                                           datetime.now())
                     rawQuestionBank.questiontype = 3  # Descriptive Answer
