@@ -114,8 +114,7 @@
         $("#testName-submit").val(getURLParameter("testName"));
         var questions={{questions|safe}};
         /*Update the test status*/
-        $.get("ajaxUtil/changeTestState.html?testId=" + $("#testId").val() +
-          "&state=1", function(data,success){
+        $.get("ajaxUtil/notifyTestStart.html?testId=" + $("#testId").val(), function(data,success){
             if (data != "ok") {
               alert("Error: Test status not updated");
             }
@@ -259,6 +258,7 @@
         );
         $("#nextqNum").trigger("change");
         /* submit test after pop-up */
+        /* Replace with a save and submit page*/
         $("#popup-submit-button").click(function(){
           $.get("ajaxUtil/saveAnswer.html?testId=" +
               $("#testId").val() + "&currentQ=" +
@@ -272,7 +272,7 @@
                       alert ("Error! submit test failed");
                     } else {
                       /*Replace with congratulations and follow up page*/
-                      window.location="home.html"
+                      window.location="/congrats.html?testId=" + $("#testId").val()
                     }
                   });
                 } else {

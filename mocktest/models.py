@@ -60,6 +60,36 @@ class Tests(Model):
     key = columns.Text()
 
 
+# class PendingEvaluationCompany(Model):
+#     pass
+
+
+# class PendingEvaluationPosition(Model):
+#     pass
+
+
+# class PendingEvaluationCompanyPosition(Model):
+#     pass
+
+
+# class PendingEvaluationPositionCompany(Model):
+#     pass
+
+
+class UserScheduledTests(Model):
+    username = columns.Text(primary_key=True)
+    testid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
+    testname = columns.Text(required=True, default="Test " +
+                            datetime.now().strftime("%c"))
+    companyid = columns.TimeUUID(required=True)
+    positionid = columns.TimeUUID(required=True)
+    companyname = columns.Text(required=True)
+    positionname = columns.Text(required=True)
+    teststarttime = columns.DateTime(required=True)
+    testendtime = columns.DateTime(required=True)
+    totalquestions = columns.Integer(required=True)
+
+
 class UserSavedTests(Model):
     username = columns.Text(primary_key=True)
     testid = columns.TimeUUID(primary_key=True, clustering_order="DESC")
@@ -166,6 +196,14 @@ class PositionRevLookup(Model):
 class CompanyRevLookup(Model):
     companyname = columns.Text(primary_key=True)
     companyid = columns.TimeUUID(required=True)
+
+
+class MentorCompanyPosition(Model):
+    username = columns.Text(partition_key=True)
+    companyid = columns.TimeUUID(primary_key=True)
+    positionid = columns.TimeUUID(primary_key=True)
+    companyname = columns.Text(required=True)
+    positionname = columns.Text(required=True)
 
 
 class QuestionBank(Model):

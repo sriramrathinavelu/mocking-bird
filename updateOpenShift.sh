@@ -8,7 +8,7 @@ cp -r mocktest $OPENSHIFT_APP_PATH
 
 # Copy Templates
 echo "Copying Templates"
-cp -r mocktest/templates $OPENSHIFT_APP_PATH
+cp -r mocktest/templates $OPENSHIFT_TEMPLATE_PATH
 
 echo "Copying Static Files"
 cp -r mockingsite/static $OPENSHIFT_STATIC_PATH 

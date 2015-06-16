@@ -12,6 +12,7 @@ from models import UserPosition
 from models import UserCompanyTests
 from models import UserPositionTests
 from models import UserTests
+from models import UserScheduledTests
 from datetime import datetime
 from mocktest import DAOUtil
 import uuid
@@ -126,6 +127,15 @@ def getUserPositionTests(request):
 def getUserSavedTests(request):
     username = request.user.username
     userTests = UserSavedTests.objects.filter(username=username)
+    tests = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
+                           userTests))
+    return HttpResponse(tests)
+
+
+@login_required
+def getUserSchedTests(request):
+    username = request.user.username
+    userTests = UserScheduledTests.objects.filter(username=username)
     tests = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
                            userTests))
     return HttpResponse(tests)
@@ -274,12 +284,14 @@ def exitTest(request):
 
 
 @login_required
-def changeTestState(request):
+def notifyTestStart(request):
     testId = uuid.UUID(request.GET.get('testId'))
-    state = int(request.GET.get('state'))
+    state = 1
     testObj = Tests.objects.filter(testid=testId)[0]
     testObj.state = state
     testObj.save()
+    DAOUtil.deleteScheduledTest(request.user.username,
+                                testId)
     return HttpResponse("ok")
 
 

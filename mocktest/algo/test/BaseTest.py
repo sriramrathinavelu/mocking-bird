@@ -15,21 +15,35 @@ class BaseTest(object):
         self.positionId = positionId
         self.numQ = None
         self.questions = None
+        self.startTime = None
+        self.endTime = None
+        self.firstQuestion = None
 
     @abstractmethod
     def getQuestions(self, numQ=3):
         pass
 
     def getEndTime(self):
-        return utils.fututeTime(self.numQ*30)
+        if not self.endTime:
+            return utils.fututeTime(self.numQ*30)
+        else:
+            return datetime.utcfromtimestamp(self.endTime)
 
     def getStartTime(self):
-        return datetime.now()
+        if not self.startTime:
+            return datetime.now()
+        else:
+            return datetime.utcfromtimestamp(self.startTime)
+
+    def getFirstQuestion(self):
+        return self.firstQuestion
 
     def createTest(self,
                    startTime,
                    endTime,
                    numQ=3):
+        self.startTime = startTime
+        self.endTime = endTime
         self.getQuestions(numQ)
         curQ = 0
         newTest = Tests()
@@ -68,6 +82,8 @@ class BaseTest(object):
         newTest.key = question.key
         # Save the first row for now
         newTest.save()
+        # Saved to retrieve the static fields later on
+        self.firstQuestion = newTest
         # We just need to save remaining questions now
         # No need to worry about the static fields
         for i in range(1, self.numQ):

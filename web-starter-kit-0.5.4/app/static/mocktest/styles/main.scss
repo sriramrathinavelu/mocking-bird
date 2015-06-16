@@ -282,15 +282,27 @@ main,
 
 .centered-icon {
   display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.left-div{  
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+  font-weight: 300;
+  width: 100%;
+  color: #FFFFFF; /*#000000;*/
+  padding-left: 18px;
+  padding-right: 18px;
+  text-align: left;  
 }
 
 .centered-div{  
   font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
   font-weight: 300;
   width: 100%;
-  color: #000000;
+  color: #FFFFFF; /*#000000;*/
   padding-left: 18px;
   padding-right: 18px;
   text-align: center;  
@@ -308,6 +320,15 @@ main,
 
 .centered-input-text {
   text-align: center;
+}
+
+.centered-flip-clock {
+  transform: scale(0.5);
+  margin-left: -268px;
+  display: flex;
+  position: absolute;
+  top: 45%;
+  left: 50%;
 }
 
 .centered-button {  
@@ -404,6 +425,10 @@ main,
   color: #606060;
 }
 
+.black-input {
+  color: #000000;
+}
+
 .valid-input {
   background: white url('/static/mocktest/images/icons/accept.png') left no-repeat;
   padding-left: 40px;
@@ -416,6 +441,10 @@ main,
 
 .form-error {
   color: #FFFE00;
+}
+
+.form-label {
+  color: #EAEAEA;
 }
 
 .hidden-element {
@@ -575,6 +604,14 @@ main {
 /** Mid Sized Screens **/
 @media screen and (min-width: 550px) {
 
+  .centered-flip-clock {
+    transform: scale(0.6);
+    margin-left: -268px;
+    display: flex;
+    position: absolute;
+    top: 45%;
+  }
+
   .date-as-calendar {
     float: right;
     margin-right: 100px;
@@ -637,6 +674,17 @@ main {
 
 /** Larger Screens - desktops and tablets **/
 @media all and (min-width: 990px) {
+
+
+  .centered-flip-clock {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -45px;
+    margin-left: -268px;
+    transform: scale(1);
+  }
+
 
   .date-as-calendar {
     float: right;

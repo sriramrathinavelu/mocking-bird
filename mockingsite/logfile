@@ -49,3 +49,19 @@
 [09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:109] Existing Company: False Existing Position: True Existing combination: False
 [09/Jun/2015 08:31:51] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
 [09/Jun/2015 14:04:34] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[09/Jun/2015 16:05:02] DEBUG [mocktest.DAOUtil:106] Adding company Amazon and position Software Developer
+[09/Jun/2015 16:05:02] DEBUG [mocktest.DAOUtil:109] Existing Company: True Existing Position: True Existing combination: True
+[11/Jun/2015 15:47:37] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[11/Jun/2015 22:01:50] DEBUG [mocktest.views:58] Start Time: 1434063600 End Time: 1434067200
+[11/Jun/2015 22:03:43] DEBUG [mocktest.views:58] Start Time: 1434063600 End Time: 1434067200
+[12/Jun/2015 16:45:58] DEBUG [mocktest.views:58] Start Time: 1434214800 End Time: 1434222000
+[13/Jun/2015 17:06:15] DEBUG [mocktest.views:58] Start Time: 1434305100 End Time: 1434308700
+[13/Jun/2015 18:44:26] DEBUG [mocktest.views:58] Start Time: 1434314640 End Time: 1434321840
+[14/Jun/2015 14:50:42] DEBUG [mocktest.views:59] Start Time: 1434384000 End Time: 1434391200
+[14/Jun/2015 14:51:19] DEBUG [mocktest.views:59] Start Time: 1434384000 End Time: 1434391200
+[14/Jun/2015 15:18:59] DEBUG [mocktest.views:59] Start Time: 1434305880 End Time: 1434309480
+[14/Jun/2015 18:20:03] DEBUG [mocktest.views:59] Start Time: 1434306000 End Time: 1434306120
+[14/Jun/2015 18:25:37] DEBUG [mocktest.views:163] testId = f9bf5fd7-12c1-11e5-8c1f-4025c2cdc7f8 choice = 2
+[15/Jun/2015 19:09:07] DEBUG [mocktest.views:59] Start Time: 1434396000 End Time: 1434399600
+[15/Jun/2015 19:22:54] DEBUG [mocktest.views:163] testId = b97cefd9-1085-11e5-9210-4025c2cdc7f8 choice = 2
+[15/Jun/2015 19:23:47] DEBUG [mocktest.views:163] testId = b97cefd9-1085-11e5-9210-4025c2cdc7f8 choice = 1

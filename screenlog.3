@@ -1,0 +1,248 @@
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ cd mockingsite/
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ ls
+__init__.py  __init__.pyc  logfile  logfile.1  settings.py  settings.pyc  [0m[01;34mstatic[0m  urls.py  urls.pyc  wsgi.py  wsgi.pyc
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ vi urls.py
+[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"urls.py" 25L, 998C[1;1H[31m"""mockingsite URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.8/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Add an import:  from blog import urls as blog_urls
+    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
+"""[0m
+[35mfrom[0m django.conf.urls [35mimport[0m include, url
+[35mfrom[0m django.contrib [35mimport[0m admin
+[35mfrom[0m django.conf [35mimport[0m settings
+[35mfrom[0m django.conf.urls.static [35mimport[0m static
+
+urlpatterns = [
+    url([31m'^'[0m, include([31m'mocktest.urls'[0m)),
+    url([31m'^ajaxUtil/'[0m, include([31m'mocktest.ajaxUrls'[0m)),
+    url([31mr'^admin/'[0m, include([31m'mocktest.adminUrls'[0m)),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+[1m[34m~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H2,0-1[9CAll[2;1H[34h[?25h[?25l[38;126H3,1  [3;1H[34h[?25h[?25l[38;126H4[4;1H[34h[?25h[?25l[38;126H5[5;1H[34h[?25h[?25l[38;126H6[6;1H[34h[?25h[?25l[38;126H7[7;1H[34h[?25h[?25l[38;126H8[8;1H[34h[?25h[?25l[38;126H9[9;1H[34h[?25h[?25l[38;126H10,1[10;1H[34h[?25h[?25l[38;127H1[11;1H[34h[?25h[?25l[38;127H2[12;1H[34h[?25h[?25l[38;127H3[13;1H[34h[?25h[?25l[38;127H4[14;1H[34h[?25h[?25l[38;127H5[15;1H[34h[?25h[?25l[38;127H6[16;1H[34h[?25h[?25l[38;127H7[17;1H[34h[?25h[?25l[38;127H8[18;1H[34h[?25h[?25l[38;1H[K[38;1H:[34h[?25hq[?25l[34h[?25h![?25l[34h[?25h[?25l[38;1H[K[38;1H[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ ls
+__init__.py  __init__.pyc  logfile  logfile.1  settings.py  settings.pyc  [0m[01;34mstatic[0m  urls.py  urls.pyc  wsgi.py  wsgi.pyc
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ less logfile
+[?1049h[?1h=[03/Jun/2015 08:29:13] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 263000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'Answer 1 .. This is the first answer', 'questionid':  UUID('8472c5a3-08b9-11e5-9b37-4025c2cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'qu estion': u'You are given an unsorted array A with elements 0 to n-1, numbers can be repeated in the array. \r\nCreate n sets where the i-th set  is of form\r\nS[i]={a[i],a[a[i]],a[a[a[i]]]\u2026}. \r\nSet has all elements unique. Find the size of the largest set.\r\n\r\nExample:\r\n\r\n Input: a[] = { 1, 2, 3, 4, 4, 5 } \r\nOutput: \r\nSize of Largest set is 4 \r\nPrinting elements in all sets \r\nSet# 0 => 1 2 3 4 \r\nSet# 1 = > 2 3 4 \r\nSet# 2 => 3 4 \r\nSet# 3 => 4 \r\nSet# 4 => 4 \r\nSet# 5 => 5\r\n\r\nPlease provide an algorithm and implementation for the above p roblem', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015, 6, 2, 22,  21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Software Devel oper', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 263000), 'correctanswer': u'This problem can be solved by following the indexes in th e array. \r\n\r\nEach set can be initialized has a hash so that check for duplicates are O(1)\r\n\r\nThe complete code in JAVA for the problem  is\r\n\r\nimport java.util.LinkedHashSet;\r\nimport java.util.Set;\r\n\r\n\r\npublic class IterativeSubset {\r\n\r\n\tpublic static void main(S tring[] args) {\r\n\t\t\r\n\t\tint array[]=new int[]{5,6,3,1,4,7,8,9,2,11,12,2,4,6,9,4,1};\r\n\t\t\r\n\t\tint arrayLngth=array.length;\r\n\t\ti nt i=0;\r\n\t\tSet<Integer> sets=new LinkedHashSet<Integer>();\r\n\t\t\r\n\t\tfor(int j=0;j<arrayLngth;j++)\r\n\t\t{\r\n\t\t\ti=j;\r\n\t\t\twhi le(!sets.contains(array[i]))\r\n\t\t\t{\r\n\t\t\t\ti=array[i];\r\n\t\t\t\tsets.add(i);\r\n\t\t\t}\r\n\t\t\tSystem.out.println(sets.toString()); \r\n\t\t\tsets.clear();\r\n\t\t}\r\n\r\n\t}\r\n\r\n}\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questionnum': 2}
+[03/Jun/2015 08:29:14] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'', 'questionid': UUID('45c55d70-08bf-11e5-97af-4025c2 cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'question': u'Find the maximum depth of  parenthesis in a given string.\r\n\r\nSample Input:\r\n(a(b))(c(d(f))g)(y(h))\r\n\r\nCorresponding Output:\r\n3 (f is surrounded by three pair s of parenthesis)', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015,  6, 2, 22, 21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Sof tware Developer', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'correctanswer': u'\r\n1) make a stack.\r\n2) push every time you  see a (\r\n3) pop every time you see a )\r\n4) store a max value of the stack size.\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questi onnum': 1}
+[03/Jun/2015 08:32:30] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'', 'questionid': UUID('45c55d70-08bf-11e5-97af-4025c2 cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'question': u'Find the maximum depth of  parenthesis in a given string.\r\n\r\nSample Input:\r\n(a(b))(c(d(f))g)(y(h))\r\n\r\nCorresponding Output:\r\n3 (f is surrounded by three pair s of parenthesis)', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015,  6, 2, 22, 21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Sof tware Developer', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'correctanswer': u'\r\n1) make a stack.\r\n2) push every time you  see a (\r\n3) pop every time you see a )\r\n4) store a max value of the stack size.\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questi onnum': 1}
+[3mlogfile[23m[K[K...skipping...
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[09/Jun/2015 07:10:55] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 07:29:09] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 07:44:50] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:56:00] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:56:09] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 07:57:03] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:57:16] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 07:57:16] DEBUG [mocktest.DAOUtil:114] Existing Company: False Existing Position: False Existing combination: False
+[09/Jun/2015 08:17:52] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 08:18:02] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 08:18:02] DEBUG [mocktest.DAOUtil:114] Existing Company: False Existing Position: True Existing combination: False
+[09/Jun/2015 08:27:20] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:106] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:109] Existing Company: False Existing Position: True Existing combination: False
+[09/Jun/2015 08:31:51] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 14:04:34] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[09/Jun/2015 16:05:02] DEBUG [mocktest.DAOUtil:106] Adding company Amazon and position Software Developer
+[09/Jun/2015 16:05:02] DEBUG [mocktest.DAOUtil:109] Existing Company: True Existing Position: True Existing combination: True
+[11/Jun/2015 15:47:37] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[11/Jun/2015 22:01:50] DEBUG [mocktest.views:58] Start Time: 1434063600 End Time: 1434067200
+[11/Jun/2015 22:03:43] DEBUG [mocktest.views:58] Start Time: 1434063600 End Time: 1434067200
+[12/Jun/2015 16:45:58] DEBUG [mocktest.views:58] Start Time: 1434214800 End Time: 1434222000
+[13/Jun/2015 17:06:15] DEBUG [mocktest.views:58] Start Time: 1434305100 End Time: 1434308700
+[13/Jun/2015 18:44:26] DEBUG [mocktest.views:58] Start Time: 1434314640 End Time: 1434321840
+[14/Jun/2015 14:50:42] DEBUG [mocktest.views:59] Start Time: 1434384000 End Time: 1434391200
+[14/Jun/2015 14:51:19] DEBUG [mocktest.views:59] Start Time: 1434384000 End Time: 1434391200
+[14/Jun/2015 15:18:59] DEBUG [mocktest.views:59] Start Time: 1434305880 End Time: 1434309480
+[14/Jun/2015 18:20:03] DEBUG [mocktest.views:59] Start Time: 1434306000 End Time: 1434306120
+[3m(END)[23m[K[K[?1l>[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ less logfile
+logfile    logfile.1  
+sriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ less logfile.[K
+[?1049h[?1h=[03/Jun/2015 08:29:13] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 263000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'Answer 1 .. This is the first answer', 'questionid':  UUID('8472c5a3-08b9-11e5-9b37-4025c2cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'qu estion': u'You are given an unsorted array A with elements 0 to n-1, numbers can be repeated in the array. \r\nCreate n sets where the i-th set  is of form\r\nS[i]={a[i],a[a[i]],a[a[a[i]]]\u2026}. \r\nSet has all elements unique. Find the size of the largest set.\r\n\r\nExample:\r\n\r\n Input: a[] = { 1, 2, 3, 4, 4, 5 } \r\nOutput: \r\nSize of Largest set is 4 \r\nPrinting elements in all sets \r\nSet# 0 => 1 2 3 4 \r\nSet# 1 = > 2 3 4 \r\nSet# 2 => 3 4 \r\nSet# 3 => 4 \r\nSet# 4 => 4 \r\nSet# 5 => 5\r\n\r\nPlease provide an algorithm and implementation for the above p roblem', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015, 6, 2, 22,  21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Software Devel oper', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 263000), 'correctanswer': u'This problem can be solved by following the indexes in th e array. \r\n\r\nEach set can be initialized has a hash so that check for duplicates are O(1)\r\n\r\nThe complete code in JAVA for the problem  is\r\n\r\nimport java.util.LinkedHashSet;\r\nimport java.util.Set;\r\n\r\n\r\npublic class IterativeSubset {\r\n\r\n\tpublic static void main(S tring[] args) {\r\n\t\t\r\n\t\tint array[]=new int[]{5,6,3,1,4,7,8,9,2,11,12,2,4,6,9,4,1};\r\n\t\t\r\n\t\tint arrayLngth=array.length;\r\n\t\ti nt i=0;\r\n\t\tSet<Integer> sets=new LinkedHashSet<Integer>();\r\n\t\t\r\n\t\tfor(int j=0;j<arrayLngth;j++)\r\n\t\t{\r\n\t\t\ti=j;\r\n\t\t\twhi le(!sets.contains(array[i]))\r\n\t\t\t{\r\n\t\t\t\ti=array[i];\r\n\t\t\t\tsets.add(i);\r\n\t\t\t}\r\n\t\t\tSystem.out.println(sets.toString()); \r\n\t\t\tsets.clear();\r\n\t\t}\r\n\r\n\t}\r\n\r\n}\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questionnum': 2}
+[03/Jun/2015 08:29:14] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'', 'questionid': UUID('45c55d70-08bf-11e5-97af-4025c2 cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'question': u'Find the maximum depth of  parenthesis in a given string.\r\n\r\nSample Input:\r\n(a(b))(c(d(f))g)(y(h))\r\n\r\nCorresponding Output:\r\n3 (f is surrounded by three pair s of parenthesis)', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015,  6, 2, 22, 21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Sof tware Developer', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'correctanswer': u'\r\n1) make a stack.\r\n2) push every time you  see a (\r\n3) pop every time you see a )\r\n4) store a max value of the stack size.\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questi onnum': 1}
+[03/Jun/2015 08:32:30] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'', 'questionid': UUID('45c55d70-08bf-11e5-97af-4025c2 cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'question': u'Find the maximum depth of  parenthesis in a given string.\r\n\r\nSample Input:\r\n(a(b))(c(d(f))g)(y(h))\r\n\r\nCorresponding Output:\r\n3 (f is surrounded by three pair s of parenthesis)', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015,  6, 2, 22, 21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Sof tware Developer', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'correctanswer': u'\r\n1) make a stack.\r\n2) push every time you  see a (\r\n3) pop every time you see a )\r\n4) store a max value of the stack size.\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questi onnum': 1}
+[3mlogfile[23m[K[K...skipping...
+
+                   [1mSUMMARY[0m [1mOF[0m [1mLESS[0m [1mCOMMANDS[0m
+
+      Commands marked with * may be preceded by a number, [4mN[24m.
+      Notes in parentheses indicate the behavior if [4mN[24m is given.
+
+  h  H                 Display this help.
+  q  :q  Q  :Q  ZZ     Exit.
+ ---------------------------------------------------------------------------
+
+                           [1mMOVING[0m
+
+  e  ^E  j  ^N  CR  *  Forward  one line   (or [4mN[24m lines).
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or [4mN[24m lines).
+  f  ^F  ^V  SPACE  *  Forward  one window (or [4mN[24m lines).
+  b  ^B  ESC-v      *  Backward one window (or [4mN[24m lines).
+  z                 *  Forward  one window (and set window to [4mN[24m).
+  w                 *  Backward one window (and set window to [4mN[24m).
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file.
+  d  ^D             *  Forward  one half-window (and set half-window to [4mN[24m).
+  u  ^U             *  Backward one half-window (and set half-window to [4mN[24m).
+  ESC-)  RightArrow *  Left  one half screen width (or [4mN[24m positions).
+  ESC-(  LeftArrow  *  Right one half screen width (or [4mN[24m positions).
+  F                    Forward forever; like "tail -f".
+  r  ^R  ^L            Repaint screen.
+  R                    Repaint screen, discarding buffered input.
+        ---------------------------------------------------
+        Default "window" is the screen height.
+        Default "half-window" is half of the screen height.
+ ---------------------------------------------------------------------------
+
+                          [1mSEARCHING[0m
+
+  /[4mpattern[24m          *  Search forward for ([4mN[24m-th) matching line.
+  ?[4mpattern[24m          *  Search backward for ([4mN[24m-th) matching line.
+  n                 *  Repeat previous search (for [4mN[24m-th occurrence).
+  N                 *  Repeat previous search in reverse direction.
+[3mHELP -- Press RETURN for more, or q when done[23m[K[K...skipping...
+  -" [[4mc[24m[[4mc[24m]]  .  --quotes=[[4mc[24m[[4mc[24m]]
+                  Set shell quote characters.
+  -~  ........  --tilde
+                  Don't display tildes after end of file.
+  -# [[4mN[24m]  ....  --shift=[[4mN[24m]
+                  Horizontal scroll amount (0 = one half screen width)
+      ........  --no-keypad
+                  Don't send keypad init/deinit sequence.
+      ........  --follow-name
+                  The F command changes files if the input file is renamed.
+
+
+ ---------------------------------------------------------------------------
+
+                          [1mLINE[0m [1mEDITING[0m
+
+        These keys can be used to edit text being entered 
+        on the "command line" at the bottom of the screen.
+
+ RightArrow                       ESC-l     Move cursor right one character.
+ LeftArrow                        ESC-h     Move cursor left one character.
+ CNTL-RightArrow  ESC-RightArrow  ESC-w     Move cursor right one word.
+ CNTL-LeftArrow   ESC-LeftArrow   ESC-b     Move cursor left one word.
+ HOME                             ESC-0     Move cursor to start of line.
+ END                              ESC-$     Move cursor to end of line.
+ BACKSPACE                                  Delete char to left of cursor.
+ DELETE                           ESC-x     Delete char under cursor.
+ CNTL-BACKSPACE   ESC-BACKSPACE             Delete word to left of cursor.
+ CNTL-DELETE      ESC-DELETE      ESC-X     Delete word under cursor.
+ CNTL-U           ESC (MS-DOS only)         Delete entire line.
+ UpArrow                          ESC-k     Retrieve previous command line.
+ DownArrow                        ESC-j     Retrieve next command line.
+ TAB                                        Complete filename & cycle.
+ SHIFT-TAB                        ESC-TAB   Complete filename & reverse cycle.
+ CNTL-L                                     Complete filename, list all.
+
+
+[3mHELP -- END -- Press g to see it again, or q when done[23m[K...skipping...
+[03/Jun/2015 08:29:13] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 263000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'Answer 1 .. This is the first answer', 'questionid':  UUID('8472c5a3-08b9-11e5-9b37-4025c2cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'qu estion': u'You are given an unsorted array A with elements 0 to n-1, numbers can be repeated in the array. \r\nCreate n sets where the i-th set  is of form\r\nS[i]={a[i],a[a[i]],a[a[a[i]]]\u2026}. \r\nSet has all elements unique. Find the size of the largest set.\r\n\r\nExample:\r\n\r\n Input: a[] = { 1, 2, 3, 4, 4, 5 } \r\nOutput: \r\nSize of Largest set is 4 \r\nPrinting elements in all sets \r\nSet# 0 => 1 2 3 4 \r\nSet# 1 = > 2 3 4 \r\nSet# 2 => 3 4 \r\nSet# 3 => 4 \r\nSet# 4 => 4 \r\nSet# 5 => 5\r\n\r\nPlease provide an algorithm and implementation for the above p roblem', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015, 6, 2, 22,  21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Software Devel oper', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 263000), 'correctanswer': u'This problem can be solved by following the indexes in th e array. \r\n\r\nEach set can be initialized has a hash so that check for duplicates are O(1)\r\n\r\nThe complete code in JAVA for the problem  is\r\n\r\nimport java.util.LinkedHashSet;\r\nimport java.util.Set;\r\n\r\n\r\npublic class IterativeSubset {\r\n\r\n\tpublic static void main(S tring[] args) {\r\n\t\t\r\n\t\tint array[]=new int[]{5,6,3,1,4,7,8,9,2,11,12,2,4,6,9,4,1};\r\n\t\t\r\n\t\tint arrayLngth=array.length;\r\n\t\ti nt i=0;\r\n\t\tSet<Integer> sets=new LinkedHashSet<Integer>();\r\n\t\t\r\n\t\tfor(int j=0;j<arrayLngth;j++)\r\n\t\t{\r\n\t\t\ti=j;\r\n\t\t\twhi le(!sets.contains(array[i]))\r\n\t\t\t{\r\n\t\t\t\ti=array[i];\r\n\t\t\t\tsets.add(i);\r\n\t\t\t}\r\n\t\t\tSystem.out.println(sets.toString()); \r\n\t\t\tsets.clear();\r\n\t\t}\r\n\r\n\t}\r\n\r\n}\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questionnum': 2}
+[03/Jun/2015 08:29:14] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'', 'questionid': UUID('45c55d70-08bf-11e5-97af-4025c2 cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'question': u'Find the maximum depth of  parenthesis in a given string.\r\n\r\nSample Input:\r\n(a(b))(c(d(f))g)(y(h))\r\n\r\nCorresponding Output:\r\n3 (f is surrounded by three pair s of parenthesis)', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015,  6, 2, 22, 21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Sof tware Developer', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'correctanswer': u'\r\n1) make a stack.\r\n2) push every time you  see a (\r\n3) pop every time you see a )\r\n4) store a max value of the stack size.\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questi onnum': 1}
+[03/Jun/2015 08:32:30] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'', 'questionid': UUID('45c55d70-08bf-11e5-97af-4025c2 cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'question': u'Find the maximum depth of  parenthesis in a given string.\r\n\r\nSample Input:\r\n(a(b))(c(d(f))g)(y(h))\r\n\r\nCorresponding Output:\r\n3 (f is surrounded by three pair s of parenthesis)', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015,  6, 2, 22, 21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Sof tware Developer', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'correctanswer': u'\r\n1) make a stack.\r\n2) push every time you  see a (\r\n3) pop every time you see a )\r\n4) store a max value of the stack size.\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questi onnum': 1}
+[3mlogfile[23m[K[K...skipping...
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[09/Jun/2015 07:10:55] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 07:29:09] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 07:44:50] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:56:00] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:56:09] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 07:57:03] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:57:16] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 07:57:16] DEBUG [mocktest.DAOUtil:114] Existing Company: False Existing Position: False Existing combination: False
+[09/Jun/2015 08:17:52] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 08:18:02] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 08:18:02] DEBUG [mocktest.DAOUtil:114] Existing Company: False Existing Position: True Existing combination: False
+[09/Jun/2015 08:27:20] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:106] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:109] Existing Company: False Existing Position: True Existing combination: False
+[09/Jun/2015 08:31:51] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 14:04:34] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[09/Jun/2015 16:05:02] DEBUG [mocktest.DAOUtil:106] Adding company Amazon and position Software Developer
+[09/Jun/2015 16:05:02] DEBUG [mocktest.DAOUtil:109] Existing Company: True Existing Position: True Existing combination: True
+[11/Jun/2015 15:47:37] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[11/Jun/2015 22:01:50] DEBUG [mocktest.views:58] Start Time: 1434063600 End Time: 1434067200
+[11/Jun/2015 22:03:43] DEBUG [mocktest.views:58] Start Time: 1434063600 End Time: 1434067200
+[12/Jun/2015 16:45:58] DEBUG [mocktest.views:58] Start Time: 1434214800 End Time: 1434222000
+[13/Jun/2015 17:06:15] DEBUG [mocktest.views:58] Start Time: 1434305100 End Time: 1434308700
+[13/Jun/2015 18:44:26] DEBUG [mocktest.views:58] Start Time: 1434314640 End Time: 1434321840
+[14/Jun/2015 14:50:42] DEBUG [mocktest.views:59] Start Time: 1434384000 End Time: 1434391200
+[14/Jun/2015 14:51:19] DEBUG [mocktest.views:59] Start Time: 1434384000 End Time: 1434391200
+[14/Jun/2015 15:18:59] DEBUG [mocktest.views:59] Start Time: 1434305880 End Time: 1434309480
+[14/Jun/2015 18:20:03] DEBUG [mocktest.views:59] Start Time: 1434306000 End Time: 1434306120
+[3m(END)[23m[K[K[?1l>[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ less logfile
+[?1049h[?1h=[03/Jun/2015 08:29:13] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 263000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'Answer 1 .. This is the first answer', 'questionid':  UUID('8472c5a3-08b9-11e5-9b37-4025c2cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'qu estion': u'You are given an unsorted array A with elements 0 to n-1, numbers can be repeated in the array. \r\nCreate n sets where the i-th set  is of form\r\nS[i]={a[i],a[a[i]],a[a[a[i]]]\u2026}. \r\nSet has all elements unique. Find the size of the largest set.\r\n\r\nExample:\r\n\r\n Input: a[] = { 1, 2, 3, 4, 4, 5 } \r\nOutput: \r\nSize of Largest set is 4 \r\nPrinting elements in all sets \r\nSet# 0 => 1 2 3 4 \r\nSet# 1 = > 2 3 4 \r\nSet# 2 => 3 4 \r\nSet# 3 => 4 \r\nSet# 4 => 4 \r\nSet# 5 => 5\r\n\r\nPlease provide an algorithm and implementation for the above p roblem', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015, 6, 2, 22,  21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Software Devel oper', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 263000), 'correctanswer': u'This problem can be solved by following the indexes in th e array. \r\n\r\nEach set can be initialized has a hash so that check for duplicates are O(1)\r\n\r\nThe complete code in JAVA for the problem  is\r\n\r\nimport java.util.LinkedHashSet;\r\nimport java.util.Set;\r\n\r\n\r\npublic class IterativeSubset {\r\n\r\n\tpublic static void main(S tring[] args) {\r\n\t\t\r\n\t\tint array[]=new int[]{5,6,3,1,4,7,8,9,2,11,12,2,4,6,9,4,1};\r\n\t\t\r\n\t\tint arrayLngth=array.length;\r\n\t\ti nt i=0;\r\n\t\tSet<Integer> sets=new LinkedHashSet<Integer>();\r\n\t\t\r\n\t\tfor(int j=0;j<arrayLngth;j++)\r\n\t\t{\r\n\t\t\ti=j;\r\n\t\t\twhi le(!sets.contains(array[i]))\r\n\t\t\t{\r\n\t\t\t\ti=array[i];\r\n\t\t\t\tsets.add(i);\r\n\t\t\t}\r\n\t\t\tSystem.out.println(sets.toString()); \r\n\t\t\tsets.clear();\r\n\t\t}\r\n\r\n\t}\r\n\r\n}\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questionnum': 2}
+[03/Jun/2015 08:29:14] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'', 'questionid': UUID('45c55d70-08bf-11e5-97af-4025c2 cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'question': u'Find the maximum depth of  parenthesis in a given string.\r\n\r\nSample Input:\r\n(a(b))(c(d(f))g)(y(h))\r\n\r\nCorresponding Output:\r\n3 (f is surrounded by three pair s of parenthesis)', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015,  6, 2, 22, 21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Sof tware Developer', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'correctanswer': u'\r\n1) make a stack.\r\n2) push every time you  see a (\r\n3) pop every time you see a )\r\n4) store a max value of the stack size.\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questi onnum': 1}
+[03/Jun/2015 08:32:30] DEBUG [mocktest.ajaxUtil:23] {'positionid': UUID('cc4333c0-059c-11e5-9a59-4025c2cdc7f8'), 'questiontype': 3, 'companyid' : UUID('cc21e4eb-059c-11e5-9bd0-4025c2cdc7f8'), 'totalmarks': 100.0, 'mtime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'userendtime':  None, 'testendtime': datetime.datetime(2015, 6, 2, 23, 51, 10, 147000), 'givenanswer': u'', 'questionid': UUID('45c55d70-08bf-11e5-97af-4025c2 cdc7f8'), 'questionsanswered': 0, 'isevaluated': False, 'companyname': u'Amazon', 'currentquestion': 0, 'question': u'Find the maximum depth of  parenthesis in a given string.\r\n\r\nSample Input:\r\n(a(b))(c(d(f))g)(y(h))\r\n\r\nCorresponding Output:\r\n3 (f is surrounded by three pair s of parenthesis)', 'choices': [], 'state': 0, 'testid': UUID('abb9c3a8-0975-11e5-b305-4025c2cdc7f8'), 'teststarttime': datetime.datetime(2015,  6, 2, 22, 21, 10, 147000), 'input': u'', 'retrorating': 1200, 'userstarttime': None, 'username': u'sriram1', 'key': u'', 'positionname': u'Sof tware Developer', 'ctime': datetime.datetime(2015, 6, 2, 22, 21, 10, 259000), 'correctanswer': u'\r\n1) make a stack.\r\n2) push every time you  see a (\r\n3) pop every time you see a )\r\n4) store a max value of the stack size.\r\n\r\n', 'totalquestions': 3, 'scoredmarks': 0.0, 'questi onnum': 1}
+[3mlogfile[23m[K[K...skipping...
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[05/Jun/2015 14:28:45] DEBUG [mocktest.DAOUtil:48] Escaped using cgi
+[09/Jun/2015 07:10:55] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 07:29:09] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 07:44:50] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:56:00] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:56:09] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 07:57:03] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 07:57:16] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 07:57:16] DEBUG [mocktest.DAOUtil:114] Existing Company: False Existing Position: False Existing combination: False
+[09/Jun/2015 08:17:52] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 08:18:02] DEBUG [mocktest.DAOUtil:111] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 08:18:02] DEBUG [mocktest.DAOUtil:114] Existing Company: False Existing Position: True Existing combination: False
+[09/Jun/2015 08:27:20] DEBUG [mocktest.adminForms:22] [(u'Amazon', u'Amazon')]
+[09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:106] Adding company Microsoft and positionSoftware Developer
+[09/Jun/2015 08:29:38] DEBUG [mocktest.DAOUtil:109] Existing Company: False Existing Position: True Existing combination: False
+[09/Jun/2015 08:31:51] DEBUG [mocktest.adminForms:22] [(u'Microsoft', u'Microsoft'), (u'Amazon', u'Amazon')]
+[09/Jun/2015 14:04:34] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[09/Jun/2015 16:05:02] DEBUG [mocktest.DAOUtil:106] Adding company Amazon and position Software Developer
+[09/Jun/2015 16:05:02] DEBUG [mocktest.DAOUtil:109] Existing Company: True Existing Position: True Existing combination: True
+[11/Jun/2015 15:47:37] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[11/Jun/2015 22:01:50] DEBUG [mocktest.views:58] Start Time: 1434063600 End Time: 1434067200
+[11/Jun/2015 22:03:43] DEBUG [mocktest.views:58] Start Time: 1434063600 End Time: 1434067200
+[12/Jun/2015 16:45:58] DEBUG [mocktest.views:58] Start Time: 1434214800 End Time: 1434222000
+[13/Jun/2015 17:06:15] DEBUG [mocktest.views:58] Start Time: 1434305100 End Time: 1434308700
+[13/Jun/2015 18:44:26] DEBUG [mocktest.views:58] Start Time: 1434314640 End Time: 1434321840
+[14/Jun/2015 14:50:42] DEBUG [mocktest.views:59] Start Time: 1434384000 End Time: 1434391200
+[14/Jun/2015 14:51:19] DEBUG [mocktest.views:59] Start Time: 1434384000 End Time: 1434391200
+[14/Jun/2015 15:18:59] DEBUG [mocktest.views:59] Start Time: 1434305880 End Time: 1434309480
+[14/Jun/2015 18:20:03] DEBUG [mocktest.views:59] Start Time: 1434306000 End Time: 1434306120
+[14/Jun/2015 18:25:37] DEBUG [mocktest.views:163] testId = f9bf5fd7-12c1-11e5-8c1f-4025c2cdc7f8 choice = 2
+[3m(END)[23m[K[K[?1l>[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mockingsite$ 

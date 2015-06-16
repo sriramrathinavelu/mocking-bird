@@ -35,6 +35,11 @@ def home(request):
 
 
 @login_required(redirect_field_name='redirect_url')
+def advancedTest(request):
+    return render(request, 'mocktest/advancedTest.html', {})
+
+
+@login_required(redirect_field_name='redirect_url')
 def createTest(request):
     username = request.user.username
     # Get the company ID
@@ -43,23 +48,47 @@ def createTest(request):
     # Get the position ID
     positionId = request.GET['positionId']
     # Get optional parameters
-    #   Number of Questions (3)
-    numQ = request.GET.get('numQ', 3)
-    #   Start Time (now ())
+    numQ = int(request.GET.get('numQ', 3))
+    if numQ > 5:
+        numQ = 5
+    if numQ < 1:
+        numQ = 1
     startTime = request.GET.get('startTime')
-    #   End Time (now() + 90 mins)
     endTime = request.GET.get('endTime')
+    testName = request.GET.get('testName')
+    logger.debug("Start Time: " + startTime + " End Time: " + endTime)
+    if startTime:
+        startTime = float(startTime)
+    if endTime:
+        endTime = float(endTime)
     #   Generating Algorithm (Recent Questions)
     testAlgo = LinearByTime.LinearByTime(username, companyId, positionId)
     testId = testAlgo.createTest(startTime,
                                  endTime,
                                  numQ)
+    firstQuestion = testAlgo.getFirstQuestion()
+    # Add entry to user scheduled test
+    DAOUtil.addScheduledTest(username,
+                             testId,
+                             testName,
+                             companyId,
+                             companyName,
+                             positionId,
+                             firstQuestion.positionname,
+                             firstQuestion.teststarttime,
+                             firstQuestion.testendtime,
+                             firstQuestion.totalquestions)
     return HttpResponseRedirect("test.html?testId=" + str(testId))
 
 
 @login_required(redirect_field_name='redirect_url')
 def savedTests(request):
     return render(request, 'mocktest/savedTests.html', {})
+
+
+@login_required(redirect_field_name='redirect_url')
+def schedTests(request):
+    return render(request, 'mocktest/schedTests.html', {})
 
 
 @login_required(redirect_field_name='redirect_url')
@@ -101,9 +130,37 @@ def test(request):
         if questions[0].state == 2:
             # Test is already completed
             return HttpResponseRedirect("home.html")
+        testStartTime = questions[0].teststarttime
+        if testStartTime > datetime.datetime.now():
+            # Redirect to countdown page
+            return HttpResponseRedirect("countdown.html?testId=" +
+                                        testId +
+                                        "&testStartTime=" +
+                                        str(utils.unix_time(testStartTime)))
         context['questions'] = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
                                               questions))
         return render(request, 'mocktest/test.html', context)
+
+
+@login_required(redirect_field_name='redirect_url')
+def congrats(request):
+    if request.method == 'GET':
+        context = {}
+        testId = request.GET.get('testId')
+        if not testId:
+            # 404 page
+            # Also check if this test is completed
+            return HttpResponseRedirect("/home.html")
+        context['testId'] = testId
+        context['isAuthenticated'] = False
+        if request.user.is_authenticated():
+            context['username'] = request.user.username
+            context['isAuthenticated'] = True
+        return render(request, 'mocktest/congrats.html', context)
+    else:
+        testId = request.POST["testId"]
+        choice = request.POST["evaluation"]
+        logger.debug("testId = " + testId + " choice = " + choice)
 
 
 @login_required(redirect_field_name='redirect_url')
@@ -162,6 +219,11 @@ def login(request):
 def logout(request):
     logoutuser(request)
     return HttpResponse("ok")
+
+
+@login_required(redirect_field_name='redirect_url')
+def countDown(request):
+    return render(request, 'mocktest/countdown.html', {})
 
 
 def signup(request):

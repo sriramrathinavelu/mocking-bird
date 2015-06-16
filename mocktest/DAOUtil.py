@@ -6,6 +6,7 @@ from models import CompanyPosition
 from models import PositionCompany
 from models import QuestionBank
 from models import Users
+from models import UserScheduledTests
 from datetime import datetime
 import collections
 import logging
@@ -227,6 +228,38 @@ def addRawQuestion(companyId,
         raise Exception("Invalid company and position")
 
 
+def addScheduledTest(username,
+                     testId,
+                     testName,
+                     companyId,
+                     companyName,
+                     positionId,
+                     positionName,
+                     testStartTime,
+                     testEndTime,
+                     totalQuestions):
+    if not isScheduledTestFound(username, testId):
+        scheduledTest = UserScheduledTests()
+        scheduledTest.username = username
+        scheduledTest.testid = testId
+        scheduledTest.testname = testName
+        scheduledTest.companyid = companyId
+        scheduledTest.companyname = companyName
+        scheduledTest.positionid = positionId
+        scheduledTest.positionname = positionName
+        scheduledTest.teststarttime = testStartTime
+        scheduledTest.testendtime = testEndTime
+        scheduledTest.totalquestions = totalQuestions
+        scheduledTest.save()
+
+
+def deleteScheduledTest(username, testId):
+    scheduledTest = UserScheduledTests.objects.get(username=username,
+                                                   testid=testId)
+    if scheduledTest:
+        scheduledTest.delete()
+
+
 @cleanInput
 def getUserRating(username):
     user = Users.objects.get(username=username)
@@ -287,6 +320,13 @@ def isPresent(companyName, positionName):
         return (True, True, False)
     else:
         return (isCompany, isPosition, False)
+
+
+@cleanInput
+def isScheduledTestFound(username, testId):
+    return __isPresentInDB(table='UserScheduledTests',
+                           column=['username', 'testid'],
+                           value=[username, testId])
 
 
 @cleanInput

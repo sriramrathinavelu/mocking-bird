@@ -45,7 +45,7 @@ class addQuestionForm (forms.Form):
             self.fields['positionName'].choices = positions
 
     companyId = forms.CharField(widget=forms.HiddenInput)
-    positionName = DynamicChoiceField(label='Poforms.CharField(sition Name')
+    positionName = DynamicChoiceField(label='Position Name')
     question = forms.CharField(label='Question', widget=forms.Textarea)
     questionType = forms.ChoiceField(label='Question Type',
                                      choices=[

@@ -71,13 +71,13 @@
       });    
       $("#begintest").click(function(){
         console.log($("#companyinput").val())
-        window.location = "quicktest.html?companyName=" +
+        window.location = "createtest.html?companyName=" +
         $("#companyinput").val() + "&positionId=" +
         $("#positionselect").val()        
       });
       $("#schedtest").click(function(){
-        window.location = "schedtest.html?companyName=" +
-        + $("#companyinput").val() + "&positionId=" +
+        window.location = "advancedtest.html?companyName=" +
+        $("#companyinput").val() + "&positionId=" +
         $("#positionselect").val()
       });
       $(document).on('click', "#logout-button-top", function(){
@@ -207,6 +207,7 @@
         <li><a href="/">Home</a></li>  
         <li><a href="/history.html">History</a></li>
         <li><a href="/savedTests.html">Saved Tests</a></li>
+        <li><a href="/schedTests.html">Scheduled Tests</a></li>
         <li><a href="#hello">About Us</a></li>
         <li><a href="#getstarted">Contact Us</a></li>
       </ul>
@@ -224,9 +225,9 @@
     	<select id="positionselect" name="position" style="display:none"></select>
 	    <div id="buttoncontrols">
     	  <a id="begintest" href="#" class="button--mockingone"
-        	style="display:none">Begin Test</a>
+        	style="display:none">Quick Test</a>
 	      <a id="schedtest" href="#" class="button--mockingone"
-    	    style="display:none">Schedule Test</a>
+    	    style="display:none">Advanced Test</a>
 	    </div>
       </div>
 
