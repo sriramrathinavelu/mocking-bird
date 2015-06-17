@@ -217,4 +217,239 @@ cqlsh:mocking_db> SELECT questionid FROM question_bank  ;[C[C[C[C[C[C[C
 
 (2 rows)
 
+cqlsh:mocking_db> SELECT questionid,timetosolve FROM question_bank  ;[12P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[10P[1@*[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C;[Ku;s;e;r;_;c;o;mpany;_;tests ;
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m | [0;1;35mpositionname[0m       | [0;1;35mtestid[0m                               | [0;1;35misevaluated[0m | [0;1;35mquestionsanswered[0m | [0;1;35mscoredmarks[0m | [0;1;35mtestdate[0m                 | [0;1;35mtestname[0m      | [0;1;35mtotalmarks[0m | [0;1;35mtotalquestions[0m
+----------+-------------+--------------------+--------------------------------------+-------------+-------------------+-------------+--------------------------+---------------+------------+----------------
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m | [0;1;32mdd14a930-1464-11e5-8d80-4025c2cdc7f8[0m |       [0;1;32mFalse[0m |                 [0;1;32m2[0m |           [0;1;32m0[0m | [0;1;32m2015-06-16 13:18:34-0700[0m | [0;1;33mmy first test[0m |        [0;1;32m100[0m |              [0;1;32m2[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT * FROM user_company_tests ;[1P[1@D[1@I[1@S[1@T[1@I[1@N[1@C[1@T[C[1@ [1@c[1@o[1@m[1@p[1@a[1@n[1@y[1@n[1@a[1@m[1@e[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[CW;J;[1P;H;E;R;E; ;u;s;e;r;n;a;m;e; ;=; ;';s;r;i;r;a;m;1;';
+[0;1;31mBad Request: Partition key part companyname must be restricted since preceding part is[0m
+cqlsh:mocking_db> SELECT DISTINCT companyname FROM user_company_tests WHERE username = 'sriram1';[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8P
+[0;1;31mBad Request: Partition key part companyname must be restricted since preceding part is[0m
+cqlsh:mocking_db> SELECT  companyname FROM user_company_tests WHERE username = 'sriram1';[C ;A;N;D; ;c;o;m;p;a;n;y;n;a;m;e;=;';A;m;a;z;o;n;m;[1P;';
+
+ [0;1;35mcompanyname[0m
+-------------
+      [0;1;33mAmazon[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT  companyname FROM user_company_tests WHERE username = 'sriram1' AND companyname='Amazon';;[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8@DISTINCT[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[8P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C AND companyname='Amazon';[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@D[1@I[1@S[1@T[1@I[1@N[1@C[1@T
+
+ [0;1;35mcompanyname[0m
+-------------
+      [0;1;33mAmazon[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT DISTINCT companyname FROM user_company_tests WHERE username = 'sriram1' AND companyname='Amazon';[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1P[1P[1P[1P[1P[1@p[1@o[1@s[1@i[1@t[1@i[1@o[C[1@n
+[0;1;31mBad Request: SELECT DISTINCT queries must only request partition key columns and/or static columns (not positionname)[0m
+cqlsh:mocking_db> SELECT DISTINCT positionname FROM user_company_tests WHERE username = 'sriram1' AND companyname='Amazon';[C[C[C;[K;[K;[K[2P;;[K;[K
+[0;1;31mBad Request: SELECT DISTINCT queries must only request partition key columns and/or static columns (not positionname)[0m
+cqlsh:mocking_db> SELECT DISTINCT positionname FROM user_company_tests ;WHERE username = 'sriram1' AND companyname='Amazon';[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1Pcompany[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C;[K;[K;[K[2P;;[K;[K
+[0;1;31mBad Request: SELECT DISTINCT queries must request all the partition key columns (missing username)[0m
+cqlsh:mocking_db> SELECT DISTINCT companyname FROM user_company_tests ;[1@u[1@s[1@e[1@r[1@n[1@a[1@m[1@e[1@,[1@ 
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m
+----------+-------------
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m
+
+(1 rows)
+
+cqlsh:mocking_db> SELECT DISTINCT username, companyname FROM user_company_tests ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[KSEELCT[K[K[K[KLECT * FOM [K[K[KRO m[K[KM mentor_company_position 
+              ... ;
+
+(0 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m | [0;1;35mpositionname[0m
+----------+-------------+--------------------
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m |        [0;1;33mQA Engineer[0m
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;;[Km;e;n;tor_;p;osition_company ;
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+-------------
+  [0;1;33msriram1[0m |        [0;1;33mQA Engineer[0m |      [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |      [0;1;33mAmazon[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+--------------------
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m |        [0;1;33mQA Engineer[0m
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |             [0;1;33mAmazon[0m
+
+(3 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;[1@company_position [C[C
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m        | [0;1;35mpositionname[0m
+----------+--------------------+--------------------
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m |        [0;1;33mQA Engineer[0m |             [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |             [0;1;33mAmazon[0m
+
+(3 rows)
+
+cqlsh:mocking_db> DELETE FROM mentor_company_position[K[K[KDELETE FROM mentor_company_position WHERE username = 'sriram1' ad[K[KAND companyname[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K;
+cqlsh:mocking_db> DELETE FROM mentor_company_position WHERE username = 'sriram1' ;[C[C[C[C[C[C[23P[1@m[1@n[1P[1@e[1@n[1@t[1@o[1@r[1@_[1@p[16@osition_company [1P
+cqlsh:mocking_db> DELETE FROM mentor_position_company WHERE username = 'sriram1' ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccompany_position[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24PSELECT * FROM mentor_company_position [C[C
+
+(0 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24@DELETE FROM mentor_position_company WHERE username = 'sriram1'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccompany_position[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24PSELECT * FROM mentor_company_position [C[C[1Pposition_company[C[C
+
+(0 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;[1@company_position [C[C
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m | [0;1;35mpositionname[0m
+----------+-------------+--------------------
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m |        [0;1;33mQA Engineer[0m
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;[1Pposition_company[C[C
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+-------------
+  [0;1;33msriram1[0m |        [0;1;33mQA Engineer[0m |      [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |      [0;1;33mAmazon[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+--------------------
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m |        [0;1;33mQA Engineer[0m
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |             [0;1;33mAmazon[0m
+
+(3 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;[1@company_position [C[C
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m        | [0;1;35mpositionname[0m
+----------+--------------------+--------------------
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m |        [0;1;33mQA Engineer[0m |             [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |             [0;1;33mAmazon[0m
+
+(3 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;[1Pposition_company[C[C[1@company_position [C[C[1Pposition_company[C[C[1@company_position [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24@DELETE FROM mentor_position_company WHERE username = 'sriram1'[C[C
+cqlsh:mocking_db> DELETE FROM mentor_position_company WHERE username = 'sriram1' ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24PSELECT * FROM mentor_company_position [C[C[1Pposition_company[C[C[1@company_position [C[C[1Pposition_company[C[C[1@company_position [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24@DELETE FROM mentor_position_company WHERE username = 'sriram1'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccompany_position[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+cqlsh:mocking_db> DELETE FROM mentor_company_position WHERE username = 'sriram1' ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cposition_company[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24PSELECT * FROM mentor_company_position [C[C
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m        | [0;1;35mpositionname[0m
+----------+--------------------+--------------------
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m |        [0;1;33mQA Engineer[0m
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m |          [0;1;33mMicrosoft[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m |        [0;1;33mQA Engineer[0m |             [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |             [0;1;33mAmazon[0m
+
+(5 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24@DELETE FROM mentor_company_position WHERE username = 'sriram1'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cposition_company[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24PSELECT * FROM mentor_company_position [C[C[1Pposition_company[C[C
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+--------------------
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m |        [0;1;33mQA Engineer[0m
+  [0;1;33msriram1[0m |             [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m |        [0;1;33mQA Engineer[0m |             [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |             [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |          [0;1;33mMicrosoft[0m
+
+(5 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;[1@company_position [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24@DELETE FROM mentor_company_position WHERE username = 'sriram1'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cposition_company[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccompany_position[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+cqlsh:mocking_db> DELETE FROM mentor_company_position WHERE username = 'sriram1' ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[25PSELECT * FROM mentor_position_company[C[C[1@company_position [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[24@DELETE FROM mentor_company_position WHERE username = 'sriram1'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cposition_company[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+cqlsh:mocking_db> 
+cqlsh:mocking_db> 
+cqlsh:mocking_db> DELETE FROM mentor_position_company WHERE username = 'sriram1' ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccompany_position[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[25PSELECT * FROM mentor_position_company[C[C
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+-------------
+  [0;1;33msriram1[0m |        [0;1;33mQA Engineer[0m |      [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |      [0;1;33mAmazon[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[25@DELETE FROM mentor_position_company WHERE username = 'sriram1'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccompany_position[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[25PSELECT * FROM mentor_position_company[C[C[1@company_position [C[C
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m | [0;1;35mpositionname[0m
+----------+-------------+--------------------
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m |        [0;1;33mQA Engineer[0m
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m | [0;1;35mpositionname[0m
+----------+-------------+--------------------
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m |        [0;1;33mQA Engineer[0m
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;[1Pposition_company[C[C
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+-------------
+  [0;1;33msriram1[0m |        [0;1;33mQA Engineer[0m |      [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |      [0;1;33mAmazon[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;[1@company_position [C[C
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m | [0;1;35mpositionname[0m
+----------+-------------+--------------------
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m |   [0;1;33mMicrosoft[0m | [0;1;33mSoftware Developer[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_company_position  ;[1Pposition_company[C[C
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+-------------
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |      [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |   [0;1;33mMicrosoft[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;
+
+ [0;1;35musername[0m | [0;1;35mpositionname[0m       | [0;1;35mcompanyname[0m
+----------+--------------------+-------------
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |      [0;1;33mAmazon[0m
+  [0;1;33msriram1[0m | [0;1;33mSoftware Developer[0m |   [0;1;33mMicrosoft[0m
+
+(2 rows)
+
+cqlsh:mocking_db> SELECT * FROM mentor_position_company ;[1@company_position [C[C
+
+ [0;1;35musername[0m | [0;1;35mcompanyname[0m | [0;1;35mpositionname[0m
+----------+-------------+--------------------
+  [0;1;33msriram1[0m |      [0;1;33mAmazon[0m | [0;1;33mSoftware Developer[0m
+  [0;1;33msriram1[0m |   [0;1;33mMicrosoft[0m | [0;1;33mSoftware Developer[0m
+
+(2 rows)
+
 cqlsh:mocking_db> 

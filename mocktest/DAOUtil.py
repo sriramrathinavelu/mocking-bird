@@ -235,7 +235,9 @@ def getDistinctCompanies():
     results = cursor.execute("""
         SELECT DISTINCT companyname
         FROM company_position""")
-    return map(lambda x: x['companyname'], results)
+    companies = map(lambda x: x['companyname'], results)
+    cursor.close()
+    return companies
 
 
 @cleanInput
