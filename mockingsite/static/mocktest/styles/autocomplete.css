@@ -1,1 +1,13 @@
-ul.ui-autocomplete{list-style:none;list-style-type:none;padding:0;margin:0}#ui-id-1{font-family:'Roboto Condensed',Helvetica,Arial,sans-serif;font-weight:300}#ui-id-1,.ui-menu-item{list-style-type:none;list-style-image:none}
+ul.ui-autocomplete{
+    list-style:none;
+    list-style-type:none;
+    list-style-image:none;
+    padding:0;
+    margin:0;
+    font-family:'Roboto Condensed',Helvetica,Arial,sans-serif;
+    font-weight:300;
+}
+
+ul.ui-autocomplete li::before{
+    display: none;
+}

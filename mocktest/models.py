@@ -3,7 +3,6 @@
 from cassandra.cqlengine import columns
 from cassandra.cqlengine.models import Model
 from datetime import datetime
-import utils
 
 # Create your models here.
 
@@ -43,6 +42,8 @@ class Tests(Model):
     testendtime = columns.DateTime(static=True)
     userstarttime = columns.DateTime(static=True)
     userendtime = columns.DateTime(static=True)
+    # Makes sense only if isevaluated is True
+    iscleared = columns.Boolean(static=True, default=False)
     ctime = columns.DateTime(default=datetime.now)
     mtime = columns.DateTime(default=datetime.now)
     questionnum = columns.Integer(primary_key=True,
@@ -53,6 +54,7 @@ class Tests(Model):
     questiontype = columns.Integer(required=True, default=3)
     givenanswer = columns.Text()
     correctanswer = columns.Text(required=True)
+    mentorcomment = columns.Text()
     choices = columns.List(columns.Text, default=[])
     input = columns.Text()
     key = columns.Text()
@@ -102,6 +104,7 @@ class UserCompanyTests(Model):
     isevaluated = columns.Boolean(required=True)
     totalmarks = columns.Integer(required=True)
     scoredmarks = columns.Integer(required=True)
+    iscleared = columns.Boolean(default=False)
 
 
 class UserPosition(Model):
@@ -121,6 +124,7 @@ class UserPositionTests(Model):
     isevaluated = columns.Boolean(required=True)
     totalmarks = columns.Integer(required=True)
     scoredmarks = columns.Integer(required=True)
+    iscleared = columns.Boolean(default=False)
 
 
 class UserTests(Model):
@@ -135,6 +139,20 @@ class UserTests(Model):
     isevaluated = columns.Boolean(required=True)
     totalmarks = columns.Integer(required=True)
     scoredmarks = columns.Integer(required=True)
+    iscleared = columns.Boolean(default=False)
+
+
+class PendingEvalTests(Model):
+    companyname = columns.Text(partition_key=True)
+    positionname = columns.Text(partition_key=True)
+    testid = columns.TimeUUID(primary_key=True)
+    testdate = columns.DateTime(required=True)
+    totalquestions = columns.Integer(required=True)
+    questionsanswered = columns.Integer(required=True)
+    teststarttime = columns.DateTime(required=True)
+    testendtime = columns.DateTime(required=True)
+    ctime = columns.DateTime(default=datetime.now)
+    mtime = columns.DateTime(default=datetime.now)
 
 
 class UserQuestion(Model):
@@ -154,9 +172,19 @@ class PositionCompany(Model):
     companyname = columns.Text(primary_key=True)
 
 
+class MentorCompany(Model):
+    username = columns.Text(primary_key=True)
+    companyname = columns.Text(primary_key=True)
+
+
 class MentorCompanyPosition(Model):
     username = columns.Text(partition_key=True)
     companyname = columns.Text(primary_key=True)
+    positionname = columns.Text(primary_key=True)
+
+
+class MentorPosition(Model):
+    username = columns.Text(primary_key=True)
     positionname = columns.Text(primary_key=True)
 
 

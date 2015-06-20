@@ -52,6 +52,12 @@
         return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,''])[1].replace(/\+/g, '%20'))||null;
       }
 
+      /* jquery preserves line break */
+        $.valHooks.textarea = {
+          get: function( elem ) {            
+            return elem.value.replace( /\r?\n/g, "\r\n" );
+          }
+        };
 
       $(function () {
 
@@ -105,6 +111,8 @@
         });
         
         /*JQM*/
+
+        
 
 
 
@@ -163,7 +171,7 @@
             $.get("ajaxUtil/saveAnswer.html?testId=" +
               $("#testId").val() + "&currentQ=" +
               $("#currentQ").val() + "&answer=" + 
-              $("#answer-space").val(), function(data, status){
+              escape($("#answer-space").val()), function(data, status){
                 if (data === 'ok') {
 
                 } else {
@@ -184,7 +192,7 @@
           $.get("ajaxUtil/saveAnswer.html?testId=" +
               $("#testId").val() + "&currentQ=" +
               $("#currentQ").val() + "&answer=" + 
-              $("#answer-space").val(), function(data, status){
+              escape($("#answer-space").val()), function(data, status){
                 if (data === 'ok') {
 
                 } else {
@@ -204,11 +212,12 @@
           if($("#nextq").hasClass("disabled")) {           
             e.preventDefault();
           } else {
+            console.log($("#answer-space").val())
             /*Save the answer*/            
             $.get("ajaxUtil/saveAnswer.html?testId=" +
               $("#testId").val() + "&currentQ=" +
               $("#currentQ").val() + "&answer=" + 
-              $("#answer-space").val(), function(data, status){
+              escape($("#answer-space").val()), function(data, status){
                 if (data === 'ok') {
 
                 } else {
@@ -263,7 +272,29 @@
           $.get("ajaxUtil/saveAnswer.html?testId=" +
               $("#testId").val() + "&currentQ=" +
               $("#currentQ").val() + "&answer=" + 
-              $("#answer-space").val(), function(data, status){
+              escape($("#answer-space").val()), function(data, status){
+                if (data === 'ok') {
+                  $.get("ajaxUtil/submitTest.html?testId=" +
+                  $("#testId").val() + "&testName=" + 
+                  $("#testName-submit").val(), function(data, status){
+                    if (data != "ok") {
+                      alert ("Error! submit test failed");
+                    } else {
+                      /*Replace with congratulations and follow up page*/
+                      window.location="/congrats.html?testId=" + $("#testId").val()
+                    }
+                  });
+                } else {
+                  alert("Error answer not saved!");
+                }
+            });          
+        });
+
+        $("#popup-submit-button-1").click(function(){
+          $.get("ajaxUtil/saveAnswer.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&answer=" + 
+              escape($("#answer-space").val()), function(data, status){
                 if (data === 'ok') {
                   $.get("ajaxUtil/submitTest.html?testId=" +
                   $("#testId").val() + "&testName=" + 
@@ -285,7 +316,7 @@
           $.get("ajaxUtil/saveAnswer.html?testId=" +
               $("#testId").val() + "&currentQ=" +
               $("#currentQ").val() + "&answer=" + 
-              $("#answer-space").val(), function(data, status){
+              escape($("#answer-space").val()), function(data, status){
                 if (data === 'ok') {
                   $.get("ajaxUtil/saveTest.html?testId=" +
                   $("#testId").val() + "&testName=" +
@@ -413,7 +444,7 @@
           </div>
 
           <!-- Answer -->
-          <textarea id="answer-space" class="full-width middle-item" style="font-family: sans-serif;"></textarea>
+          <textarea id="answer-space" class="full-width middle-item answer-space" style="font-family: sans-serif;"></textarea>
 
           <div class="footerbar">
           <!-- Prev Next Save and Navigation -->
@@ -504,7 +535,7 @@
               finish the test or feel free to continue at
               your pace
               </div>              
-              <button id="popup-submit-button" class="submit button middle" type="button">Submit</button>
+              <button id="popup-submit-button-1" class="submit button middle" type="button">Submit</button>
               </fieldset>
         </form>
         </div> 

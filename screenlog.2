@@ -271,3 +271,207 @@ Syncing mocktest.models.UserScheduledTests
 Syncing mocktest.models.UserTests
 Syncing mocktest.models.Users
 sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra[9Pgit push origin mastercommit -m 'Removed companyid and position id and fixed countdown'[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpush origin master[Kcommit -m 'Removed companyid and position id and fixed countdown'[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cadd .[K
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ git add .python manage.py sync_cassandra[9Pgit push origin mastercommit -m 'Removed companyid and position id and fixed countdown'[C'[K'[K'[K'[K'[K'[K'[K[K;'[1P'[C'C'o'm'p'l'e't'e'd' 'f'a'v'o'u'r'i't'e's' 'f'o'r' 'm'e'n't'o'e's'[1P'[1P'r's'[C
+[master e0a7608] Completed favourites for mentors
+ Committer: sriram <sriram@ubuntu.(none)>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 44 files changed, 11057 insertions(+), 86 deletions(-)
+ create mode 100644 mockingsite/static/mocktest/images/icons/anchor.gif
+ create mode 100644 mockingsite/static/mocktest/images/icons/anchor.xcf
+ create mode 100755 mockingsite/static/mocktest/scripts/jquery.tree.js
+ create mode 100644 mockingsite/static/mocktest/scripts/jquery.tree.min.js
+ create mode 100755 mockingsite/static/mocktest/styles/jquery.tree.css
+ rewrite mocktest/mentorUrls.pyc (68%)
+ rewrite mocktest/mentorViews.pyc (99%)
+ create mode 100644 plugins/jquery-tree-master.zip
+ create mode 100644 plugins/jquery-tree-master/README.md
+ create mode 100644 plugins/jquery-tree-master/demo/lazy.json
+ create mode 100755 plugins/jquery-tree-master/index.html
+ create mode 100644 plugins/jquery-tree-master/minified/images/anchor.gif
+ create mode 100644 plugins/jquery-tree-master/minified/jquery.tree.min.css
+ create mode 100644 plugins/jquery-tree-master/minified/jquery.tree.min.js
+ create mode 100755 plugins/jquery-tree-master/minify.sh
+ create mode 100644 plugins/jquery-tree-master/src/css/_jquery.treednd.css
+ create mode 100644 plugins/jquery-tree-master/src/css/images/anchor.gif
+ create mode 100644 plugins/jquery-tree-master/src/css/images/anchor.xcf
+ create mode 100755 plugins/jquery-tree-master/src/css/jquery.tree.css
+ create mode 100644 plugins/jquery-tree-master/src/js/.jquery.tree.js.swp
+ create mode 100755 plugins/jquery-tree-master/src/js/jquery.tree.js
+ create mode 100644 plugins/jquery-tree-master/src/js/jquery.treeajax.js
+ create mode 100644 plugins/jquery-tree-master/src/js/jquery.treecheckbox.js
+ create mode 100644 plugins/jquery-tree-master/src/js/jquery.treecollapse.js
+ create mode 100644 plugins/jquery-tree-master/src/js/jquery.treednd.js
+ create mode 100644 screenlog.6
+ create mode 100644 screenlog.7
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ git push[K[K[K[K[K[K[K[Kgit commit -m 'Completed favourites for mentors'add .[Kpython manage.py sync_cassandra[9Pgit push origin mastercommit -m 'Removed companyid and position id and fixed countdown'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpush origin master[K
+Counting objects: 100, done.
+Delta compression using up to 4 threads.
+Compressing objects:   1% (1/63)   Compressing objects:   3% (2/63)   Compressing objects:   4% (3/63)   Compressing objects:   6% (4/63)   Compressing objects:   7% (5/63)   Compressing objects:   9% (6/63)   Compressing objects:  11% (7/63)   Compressing objects:  12% (8/63)   Compressing objects:  14% (9/63)   Compressing objects:  15% (10/63)   Compressing objects:  17% (11/63)   Compressing objects:  19% (12/63)   Compressing objects:  20% (13/63)   Compressing objects:  22% (14/63)   Compressing objects:  23% (15/63)   Compressing objects:  25% (16/63)   Compressing objects:  26% (17/63)   Compressing objects:  28% (18/63)   Compressing objects:  30% (19/63)   Compressing objects:  31% (20/63)   Compressing objects:  33% (21/63)   Compressing objects:  34% (22/63)   Compressing objects:  36% (23/63)   Compressing objects:  38% (24/63)   Compressing objects:  39% (25/63)   Compressing objects:  41% (26/63)   Compressing objects:  42% (27/63)   Compressing objects:  44% (28/63)   Compressing objects:  46% (29/63)   Compressing objects:  47% (30/63)   Compressing objects:  49% (31/63)   Compressing objects:  50% (32/63)   Compressing objects:  52% (33/63)   Compressing objects:  53% (34/63)   Compressing objects:  55% (35/63)   Compressing objects:  57% (36/63)   Compressing objects:  58% (37/63)   Compressing objects:  60% (38/63)   Compressing objects:  61% (39/63)   Compressing objects:  63% (40/63)   Compressing objects:  65% (41/63)   Compressing objects:  66% (42/63)   Compressing objects:  68% (43/63)   Compressing objects:  69% (44/63)   Compressing objects:  71% (45/63)   Compressing objects:  73% (46/63)   Compressing objects:  74% (47/63)   Compressing objects:  76% (48/63)   Compressing objects:  77% (49/63)   Compressing objects:  79% (50/63)   Compressing objects:  80% (51/63)   Compressing objects:  82% (52/63)   Compressing objects:  84% (53/63)   Compressing objects:  85% (54/63)   Compressing objects:  87% (55/63)   Compressing objects:  88% (56/63)   Compressing objects:  90% (57/63)   Compressing objects:  92% (58/63)   Compressing objects:  93% (59/63)   Compressing objects:  95% (60/63)   Compressing objects:  96% (61/63)   Compressing objects:  98% (62/63)   Compressing objects: 100% (63/63)   Compressing objects: 100% (63/63), done.
+Writing objects:   1% (1/66)   Writing objects:   3% (2/66)   Writing objects:   4% (3/66)   Writing objects:   6% (4/66)   Writing objects:   7% (5/66)   Writing objects:   9% (6/66)   Writing objects:  10% (7/66)   Writing objects:  12% (8/66)   Writing objects:  13% (9/66)   Writing objects:  15% (10/66)   Writing objects:  16% (11/66)   Writing objects:  18% (12/66)   Writing objects:  19% (13/66)   Writing objects:  21% (14/66)   Writing objects:  22% (15/66)   Writing objects:  24% (16/66)   Writing objects:  25% (17/66)   Writing objects:  27% (18/66)   Writing objects:  28% (19/66)   Writing objects:  30% (20/66)   Writing objects:  31% (21/66)   Writing objects:  33% (22/66)   Writing objects:  34% (23/66)   Writing objects:  36% (24/66)   Writing objects:  37% (25/66)   Writing objects:  39% (26/66)   Writing objects:  40% (27/66)   Writing objects:  42% (28/66)   Writing objects:  43% (29/66)   Writing objects:  45% (30/66)   Writing objects:  46% (31/66)   Writing objects:  48% (32/66)   Writing objects:  50% (33/66)   Writing objects:  51% (34/66)   Writing objects:  53% (35/66)   Writing objects:  54% (36/66)   Writing objects:  56% (37/66)   Writing objects:  57% (38/66)   Writing objects:  59% (39/66)   Writing objects:  60% (40/66)   Writing objects:  62% (41/66)   Writing objects:  63% (42/66)   Writing objects:  65% (43/66)   Writing objects:  66% (44/66)   Writing objects:  68% (45/66)   Writing objects:  69% (46/66)   Writing objects:  71% (47/66)   Writing objects:  72% (48/66)   Writing objects:  74% (49/66)   Writing objects:  75% (50/66)   Writing objects:  77% (51/66)   Writing objects:  78% (52/66)   Writing objects:  80% (53/66)   Writing objects:  81% (54/66)   Writing objects:  83% (55/66)   Writing objects:  84% (56/66)   Writing objects:  86% (57/66)   Writing objects:  87% (58/66)   Writing objects:  89% (59/66)   Writing objects:  90% (60/66)   Writing objects:  92% (61/66)   Writing objects:  93% (62/66)   Writing objects:  95% (63/66)   Writing objects:  96% (64/66)   Writing objects:  98% (65/66)   Writing objects: 100% (66/66)   Writing objects: 100% (66/66), 111.38 KiB, done.
+Total 66 (delta 26), reused 0 (delta 0)
+To git@github.com:sriramrathinavelu/mocking-bird.git
+   1bfa452..e0a7608  master -> master
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ git push origin mastercommit -m 'Completed favourites for mentors'add .[Kpython manage.py sync_cassandra[9Pgit push origin masterpython manage.py sync_cassandra
+Creating keyspace mocking_db..
+Syncing mocktest.models.CompanyPosition
+Syncing mocktest.models.MentorCompanyPosition
+Syncing mocktest.models.MentorPositionCompany
+Syncing mocktest.models.PendingEvalCompTests
+Syncing mocktest.models.PendingEvalPosTests
+Syncing mocktest.models.PositionCompany
+Syncing mocktest.models.QuestionBank
+Syncing mocktest.models.RawQuestionBank
+Syncing mocktest.models.Tests
+Syncing mocktest.models.UserCompany
+Syncing mocktest.models.UserCompanyTests
+Syncing mocktest.models.UserPosition
+Syncing mocktest.models.UserPositionTests
+Syncing mocktest.models.UserQuestion
+Syncing mocktest.models.UserSavedTests
+Syncing mocktest.models.UserScheduledTests
+Syncing mocktest.models.UserTests
+Syncing mocktest.models.Users
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
+Creating keyspace mocking_db..
+Syncing mocktest.models.CompanyPosition
+Syncing mocktest.models.MentorCompanyPosition
+Syncing mocktest.models.MentorPositionCompany
+Syncing mocktest.models.PendingEvalCompTests
+Syncing mocktest.models.PendingEvalPosTests
+Syncing mocktest.models.PositionCompany
+Syncing mocktest.models.QuestionBank
+Syncing mocktest.models.RawQuestionBank
+Syncing mocktest.models.Tests
+Syncing mocktest.models.UserCompany
+Syncing mocktest.models.UserCompanyTests
+Syncing mocktest.models.UserPosition
+Syncing mocktest.models.UserPositionTests
+Syncing mocktest.models.UserQuestion
+Syncing mocktest.models.UserSavedTests
+Syncing mocktest.models.UserScheduledTests
+Syncing mocktest.models.UserTests
+Syncing mocktest.models.Users
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
+Creating keyspace mocking_db..
+Syncing mocktest.models.CompanyPosition
+Syncing mocktest.models.MentorCompany
+Syncing mocktest.models.MentorCompanyPosition
+Syncing mocktest.models.MentorPosition
+Syncing mocktest.models.MentorPositionCompany
+Syncing mocktest.models.PendingEvalCompTests
+Syncing mocktest.models.PendingEvalPosTests
+Syncing mocktest.models.PositionCompany
+Syncing mocktest.models.QuestionBank
+Syncing mocktest.models.RawQuestionBank
+Syncing mocktest.models.Tests
+Syncing mocktest.models.UserCompany
+Syncing mocktest.models.UserCompanyTests
+Syncing mocktest.models.UserPosition
+Syncing mocktest.models.UserPositionTests
+Syncing mocktest.models.UserQuestion
+Syncing mocktest.models.UserSavedTests
+Syncing mocktest.models.UserScheduledTests
+Syncing mocktest.models.UserTests
+Syncing mocktest.models.Users
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
+Creating keyspace mocking_db..
+Syncing mocktest.models.CompanyPosition
+Syncing mocktest.models.MentorCompany
+Syncing mocktest.models.MentorCompanyPosition
+Syncing mocktest.models.MentorPosition
+Syncing mocktest.models.MentorPositionCompany
+Syncing mocktest.models.PendingEvalTests
+Syncing mocktest.models.PositionCompany
+Syncing mocktest.models.QuestionBank
+Syncing mocktest.models.RawQuestionBank
+Syncing mocktest.models.Tests
+Syncing mocktest.models.UserCompany
+Syncing mocktest.models.UserCompanyTests
+Syncing mocktest.models.UserPosition
+Syncing mocktest.models.UserPositionTests
+Syncing mocktest.models.UserQuestion
+Syncing mocktest.models.UserSavedTests
+Syncing mocktest.models.UserScheduledTests
+Syncing mocktest.models.UserTests
+Syncing mocktest.models.Users
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
+Creating keyspace mocking_db..
+Syncing mocktest.models.CompanyPosition
+Syncing mocktest.models.MentorCompany
+Syncing mocktest.models.MentorCompanyPosition
+Syncing mocktest.models.MentorPosition
+Syncing mocktest.models.MentorPositionCompany
+Syncing mocktest.models.PendingEvalTests
+Syncing mocktest.models.PositionCompany
+Syncing mocktest.models.QuestionBank
+Syncing mocktest.models.RawQuestionBank
+Syncing mocktest.models.Tests
+Syncing mocktest.models.UserCompany
+Syncing mocktest.models.UserCompanyTests
+Syncing mocktest.models.UserPosition
+Syncing mocktest.models.UserPositionTests
+Syncing mocktest.models.UserQuestion
+Syncing mocktest.models.UserSavedTests
+Syncing mocktest.models.UserScheduledTests
+Syncing mocktest.models.UserTests
+Syncing mocktest.models.Users
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
+Creating keyspace mocking_db..
+Syncing mocktest.models.CompanyPosition
+Syncing mocktest.models.MentorCompany
+Syncing mocktest.models.MentorCompanyPosition
+Syncing mocktest.models.MentorPosition
+Syncing mocktest.models.MentorPositionCompany
+Syncing mocktest.models.PendingEvalTests
+Syncing mocktest.models.PositionCompany
+Syncing mocktest.models.QuestionBank
+Syncing mocktest.models.RawQuestionBank
+Syncing mocktest.models.Tests
+Syncing mocktest.models.UserCompany
+Syncing mocktest.models.UserCompanyTests
+Syncing mocktest.models.UserPosition
+Syncing mocktest.models.UserPositionTests
+Syncing mocktest.models.UserQuestion
+Syncing mocktest.models.UserSavedTests
+Syncing mocktest.models.UserScheduledTests
+Syncing mocktest.models.UserTests
+Syncing mocktest.models.Users
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
+Creating keyspace mocking_db..
+Syncing mocktest.models.CompanyPosition
+Syncing mocktest.models.MentorCompany
+Syncing mocktest.models.MentorCompanyPosition
+Syncing mocktest.models.MentorPosition
+Syncing mocktest.models.MentorPositionCompany
+Syncing mocktest.models.PendingEvalTests
+Syncing mocktest.models.PositionCompany
+Syncing mocktest.models.QuestionBank
+Syncing mocktest.models.RawQuestionBank
+Syncing mocktest.models.Tests
+Syncing mocktest.models.UserCompany
+Syncing mocktest.models.UserCompanyTests
+Syncing mocktest.models.UserPosition
+Syncing mocktest.models.UserPositionTests
+Syncing mocktest.models.UserQuestion
+Syncing mocktest.models.UserSavedTests
+Syncing mocktest.models.UserScheduledTests
+Syncing mocktest.models.UserTests
+Syncing mocktest.models.Users
+sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
+Broadcast message from sriram@ubuntu
+	(/dev/tty2) at 16:26 ...
+
+The system is going down for reboot NOW!

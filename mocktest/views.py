@@ -5,6 +5,7 @@ from django.contrib.auth import logout as logoutuser
 from mocktest.algo.test import LinearByTime
 from models import UserCompany
 from models import UserPosition
+from models import PendingEvalTests
 from django.shortcuts import render
 from models import Users, Tests
 from django.http import HttpResponseRedirect
@@ -20,21 +21,28 @@ logger = logging.getLogger(__name__)
 # Create your views here.
 
 
-def home(request):
-    companies = DAOUtil.getDistinctCompanies()
-    context = {}
-    context['companies'] = json.dumps(companies)
+def __setAuthInfo(request, context={}):
     context['username'] = ""
     context['isAuthenticated'] = False
     if request.user.is_authenticated():
         context['username'] = request.user.username
         context['isAuthenticated'] = True
+    return context
+
+
+def home(request):
+    companies = DAOUtil.getDistinctCompanies()
+    context = {}
+    context['companies'] = json.dumps(companies)
+    __setAuthInfo(request, context)
     return render(request, 'mocktest/index.html', context)
 
 
 @login_required(redirect_field_name='redirect_url')
 def advancedTest(request):
-    return render(request, 'mocktest/advancedTest.html', {})
+    context = {}
+    __setAuthInfo(request, context)
+    return render(request, 'mocktest/advancedTest.html', context)
 
 
 @login_required(redirect_field_name='redirect_url')
@@ -79,20 +87,25 @@ def createTest(request):
 
 @login_required(redirect_field_name='redirect_url')
 def savedTests(request):
-    return render(request, 'mocktest/savedTests.html', {})
+    context = {}
+    __setAuthInfo(request, context)
+    return render(request, 'mocktest/savedTests.html', context)
 
 
 @login_required(redirect_field_name='redirect_url')
 def schedTests(request):
-    return render(request, 'mocktest/schedTests.html', {})
+    context = {}
+    __setAuthInfo(request, context)
+    return render(request, 'mocktest/schedTests.html', context)
 
 
 @login_required(redirect_field_name='redirect_url')
 def viewHistory(request):
+    context = {}
+    __setAuthInfo(request, context)
     username = request.user.username
     userCompanies = UserCompany.objects.filter(username=username)
     userPositions = UserPosition.objects.filter(username=username)
-    context = {}
     context['companyNames'] = json.dumps(map(lambda x: x.companyname,
                                              userCompanies))
     context['companyMap'] = json.dumps(dict(
@@ -140,8 +153,9 @@ def test(request):
 
 @login_required(redirect_field_name='redirect_url')
 def congrats(request):
+    context = {}
+    __setAuthInfo(request, context)
     if request.method == 'GET':
-        context = {}
         testId = request.GET.get('testId')
         if not testId:
             # 404 page
@@ -156,10 +170,24 @@ def congrats(request):
     else:
         testId = request.POST["testId"]
         choice = int(request.POST["evaluation"])
-        logger.debug("testId = " + testId + " choice = " + choice)
-        if (choice == 2):
-            pass
+        testObj = Tests.objects.get(testid=testId,
+                                    questionnum=0)
+        logger.debug("testId = " + str(testId) + " choice = " + str(choice))
+        if (choice == 1):
             # Enter to the pendingEvaluation Database
+            pendingEvalTests = PendingEvalTests()
+            pendingEvalTests.companyname = testObj.companyname
+            pendingEvalTests.positionname = testObj.positionname
+            pendingEvalTests.testid = testId
+            pendingEvalTests.testdate = testObj.teststarttime
+            pendingEvalTests.totalquestions = testObj.totalquestions
+            pendingEvalTests.questionsanswered = testObj.questionsanswered
+            pendingEvalTests.teststarttime = testObj.teststarttime
+            pendingEvalTests.testendtime = testObj.testendtime
+            pendingEvalTests.save()
+            # Redirect to a success page that tells how
+            # the user will be notified when the evaluation is done
+        return HttpResponseRedirect("/home.html")
 
 
 @login_required(redirect_field_name='redirect_url')
@@ -167,6 +195,7 @@ def result(request):
     if request.method == 'GET':
         # Need to get the testID
         testId = request.GET.get('testId')
+        isCongrats = request.GET.get('congrats')
         if not testId:
             # Redirect to Invalid test page
             return HttpResponseRedirect("home.html")
@@ -178,6 +207,10 @@ def result(request):
         if questions[0].state != 2:
             # Test is Not yet completed
             return HttpResponseRedirect("home.html")
+        context['fromCongrats'] = False
+        if isCongrats:
+            context['fromCongrats'] = True
+        # logger.debug("fromCongrats = " + str(contexfromCongrats))
         context['questions'] = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
                                               questions))
         return render(request, 'mocktest/result.html', context)
@@ -222,7 +255,9 @@ def logout(request):
 
 @login_required(redirect_field_name='redirect_url')
 def countDown(request):
-    return render(request, 'mocktest/countdown.html', {})
+    context = {}
+    __setAuthInfo(request, context)
+    return render(request, 'mocktest/countdown.html', context)
 
 
 def signup(request):

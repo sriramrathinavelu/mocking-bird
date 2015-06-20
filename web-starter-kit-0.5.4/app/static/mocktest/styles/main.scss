@@ -394,12 +394,20 @@ main,
   background-color: #272822;
 }
 
+.transparent-bg {
+ background-color: transparent; 
+}
+
  #prevq:visited,
  #nextq:visited,
  .color-orange-bg-before:visited {
   /*color: #FF6700;*/
   color: #D14D28;
  }
+
+a:visited {
+  color: #3372DF;
+}
 
 
  .color-orange-fg {
@@ -454,7 +462,7 @@ ul.ui-autocomplete {
   margin-right: 16px;
 }
 
-#answer-space {
+.answer-space {
   height: 150px;
   color: white;
   /*background-color: #121617;  */
@@ -551,6 +559,7 @@ ul.ui-autocomplete {
   min-height: 100%;
   color: white;
   margin-bottom: 90px;
+  padding-bottom: 100px;
 }
 
 main {
@@ -648,7 +657,7 @@ main {
     background: #D14D28;
   }
 
-  #answer-space {
+  .answer-space {
     height: 300px;
   }
 
@@ -858,7 +867,7 @@ main {
     background: #D14D28;
   }
 
-  #answer-space {
+  .answer-space {
     height: 300px;    
   }
 

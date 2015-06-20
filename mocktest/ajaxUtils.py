@@ -12,11 +12,15 @@ from models import UserCompanyTests
 from models import UserPositionTests
 from models import UserTests
 from models import UserScheduledTests
+from models import MentorCompanyPosition
+from models import MentorPositionCompany
+from models import PendingEvalTests
 from datetime import datetime
 from mocktest import DAOUtil
 import uuid
 import logging
 import json
+import math
 
 # Create your views here.
 
@@ -88,6 +92,76 @@ def getUserTests(request):
     tests = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
                            userTests))
     return HttpResponse(tests)
+
+
+@login_required
+def getMentorCompanyPosition(request):
+    username = request.user.username
+    companyName = request.GET['companyName']
+    mentorCompPositions = MentorCompanyPosition.objects.\
+        filter(username=username,
+               companyname=companyName)
+    positions = OrderedDict()
+    positions["DEFAULT"] = "Please select a position"
+    for pos in mentorCompPositions:
+        positions[pos.positionname] = pos.positionname
+    return render(request,
+                  'mocktest/ajaxUtil/optionsFromDict.html',
+                  {'theDict': positions})
+
+
+@login_required
+def getMentorPositionCompany(request):
+    username = request.user.username
+    positionName = request.GET['positionName']
+    mentorPosCompanies = MentorPositionCompany.objects.\
+        filter(username=username,
+               positionname=positionName)
+    companies = OrderedDict()
+    companies["DEFAULT"] = "Please select a company"
+    for comp in mentorPosCompanies:
+        companies[comp.companyname] = comp.companyname
+    return render(request,
+                  'mocktest/ajaxUtil/optionsFromDict.html',
+                  {'theDict': companies})
+
+
+@login_required
+def getMentorTests(request):
+    username = request.user.username
+    companyName = request.GET.get('companyName')
+    positionName = request.GET.get('positionName')
+    objects = []
+    if companyName:
+        if positionName:
+            objects = PendingEvalTests.objects.filter(
+                        companyname=companyName,
+                        positionname=positionName)
+        else:
+            positions = MentorCompanyPosition.objects.filter(
+                            username=username,
+                            companyname=companyName)
+            for position in positions:
+                objects.extend(PendingEvalTests.objects.filter(
+                                companyname=companyName,
+                                positionname=position.positionname))
+    elif positionName:
+        companies = MentorPositionCompany.objects.filter(
+                        username=username,
+                        positionname=positionName)
+        for company in companies:
+            objects.extend(PendingEvalTests.objects.filter(
+                            companyname=company.companyname,
+                            positionname=positionName))
+    else:
+        compPos = MentorCompanyPosition.objects.filter(
+                    username=username)
+        for obj in compPos:
+            objects.extend(PendingEvalTests.objects.filter(
+                                companyname=obj.companyname,
+                                positionname=obj.positionname))
+    objects = map(lambda x: DAOUtil.jsonReady(x), objects)
+    return HttpResponse(json.dumps(objects))
 
 
 @login_required
@@ -295,6 +369,7 @@ def saveAnswer(request):
     testId = uuid.UUID(request.GET.get('testId'))
     currentQ = int(request.GET.get('currentQ'))
     answer = request.GET.get('answer')
+    logger.debug("Answer: " + str(answer))
     question = Tests.objects.get(testid=testId,
                                  questionnum=currentQ)
     if (question.givenanswer.strip() == "" and answer.strip() != ""):
@@ -304,6 +379,60 @@ def saveAnswer(request):
     question.givenanswer = answer
     question.currentQ = currentQ
     question.save()
+    return HttpResponse("ok")
+
+
+@login_required
+def saveComment(request):
+    testId = uuid.UUID(request.GET.get('testId'))
+    currentQ = int(request.GET.get('currentQ'))
+    comment = request.GET.get('comment')
+    question = Tests.objects.get(testid=testId,
+                                 questionnum=currentQ)
+    question.mentorcomment = comment
+    question.save()
+    return HttpResponse("ok")
+
+
+@login_required
+def saveEvaluationResult(request):
+    testId = uuid.UUID(request.GET.get('testId'))
+    result = request.GET['result']
+    question = Tests.objects.get(testid=testId,
+                                 questionnum=1)
+    question.isevaluated = True
+    question.iscleared = result == "pass"
+    question.save()
+    companyName = question.companyname
+    positionName = question.positionname
+    username = question.username
+    userTest = UserTests.get(
+                username=username,
+                testid=testId)
+    userTest.isevaluated = True
+    userTest.iscleared = result == "pass"
+    userTest.save()
+    userCompTest = UserCompanyTests.get(
+                    username=username,
+                    companyname=companyName,
+                    positionname=positionName,
+                    testid=testId)
+    userCompTest.isevaluated = True
+    userCompTest.iscleared = result == "pass"
+    userCompTest.save()
+    userPosTest = UserPositionTests.get(
+                    username=username,
+                    positionname=positionName,
+                    companyname=companyName,
+                    testid=testId)
+    userPosTest.isevaluated = True
+    userPosTest.iscleared = result == "pass"
+    userPosTest.save()
+    pendingEvalTest = PendingEvalTests.get(
+                        companyname=companyName,
+                        positionname=positionName,
+                        testid=testId)
+    pendingEvalTest.delete()
     return HttpResponse("ok")
 
 

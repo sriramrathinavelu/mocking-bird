@@ -50,15 +50,60 @@
 
       $(function () {
 
+        /*JQM*/
+        $('.popup-source').click(function() {
+    
+          //Getting the variable's value from a link 
+          var loginBox = $(this).attr('href');
+
+          //Fade in the Popup
+          $(loginBox).fadeIn(300);
+          
+          //Set the center alignment padding + border see css style
+          var popMargTop = ($(loginBox).height() + 24) / 2; 
+          var popMargLeft = ($(loginBox).width() + 24) / 2; 
+          
+          $(loginBox).css({ 
+              'margin-top' : -popMargTop,
+              'margin-left' : -popMargLeft
+          });
+          
+          // Add the mask to body
+          $('body').append('<div id="mask"></div>');
+          $('#mask').fadeIn(300);
+          
+          return false;
+        });
+
+        // When clicking on the button close or the mask layer the popup closed
+        /*
+        $('a.close, #mask').live('click', function() { 
+          $('#mask , .login-popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+        return false;
+        });
+        */
+
+        $('body').on('click', '#mask', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+
+        $('body').on('click', 'a.close', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+        
+        /*JQM*/
+
       
         /*Get the test id*/
         $("#testId").val(getURLParameter("testId"));
-
-        {% if fromCongrats %}
-          $("#anchor-back").attr("href",
-            "/congrats.html?testId=" + getURLParameter("testId")
-          );
-        {% endif %}
 
         var questions={{questions|safe}};
         console.log(questions)
@@ -85,12 +130,19 @@
           questions[currentQ]['correctanswer'] +
           "</pre>"
         );
+        $("#mentor-comment").val(          
+          questions[currentQ]['mentorcomment']
+        );
         /* Functionality for previous question */
         $("#prevq").click(function(e){              
           if($("#prevq").hasClass("disabled")) {           
             e.preventDefault();
           } else {
+            /* Update DB*/
+            autoSave();
+            /* Update Locally*/
             var curQ = parseInt($("#currentQ").val());
+            questions[curQ]['mentorcomment']=$('#mentor-comment').val();            
             /*Update the next Question*/
             /*Update the hidden currentQ*/
             var prevQ = curQ;
@@ -102,7 +154,11 @@
           if($("#nextq").hasClass("disabled")) {           
             e.preventDefault();
           } else {
+            /* Update DB*/
+            autoSave();
+            /* Update Locally*/
             var curQ = parseInt($("#currentQ").val());            
+            questions[curQ]['mentorcomment']=$('#mentor-comment').val();            
             /*Update the next Question*/
             /*Update the hidden currentQ*/
             var nextQ = curQ+2;
@@ -140,6 +196,28 @@
           currentQ+2
         );
         $("#nextqNum").trigger("change");
+
+        var autoSave = function(){
+          $.get("../ajaxUtil/saveComment.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&comment=" + 
+              $("#mentor-comment").val(), function(data, status){
+                if (data === 'ok') {
+
+                } else {
+                  /*Need a provision to display errors*/
+                  /*on page*/
+                  alert("Error answer not saved!");
+                }
+            });
+        };
+
+        var interval = 1000 * 30;
+
+        setInterval(autoSave, interval);
+
+
+
         /* Logic for questions in navbar */
         $.each(questions, function(index, value){
           index = index+1;
@@ -171,6 +249,9 @@
               questions[index-1]['correctanswer'] +
               "</pre>"
             );
+            $("#mentor-comment").val(
+              questions[index-1]['mentorcomment']              
+            );
             $("#prevqNum").html(
               index-1
             );
@@ -181,7 +262,30 @@
             $("#nextqNum").trigger("change");
           });                              
         });        
+        $("#mentor-pass-button").click(function(){
+          console.log("clicked");
+          autoSave();
+          $.get("../ajaxUtil/saveEvaluationResult.html?testId="+$("#testId").val()+"&result=pass", function(data, status){
+            if (data != "ok") {
+              alert("Error! submission failed")
+            } else {
+              window.location="/mentor/home.html"
+            }
+          });      
+        });
+
+        $("#mentor-fail-button").click(function(){
+          autoSave();
+          $.get("../ajaxUtil/saveEvaluationResult.html?testId="+$("#testId").val()+"&result=fail", function(data, status){
+            if (data != "ok") {
+              alert("Error! submission failed")
+            } else {  
+              window.location="/mentor/home.html"
+            }
+          });      
+        });
       });
+      
     </script>
 
   </head>
@@ -253,6 +357,11 @@
             Correct Answer
           </div>
           <div id="correct-answer" class="full-width middle-item bordered-div" style="font-family: sans-serif;"></div>
+          <!-- comments -->
+          <div>
+            Your comment
+          </div>
+          <textarea id="mentor-comment" class="full-width middle-item answer-space" style="font-family: sans-serif;"></textarea>
 
           <div class="footerbar">
           <!-- Prev Next Save and Navigation -->
@@ -273,17 +382,29 @@
         <input type="hidden" id="currentQ"/>
         <input type="hidden" id="testId"/>
         <div style="display:flex;">
-        {% if fromCongrats %}
-          <a href="#" id="anchor-back" class="button--mockingone centered-button" style="width: 200px;">Back</a>
-        {% else %}
-          <a href="/home.html" class="button--mockingone centered-button">Home</a>
-          <a href="/history.html" class="button--mockingone centered-button">History</a>
-        {% endif %}
+        <a href="/mentor/search.html" class="button--mockingone centered-button">Cancel</a>
+        <a href="#mentor-verdict" id="evaluate-evaluate" class="button--mockingone centered-button popup-source">Evaluate</a>
         </div>
         <!-- Pop ups-->
 
       </div>   
     </div> 
+
+    <div id="mentor-verdict" class="popup">
+      <a href="#" class="close">
+        <img src="/static/mocktest/images/icons/close.png" class="btn_close" title="Close Window" alt="Close" />
+      </a>
+      <form method="post" class="popup-body" action="#">
+        <fieldset class="textbox">
+          <div class="middle">
+          Thanks for your comments. Now it's the moment of truth. What do you think
+          </div>      
+          <button id="mentor-pass-button" class="submit button middle" type="button">Pass</button>
+          <button id="mentor-fail-button" class="submit button middle" type="button">Fail</button>
+        </fieldset>
+      </form>
+    </div>
+
 
     <script src="/static/mocktest/scripts/testmain.js"></script>
 

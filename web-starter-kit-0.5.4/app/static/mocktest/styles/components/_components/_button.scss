@@ -47,6 +47,12 @@
   }
 }
 
+@mixin visited-behavior($textColor) {
+  &:visited {
+    color: $textColor;
+  }
+}
+
 .button--primary {
   @extend .button;
   @include style-button(#4285f4, #ffffff);
@@ -72,6 +78,7 @@
   @include style-button(#D14D28, #FFFFFF);
   /*@include hover-behavior(#FF5D1D, #4d4d4d);*/
   @include hover-behavior(#CB5A39, #4d4d4d);
+  @include visited-behavior(#FFFFFF);
 }
 
 .disabled {

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Framework to help prepare for interviews with mock tests">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Base</title>
+    <title>{% block title %}Title{% endblock %}</title>
 
     <!-- Add to homescreen -->
     <link rel="manifest" href="manifest.json">
@@ -13,16 +13,16 @@
     <!-- Fallback to homescreen for Chrome <39 on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Web Starter Kit">
-    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+    <link rel="icon" sizes="192x192" href="/static/mocktest/images/touch/chrome-touch-icon-192x192.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
-    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="/static/mocktest/images/touch/apple-touch-icon.png">
 
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="/static/mocktest/images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
     <meta name="theme-color" content="#3372DF">
@@ -33,28 +33,108 @@
     -->
 
     <!-- Page styles -->
-    <link rel="stylesheet" href="/static/mocktest/styles/main.css">
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/main.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
-    <script>
+    {% block css_js %}
+    {% endblock %}
     
-    </script>
+    {% block jquery %}
+    {% endblock %}
 
   </head>
   <body>
+    <script>
+      function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        // The response object is returned with a status field that lets the
+        // app know the current login status of the person.
+        // Full docs on the response object can be found in the documentation
+        // for FB.getLoginStatus().
+        if (response.status === 'connected') {
+          // Logged into your app and Facebook.
+          //testAPI();
+          FB.api('/me', function(response) {
+            console.log(response);
+            var logindata = {
+              'username': response.email,          
+              'fbid': response.id,                  
+            }
+            console.log(logindata);
+            // you can store this data into your database       
+            var csrftoken = $.cookie('csrftoken');
+            $.ajax({
+              type: "POST",
+              url: "/login.html",
+              data: logindata,
+              success: function (data, status, jqxhr) {
+                $("#logindata").html(logindata['username']);
+              }
+            });                  
+          });
+          //window.location="/"+getURLParameter("redirect_url");
+        } else if (response.status === 'not_authorized') {
+          // The person is logged into Facebook, but not your app.
+          //document.getElementById('status').innerHTML = 'Please log ' +
+          //  'into this app.';
+        } else {
+          // The person is not logged into Facebook, so we're not sure if
+          // they are logged into this app or not.
+          // document.getElementById('status').innerHTML = 'Please log ' +
+          //  'into Facebook.';
+        }
+      }
+    
+
+      // This function is called when someone finishes with the Login
+      // Button.  See the onlogin handler attached to it in the sample
+      // code below.
+      /*
+      function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      }
+      */
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '136150886435811',
+          cookie     : true,  // enable cookies to allow the server to access 
+                              // the session
+          xfbml      : true,  // parse social plugins on this page
+          version    : 'v2.2' // use version 2.2
+        });
+
+        // Now that we've initialized the JavaScript SDK, we call 
+        // FB.getLoginStatus().  This function gets the state of the
+        // person visiting this page and can return one of three states to
+        // the callback you provide.  They can be:
+        //
+        // 1. Logged into your app ('connected')
+        // 2. Logged into Facebook, but not your app ('not_authorized')
+        // 3. Not logged into Facebook and can't tell if they are logged into
+        //    your app or not.
+        //
+        // These three cases are handled in the callback function.
+
+         
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      
+      };
+    </script>
     <div class="mediachecker"></div>
     <header class="app-bar promote-layer">
       <div class="app-bar-container">
         <button class="menu"><img src="/static/mocktest/images/hamburger.png" alt="Menu"></button>
-        <h1 class="logo"><strong>Crack It!</strong></h1>
+        <h1 class="logo"><strong><i>#include</i>&lt;test&gt;</strong></h1>
         <section class="app-bar-actions"> 
         <!-- Put App Bar Buttons Here -->
-        <!-- e.g <button><i class="icon icon-star"></i></button> -->
+        <!-- e.g <button><i class="icon icon-star"></i></button> -->        
         {% if isAuthenticated %}
           <button id="logout-button-top"><i class="icon icon-star">Logout</i></button>
           <button id="login-button-top" style="display:none;"><i class="icon icon-star">Login</i></button>
@@ -68,23 +148,22 @@
 
     <nav class="navdrawer-container promote-layer">
       <h4>Navigation</h4>
-      <ul>        
-        <li><a href="/">Home</a></li>
+      <ul>      
+        <li><a href="/">Home</a></li>  
         <li><a href="/history.html">History</a></li>
-        <li><a href="/savedTests.html">Saved Tests</a></li>        
+        <li><a href="/savedTests.html">Saved Tests</a></li>
         <li><a href="/schedTests.html">Scheduled Tests</a></li>
-        <li><a href="#hello">About Us</a></li>
-        <li><a href="#getstarted">Contact Us</a></li>        
+        <li><a href="/mentor/home.html">Mentor view</a></li>        
       </ul>
     </nav>
 
 
-    <main>
-    </main> 
+    {% block content %}
+    {% endblock %}
 
-
-
+    
     <script src="/static/mocktest/scripts/main.js"></script>
+
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 	<!--

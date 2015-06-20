@@ -1,8 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from mocktest.models import MentorCompanyPosition
 from mocktest.models import MentorPositionCompany
+from mocktest.models import MentorCompany
+from mocktest.models import MentorPosition
 from mocktest.models import CompanyPosition
 from mocktest.models import PositionCompany
+from mocktest.models import Tests
+from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.db import connections
 from django.shortcuts import render
@@ -32,6 +36,39 @@ def home(request):
     return render(request,
                   'mentor/home.html',
                   context)
+
+
+@login_required(redirect_field_name='redirect_url')
+def search(request):
+    context = {}
+    __setAuthInfo(request, context)
+    companies = MentorCompany.objects.filter(
+                    username=request.user.username)
+    positions = MentorPosition.objects.filter(
+                    username=request.user.username)
+    context['compList'] = json.dumps(map(lambda x: x.companyname, companies))
+    context['posList'] = json.dumps(map(lambda x: x.positionname, positions))
+    return render(request,
+                  'mentor/search.html',
+                  context)
+
+
+@login_required(redirect_field_name='redirect_url')
+def evaluateTest(request):
+    if request.method == 'GET':
+        # Need to get the testID
+        testId = request.GET.get('testId')
+        if not testId:
+            # Redirect to Invalid test page
+            return HttpResponseRedirect("/mentor/home.html")
+        questions = Tests.objects.filter(testid=testId)
+        context = {}
+        if questions[0].state != 2:
+            # Test is Not yet completed
+            return HttpResponseRedirect("/mentor/home.html")
+        context['questions'] = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
+                                              questions))
+    return render(request, 'mentor/evaluate.html', context)
 
 
 @login_required(redirect_field_name='redirect_url')
@@ -86,7 +123,17 @@ def favourite(request):
             DELETE FROM mentor_position_company
             WHERE username=%s
         """, (request.user.username,))
+        cursor.execute("""
+            DELETE FROM mentor_company
+            WHERE username=%s
+        """, (request.user.username,))
+        cursor.execute("""
+            DELETE FROM mentor_position
+            WHERE username=%s
+        """, (request.user.username,))
         cursor.close()
+        compList = []
+        posList = []
         for company, positions in compPosCheckDict.iteritems():
             for position, status in positions.iteritems():
                 if (status):
@@ -100,4 +147,16 @@ def favourite(request):
                     mentorposComp.positionname = position
                     mentorposComp.companyname = company
                     mentorposComp.save()
+                    compList.append(company)
+                    posList.append(position)
+        for company in set(compList):
+            mComp = MentorCompany()
+            mComp.username = request.user.username
+            mComp.companyname = company
+            mComp.save()
+        for position in set(posList):
+            mPos = MentorPosition()
+            mPos.username = request.user.username
+            mPos.positionname = position
+            mPos.save()
         return HttpResponse("ok")
