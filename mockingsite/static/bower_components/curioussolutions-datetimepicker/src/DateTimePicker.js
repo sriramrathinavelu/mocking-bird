@@ -264,6 +264,7 @@
 			$(".dtpicker-overlay").click(function(e)
 			{
 				dtPickerObj._hidePicker("");
+				dtPickerObj.dataObject.oInputElement = null;
 			});
 		
 			var sTempStr = "";	
@@ -1097,6 +1098,7 @@
 				if(dtPickerObj.settings.buttonClicked)
 					dtPickerObj.settings.buttonClicked.call(dtPickerObj, "CLOSE", dtPickerObj.dataObject.oInputElement);
 				dtPickerObj._hidePicker("");
+				dtPickerObj.dataObject.oInputElement = null;
 			});
 		
 			$(dtPickerObj.element).find('.dtpicker-buttonSet').click(function(e)
@@ -1104,6 +1106,7 @@
 				if(dtPickerObj.settings.buttonClicked)
 					dtPickerObj.settings.buttonClicked.call(dtPickerObj, "SET", dtPickerObj.dataObject.oInputElement);
 				dtPickerObj._setButtonAction(false);
+				dtPickerObj.dataObject.oInputElement = null;
 			});
 		
 			$(dtPickerObj.element).find('.dtpicker-buttonClear').click(function(e)
@@ -1111,6 +1114,7 @@
 				if(dtPickerObj.settings.buttonClicked)
 					dtPickerObj.settings.buttonClicked.call(dtPickerObj, "CLEAR", dtPickerObj.dataObject.oInputElement);
 				dtPickerObj._clearButtonAction();
+				dtPickerObj.dataObject.oInputElement = null;
 			});
 		
 			// ----------------------------------------------------------------------------

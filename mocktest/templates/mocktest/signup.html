@@ -48,10 +48,16 @@
 
     
       $(function(){
-        $('body').on('click', 'a.disabled', function(event) {
-          event.preventDefault();
-          console.log("Sign up disabled");
-        });
+        $("#signup-button").click(function(e){
+          if ($("#signup-button").hasClass("disabled")) {
+            console.log("suppressed");
+            e.preventDefault();
+          } else {
+            console.log("should fire");
+            //document.getElementById('signup-form').submit();
+            $("#signup-form").submit();
+          }
+        }); 
         $("#redirect_url").val(getURLParameter("redirect_url"));
         $("#signup-button").disable(true);        
         $("#username-signup").focus(function(){
@@ -77,7 +83,7 @@
             $("#username-signup").addClass("greyed-input");
             $("#username-signup").val("Username");
           } 
-          if (new RegExp("^[a-z0-9_]{3,16}$").test ($("#username-signup").val())) {            
+          if (new RegExp("^[A-Za-z0-9_]{3,16}$").test ($("#username-signup").val())) {            
             $.get(
               "ajaxUtil/isUsernameValid.html?username="+$("#username-signup").val(),
               function (data, status) {
@@ -501,8 +507,7 @@
       </div>
       </form>
       <div class="centered-div">
-        <a id="signup-button" href="#" class="button--mockingone centered-button disabled" 
-        onclick="document.getElementById('signup-form').submit();">Sign Up</a>        
+        <a id="signup-button" href="#" class="button--mockingone centered-button disabled">Sign Up</a>        
       </div>
       </div>
     </main> 

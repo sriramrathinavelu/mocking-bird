@@ -399,7 +399,7 @@ def saveEvaluationResult(request):
     testId = uuid.UUID(request.GET.get('testId'))
     result = request.GET['result']
     question = Tests.objects.get(testid=testId,
-                                 questionnum=1)
+                                 questionnum=0)
     question.isevaluated = True
     question.iscleared = result == "pass"
     question.save()

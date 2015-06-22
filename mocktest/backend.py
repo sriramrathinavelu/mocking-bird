@@ -1,4 +1,5 @@
 from django.contrib.auth.signals import user_logged_in
+from cassandra.cqlengine.query import DoesNotExist
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth.models import User
 from models import Users
@@ -16,7 +17,10 @@ class MockBackend(object):
             return None
 
     def authenticate(self, username, password, fbid):
-        user = Users.objects.filter(username=username).get()
+        try:
+            user = Users.objects.get(username=username)
+        except DoesNotExist:
+            return None
         if (user):
             logger.debug("Authenticating user: " + username)
             if (user.password == password):

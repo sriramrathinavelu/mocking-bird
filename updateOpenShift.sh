@@ -1,4 +1,4 @@
-OPENSHIFT_APP_PATH='/space/openshift/preview/preview/wsgi/'
+OPENSHIFT_APP_PATH='/space/openshift/preview/preview/wsgi/openshift/'
 OPENSHIFT_TEMPLATE_PATH='/space/openshift/preview/preview/wsgi/openshift/'
 OPENSHIFT_STATIC_PATH='/space/openshift/preview/preview/wsgi/'
 

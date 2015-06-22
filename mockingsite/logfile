@@ -1,122 +1,119 @@
-[19/Jun/2015 07:26:11] DEBUG [mocktest.mentorViews:116] {u'QA Engineer': {u'Amazon': False}, u'Software Developer': {u'Amazon': True, u'Microsoft': True}}
-[19/Jun/2015 07:26:44] DEBUG [mocktest.mentorViews:112] <QueryDict: {u'posCompCheckDict': [u'{"QA Engineer":{"Amazon":false},"Software Developer":{"Amazon":false,"Microsoft":true}}'], u'compPosCheckDict': [u'{"Amazon":{"QA Engineer":false,"Software Developer":false},"Microsoft":{"Software Developer":true}}']}>
-[19/Jun/2015 07:26:44] DEBUG [mocktest.mentorViews:115] {u'Amazon': {u'QA Engineer': False, u'Software Developer': False}, u'Microsoft': {u'Software Developer': True}}
-[19/Jun/2015 07:26:44] DEBUG [mocktest.mentorViews:116] {u'QA Engineer': {u'Amazon': False}, u'Software Developer': {u'Amazon': False, u'Microsoft': True}}
-[19/Jun/2015 07:27:08] DEBUG [mocktest.mentorViews:112] <QueryDict: {u'posCompCheckDict': [u'{"QA Engineer":{"Amazon":true},"Software Developer":{"Amazon":true,"Microsoft":true}}'], u'compPosCheckDict': [u'{"Amazon":{"QA Engineer":true,"Software Developer":true},"Microsoft":{"Software Developer":true}}']}>
-[19/Jun/2015 07:27:08] DEBUG [mocktest.mentorViews:115] {u'Amazon': {u'QA Engineer': True, u'Software Developer': True}, u'Microsoft': {u'Software Developer': True}}
-[19/Jun/2015 07:27:08] DEBUG [mocktest.mentorViews:116] {u'QA Engineer': {u'Amazon': True}, u'Software Developer': {u'Amazon': True, u'Microsoft': True}}
-[20/Jun/2015 00:22:22] DEBUG [mocktest.views:175] testId = e74955fd-16de-11e5-ab37-4025c2cdc7f8 choice = 2
-[20/Jun/2015 00:30:24] DEBUG [mocktest.views:175] testId = 297282ee-16e3-11e5-b5f7-4025c2cdc7f8 choice = 2
-[20/Jun/2015 00:33:01] DEBUG [mocktest.views:175] testId = 8e6d6751-16e3-11e5-82c8-4025c2cdc7f8 choice = 2
-[20/Jun/2015 00:33:25] DEBUG [mocktest.ajaxUtil:372] Answer: Some answerblah blahyada yada
-[20/Jun/2015 00:33:40] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:34:10] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:34:40] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:35:10] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:35:40] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:36:10] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:36:40] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:37:10] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:37:40] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:38:10] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:38:40] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:39:10] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:39:27] DEBUG [mocktest.ajaxUtil:372] Answer: Some answerblah blahyada yada
-[20/Jun/2015 00:39:44] DEBUG [mocktest.ajaxUtil:372] Answer: asdasasdasasdasd
-[20/Jun/2015 00:39:48] DEBUG [mocktest.ajaxUtil:372] Answer: Some answerblah blahyada yada
-[20/Jun/2015 00:40:18] DEBUG [mocktest.ajaxUtil:372] Answer: Some answerblah blahyada yada
-[20/Jun/2015 00:40:48] DEBUG [mocktest.ajaxUtil:372] Answer: Some answerblah blahyada yada
-[20/Jun/2015 00:41:18] DEBUG [mocktest.ajaxUtil:372] Answer: Some answerblah blahyada yada
-[20/Jun/2015 00:41:30] DEBUG [mocktest.ajaxUtil:372] Answer: Some answerblah blahyada yada
-[20/Jun/2015 00:41:50] DEBUG [mocktest.ajaxUtil:372] Answer: asdasasdasasdasd
-[20/Jun/2015 00:42:20] DEBUG [mocktest.ajaxUtil:372] Answer: asdasasdasasdasd
-[20/Jun/2015 00:42:50] DEBUG [mocktest.ajaxUtil:372] Answer: asdasasdasasdasd
-[20/Jun/2015 00:43:20] DEBUG [mocktest.ajaxUtil:372] Answer: asdasasdasasdasd
-[20/Jun/2015 00:43:50] DEBUG [mocktest.ajaxUtil:372] Answer: asdasasdasasdasd
-[20/Jun/2015 00:53:32] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdasdasd
-[20/Jun/2015 00:53:56] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:54:26] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:54:56] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:55:26] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:55:52] DEBUG [mocktest.ajaxUtil:372] Answer: 
-[20/Jun/2015 00:55:56] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdasdasd
-[20/Jun/2015 00:55:57] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdasdasd
-[20/Jun/2015 00:56:05] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 00:56:27] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 00:56:48] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 00:57:34] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 00:57:45] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 00:57:54] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 00:58:25] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 00:58:55] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 00:59:32] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 00:59:57] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 01:00:01] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:00:12] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 01:00:21] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:00:54] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 01:01:24] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 01:01:54] DEBUG [mocktest.ajaxUtil:372] Answer: some andwweasdasdasd aqsd
-[20/Jun/2015 01:02:20] DEBUG [mocktest.ajaxUtil:372] Answer: some an
-
-dwweasd
-
-asd
-
-asd aqsd
-[20/Jun/2015 01:02:43] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:03:02] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:03:06] DEBUG [mocktest.ajaxUtil:372] Answer: some an
-
-dwweasd
-
-asd
-
-asd aqsd
-[20/Jun/2015 01:03:13] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:04:40] DEBUG [mocktest.ajaxUtil:372] Answer: some an
-
-dwweasd
-
-asd
-
-asd aqsd
-[20/Jun/2015 01:05:08] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:05:38] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:06:08] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:06:38] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:07:08] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:07:38] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:08:08] DEBUG [mocktest.ajaxUtil:372] Answer: asdasdasdasdaaaaa
-[20/Jun/2015 01:08:29] DEBUG [mocktest.ajaxUtil:372] Answer: some an
-
-dwweasd
-
-asd
-
-asd aqsd
-[20/Jun/2015 01:08:41] DEBUG [mocktest.ajaxUtil:372] Answer: asda
-
-sdas
-
-dasd
-
-
-aaaaa
-[20/Jun/2015 01:08:51] DEBUG [mocktest.ajaxUtil:372] Answer: some an
-
-dwweasd
-
-asd
-
-asd aqsd
-[20/Jun/2015 01:08:54] DEBUG [mocktest.ajaxUtil:372] Answer: asda
-
-sdas
-
-dasd
-
-
-aaaaa
-[20/Jun/2015 01:09:03] DEBUG [mocktest.views:175] testId = c129078f-16e6-11e5-82df-4025c2cdc7f8 choice = 2
-[20/Jun/2015 01:12:16] DEBUG [mocktest.backend:21] Authenticating user: sriram1
+[20/Jun/2015 17:39:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:40:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:40:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:41:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:41:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:42:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:42:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:43:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:43:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:44:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:44:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:45:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:45:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:46:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:46:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:47:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:47:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:48:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:48:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:49:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:49:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:50:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:50:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:51:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:51:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:52:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:52:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:53:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:53:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:54:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:54:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:55:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:55:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:56:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:56:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:57:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:57:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:58:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:58:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:59:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 17:59:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:00:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:00:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:01:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:01:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:02:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:02:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:03:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:03:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:04:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:04:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:05:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:05:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:06:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:06:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:07:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:07:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:08:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:08:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:09:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:09:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:10:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:10:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:11:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:11:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:12:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:12:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:13:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:13:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:14:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:14:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:15:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:15:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:16:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:16:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:17:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:17:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:18:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:18:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:19:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:19:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:20:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:20:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:21:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:21:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:22:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:22:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:23:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:23:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:24:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:24:57] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:25:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:25:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:26:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:26:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:27:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:27:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:28:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:28:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:29:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:29:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:30:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:30:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 18:31:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[20/Jun/2015 22:14:46] DEBUG [mocktest.views:267] {u'username': u'Sriram', u'firstname': u'Sriram', u'lastname': u'Rathinavelu', u'phonenumber': u'Phone Number (Optional)', u'redirect_url': u'home.html', u'csrfmiddlewaretoken': u'CnklaBUdrKwJZKLSDyZmz9AbND3KuwaP', u'password': u'pasword', u'email': u'srathin1@asu.edu'}
+[20/Jun/2015 22:17:40] DEBUG [mocktest.backend:21] Authenticating user: Sriram
+[20/Jun/2015 22:17:45] DEBUG [mocktest.backend:21] Authenticating user: Sriram
+[20/Jun/2015 22:17:58] DEBUG [mocktest.backend:21] Authenticating user: Sriram
+[20/Jun/2015 22:18:06] DEBUG [mocktest.backend:21] Authenticating user: Sriram
+[20/Jun/2015 22:25:21] DEBUG [mocktest.backend:25] Authenticating user: Sriram
+[22/Jun/2015 00:49:03] DEBUG [mocktest.backend:25] Authenticating user: aschandr1
+[22/Jun/2015 01:26:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[22/Jun/2015 01:27:28] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[22/Jun/2015 01:27:58] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[22/Jun/2015 01:32:16] DEBUG [mocktest.ajaxUtil:372] Answer: asda
+[22/Jun/2015 01:32:21] DEBUG [mocktest.views:175] testId = 7eb8cb97-187e-11e5-a1e7-f0def1d7a66a choice = 1
+[22/Jun/2015 01:32:30] DEBUG [mocktest.mentorViews:112] <QueryDict: {u'posCompCheckDict': [u'{"QA Engineer":{"Amazon":true},"Software Developer":{"Amazon":true,"Microsoft":false}}'], u'compPosCheckDict': [u'{"Amazon":{"QA Engineer":true,"Software Developer":true},"Microsoft":{"Software Developer":false}}']}>
+[22/Jun/2015 01:32:30] DEBUG [mocktest.mentorViews:115] {u'Amazon': {u'QA Engineer': True, u'Software Developer': True}, u'Microsoft': {u'Software Developer': False}}
+[22/Jun/2015 01:32:30] DEBUG [mocktest.mentorViews:116] {u'QA Engineer': {u'Amazon': True}, u'Software Developer': {u'Amazon': True, u'Microsoft': False}}
