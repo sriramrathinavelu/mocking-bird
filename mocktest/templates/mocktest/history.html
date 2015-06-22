@@ -27,17 +27,28 @@ History
       var testDate = new Date(value['testdate']);
       var dateStr = testDate.getFullYear().toString() + "-" + testDate.getMonth().toString() + "-" + testDate.getDate();
       var markStr="";
+      var badgeStr = "";
+      var brCount = 0
       if (value['isevaluated']){
         /*markStr="Marks Scored: " + value['scoredmarks'] +" / " + value['totalmarks'];*/
         if (value['iscleared']) {
-          markStr="Evaluation Result: Your mentor thinks you will crack it!"
+          markStr="Your mentor thinks you will crack it!"
+          if ($(".mediachecker").css("float") == "left" ){
+            badgeStr="<img class=\"history-badge\" left;\" src=\"static/mocktest/images/icons/pass_32.png\">"
+          } else {
+            badgeStr="<img class=\"history-badge\" src=\"static/mocktest/images/icons/pass_64.png\">"
+          }
         } else {
-          markStr="Evaluation Result: Better luck next time"
+          markStr="Better luck next time"
         }
+      } else {
+        brCount += 1;
       }
       var nameStr="";
       if (value['testname']) {
         nameStr="Name: " + value['testname'];
+      } else {
+        brCount += 1;
       }           
       var buttonText = "View Result";
       var ahref = "result.html?testId="+value['testid'];
@@ -50,9 +61,17 @@ History
       if ($(".mediachecker").css("float") == "left" ){
           // Small Screen
           calendarSize = "size1x";
-      }        
+      }              
+      var brStr = ""
+      if ($(".mediachecker").css("float") == "left" ){
+          // Small Screen                    
+      } else {
+          for (i = 0; i < brCount; i++) {
+            brStr += "<br/>"
+          }
+      }
       $(".articles-list").append(
-      "<li class=\"articles-list__item custom-padding blurred-bg\"><time datetime=\"" + dateStr +"\" class=\"date-as-calendar position-em " + calendarSize + "\"><span class=\"weekday\">"+days[testDate.getDay()]+"</span><span class=\"day\">"+testDate.getDate()+"</span><span class=\"month\">"+months[testDate.getMonth()]+"</span><span class=\"year\">"+testDate.getFullYear()+"</span></time><h5 class=\"mobile-text-to-left\">"+value['companyname']+"</h5><h5 class=\"mobile-text-to-left\">"+value['positionname']+"</h5><h5>"+nameStr+"</h5><h5 class=\"mobile-text-to-left\">Questions Answered: "+value['questionsanswered']+" / "+value['totalquestions']+"</h5><h5 class=\"mobile-text-to-left\">"+markStr+"</h5><a href=\""+ahref+"\" class=\"button--mockingone small-button\">"+buttonText+"</a></li>"
+      "<li class=\"articles-list__item custom-padding blurred-bg\" style=\"width: 100%;\"><time datetime=\"" + dateStr +"\" class=\"date-as-calendar position-em " + calendarSize + "\"><span class=\"weekday\">"+days[testDate.getDay()]+"</span><span class=\"day\">"+testDate.getDate()+"</span><span class=\"month\">"+months[testDate.getMonth()]+"</span><span class=\"year\">"+testDate.getFullYear()+"</span></time>" + badgeStr + "<h5 class=\"mobile-text-to-left\">"+value['companyname']+"</h5><h5 class=\"mobile-text-to-left\">"+value['positionname']+"</h5><h5 class=\"mobile-text-to-left\">"+nameStr+"</h5><h5 class=\"mobile-text-to-left\">Questions Answered: "+value['questionsanswered']+" / "+value['totalquestions']+"</h5><h5 class=\"mobile-text-to-left\">"+markStr+"</h5>" + brStr + "<a href=\""+ahref+"\" class=\"button--mockingone small-button\">"+buttonText+"</a></li>"
       );
     }
 

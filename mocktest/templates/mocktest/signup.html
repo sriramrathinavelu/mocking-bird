@@ -33,8 +33,8 @@
     -->
 
     <!-- Page styles -->
-    <link rel="stylesheet" href="/static/mocktest/styles/main.css">
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/main.css">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
@@ -58,6 +58,7 @@
             $("#signup-form").submit();
           }
         }); 
+        console.log(getURLParameter("redirect_url"))
         $("#redirect_url").val(getURLParameter("redirect_url"));
         $("#signup-button").disable(true);        
         $("#username-signup").focus(function(){
@@ -464,12 +465,12 @@
 
     <nav class="navdrawer-container promote-layer">
       <h4>Navigation</h4>
-      <ul>     
-        <li><a href="/">Home</a></li>   
+      <ul>      
+        <li><a href="/">Home</a></li>  
         <li><a href="/history.html">History</a></li>
-        <li><a href="/savedTests.html">Saved Tests</a></li>        
-        <li><a href="#hello">About Us</a></li>
-        <li><a href="#getstarted">Contact Us</a></li>        
+        <li><a href="/savedTests.html">Saved Tests</a></li>
+        <li><a href="/schedTests.html">Scheduled Tests</a></li>
+        <li><a href="/mentor/home.html">Mentor view</a></li>        
       </ul>
     </nav>
 
@@ -496,11 +497,17 @@
         {% csrf_token %}
       <!-- Add centred username and password input field -->      
       <div class="centered-div">
+        <label class="not-mobile" style="float:left;">User Name: </label>
         <input class="centered-input greyed-input" id="username-signup" type="text" value="Username" name="username"/>
+        <label class="not-mobile" style="float:left;">Password: </label>
         <input class="centered-input greyed-input" id="password-signup" type="password" value="Password" name="password"/>
+        <label class="not-mobile" style="float:left;">First Name: </label>
         <input class="centered-input greyed-input" id="firstname-signup" type="text" value="First Name" name="firstname"/>
+        <label class="not-mobile" style="float:left;">Last Name: </label>
         <input class="centered-input greyed-input" id="lastname-signup" type="text" value="Last Name" name="lastname"/>
+        <label class="not-mobile" style="float:left;">E-mail: </label>
         <input class="centered-input greyed-input" id="email-signup" type="text" value="E-Mail" name="email"/>
+        <label class="not-mobile" style="float:left;">Phone Number: </label>
         <input class="centered-input greyed-input" id="phone-signup" type="text" value="Phone Number (Optional)" name="phonenumber"
         />        
         <input type="hidden" value="" name="redirect_url" id="redirect_url"/>

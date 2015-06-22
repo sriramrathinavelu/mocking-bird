@@ -201,7 +201,7 @@
           $.get("/ajaxUtil/saveComment.html?testId=" +
               $("#testId").val() + "&currentQ=" +
               $("#currentQ").val() + "&comment=" + 
-              $("#mentor-comment").val(), function(data, status){
+              escape($("#mentor-comment").val()), function(data, status){
                 if (data === 'ok') {
 
                 } else {

@@ -581,6 +581,10 @@ main {
   margin-right: 5px;
 }
 
+.history-badge {
+  float: left;
+}
+
 .articles-list__item::before {
   margin-left: 30%;  
 }
@@ -588,6 +592,7 @@ main {
 .mobile-text-to-left {
   text-align: left;
   margin-left: 5px;
+  padding-left: 32px;
 }
 
 .not-mobile {
@@ -609,11 +614,18 @@ main {
 
   .date-as-calendar {
     float: right;
-    margin-right: 100px;
+    margin-right: 150px;
+  }
+
+  .history-badge {
+    float: left;
+    margin-left:60px;
   }
 
   .mobile-text-to-left {
-    text-align: inherit;
+    text-align: left;
+    margin-left: 5px;
+    padding-left: 175px;
   }
 
   .block-or-flex {
@@ -682,8 +694,15 @@ main {
     margin-right: 200px;
   }
 
+  .history-badge {
+    float: left;
+    margin-left:100px;
+  }
+
   .mobile-text-to-left {
-    text-align: inherit;
+    text-align: left;
+    margin-left: 5px;
+    padding-left: 225px;
   }
 
   .block-or-flex {

@@ -117,3 +117,11 @@
 [22/Jun/2015 01:32:30] DEBUG [mocktest.mentorViews:112] <QueryDict: {u'posCompCheckDict': [u'{"QA Engineer":{"Amazon":true},"Software Developer":{"Amazon":true,"Microsoft":false}}'], u'compPosCheckDict': [u'{"Amazon":{"QA Engineer":true,"Software Developer":true},"Microsoft":{"Software Developer":false}}']}>
 [22/Jun/2015 01:32:30] DEBUG [mocktest.mentorViews:115] {u'Amazon': {u'QA Engineer': True, u'Software Developer': True}, u'Microsoft': {u'Software Developer': False}}
 [22/Jun/2015 01:32:30] DEBUG [mocktest.mentorViews:116] {u'QA Engineer': {u'Amazon': True}, u'Software Developer': {u'Amazon': True, u'Microsoft': False}}
+[22/Jun/2015 02:43:42] DEBUG [mocktest.backend:25] Authenticating user: aschandr1
+[22/Jun/2015 03:42:00] DEBUG [mocktest.backend:25] Authenticating user: sriram1
+[22/Jun/2015 03:58:03] DEBUG [mocktest.views:267] {u'username': u'test1', u'firstname': u'Sriram', u'lastname': u'Rathinavelu', u'phonenumber': u'Phone Number (Optional)', u'redirect_url': u'/createtest.html?companyName=Amazon', u'csrfmiddlewaretoken': u'u3HTp7M58ZsmUziOiHzpVLJT0ZxPeLxb', u'password': u'password', u'email': u'srathin1@asu.edu'}
+[22/Jun/2015 04:07:31] DEBUG [mocktest.views:267] {u'username': u'test2', u'firstname': u'Sriram', u'lastname': u'Rathinavelu', u'phonenumber': u'Phone Number (Optional)', u'redirect_url': u'/createtest.html?companyName=Amazon&positionName=Software%20Developer', u'csrfmiddlewaretoken': u'u3HTp7M58ZsmUziOiHzpVLJT0ZxPeLxb', u'password': u'password', u'email': u'ak@gmail.com'}
+[22/Jun/2015 04:07:45] DEBUG [mocktest.backend:25] Authenticating user: test2
+[22/Jun/2015 04:07:54] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[22/Jun/2015 04:07:56] DEBUG [mocktest.ajaxUtil:372] Answer: 
+[22/Jun/2015 04:16:03] DEBUG [mocktest.backend:25] Authenticating user: sriram1

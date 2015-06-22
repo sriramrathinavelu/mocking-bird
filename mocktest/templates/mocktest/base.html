@@ -40,6 +40,26 @@
     {% block css_js %}
     {% endblock %}
     
+    <script type="text/javascript">
+    $(function(){
+      $(document).on('click', "#logout-button-top", function(){
+        $.get(
+          "logout.html",
+          function(data, status) {
+            console.log(status)
+            if (status == 'success') {
+              $("#login-button-top").show();
+              $("#logout-button-top").hide();  
+              window.location.reload(true);            
+            }
+          })
+      });      
+      $(document).on('click', "#login-button-top", function(){
+        window.location="login.html?redirect_url=home.html"
+      });      
+    });
+    </script>
+
     {% block jquery %}
     {% endblock %}
 
