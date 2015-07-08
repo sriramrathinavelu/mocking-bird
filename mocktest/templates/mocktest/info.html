@@ -1,0 +1,37 @@
+{% extends "mocktest/base.html" %}  
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block css_js %}
+  <!-- Needed for autocomplete -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{% endblock %}
+
+{% block jquery %}
+  <script>
+  $(function(){
+    {% if large_tile %}
+    var src = "{{large_tile}}"
+    if ($(".mediachecker").css("float") == "left" ){
+      // Small Screen
+      src = "{{small_tile}}"
+    } 
+    $("#img-tile").attr("src", src);  
+    {% endif %}
+  });
+  </script>
+{% endblock %}
+
+{% block content %}
+  <main>
+  <div class="centered-icon">
+    <img id="img-tile" class="centered-icon" src=""/>
+  </div>
+  <h1>{{heading}}</h1>
+  <p>{{info}}</p>
+  </main> 
+{% endblock %}

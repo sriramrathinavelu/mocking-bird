@@ -1,10 +1,10 @@
 from cassandra.cqlengine.query import DoesNotExist
 from cassandra.cqlengine.columns import TimeUUID
 from cassandra.cqlengine.models import Model
-from models import CompanyPosition
-from models import PositionCompany
-from models import QuestionBank
-from models import Users
+from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
+from models import *
 from django.db import connections
 from models import UserScheduledTests
 from datetime import datetime
@@ -50,18 +50,25 @@ def __jsonReady(value, escape=False):
         return value
 
 
-def jsonReady(obj):
+def jsonReady(obj, extraparams={}, escape=False):
     if isinstance(obj, Model):
         _dict = dict(obj)
         for key, value in _dict.iteritems():
-            _dict[key] = __jsonReady(value, True)
+            _dict[key] = jsonReady(value, escape=True)
+        for key, value in extraparams.iteritems():
+            _dict[__jsonReady(key)] = jsonReady(value)
         return _dict
     elif isinstance(obj, collections.Iterable):
         if isinstance(obj, dict):
             for key, value in obj.iteritems():
-                obj[__jsonReady(key)] = __jsonReady(value)
+                obj[__jsonReady(key)] = jsonReady(value)
+            for key, value in extraparams.iteritems():
+                obj[__jsonReady(key)] = jsonReady(value)
             return obj
-        return map(__jsonReady, obj)
+        if isinstance(obj, list) or isinstance(obj, tuple):
+            return map(jsonReady, obj)
+        if isinstance(obj, str) or isinstance(obj, unicode):
+            return __jsonReady(obj)
     else:
         return __jsonReady(obj)
 
@@ -84,10 +91,23 @@ def __deletePositionCompany(positionName, companyName):
 
 
 def __addCompanyPosition(companyName,
-                         positionName):
+                         positionName,
+                         minQuestions,
+                         minDuration,
+                         minQPerPool,
+                         maxPools,
+                         poolIncrementCount):
     comPos = CompanyPosition()
     comPos.companyname = companyName
     comPos.positionname = positionName
+    comPos.minquestions = minQuestions
+    comPos.minduration = minDuration
+    comPos.minqperpool = minQPerPool
+    comPos.maxpools = maxPools
+    if poolIncrementCount > 0:
+        comPos.poolincrementcount = poolIncrementCount
+    else:
+        comPos.poolincrementcount = 25
     comPos.save()
 
 
@@ -106,12 +126,24 @@ def deleteCompanyPosition(companyName, positionName):
 
 
 @cleanInput
-def addCompanyPosition(companyName, positionName):
+def addCompanyPosition(companyName,
+                       positionName,
+                       minQuestions,
+                       minDuration,
+                       minQPerPool,
+                       maxPools,
+                       poolIncrementCount):
     logger.debug("Adding company " + str(companyName) +
                  " and position " + str(positionName))
     try:
         if not isCompanyPositionPresent(companyName, positionName):
-            __addCompanyPosition(companyName, positionName)
+            __addCompanyPosition(companyName,
+                                 positionName,
+                                 minQuestions,
+                                 minDuration,
+                                 minQPerPool,
+                                 maxPools,
+                                 poolIncrementCount)
         if not isPositionCompanyPresent(positionName, companyName):
             __addPositionCompany(positionName, companyName)
         return True
@@ -119,6 +151,303 @@ def addCompanyPosition(companyName, positionName):
         logger.error("Encounter exception " + str(e))
         deleteCompanyPosition(companyName, positionName)
         return False
+
+
+@cleanInput
+def editCompanyPosition(companyName,
+                        positionName,
+                        minQuestions,
+                        minDuration,
+                        minQPerPool,
+                        maxPools,
+                        poolIncrementCount,
+                        poolCount,
+                        currentPool):
+    logger.debug("Editing company " + str(companyName) +
+                 " and position " + str(positionName))
+    try:
+        compPosObj = CompanyPosition.objects.get(
+            companyname=companyName,
+            positionname=positionName)
+        compPosObj.minquestions = minQuestions
+        compPosObj.minduration = minDuration
+        compPosObj.minqperpool = minQPerPool
+        compPosObj.maxpools = maxPools
+        compPosObj.poolincrementcount = poolIncrementCount
+        compPosObj.poolcount = poolCount
+        compPosObj.curpool = currentPool
+        compPosObj.save()
+        return True
+    except Exception, e:
+        logger.error("Encounter exception " + str(e))
+        return False
+
+
+def addUserQuestion(username,
+                    companyName,
+                    positionName,
+                    pool,
+                    difficulty,
+                    classLabel,
+                    questionId):
+    userQuestionObj = UserQuestion()
+    userQuestionObj.username = username
+    userQuestionObj.companyname = companyName
+    userQuestionObj.positionname = positionName
+    userQuestionObj.pool = pool
+    userQuestionObj.difficulty = difficulty
+    userQuestionObj.classlabel = classLabel
+    userQuestionObj.questionid = questionId
+    userQuestionObj.save()
+
+
+def addUserTempFavourites(username,
+                          testId,
+                          companyName,
+                          positionName,
+                          questionId,
+                          questionType,
+                          question,
+                          answer,
+                          choices,
+                          input,
+                          key,
+                          timeToSolve,
+                          rating,
+                          reputation):
+    userTempFav = UserTempFavourites()
+    userTempFav.username = username
+    userTempFav.testid = testId
+    userTempFav.companyname = companyName
+    userTempFav.positionname = positionName
+    userTempFav.questionid = questionId
+    userTempFav.questiontype = questionType
+    userTempFav.question = question
+    userTempFav.answer = answer
+    userTempFav.choices = choices
+    userTempFav.input = input
+    userTempFav.key = key
+    userTempFav.timetosolve = timeToSolve
+    userTempFav.rating = rating
+    userTempFav.reputation = reputation
+    userTempFav.save()
+
+
+def addUserFavourites(username, testId):
+    favs = UserTempFavourites.objects.filter(
+            username=username,
+            testid=testId)
+    if len(favs) == 0:
+        return
+    companyName = favs[0].companyname
+    positionName = favs[0].positionname
+    try:
+        UserFavouritesCompanyHash.objects.get(
+            username=username,
+            companyname=companyName)
+    except DoesNotExist:
+        userFavCompHash = UserFavouritesCompanyHash()
+        userFavCompHash.username = username
+        userFavCompHash.companyname = companyName
+        userFavCompHash.save()
+    try:
+        UserFavouritesPositionHash.objects.get(
+            username=username,
+            positionname=positionName)
+    except DoesNotExist:
+        userFavPosHash = UserFavouritesPositionHash()
+        userFavPosHash.username = username
+        userFavPosHash.positionname = positionName
+        userFavPosHash.save()
+    for fav in favs:
+        userComFav = UserCompanyFavourites()
+        userComFav.username = username
+        userComFav.companyname = companyName
+        userComFav.positionname = positionName
+        userComFav.questionid = fav.questionid
+        userComFav.questiontype = fav.questiontype
+        userComFav.question = fav.question
+        userComFav.answer = fav.answer
+        userComFav.choices = fav.choices
+        userComFav.input = fav.input
+        userComFav.key = fav.key
+        userComFav.timetosolve = fav.timetosolve
+        userComFav.rating = fav.rating
+        userComFav.reputation = fav.reputation
+        userPosFav = UserPositionFavourites()
+        userPosFav.username = username
+        userPosFav.companyname = companyName
+        userPosFav.positionname = positionName
+        userPosFav.questionid = fav.questionid
+        userPosFav.questiontype = fav.questiontype
+        userPosFav.question = fav.question
+        userPosFav.answer = fav.answer
+        userPosFav.choices = fav.choices
+        userPosFav.input = fav.input
+        userPosFav.key = fav.key
+        userPosFav.timetosolve = fav.timetosolve
+        userPosFav.rating = fav.rating
+        userPosFav.reputation = fav.reputation
+        userComFav.save()
+        userPosFav.save()
+
+
+def __unused_addUserFavourites(username,
+                               companyName,
+                               positionName,
+                               questionId,
+                               questionType,
+                               question,
+                               answer,
+                               choices,
+                               input,
+                               key,
+                               timeToSolve,
+                               rating,
+                               reputation):
+    try:
+        UserFavouritesCompanyHash.objects.get(
+            username=username,
+            companyname=companyName)
+    except DoesNotExist:
+        userFavCompHash = UserFavouritesCompanyHash()
+        userFavCompHash.username = username
+        userFavCompHash.companyname = companyName
+        userFavCompHash.save()
+    userComFav = UserCompanyFavourites()
+    userComFav.username = username
+    userComFav.companyname = companyName
+    userComFav.positionname = positionName
+    userComFav.questionid = questionId
+    userComFav.questiontype = questionType
+    userComFav.question = question
+    userComFav.answer = answer
+    userComFav.choices = choices
+    userComFav.input = input
+    userComFav.key = key
+    userComFav.timetosolve = timeToSolve
+    userComFav.rating = rating
+    userComFav.reputation = reputation
+    try:
+        UserFavouritesPositionHash.objects.get(
+            username=username,
+            positionname=positionName)
+    except DoesNotExist:
+        userFavPosHash = UserFavouritesPositionHash()
+        userFavPosHash.username = username
+        userFavPosHash.positionname = positionName
+        userFavPosHash.save()
+    userPosFav = UserPositionFavourites()
+    userPosFav.username = username
+    userPosFav.companyname = companyName
+    userPosFav.positionname = positionName
+    userPosFav.questionid = questionId
+    userPosFav.questiontype = questionType
+    userPosFav.question = question
+    userPosFav.answer = answer
+    userPosFav.choices = choices
+    userPosFav.input = input
+    userPosFav.key = key
+    userPosFav.timetosolve = timeToSolve
+    userPosFav.rating = rating
+    userPosFav.reputation = reputation
+    userComFav.save()
+    userPosFav.save()
+
+
+def addUserPool(username,
+                companyName,
+                positionName,
+                difficulty,
+                classLabel,
+                activeQPool,
+                activeAPool):
+    newUserPool = UserPools()
+    newUserPool.username = username
+    newUserPool.companyname = companyName
+    newUserPool.positionname = positionName
+    newUserPool.difficulty = difficulty
+    newUserPool.classlabel = classLabel
+    newUserPool.activeqpool = activeQPool
+    newUserPool.activeapool = activeAPool
+    newUserPool.save()
+
+
+def markPoolUsed(username,
+                 companyName,
+                 positionName,
+                 difficulty,
+                 classLabel,
+                 usedQPool,
+                 usedAPool):
+    obj = UserPools.objects.get(
+            username=username,
+            companyname=companyName,
+            positionname=positionName,
+            difficulty=difficulty,
+            classlabel=classLabel
+          )
+    maxPools = CompanyPosition.objects.get(
+            companyname=companyName,
+            positionname=positionName
+        ).poolcount
+    if usedQPool:
+        obj.activeqpool = (usedQPool % maxPools) + 1
+        obj.usedqpool.append(usedQPool)
+    if usedAPool:
+        obj.activeapool = (usedAPool % maxPools) + 1
+        obj.usedapool.append(usedAPool)
+    obj.save()
+
+
+def getQuestionClass(difficulty=Constants.MEDIUM):
+    questionClass = None
+    if difficulty == Constants.MEDIUM:
+        questionClass = QuestionBankMedium
+    elif difficulty == Constants.EASY:
+        questionClass = QuestionBankEasy
+    else:
+        questionClass = QuestionBankHard
+    return questionClass
+
+
+def getActivePool(companyName,
+                  positionName,
+                  difficulty=Constants.MEDIUM,
+                  classLabel='all'):
+    questionClass = getQuestionClass(difficulty)
+    # Get the active pool from the CompanyPosition table
+    compPosObj = CompanyPosition.objects.get(
+        companyname=companyName,
+        positionname=positionName)
+    # Get count of questions in the active pool
+    count = questionClass.objects.filter(
+        companyname=companyName,
+        positionname=positionName,
+        classlabel=classLabel,
+        pool=compPosObj.curpool).count()
+    if count + 1 <= compPosObj.minqperpool:
+        return compPosObj.curpool
+    else:
+        while True:
+            # Try next pool
+            compPosObj.curpool += 1
+            if compPosObj.curpool > compPosObj.maxpools:
+                # All pools are filled. Bump up the count of each pool
+                compPosObj.curpool = 1
+                compPosObj.minqperpool += compPosObj.poolincrementcount
+            count = questionClass.objects.filter(
+                companyname=companyName,
+                positionname=positionName,
+                classlabel=classLabel,
+                pool=compPosObj.curpool).count()
+            if count == 0:
+                # Using the pool for the very first time
+                # Increment poolcount
+                compPosObj.poolcount += 1
+            if count + 1 <= compPosObj.minqperpool:
+                compPosObj.save()
+                return compPosObj.curpool
 
 
 def addQuestion(companyName,
@@ -131,9 +460,17 @@ def addQuestion(companyName,
                 key="",
                 timeToSolve=20):
     if isPresent(companyName, positionName):
-        questionObj = QuestionBank()
+        activePool = getActivePool(
+            companyName=companyName,
+            positionName=positionName,
+            difficulty=Constants.MEDIUM,
+            classLabel='all')
+        questionObj = QuestionBankMedium()
         questionObj.companyname = companyName
         questionObj.positionname = positionName
+        questionObj.difficulty = Constants.MEDIUM
+        questionObj.classLabel = 'all'
+        questionObj.pool = activePool
         questionObj.questionid = TimeUUID.from_datetime(datetime.now())
         questionObj.questiontype = questionType
         questionObj.question = question
@@ -147,6 +484,52 @@ def addQuestion(companyName,
         raise Exception("Invalid company and position")
 
 
+def updateQuestionDifficulty(questionObj):
+    if isinstance(questionObj, QuestionBankMedium):
+        if questionObj.rating <= 1200 and questionObj.ratingdeviation < 100:
+            # Move it to the easy table
+            questionObjEasy = QuestionBankEasy()
+            for item in questionObj.items():
+                questionObjEasy.__setattr__(
+                    item[0],
+                    item[1]
+                )
+                questionObjEasy.save()
+                questionObj.delete()
+        elif questionObj.rating >= 1800 and questionObj.ratingdeviation < 100:
+            # Move it to the hard table
+            questionObjHard = QuestionBankHard()
+            for item in questionObj.items():
+                questionObjHard.__setattr__(
+                    item[0],
+                    item[1]
+                )
+                questionObjHard.save()
+                questionObj.delete()
+    elif isinstance(questionObj, QuestionBankEasy):
+        if questionObj.rating >= 1500 and questionObj.ratingdeviation < 100:
+            # Move it to the medium table
+            questionObjMedium = QuestionBankMedium()
+            for item in questionObj.items():
+                questionObjMedium.__setattr__(
+                    item[0],
+                    item[1]
+                )
+                questionObjMedium.save()
+                questionObj.delete()
+    else:
+        if questionObj.rating <= 1500 and questionObj.ratingdeviation < 100:
+            # Move it to the medium table
+            questionObjMedium = QuestionBankMedium()
+            for item in questionObj.items():
+                questionObjMedium.__setattr__(
+                    item[0],
+                    item[1]
+                )
+                questionObjMedium.save()
+                questionObj.delete()
+
+
 def editQuestion(companyName,
                  positionName,
                  questionId,
@@ -158,9 +541,9 @@ def editQuestion(companyName,
                  key="",
                  timeToSolve=20):
     if isValidQuestion(companyName, positionName, questionId):
-        questionObj = QuestionBank.objects.get(companyname=companyName,
-                                               positionname=positionName,
-                                               questionid=questionId)
+        questionObj = QuestionBankMedium.objects.get(companyname=companyName,
+                                                     positionname=positionName,
+                                                     questionid=questionId)
         questionObj.questiontype = questionType
         questionObj.question = question
         questionObj.answer = answer
@@ -184,7 +567,7 @@ def addRawQuestion(companyName,
                    key="",
                    timeToSolve=20):
     if isPresent(companyName, positionName):
-        question = QuestionBank()
+        question = RawQuestionBank()
         question.companyname = companyName
         question.positionname = positionName
         question.questionid = TimeUUID.from_datetime(datetime.now())
@@ -219,6 +602,109 @@ def addScheduledTest(username,
         scheduledTest.testendtime = testEndTime
         scheduledTest.totalquestions = totalQuestions
         scheduledTest.save()
+
+
+def __addAuthUser(username, isMentor, isInternal=False):
+    authUser = User(username=username,
+                    password='mockingsite')
+    authUser.save()
+    try:
+        userWL = Group.objects.get(name='UsersWaitingList')
+    except Group.DoesNotExist:
+        userWL = Group(name='UsersWaitingList')
+        userWL.save()
+    authUser.groups.add(userWL)
+    if isInternal:
+        try:
+            moderatorWL = Group.objects.get(name='ModeratorsWaitingList')
+        except Group.DoesNotExist:
+            moderatorWL = Group(name='ModeratorsWaitingList')
+            moderatorWL.save()
+        authUser.groups.add(moderatorWL)
+    # Hack to make it work in openshift
+    authUser.last_login = datetime.now()
+    if isMentor:
+        try:
+            mentorWL = Group.objects.get(name='MentorsWaitingList')
+        except Group.DoesNotExist:
+            mentorWL = Group(name='MentorsWaitingList')
+            mentorWL.save()
+        authUser.groups.add(mentorWL)
+    authUser.save()
+
+
+def updateAuthUserGroup(username, grpName):
+    authUser = User.objects.get(username=username)
+    try:
+        newGrp = Group.objects.get(name=grpName)
+    except Group.DoesNotExist:
+        newGrp = Group(name=grpName)
+        newGrp.save()
+    # User can be in only one group at a time
+    # TODO: Deleting all user groups without
+    # checking is a bug and needs to be fixed
+    for grp in authUser.groups.all():
+        authUser.groups.remove(grp)
+    authUser.groups.add(newGrp)
+
+
+def addMentorRequest(userObject):
+    mentorReq = MentorRequests()
+    mentorReq.username = userObject.username
+    mentorReq.firstname = userObject.firstname
+    mentorReq.lastname = userObject.lastname
+    mentorReq.email = userObject.email
+    mentorReq.phone = userObject.phone
+    mentorReq.save()
+
+
+def addUser(username,
+            password,
+            fbid,
+            firstName,
+            lastName,
+            email,
+            phone,
+            isMentor=False,
+            isInternal=False):
+    newUser = Users()
+    newUser.username = username
+    password = password or fbid
+    newUser.password = password
+    newUser.firstname = firstName
+    newUser.lastname = lastName
+    if isMentor:
+        newUser.mentorrequest = True
+    if isInternal:
+        newUser.isinternal = True
+    newUser.email = email
+    phonenumber = phone
+    if (phonenumber and phonenumber.startswith("Phone")):
+        phonenumber = None
+    newUser.phone = phonenumber
+    newUser.fbid = fbid
+    newUser.save()
+    emailMsg = "\n\n Thanks for signing up with us"
+    if isMentor:
+        addMentorRequest(newUser)
+        emailMsg = "\n\nAfter verification, please give us " +\
+            "three to five business days to verify your account" +\
+            "\n\n We will get in touch with you soon"
+    if isInternal:
+        emailMsg = "\n\nAfter verification, please give us " +\
+            "three to five business days to verify your account" +\
+            "\n\n We will get in touch with you soon"
+    __addAuthUser(username, isMentor, isInternal)
+    email = EmailMessage(
+        'Verification',
+        "Please click the following link to " +
+        """verify your email account.
+        http://crackit.com:8000/admin/verification.html""" +
+        "?username=%s" % (username) +
+        emailMsg,
+        to=[email])
+    email.send()
+    return True
 
 
 def deleteScheduledTest(username, testId):

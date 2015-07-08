@@ -1,0 +1,80 @@
+1) Admin sign up page (sign up with isInternal) --> Done
+
+2) Admin Login page --> Done
+
+3) Super Admin verification page --> Done
+
+4) Audit Table
+
+5) Test defaults at position level
+
+Test defaults: 
+    1) min num questions
+    2) Minimum test duration
+        Each question has a time-to-solve attribute which indicates how long it takes to solve the question. This suggests the minimum duration a test must last.
+
+        Example: min num questions: 3
+                 min test duration: 30 mins
+                 If each question's time-to-solve is 5 mins. The test will last only 15 mins. In such cases, the minimum duration test attribute suggests the test planner to add as many questions as needed so that the test duration is at least 30 mins
+    3) Question Difficulty : Easy, Medium, Hard --> Pushed to the future, currently it's all MEDIUM
+    4) Min questions per pool (Refer point 8)
+    5) Max num of pools (Refer point 8)
+    6) pool increment count (default to min questions per pool) (Refer point 8)
+
+
+6) Dashboard Alerts for moderators when a user is in (n/2)th question out of n questions for a company/position
+
+7) QuestionBank - Easy / Medium / Hard
+
+    -> moderateQuestion
+
+    -> createTest
+
+8) Pool of questions
+
+    Reasons:
+        1) For each user there is a one pool that will serve his quick tests
+        2) For advanced test, we need other pool for which easy/medium/hard questions are classified
+        3) Different users will have different pools from which questions are served
+        4) This way all pools will have questions classified as easy and hard.
+    Questions:
+        1) How many pools ? 
+        2) # pools = (# questions/ # num of questions per pool)
+    Solution
+        a) If we decide min num of questions per pool, we can let a pool have as much questions
+        b) Once that condition is met, we can form a second pool, We can go on this way till we reach max number of pools
+        c) Once we reach max pools, we return to the first pool and another set of questions till a treshold is met and we move on to the next pool and so on
+        d) So we need 
+            1) min questions per pool (High num will ensure many non-duplicated QT)
+            2) max num of pools (High num will ensure many non-duplicated AT)
+            3) pool increment count (default to min questions per pool)
+    Implementation
+        1) Get min questions per pool, max num of pools and pool increment count from Add position screen
+        2) Extend CompanyPosition Model to have
+            a) num of pools (num of pools that are filled default to zero. If zero, assign first pool to the user) -> (used for assigning pools to the user)
+            b) Current pool that is getting filled up (Used for adding questions)
+        3) Create UserPools table to indicate which pools are assigned to which user for quick test
+            a) username (PK)
+            b) companyName (PK)
+            c) positionName (PK)
+            d) classlabel (PK)   
+            e) Difficulty (PK)         
+            e) ActiveQPool
+            f) UsedQPool
+            g) ActiveAPool
+            h) UsedAPool
+        4) Extend UserQuestion to the following schema
+            a) username (PK)
+            b) companyName (PK)
+            c) positionName (PK)
+            d) Difficulty (Easy/Medium/Hard) (PK)
+            e) Pool (1 - #num Pools) (PK)
+            f) classLabel (All/Algo/<blah>/<blah>) (PK)
+            g) questionId (CK)
+        5) Linear By Time
+            a) Get the current Active pool for the user (Active-QT/Active-AT based on the test). If no entry create and assign active pool
+            b) Based on the constraint check for questions 
+                b.1) UserQuestion's first questionId will be the latest, so all questionIds with timeUUID before it must have been seen by the user, so you can use greater than condition to look for the question from QB
+            c) If we get no questions change the status to Used-(QT/AT), move to the next pool, even if it's Used and repeat b
+            d) Repeat c unless we get questions (i.e a pool) or return NoQuestionsException if we had searched all pools. At this point an alert must be raised to the super moderator
+

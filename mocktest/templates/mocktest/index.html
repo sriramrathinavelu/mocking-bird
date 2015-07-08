@@ -13,10 +13,157 @@ Home
 
 {% block jquery %}
   <script>
-    $(function() {
-      $("#companyinput").click(function(){
-        $("#companyinput").val("");
+    (function( $ ) {
+      $.widget( "custom.combobox", {
+      _create: function() {
+        this.wrapper = $( "<span>" )
+          .addClass( "custom-combobox" )
+          .insertAfter( this.element );
+ 
+        this.element.hide();
+        this._createAutocomplete();
+        this._createShowAllButton();
+      },
+ 
+      _createAutocomplete: function() {
+        var selected = this.element.children( ":selected" ),
+          value = selected.val() ? selected.text() : "";
+ 
+        this.input = $( "<input>" )
+          .appendTo( this.wrapper )
+          .val( "" )
+          .attr( "title", "")
+          .attr( "placeholder", "Enter/Select Company Name")
+          .addClass( "custom-combobox-input ui-widget ui-widget-content ui-state-default ui-corner-left" )
+          .autocomplete({
+            delay: 0,
+            minLength: 0,
+            source: $.proxy( this, "_source" )
+          })
+          .tooltip({
+            tooltipClass: "ui-state-highlight"
+          });
+ 
+        this._on( this.input, {
+          autocompleteselect: function( event, ui ) {
+            ui.item.option.selected = true;
+            console.log(this);
+            this._trigger( "select", event, {
+              item: ui.item.option
+            });
+          },
+ 
+          autocompletechange: "_removeIfInvalid"
+        });
+      },
+ 
+      _createShowAllButton: function() {
+        var input = this.input,
+          wasOpen = false;
+ 
+        $( "<a>" )
+          .attr( "tabIndex", -1 )
+          .attr( "title", "Show All Items" )
+          .tooltip()
+          .appendTo( this.wrapper )
+          .button({
+            icons: {
+              primary: "ui-icon-triangle-1-s"
+            },
+            text: false
+          })
+          .removeClass( "ui-corner-all" )
+          .addClass( "custom-combobox-toggle ui-corner-right" )
+          .mousedown(function() {
+            wasOpen = input.autocomplete( "widget" ).is( ":visible" );
+          })
+          .click(function() {
+            input.focus();
+ 
+            // Close if already visible
+            if ( wasOpen ) {
+              return;
+            }
+ 
+            // Pass empty string as value to search for, displaying all results
+            input.autocomplete( "search", "" );
+          });
+      },
+ 
+      _source: function( request, response ) {
+        var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response( this.element.children( "option" ).map(function() {
+          var text = $( this ).text();
+          if ( this.value && ( !request.term || matcher.test(text) ) )
+            return {
+              label: text,
+              value: text,
+              option: this
+            };
+        }) );
+      },
+ 
+      _removeIfInvalid: function( event, ui ) {
+ 
+        // Selected an item, nothing to do
+        if ( ui.item ) {
+          return;
+        }
+ 
+        // Search for a match (case-insensitive)
+        var value = this.input.val(),
+          valueLowerCase = value.toLowerCase(),
+          valid = false;
+        this.element.children( "option" ).each(function() {
+          if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+            this.selected = valid = true;
+            return false;
+          }
+        });
+ 
+        // Found a match, nothing to do
+        if ( valid ) {
+          return;
+        }
+ 
+        // Remove invalid value
+        this.input
+          .val( "" )
+          .attr( "title", value + " didn't match any item" )
+          .tooltip( "open" );
+        this.element.val( "" );
+        this._delay(function() {
+          this.input.tooltip( "close" ).attr( "title", "" );
+        }, 2500 );
+        this.input.autocomplete( "instance" ).term = "";
+      },
+ 
+      _destroy: function() {
+        this.wrapper.remove();
+        this.element.show();
+      }
+    });
+    })( jQuery );
+    $(function() {      
+      $("#companyinput").combobox({
+        select: function(event, ui){        
+                    console.log(ui);
+                    $.get("ajaxUtil/getPositions.html?companyName=" + ui['item'].label, function(data, status){
+                      $("#positionselect").html(data);  
+                      $("#positionselect").show();
+                      if ($(".mediachecker").css("float") == "left" ){
+                        // Small Screen
+                        $("#content").hide();
+                        $("#contentcollapser").show();
+                      }
+                    });
+        }
       });
+      $(".custom-combobox input").click(function(){
+        $(".custom-combobox input").val("");
+      });
+
+      /*
       $("#companyinput").autocomplete({
         source: {{companies|safe}},
         select: function(event, ui){                
@@ -31,6 +178,7 @@ Home
                 });
         }
       });
+      */
       $("#contentcollapser").click(function(){
         $("#contentcollapser").hide();
         $("#content").show(); 
@@ -77,7 +225,12 @@ Home
     <p>Search for your dream job and get started with our carefully prepared mock interviews or read how to <a href="#get-started">Get Started</a> with our interviews</p>
     </div>
     <div id="controls">
-    <input id="companyinput" type="text" name="company" value="Enter Company Name"/>
+    <!--<input id="companyinput" type="text" name="company" value="Enter Company Name"/>-->
+    <select id="companyinput" name="company">
+      {% for comp in companies %}
+        <option value="{{comp}}">{{comp}}</option>
+      {% endfor %}      
+    </select>
   	<select id="positionselect" name="position" style="display:none"></select>
     <div id="buttoncontrols">
   	  <a id="begintest" href="#" class="button--mockingone"

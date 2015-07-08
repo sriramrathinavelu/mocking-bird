@@ -1,0 +1,67 @@
+{% extends "admin/formbase.html" %}
+
+{% block notsuperuser %}
+    <p> Sorry! Only super user reserve the right to add moderators.</p>
+    <p> If you wish to have this privellge, Please contact the System Administrator </p>
+    <a href="/admin/home.html"> Home </a>
+{% endblock %}
+
+{% block superuser %}
+<div class="pagination">
+    <span class="step-links">
+        {% if moderatorReqs.has_previous %}
+            <a href="?companyName={{companyName}}&positionName={{positionName}}&page={{ moderatorReqs.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ moderatorReqs.number }} of {{ moderatorReqs.paginator.num_pages }}.
+        </span>
+
+        {% if moderatorReqs.has_next %}
+            <a href="?companyName={{companyName}}&positionName={{positionName}}&page={{ moderatorReqs.next_page_number }}">next</a>
+        {% endif %}
+
+        <a href="/admin/home.html"> Home </a>
+    </span>
+</div>
+<h2> Add Moderators </h2>
+<table class="pure-table pure-table-bordered">
+<thead>
+    <tr>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>E-Mail</th>
+        <th>Add</th>
+    </tr>
+</thead>
+<tbody>
+{% for req in moderatorReqs%}
+    <tr>
+        <td>{{req.username}}</td>
+        <td>{{req.firstname}}</td>
+        <td>{{req.lastname}}</td>
+        <td>{{req.email}}</td>
+        <td><a id={{req.username}} href="/admin/addModerator.html?page={{moderatorReqs.number}}&username={{req.username}}">Add</a></td>
+    </tr>    
+{% endfor %}
+</tbody>
+</table>
+<div class="pagination">
+    <span class="step-links">
+        {% if moderatorReqs.has_previous %}
+            <a href="?companyName={{companyName}}&positionName={{positionName}}&page={{ moderatorReqs.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ moderatorReqs.number }} of {{ moderatorReqs.paginator.num_pages }}.
+        </span>
+
+        {% if moderatorReqs.has_next %}
+            <a href="?companyName={{companyName}}&positionName={{positionName}}&page={{ moderatorReqs.next_page_number }}">next</a>
+        {% endif %}
+
+        <a href="/admin/home.html"> Home </a>
+    </span>
+</div>
+{% endblock %}

@@ -9,5 +9,6 @@ import scrapy
 
 
 class CodercareerItem(scrapy.Item):
+	company = scrapy.Field()
 	question = scrapy.Field()
 	answer = scrapy.Field()

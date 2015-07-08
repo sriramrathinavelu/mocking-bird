@@ -1,0 +1,267 @@
+{% extends "mocktest/base.html" %}
+
+{% block title %}
+History
+{% endblock %}
+
+{% block css_js %}
+  <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">    
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  
+{% endblock %}  
+
+{% block jquery %}
+  <script>    
+  $(function(){
+
+        /*JQM*/
+        $(document).on("click", ".popup-source", function() {
+   
+          console.log("Clicked!!");
+          //Getting the variable's value from a link 
+          var loginBox = $(this).attr('href');
+
+          //Fade in the Popup
+          $(loginBox).fadeIn(300);
+          
+          //Set the center alignment padding + border see css style
+          var popMargTop = ($(loginBox).height() + 24) / 2; 
+          var popMargLeft = ($(loginBox).width() + 24) / 2; 
+          
+          $(loginBox).css({ 
+              'margin-top' : -popMargTop,
+              'margin-left' : -popMargLeft
+          });
+          
+          // Add the mask to body
+          $('body').append('<div id="mask"></div>');
+          $('#mask').fadeIn(300);
+          
+          return false;
+        });
+
+        // When clicking on the button close or the mask layer the popup closed
+        /*
+        $('a.close, #mask').live('click', function() { 
+          $('#mask , .login-popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+        return false;
+        });
+        */
+
+        $('body').on('click', '#mask', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+
+        $('body').on('click', 'a.close', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+        
+        /*JQM*/
+
+
+
+    
+    function makeListTitle(count){
+      $(".articles-count").html("We found " + count + " question(s) matching your criteria");
+    }
+    
+
+    function makeTestList(index, value, isSaved) {
+      $(".articles-list").append(
+      "<li class=\"articles-list__item custom-padding blurred-bg\" style=\"width: 100%;\">" + 
+        "<h4>" + value['companyname'] + "/" + value['positionname'] + "</h4>" + 
+        "<br/>" + 
+        "<div class=\"left-div\">" + value['question'] + "</div>" +
+        "<div><a href=\"#\" class=\"button--mockingone small-button button-row\">Open</a></div></li>"
+      );
+    }
+
+    $.getJSON("/ajaxUtil/userCompanyFavourites.html",function (data, status){
+        if (status === "success") {              
+          $(".articles-list").html("");
+          data = data['objects']
+          console.log(data);
+          makeListTitle(data.length);
+          $.each(data, function(index, value){
+            makeTestList(index, value, false);
+         }); 
+        }
+      });
+    
+
+    $("#positionName").autocomplete({
+      source: {{positionNames|safe}},
+      select: function(event, ui){
+        $.getJSON("/ajaxUtil/userPositionFavourites.html?positionName=" + ui.item.value,function (data, status){
+          if (status === "success") {
+            $(".articles-count").html("");
+            $(".articles-list").html("");
+            objects = data['objects']
+            compNames = data['companies']
+            makeListTitle(objects.length);
+            $.each(objects, function(index, value){
+              makeTestList(index, value, false);
+            }); 
+            $.each(compNames, function(index, value){
+              $("#company-select-1").append(
+                "<option value=\""+ value + "\">" + value + "</option>")
+            });
+            if ($("#company-select-1 option").length > 0) {
+              $("#company-select-1").show();
+              $("#companyName").hide();
+              $("#clearSearch").show();
+            }
+          }
+        });        
+      }
+    });
+
+
+    $("#companyName").autocomplete({
+      source: {{companyNames|safe}},
+      select: function(event, ui){
+        $.getJSON("/ajaxUtil/userCompanyFavourites.html?companyName=" + ui.item.value,function (data, status){
+          $(".articles-count").html("");
+          $(".articles-list").html("");
+          objects = data['objects']
+          posNames = data['positions']
+          makeListTitle(objects.length);
+          $.each(objects, function(index, value){
+            makeTestList(index, value, false);
+          }); 
+          $.each(posNames, function(index, value){
+            $("#position-select-1").append(
+              "<option value=\""+ value + "\">" + value + "</option>")
+          });
+          if ($("#position-select-1 option").length > 0) {
+            $("#positionName").hide();
+            $("#position-select-1").show();
+            $("#clearSearch").show();
+          }
+        });        
+      }
+    });
+
+    $("#clearSearch").click(function(){
+      $("#position-select-1").html("");
+      $("#company-select-1").html("");
+      $("#position-select-1").hide();
+      $("#company-select-1").hide();
+      $("#companyName").show();
+      $("#positionName").show();
+      $("#companyName").val("");
+      $("#positionName").val("");
+      $(".articles-list").html("");
+      $(".articles-count").html("");
+      $.getJSON("/ajaxUtil/userCompanyFavourites.html",function (data, status){
+        if (status === "success") {              
+          $(".articles-list").html("");
+          data = data['objects']
+          console.log(data);
+          makeListTitle(data.length);
+          $.each(data, function(index, value){
+            makeTestList(index, value, false);
+         }); 
+        }
+      });
+    });
+
+
+    $("#position-select-1").change(function(){
+      /*Load Test data based on the company and position*/
+      if (!$("#position-select-1").val().match("^Please")) {
+        $.getJSON("/ajaxUtil/userCompanyFavourites.html?companyName=" + $("#companyName").val() + "&positionName=" + $("#position-select-1").val(),function (data, status){
+          if (status === "success") {
+            data = data['objects']
+            makeListTitle(data.length);
+            $(".articles-list").html("");
+            $.each(data, function(index, value){
+              makeTestList(index, value, false);
+            }); 
+          }
+        });
+      }
+    });
+    $("#company-select-1").change(function(){
+      /*Load Test data based on the company and position*/
+      if (!$("#company-select-1").val().match("^Please")) {
+        $.getJSON("/ajaxUtil/userPositionFavourites.html?companyName=" + $("#company-select-1").val() + "&positionName=" + $("#positionName").val(),function (data, status){
+          if (status === "success") {              
+            data = data['objects']
+            makeListTitle(data.length);
+            $(".articles-list").html("");
+            $.each(data, function(index, value){
+              makeTestList(index, value, false);
+            }); 
+          }
+        });
+      }
+    });
+    /*
+    $("#saved-tests").click(function(){
+      $("#company-select").hide();
+      $("#position-select-1").hide();
+      $("#position-select").hide();
+      $("#company-select-1").hide();
+      $.getJSON("/ajaxUtil/userSavedTests.html",function (data, status){
+        if (status === "success") {              
+          $(".articles-list").html("");
+          makeListTitle(data.length);
+          $.each(data, function(index, value){
+            makeTestList(index, value, true);
+         }); 
+        }
+      });
+    });
+    */
+  });
+  </script>
+{% endblock %}
+
+{% block content %}
+  <main>
+    <div class="centered-div block-or-flex">
+      <input class="centered-input" type="text" id="companyName" placeholder="Enter Company Name"/>
+      <select id="company-select-1" name="company-select-1" class="centered-input" style="display:none">
+      <input class="centered-input" type="text" id="positionName" placeholder="Enter Position Name"/>
+      <select id="position-select-1" name="position-select-1" class="centered-input" style="display:none"></select>        
+      <!--
+      <img class="not-mobile" src="/static/mocktest/images/icons/search-icon.png"/>
+      -->
+    </div>
+    <div class="middle-item">
+      <a id="clearSearch" href="#" class="button--mockingone middle" style="width: 100px; display: none;">Clear</a>
+    </div>
+    <section class="styleguide__articles-section">
+      <div class="articles-section">
+          <div class="container">                
+              <p class="articles-count"></p>
+              <ol class="articles-list">
+              </ol>                
+          </div>
+      </div>
+    </section>     
+    
+    <div id="evaluation-confirmation" class="popup">
+      <a href="#" class="close">
+        <img src="/static/mocktest/images/icons/close.png" class="btn_close" title="Close Window" alt="Close" />
+      </a>
+        <div class="middle">
+          Are you sure you want to submit for evaluation?<br/>You could be charged $XX for this transaction.
+        </div>              
+        <div class="centered-div">
+        <button id="popup-eval-yes-button" class="submit button middle" type="button">Yes</button>
+        <button id="popup-eval-no-button" class="submit button middle" type="button">Cancel</button>
+        </div>
+    </div>
+  </main> 
+{% endblock %}

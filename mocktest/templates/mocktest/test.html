@@ -37,9 +37,15 @@
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
     <link rel="stylesheet" href="/static/mocktest/styles/main.css">
     
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.theme.css">
+    <!--
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    -->
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
     
     <!--Jquery counter -->
     <link rel="stylesheet" href="/static/mocktest/styles/jquery.countdown.css">
@@ -58,6 +64,9 @@
             return elem.value.replace( /\r?\n/g, "\r\n" );
           }
         };
+
+
+
 
       $(function () {
 
@@ -112,9 +121,28 @@
         
         /*JQM*/
 
-        
+        $(document).keydown(function(e) {
+          switch(e.which) {
+            case 37: // left
+            $("#prevq").trigger("click");
+            break;
 
+            case 38: // up
+            break;
 
+            case 39: // right
+            $("#nextq").trigger("click");
+            break;
+
+            case 40: // down            
+            break;
+
+            default: return; // exit this handler for other keys
+          }
+          // e.preventDefault(); // prevent the default action (scroll / move caret)
+        });      
+
+        $("#difficulty-radio").buttonset();
 
         /*Get the test id*/
         $("#testId").val(getURLParameter("testId"));
@@ -161,6 +189,41 @@
         $("#answer-space").val(
           questions[currentQ]['givenanswer']
         );
+        /* Display the voting Panel*/
+        var interactions = questions[currentQ]['interactions']
+        console.log(interactions);
+        $("#voting-panel-upvote").removeClass("disabled");
+        $("#voting-panel-downvote").removeClass("disabled");
+        $("#voting-panel-favourite").removeClass("disabled");
+        $("#radio_easy").next().removeClass("ui-state-active");
+        $("#radio_medium").next().removeClass("ui-state-active");
+        $("#radio_hard").next().removeClass("ui-state-active");
+        if (interactions.indexOf(1) > -1) {
+          $("#voting-panel-upvote").addClass("disabled");
+          $("#voting-panel-downvote").addClass("disabled");
+        } 
+        if (interactions.indexOf(2) > -1) {
+          $("#voting-panel-favourite").addClass("disabled");
+        } 
+        if (interactions.indexOf(3) > -1) {
+          $("#voting-panel-upvote").addClass("disabled");
+          $("#voting-panel-downvote").addClass("disabled");
+        }
+        if (interactions.indexOf(4) > -1) {
+          $("#radio_easy").next().addClass("ui-state-active");
+          $("#radio_medium").next().removeClass("ui-state-active");
+          $("#radio_hard").next().removeClass("ui-state-active");
+        } 
+        if (interactions.indexOf(5) > -1) {
+          $("#radio_easy").next().removeClass("ui-state-active");
+          $("#radio_medium").next().addClass("ui-state-active");
+          $("#radio_hard").next().removeClass("ui-state-active");
+        } 
+        if (interactions.indexOf(6) > -1) {
+          $("#radio_easy").next().removeClass("ui-state-active");
+          $("#radio_medium").next().removeClass("ui-state-active");
+          $("#radio_hard").next().addClass("ui-state-active");
+        } 
         /* Functionality for previous question */
         $("#prevq").click(function(e){              
           if($("#prevq").hasClass("disabled")) {           
@@ -171,7 +234,8 @@
             $.get("ajaxUtil/saveAnswer.html?testId=" +
               $("#testId").val() + "&currentQ=" +
               $("#currentQ").val() + "&answer=" + 
-              escape($("#answer-space").val()), function(data, status){
+              escape($("#answer-space").val()) + 
+              "&oprn=prev", function(data, status){
                 if (data === 'ok') {
 
                 } else {
@@ -217,7 +281,8 @@
             $.get("ajaxUtil/saveAnswer.html?testId=" +
               $("#testId").val() + "&currentQ=" +
               $("#currentQ").val() + "&answer=" + 
-              escape($("#answer-space").val()), function(data, status){
+              escape($("#answer-space").val()) + 
+              "&oprn=next", function(data, status){
                 if (data === 'ok') {
 
                 } else {
@@ -345,6 +410,73 @@
               }
           });
         });
+        var voteFunction = function (interaction) {
+          var curQ = parseInt($("#currentQ").val());
+          var companyName = questions[curQ]['companyname']
+          var positionName = questions[curQ]['positionname']
+          var questionId = questions[curQ]['questionid']
+          var pool = questions[curQ]['pool']
+          var classLabel = questions[curQ]['classlabel']
+          $.get("ajaxUtil/vote.html?questionId=" + questionId +
+            "&companyName=" + companyName + "&positionName=" +
+            positionName + "&pool=" + pool + "&classlabel=" +
+            classLabel + "&interaction=" + interaction + "&testId=" +
+            $("#testId").val(), function (data, status) {
+              if (data === "ok") {
+                console.log("ok");                
+              } else if (data === "add") {
+                if (interaction >= 4) {
+                  var i = 0;
+                  console.log(questions[curQ]['interactions']);
+                  for (i = 0; i < questions[curQ]['interactions'].length; i++) {
+                    if (questions[curQ]['interactions'][i] >= 4)
+                      questions[curQ]['interactions'].splice(i,1);
+                  }
+                }
+                questions[curQ]['interactions'].push(parseInt(interaction));                
+              }
+          });
+        }
+        /* Voting Panel*/
+        $("#voting-panel-upvote").click(function(e){
+          if ($("#voting-panel-upvote").hasClass("disabled")) {
+            console.log("suppressed");
+            e.preventDefault();
+          } else {
+            voteFunction('1');
+            $("#voting-panel-downvote").addClass("disabled")
+            $("#voting-panel-upvote").addClass("disabled")
+          }
+        });
+        $("#voting-panel-favourite").click(function(e){
+          if ($("#voting-panel-favourite").hasClass("disabled")) {
+            console.log("suppressed");
+            e.preventDefault();
+          } else {
+            voteFunction('2');
+            $("#voting-panel-favourite").addClass("disabled")
+          }
+        });
+        $("#voting-panel-downvote").click(function(e){
+          if ($("#voting-panel-downvote").hasClass("disabled")) {
+            console.log("suppressed");
+            e.preventDefault();
+          } else {
+            voteFunction('3');
+            $("#voting-panel-upvote").addClass("disabled")
+            $("#voting-panel-downvote").addClass("disabled")
+          }
+        });
+        /* Difficulty Feedback */
+        $("#radio_easy").click(function(e){
+          voteFunction('4');
+        });
+        $("#radio_medium").click(function(e){
+          voteFunction('5');
+        });
+        $("#radio_hard").click(function(e){
+          voteFunction('6');
+        });
         /* Logic for questions in navbar */
         $.each(questions, function(index, value){
           index = index+1;
@@ -377,6 +509,40 @@
               index+1
             );
             $("#nextqNum").trigger("change");
+            $("#voting-panel-upvote").removeClass("disabled");
+            $("#voting-panel-downvote").removeClass("disabled");
+            $("#voting-panel-favourite").removeClass("disabled");
+            $("#radio_easy").next().removeClass("ui-state-active");
+            $("#radio_medium").next().removeClass("ui-state-active");
+            $("#radio_hard").next().removeClass("ui-state-active"); 
+            var interactions = questions[index-1]['interactions']   
+            console.log(interactions);
+            if (interactions.indexOf(1) > -1) {              
+              $("#voting-panel-upvote").addClass("disabled");
+              $("#voting-panel-downvote").addClass("disabled");
+            } 
+            if (interactions.indexOf(2) > -1) {
+              $("#voting-panel-favourite").addClass("disabled");
+            } 
+            if (interactions.indexOf(3) > -1) {
+              $("#voting-panel-upvote").addClass("disabled");
+              $("#voting-panel-downvote").addClass("disabled");
+            } 
+            if (interactions.indexOf(4) > -1) {
+              $("#radio_easy").next().addClass("ui-state-active");
+              $("#radio_medium").next().removeClass("ui-state-active");
+              $("#radio_hard").next().removeClass("ui-state-active");
+            } 
+            if (interactions.indexOf(5) > -1) {
+              $("#radio_easy").next().removeClass("ui-state-active");
+              $("#radio_medium").next().addClass("ui-state-active");
+              $("#radio_hard").next().removeClass("ui-state-active");
+            } 
+            if (interactions.indexOf(6) > -1) {
+              $("#radio_easy").next().removeClass("ui-state-active");
+              $("#radio_medium").next().removeClass("ui-state-active");
+              $("#radio_hard").next().addClass("ui-state-active");
+            } 
           });                              
         });        
       });
@@ -439,10 +605,26 @@
       <div class="acting-main">            
         <hr id="linesep-1" class="mobile">
         <div class="middle-item">      
+          <!-- Voting icons -->
+          <div id="voting-panel" style="float:left; display: flex; flex-direction: column">
+            <button id="voting-panel-upvote" class="image-button-column">
+              <img src="/static/mocktest/images/icons/upvote_32.png" title="Up vote">            
+            </button>
+            <button id="voting-panel-favourite" class="image-button-column">
+              <img src="/static/mocktest/images/icons/favourite_32.png" title="Favourite">
+            </button>
+            <button id="voting-panel-downvote" class="image-button-column">
+              <img src="/static/mocktest/images/icons/downvote_32.png" title="Downvote">                        
+            </button>          
+          </div>
           <!-- Question -->
           <div class="middle-item" id="question">            
-          </div>
-
+          </div>          
+          <div class="centered-div" id="difficulty-radio">
+            <input type="radio" id="radio_easy" name="difficulty"><label for="radio_easy">Easy</label>
+            <input type="radio" id="radio_medium" name="difficulty"><label for="radio_medium">Moderate</label>
+            <input type="radio" id="radio_hard" name="difficulty"><label for="radio_hard">Hard</label>
+          </div>          
           <!-- Answer -->
           <textarea id="answer-space" class="full-width middle-item answer-space" style="font-family: sans-serif;"></textarea>
 

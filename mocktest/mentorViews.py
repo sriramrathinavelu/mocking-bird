@@ -1,17 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from mocktest.models import MentorCompanyPosition
-from mocktest.models import MentorPositionCompany
-from mocktest.models import MentorCompany
-from mocktest.models import MentorPosition
-from mocktest.models import CompanyPosition
-from mocktest.models import PositionCompany
-from mocktest.models import Tests
+from cassandra.cqlengine.columns import TimeUUID
+from mocktest.models import *
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.db import connections
 from django.shortcuts import render
 from collections import defaultdict
 from mocktest import DAOUtil
+from datetime import datetime
 import logging
 import json
 import cgi
@@ -33,8 +29,25 @@ def __setAuthInfo(request, context={}):
 def home(request):
     context = {}
     __setAuthInfo(request, context)
+    if request.user.groups.filter(name='MentorsWaitingList'):
+        # Mentor is in waiting list. Ask him
+        # to verify his email
+        return render(request,
+                      'mentor/homeWL.html',
+                      context)
+    if request.user.groups.filter(name='MentorsVerifiedList'):
+        # Mentor has verified his email. We need
+        # to process his application on our end.
+        return render(request,
+                      'mentor/homeVL.html',
+                      context)
+    if request.user.groups.filter(name='Mentors'):
+        # Mentors normal home
+        return render(request,
+                      'mentor/home.html',
+                      context)
     return render(request,
-                  'mentor/home.html',
+                  'mentor/homeApplication.html',
                   context)
 
 
@@ -56,16 +69,67 @@ def search(request):
 @login_required(redirect_field_name='redirect_url')
 def evaluateTest(request):
     if request.method == 'GET':
+        # company name and position name
+        companyName = request.GET.get('companyName')
+        positionName = request.GET.get('positionName')
         # Need to get the testID
         testId = request.GET.get('testId')
+        evalId = request.GET.get('evalId')
+        mentorEval = None
+        if not evalId:
+            evalId = TimeUUID.from_datetime(datetime.now())
+        else:
+            mentorEval = MentorEvaluation.objects.filter(
+                            testid=testId,
+                            evalid=evalId)
         if not testId:
             # Redirect to Invalid test page
             return HttpResponseRedirect("/mentor/home.html")
+        # Acquiring lock on PendingEvalTests
+        pendingEvalTests = PendingEvalTests.objects.get(
+            companyname=companyName,
+            positionname=positionName,
+            testid=testId)
+        if pendingEvalTests.islocked:
+            if not request.user.username == pendingEvalTests.mentorname:
+                # Someone else is evaluating the test
+                return HttpResponse("Someone else is already evaluating this" +
+                                    " test. Please refresh your search and " +
+                                    "try again")
+        else:
+            # We lock this test
+            pendingEvalTests.islocked = True
+            pendingEvalTests.mentorname = request.user.username
+            pendingEvalTests.save()
+            # Add entry in MentorPendingEvalTests
+            mentorPendingEvalTests = MentorPendingEvalTests()
+            mentorPendingEvalTests.mentorname = request.user.username
+            mentorPendingEvalTests.testid = testId
+            mentorPendingEvalTests.evalid = evalId
+            mentorPendingEvalTests.companyname = pendingEvalTests.companyname
+            mentorPendingEvalTests.positionname = pendingEvalTests.positionname
+            mentorPendingEvalTests.testdate = pendingEvalTests.testdate
+            mentorPendingEvalTests.totalquestions = pendingEvalTests.totalquestions
+            mentorPendingEvalTests.questionsanswered = pendingEvalTests.questionsanswered
+            mentorPendingEvalTests.teststarttime = pendingEvalTests.teststarttime
+            mentorPendingEvalTests.testendtime = pendingEvalTests.testendtime
+            mentorPendingEvalTests.save()
         questions = Tests.objects.filter(testid=testId)
         context = {}
         if questions[0].state != 2:
             # Test is Not yet completed
             return HttpResponseRedirect("/mentor/home.html")
+        # Create an evaluation id for the evaluation
+        for quest in questions:
+            quest.result = 0
+            quest.mentorcomment = ""
+        if mentorEval:
+            for mEval in mentorEval:
+                questions[mEval.questionnum].result = mEval.result
+                questions[mEval.questionnum].mentorcomment = \
+                    mEval.mentorcomment
+
+        context['evalId'] = evalId
         context['questions'] = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
                                               questions))
     return render(request, 'mentor/evaluate.html', context)

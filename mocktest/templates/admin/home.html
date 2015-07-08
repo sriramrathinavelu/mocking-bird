@@ -1,6 +1,14 @@
 {% extends "admin/formbase.html" %}
 
 {%block jquery %}
+<script>
+$(function(){
+    {% if not isLoggedIn %}
+        $("#dashboard").hide();
+    {% endif %}
+    $("#editPosition").click(function(){
+        window.location="/admin/editPosition.html?" + $("#companyPositions").val()
+    });
     $("#addquestion").click(function(){
         window.location="/admin/addQuestion.html?companyName=" + $("#companyName").val()
     });
@@ -13,9 +21,12 @@
         "&positionName=" + $("#positionNameText").val() +
         "&questionId=" + $("#questionIdText").val()
     });
+});
+</script>
 {% endblock %}
 
-{% block content %}
+{% block content %}    
+    <div id="dashboard">
     <h4> Admin Page </h4>
     <ul>
     <li>
@@ -23,6 +34,14 @@
     </li>
     <li>
     <a href="/admin/addPosition.html">Add Position</a>
+    </li>
+    <li>
+    <a id="editPosition" href="#">Edit Position</a> for Company/Position
+    <select id="companyPositions">
+        {% for key, value in companyPositionsDict.iteritems %}
+            <option value="{{key}}">{{value}}</option>
+        {% endfor %}
+    </select>
     </li>
     <li>
     <a id="addquestion" href="#">Add Questions</a> for company 
@@ -46,5 +65,12 @@
         {% endfor %}
     </select>
     </li>
+    <li>
+    <a id="moderateMentors" href="/admin/moderateMentorsTable.html">Moderate Mentors</a>
+    </li>
+    <li>
+    <a id="AddModerators" href="/admin/addModeratorsTable.html">Add Moderators</a>
+    </li>
     </ul>
+    </div>
 {% endblock %}

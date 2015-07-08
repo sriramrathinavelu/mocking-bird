@@ -20,28 +20,16 @@
       function makeTestList(index, value, isSaved) {
         var testDate = new Date(value['testdate']);
         var dateStr = testDate.getFullYear().toString() + "-" + testDate.getMonth().toString() + "-" + testDate.getDate();
-        var markStr="";
-        if (value['isevaluated']){
-          markStr="Marks Scored: " + value['scoredmarks'] +" / " + value['totalmarks'];
-        }
-        var nameStr="";
-        if (value['testname']) {
-          nameStr="Name: " + value['testname'];
-        }           
         var buttonText = "Evaluate";
-        var ahref = "evaluate.html?testId="+value['testid'];
-        if (isSaved) {
-          buttonText = "Resume Test";
-          ahref = "test.html?testId="+value['testid']+"&testName="+
-                  value['testname'];
-        }
+        var ahref = "evaluate.html?companyName="+value['companyname']+"&positionName="+
+        value['positionname']+"&testId="+value['testid'];
         var calendarSize = "size1_5x";        
         if ($(".mediachecker").css("float") == "left" ){
             // Small Screen
             calendarSize = "size1x";
         }        
         $(".articles-list").append(
-        "<li class=\"articles-list__item custom-padding blurred-bg\"><time datetime=\"" + dateStr +"\" class=\"date-as-calendar position-em " + calendarSize + "\"><span class=\"weekday\">"+days[testDate.getDay()]+"</span><span class=\"day\">"+testDate.getDate()+"</span><span class=\"month\">"+months[testDate.getMonth()]+"</span><span class=\"year\">"+testDate.getFullYear()+"</span></time><h5 class=\"mobile-text-to-left\">"+value['companyname']+"</h5><h5 class=\"mobile-text-to-left\">"+value['positionname']+"</h5><h5>"+nameStr+"</h5><h5 class=\"mobile-text-to-left\">Questions Answered: "+value['questionsanswered']+" / "+value['totalquestions']+"</h5><h5 class=\"mobile-text-to-left\">"+markStr+"</h5><a href=\""+ahref+"\" class=\"button--mockingone small-button\">"+buttonText+"</a></li>"
+        "<li class=\"articles-list__item custom-padding blurred-bg\"><time datetime=\"" + dateStr +"\" style=\"margin-top:0px\" class=\"date-as-calendar position-em " + calendarSize + "\"><span class=\"weekday\">"+days[testDate.getDay()]+"</span><span class=\"day\">"+testDate.getDate()+"</span><span class=\"month\">"+months[testDate.getMonth()]+"</span><span class=\"year\">"+testDate.getFullYear()+"</span></time><h5 class=\"mobile-text-to-left\">"+value['companyname']+"</h5><h5 class=\"mobile-text-to-left\">"+value['positionname']+"</h5><h5 class=\"mobile-text-to-left\">Questions Answered: "+value['questionsanswered']+" / "+value['totalquestions']+"</h5><br/><a href=\""+ahref+"\" class=\"button--mockingone small-button\">"+buttonText+"</a></li>"
         );
       }
 
@@ -151,7 +139,6 @@
         if (!$("#company-select-1").val().match("^Please")) {
           $.getJSON("/ajaxUtil/mentorTests.html?companyName=" + $("#company-select-1").val() + "&positionName=" + $("#positionName").val(),function (data, status){
             if (status === "success") {              
-              data = data['objects'];
               makeListTitle(data.length);
               $(".articles-list").html("");
               $.each(data, function(index, value){

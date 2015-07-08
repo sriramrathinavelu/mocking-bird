@@ -338,6 +338,12 @@ main,
   padding-top: 6px;
   padding-bottom: 6px;
   font-size: medium;
+  width: 150px;
+}
+
+.button-row {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .right-align {  
@@ -608,6 +614,137 @@ main {
   padding-bottom: 10px;
 }
 
+.custom-combobox {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+}
+.custom-combobox-toggle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin-left: -1px;
+  padding: 0;
+}
+.custom-combobox-input {
+  margin: 0;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+.custom-combobox .ui-widget{
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+}
+
+body .ui-widget{
+  font-family: 'Roboto Condensed', Helvetica, Arial, sans-serif;
+}
+
+body .ui-state-default{  
+/*
+  background: transparent;
+  background-color: #FFFFFF;
+*/
+}
+
+body .ui-widget-header{
+/*
+  border: none;
+  background: none;
+  color: #FFFFFF;
+  background-color: #272822;
+*/
+}
+
+body .ui-state-active a, body .ui-state-active a:link, .body ui-state-active a:visited {
+  /*
+  color: #FFFFFF;
+  background-color: #272822;
+  */
+}
+
+body label.ui-state-default{  
+/*
+  background: transparent;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,.75);
+  margin-left: 5px;
+  margin-right: 5px;    
+*/
+}
+
+body label.ui-state-active{  
+/*
+  background: transparent;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,.75);
+  margin-left: 5px;
+  margin-right: 5px;    
+  color: #FFFFFF;
+*/
+}
+
+body .ui-tabs .ui-tabs-panel{
+/*
+  background: #272822;
+*/
+}
+
+body .ui-tabs .ui-tabs-panel p{
+/*
+  padding-top: 0px;
+  color: #FFFFFF;
+*/
+}
+
+.ui-tabs .ui-tabs-nav li::before{
+  display: none;
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-filter: opacity(.65);
+}
+
+.image-button {
+  margin-left: auto;
+  margin-right: auto;  
+  background: transparent;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,.75);
+}
+
+.image-button-column {
+  margin-top: 10px;
+  margin-bottom: 10px;  
+  background: transparent;
+  border: none;
+  box-shadow: 0 0 10px rgba(0,0,0,.75);  
+}
+
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('/static/mocktest/images/ajax-loader.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+body.loading {
+    overflow: hidden;   
+}
+
+body.loading .modal {
+    display: block;
+}
 
 /** Mid Sized Screens **/
 @media screen and (min-width: 550px) {

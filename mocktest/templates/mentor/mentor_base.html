@@ -41,6 +41,30 @@
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
+    <script type="text/javascript">
+    $(function(){
+      $(document).on('click', "#logout-button-top", function(){
+        FB.logout(function(response) {
+          // Person is now logged out
+        });
+        $.get(
+          "../logout.html",
+          function(data, status) {
+            console.log(status)
+            if (status == 'success') {
+              $("#login-button-top").show();
+              $("#logout-button-top").hide();  
+              window.location.reload(true);            
+            }
+          })        
+      });      
+      $(document).on('click', "#login-button-top", function(){
+        window.location="login.html?redirect_url=/mentor/home.html"
+      });      
+    });
+    </script>
+
+
     {% block css_js %}
     {% endblock %}
 

@@ -36,10 +36,17 @@
     <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">    
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
     <link rel="stylesheet" href="/static/mocktest/styles/main.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.structure.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.theme.css">
     
+    <!--
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    -->
+
     <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     
     
     <script>
@@ -60,13 +67,37 @@
           );
         {% endif %}
 
+        {% if numTabs %}
+          $("#mentor-comments").show();
+          var i = 0;
+          $("#mentor-comments-tabs").append("<ul>")
+          while (i<{{numTabs}}) {
+            var index = i+1;
+            $("#mentor-comments-tabs ul").append("<li><a href=\"#mentor-comments-tabs-"+i+
+              "\">Evaluation-" + index.toString() + "</a></li>");
+            $("#mentor-comments-tabs").append("<div id=\"mentor-comments-tabs-"+i+"\"></div>");
+            i++;
+          }
+        {% else %}
+          $("#mentor-comments").hide();
+        {% endif %}
+
         var questions={{questions|safe}};
+        var evaluations={{evaluations|safe}};
         console.log(questions)
         /* Get the current question */
-        var currentQ=questions[0]['currentquestion'];
+        var currentQ=0;
         /* Set the current question */
         $("#currentQ").val(currentQ);
         /* Load the current question */
+        {% if numTabs %}
+          $("#mentor-comments-tabs").tabs();
+          var i = 0;
+          while (i<{{numTabs}}) {
+            $("#mentor-comments-tabs-"+i.toString()).html("<p>" + evaluations[currentQ+(i*questions[0]['totalquestions'])]['mentorcomment'] + "</p>");
+            i++;            
+          }
+        {% endif %}
         $("#question").html(
           "<pre style=\"white-space: pre-wrap;\">" +
           parseInt(currentQ + 1).toString() + ") " +
@@ -179,6 +210,13 @@
               index+1
             );
             $("#nextqNum").trigger("change");
+            {% if numTabs %}
+              var i = 0;
+              while (i<{{numTabs}}) {
+                $("#mentor-comments-tabs-"+i.toString()).html("<p>" + evaluations[index-1+(i*questions[0]['totalquestions'])]['mentorcomment'] + "</p>");
+                i++;
+              }
+            {% endif %}
           });                              
         });        
       });
@@ -253,7 +291,11 @@
             Correct Answer
           </div>
           <div id="correct-answer" class="full-width middle-item bordered-div" style="font-family: sans-serif;"></div>
-
+          <div id="mentor-comments">
+            Mentor Comments
+          </div>
+          <div id="mentor-comments-tabs">
+          </div>
           <div class="footerbar">
           <!-- Prev Next Save and Navigation -->
           <section class="styleguide__article-nav">

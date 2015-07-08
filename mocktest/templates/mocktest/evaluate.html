@@ -104,6 +104,7 @@
       
         /*Get the test id*/
         $("#testId").val(getURLParameter("testId"));
+        $("#evalId").val({{evalId|safe}});
 
         var questions={{questions|safe}};
         console.log(questions)
@@ -111,6 +112,8 @@
         var currentQ=questions[0]['currentquestion'];
         /* Set the current question */
         $("#currentQ").val(currentQ);
+        $("#companyName").val(questions[0]['companyname'])
+        $("#positionName").val(questions[0]['positionname'])
         /* Load the current question */
         $("#question").html(
           "<pre style=\"white-space: pre-wrap;\">" +
@@ -130,7 +133,7 @@
           questions[currentQ]['correctanswer'] +
           "</pre>"
         );
-        $("#mentor-comment").val(          
+        $("#mentor-comment").val(
           questions[currentQ]['mentorcomment']
         );
         /* Functionality for previous question */
@@ -262,10 +265,27 @@
             $("#nextqNum").trigger("change");
           });                              
         });        
+
+        $("#mentor-verdict").click(function(e){
+          if $("#mentor-verdict").hasClass("disabled") {
+            console.log("Suppressed");
+            e.preventDefault();
+          }
+        })
+        $("#mentor-cancel-yes-button").click(function(){
+          console.log("Cancelling Evaluation");
+          $.get("../ajaxUtil/cancelEvaluation.html?testId="+$("#testId").val()+"&evalId="+$("#evalId").val()+"&companyName="+$("#companyName").val()+"&positionName="+$("#positionName").val(), function(data, status){
+            if (data != "ok") {
+              alert("Cancelling Operation Failed")
+            } else {
+              window.location="/mentor/home.html"
+            }
+          });
+        });
         $("#mentor-pass-button").click(function(){
           console.log("clicked");
           autoSave();
-          $.get("../ajaxUtil/saveEvaluationResult.html?testId="+$("#testId").val()+"&result=pass", function(data, status){
+          $.get("../ajaxUtil/saveEvaluationResult.html?testId="+$("#testId").val()+"&result=pass"+"&evalId="+$("#evalId").val(), function(data, status){
             if (data != "ok") {
               alert("Error! submission failed")
             } else {
@@ -273,7 +293,6 @@
             }
           });      
         });
-
         $("#mentor-fail-button").click(function(){
           autoSave();
           $.get("../ajaxUtil/saveEvaluationResult.html?testId="+$("#testId").val()+"&result=fail", function(data, status){
@@ -362,6 +381,11 @@
             Your comment
           </div>
           <textarea id="mentor-comment" class="full-width middle-item answer-space" style="font-family: sans-serif;"></textarea>
+          <div class="centered-div" id="answer-right-wrong">
+            <input type="radio" id="radio-correct" name="radio-right-wrong"><label for="radio-correct">Correct</label>
+            <input type="radio" id="radio-partially-correct" name="radio-right-wrong"><label for="radio-partially-correct">Partially Correct</label>
+            <input type="radio" id="radio-wrong" name="radio-right-wrong"><label for="radio-wrong">Incorrect</label>
+          </div>
 
           <div class="footerbar">
           <!-- Prev Next Save and Navigation -->
@@ -381,14 +405,32 @@
         </div>
         <input type="hidden" id="currentQ"/>
         <input type="hidden" id="testId"/>
+        <input type="hidden" id="evalId"/>
+        <input type="hidden" id="companyName"/>
+        <input type="hidden" id="positionName"/>
         <div style="display:flex;">
-        <a href="/mentor/search.html" class="button--mockingone centered-button">Cancel</a>
-        <a href="#mentor-verdict" id="evaluate-evaluate" class="button--mockingone centered-button popup-source">Evaluate</a>
+        <a href="#mentor-cancel-confirm" id="evaluate-cancel" class="button--mockingone centered-button popup-source">Cancel</a>
+        <a href="#mentor-verdict" id="evaluate-evaluate" class="button--mockingone centered-button disabled popup-source">Evaluate</a>
         </div>
         <!-- Pop ups-->
 
       </div>   
     </div> 
+
+    <div id="mentor-cancel-confirm" class="popup">
+      <a href="#" class="close">
+        <img src="/static/mocktest/images/icons/close.png" class="btn_close" title="Close Window" alt="Close" />
+      </a>
+      <form method="post" class="popup-body" action="#">
+        <fieldset class="textbox">
+          <div class="middle">
+          This will exit you from evaluation and you will lose all the progress you have made. Do you wish to cancel?
+          </div>      
+          <button id="mentor-cancel-yes-button" class="submit button middle" type="button">Yes! Cancel</button>
+        </fieldset>
+      </form>
+    </div>
+
 
     <div id="mentor-verdict" class="popup">
       <a href="#" class="close">

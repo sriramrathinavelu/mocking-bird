@@ -36,13 +36,36 @@
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
     <link rel="stylesheet" href="/static/mocktest/styles/main.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="/static/mocktest/scripts/jquery.cookie.js"></script>
 
     {% block css_js %}
     {% endblock %}
     
     <script type="text/javascript">
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+
     $(function(){
+
+
+
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          console.log("Done!");
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+          }
+        }
+      });
+
       $(document).on('click', "#logout-button-top", function(){
+        FB.logout(function(response) {
+          // Person is now logged out
+        });
         $.get(
           "logout.html",
           function(data, status) {
@@ -52,7 +75,7 @@
               $("#logout-button-top").hide();  
               window.location.reload(true);            
             }
-          })
+        });
       });      
       $(document).on('click', "#login-button-top", function(){
         window.location="login.html?redirect_url=home.html"
@@ -90,7 +113,10 @@
               url: "/login.html",
               data: logindata,
               success: function (data, status, jqxhr) {
-                $("#logindata").html(logindata['username']);
+                console.log(data);
+                if (data != 'no') {
+                  window.location.reload(true);
+                }
               }
             });                  
           });
@@ -146,6 +172,25 @@
         });
       
       };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+
+      // Here we run a very simple test of the Graph API after login is
+      // successful.  See statusChangeCallback() for when this call is made.
+      function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response) {
+          console.log('Successful login for: ' + response.name);
+          document.getElementById('status').innerHTML =
+            'Thanks for logging in, ' + response.name + '!';
+        });
+      }
     </script>
     <div class="mediachecker"></div>
     <header class="app-bar promote-layer">
@@ -165,7 +210,7 @@
         </section>
       </div>
     </header>
-
+    <div id="nprogress-div" style="z-index: 1000;"></div>
     <nav class="navdrawer-container promote-layer">
       <h4>Navigation</h4>
       <ul>      
@@ -173,6 +218,7 @@
         <li><a href="/history.html">History</a></li>
         <li><a href="/savedTests.html">Saved Tests</a></li>
         <li><a href="/schedTests.html">Scheduled Tests</a></li>
+        <li><a href="/favouriteQuestions.html">Favourites</a></li>
         <li><a href="/mentor/home.html">Mentor view</a></li>        
       </ul>
     </nav>
@@ -181,6 +227,7 @@
     {% block content %}
     {% endblock %}
 
+    <div class="modal"><!-- Place at bottom of page --></div>
     
     <script src="/static/mocktest/scripts/main.js"></script>
 

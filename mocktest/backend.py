@@ -16,10 +16,11 @@ class MockBackend(object):
         except User.DoesNotExist:
             return None
 
-    def authenticate(self, username, password, fbid):
+    def authenticate(self, username, password, fbid, isInternal=False):
         try:
             user = Users.objects.get(username=username)
         except DoesNotExist:
+            logger.debug("Could u believe it")
             return None
         if (user):
             logger.debug("Authenticating user: " + username)
@@ -30,8 +31,13 @@ class MockBackend(object):
                     except User.DoesNotExist:
                         authUser = User(username=username,
                                         password='mockingsite')
-                        authUser.is_staff = True
                         authUser.save()
+                    if isInternal:
+                        logger.debug("is staff: " + str(authUser.is_staff))
+                        if authUser.is_staff:
+                            return authUser
+                        else:
+                            return None
                     return authUser
         return None
 

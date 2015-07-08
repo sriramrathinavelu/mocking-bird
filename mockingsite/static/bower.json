@@ -12,6 +12,7 @@
     "tests"
   ],
   "dependencies": {
-    "moment": "~2.10.3"
+    "moment": "~2.10.3",
+    "nprogress": "~0.2.0"
   }
 }

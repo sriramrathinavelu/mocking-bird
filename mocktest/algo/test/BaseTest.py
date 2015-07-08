@@ -1,9 +1,18 @@
+from cassandra.cqlengine.query import DoesNotExist
 from abc import ABCMeta, abstractmethod
 from cassandra.cqlengine.columns import TimeUUID
 from datetime import datetime
 from mocktest.models import Tests
+from mocktest.models import QuestionBankMedium
+from mocktest.models import QuestionBankEasy
+from mocktest.models import QuestionBankHard
+from mocktest.models import CompanyPosition
+from mocktest.models import UserPools
+from mocktest.models import Constants
 from mocktest import DAOUtil
 from mocktest import utils
+from TestExceptions import *
+import random
 
 
 class BaseTest(object):
@@ -20,8 +29,55 @@ class BaseTest(object):
         self.firstQuestion = None
 
     @abstractmethod
-    def getQuestions(self, numQ=3):
+    def getQuestions(self,
+                     numQ=3,
+                     minduration=30,
+                     difficulty=[],
+                     classlabel=[]):
         pass
+
+    def getPool(self,
+                difficulty=Constants.MEDIUM,
+                classLabel="all",
+                isQuick=False,
+                isAdvanced=False):
+        if not(isQuick or isAdvanced):
+            isQuick = True
+        try:
+            UserPoolObj = UserPools.objects.get(
+                            username=self.username,
+                            companyname=self.companyName,
+                            positionname=self.positionName,
+                            difficulty=difficulty,
+                            classlabel=classLabel)
+            if isQuick:
+                return UserPoolObj.activeqpool
+            if isAdvanced:
+                return UserPoolObj.activeapool
+        except DoesNotExist:
+            # First test for the user I guess
+            # Figure out and assign a activeQPool
+            numPool = CompanyPosition.objects.get(
+                        companyname=self.companyName,
+                        positionname=self.positionName).poolcount
+            if isQuick:
+                activeQPool = random.randint(1, numPool)
+                activeAPool = None
+            if isAdvanced:
+                activeAPool = random.randint(1, numPool)
+                activeQPool = None
+            DAOUtil.addUserPool(
+                self.username,
+                self.companyName,
+                self.positionName,
+                difficulty,
+                classLabel,
+                activeQPool,
+                activeAPool)
+            if isQuick:
+                return activeQPool
+            if isAdvanced:
+                return activeAPool
 
     def getEndTime(self):
         if not self.endTime:
@@ -44,10 +100,18 @@ class BaseTest(object):
     def createTest(self,
                    startTime,
                    endTime,
-                   numQ=3):
+                   numQ=3,
+                   minduration=30,
+                   difficulty=[],
+                   classlabel=[]):
         self.startTime = startTime
         self.endTime = endTime
-        self.getQuestions(numQ)
+        self.getQuestions(numQ,
+                          minduration,
+                          difficulty,
+                          classlabel)
+        if self.numQ == 0:
+            raise NotEnoughQuestions()
         curQ = 0
         newTest = Tests()
         self.testId = TimeUUID.from_datetime(datetime.now())
@@ -74,6 +138,14 @@ class BaseTest(object):
         newTest.questionnum = curQ
         curQ += 1
         newTest.questionid = question.questionid
+        if isinstance(question, QuestionBankEasy):
+            newTest.table = Constants.EASY
+        if isinstance(question, QuestionBankMedium):
+            newTest.table = Constants.MEDIUM
+        if isinstance(question, QuestionBankHard):
+            newTest.table = Constants.HARD
+        newTest.pool = question.pool
+        newTest.classlabel = question.classlabel
         newTest.question = question.question
         newTest.questiontype = question.questiontype
         newTest.givenanswer = ""
@@ -93,6 +165,14 @@ class BaseTest(object):
             newTest.testid = self.testId
             newTest.questionnum = curQ
             curQ += 1
+            if isinstance(question, QuestionBankEasy):
+                newTest.table = Constants.EASY
+            if isinstance(question, QuestionBankMedium):
+                newTest.table = Constants.MEDIUM
+            if isinstance(question, QuestionBankHard):
+                newTest.table = Constants.HARD
+            newTest.pool = question.pool
+            newTest.classlabel = question.classlabel
             newTest.questionid = question.questionid
             newTest.question = question.question
             newTest.questiontype = question.questiontype

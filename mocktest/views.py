@@ -1,20 +1,20 @@
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login as loginuser
 from django.contrib.auth import logout as logoutuser
 from mocktest.algo.test import LinearByTime
-from models import UserCompany
-from models import UserPosition
-from models import PendingEvalTests
+from cassandra.cqlengine.query import DoesNotExist
+from django.contrib.auth.decorators import user_passes_test
+from models import *
 from django.shortcuts import render
-from models import Users, Tests
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
+from mocktest.algo.test import TestExceptions
 import logging
 import DAOUtil
 import datetime
 import utils
 import json
+import uuid
 
 
 logger = logging.getLogger(__name__)
@@ -30,15 +30,40 @@ def __setAuthInfo(request, context={}):
     return context
 
 
+def __brokenPage(request,
+                 tile="wrong_way",
+                 heading="Something is wrong",
+                 info="The information you requested cannot be loaded " +
+                      "either because the information is not available " +
+                      "or the url is invalid."):
+    context = __setAuthInfo(request)
+    context["large_tile"] = \
+        "/static/mocktest/images/icons/%s_128.png" % tile
+    context["small_tile"] = \
+        "/static/mocktest/images/icons/%s_64.png" % tile
+    context["heading"] = heading
+    context["info"] = info
+    return render(request, "mocktest/info.html", context)
+
+
+@login_required(redirect_field_name='redirect_url')
+def notVerified(request):
+    context = __setAuthInfo(request)
+    return render(request, 'mocktest/notVerified.html', context)
+
+
 def home(request):
     companies = DAOUtil.getDistinctCompanies()
     context = {}
-    context['companies'] = json.dumps(companies)
+    context['companies'] = companies
     __setAuthInfo(request, context)
     return render(request, 'mocktest/index.html', context)
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def advancedTest(request):
     context = {}
     __setAuthInfo(request, context)
@@ -46,6 +71,9 @@ def advancedTest(request):
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def createTest(request):
     username = request.user.username
     # Get the company Name
@@ -69,9 +97,21 @@ def createTest(request):
     testAlgo = LinearByTime.LinearByTime(username,
                                          companyName,
                                          positionName)
-    testId = testAlgo.createTest(startTime,
-                                 endTime,
-                                 numQ)
+    try:
+        testId = testAlgo.createTest(startTime,
+                                     endTime,
+                                     numQ)
+    except TestExceptions.NotEnoughQuestions:
+        context = __setAuthInfo(request)
+        context["large_tile"] = \
+            "/static/mocktest/images/icons/dead_end_128.png"
+        context["small_tile"] = "/static/mocktest/images/icons/dead_end_64.png"
+        context["heading"] = "Ouch we ran out of questions!"
+        context["info"] = "We are either out of questions or an internal " +\
+                          "error has occurred. Please give us three to " +\
+                          "five days to address this issue. We appreciate " +\
+                          "your patience to wait "
+        return render(request, "mocktest/info.html", context)
     firstQuestion = testAlgo.getFirstQuestion()
     # Add entry to user scheduled test
     DAOUtil.addScheduledTest(username,
@@ -86,6 +126,9 @@ def createTest(request):
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def savedTests(request):
     context = {}
     __setAuthInfo(request, context)
@@ -93,6 +136,9 @@ def savedTests(request):
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def schedTests(request):
     context = {}
     __setAuthInfo(request, context)
@@ -100,6 +146,27 @@ def schedTests(request):
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
+def viewFavouriteQuestions(request):
+    context = __setAuthInfo(request)
+    username = request.user.username
+    compFavs = UserFavouritesCompanyHash.objects.filter(
+                    username=username)
+    posFavs = UserFavouritesPositionHash.objects.filter(
+                    username=username)
+    context['companyNames'] = json.dumps(map(lambda x: x.companyname,
+                                             compFavs))
+    context['positionNames'] = json.dumps(map(lambda x: x.positionname,
+                                              posFavs))
+    return render(request, 'mocktest/favourite.html', context)
+
+
+@login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def viewHistory(request):
     context = {}
     __setAuthInfo(request, context)
@@ -108,37 +175,35 @@ def viewHistory(request):
     userPositions = UserPosition.objects.filter(username=username)
     context['companyNames'] = json.dumps(map(lambda x: x.companyname,
                                              userCompanies))
-    context['companyMap'] = json.dumps(dict(
-                                        map(lambda x:
-                                            DAOUtil.jsonReady((x.companyname,
-                                                               x.companyname)),
-                                            userCompanies)))
     context['positionNames'] = json.dumps(map(lambda x: x.positionname,
                                               userPositions))
-    context['positionMap'] = json.dumps(dict(
-                                        map(lambda x:
-                                            DAOUtil.jsonReady((x.positionname,
-                                                               x.positionname)),
-                                            userPositions)))
     return render(request, 'mocktest/history.html', context)
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def test(request):
     if request.method == 'GET':
         # Need to get the testID
         testId = request.GET.get('testId')
         if not testId:
-            # Redirect to Invalid test page
-            return HttpResponseRedirect("home.html")
-        questions = Tests.objects.filter(testid=testId)
+            return __brokenPage(request)
+        try:
+            questions = Tests.objects.filter(testid=uuid.UUID(testId))
+        except ValueError:
+            return __brokenPage(request, info="The test-id is broken. " +
+                                "Please create another test")
+        if len(questions) == 0:
+            return __brokenPage(request, info="The test-id is broken. " +
+                                "Please create another test")
         if questions[0].username != request.user.username:
-            # User not authorized to access the page
-            return HttpResponseRedirect("home.html")
+            return __brokenPage(request)
         context = {}
-        if questions[0].state == 2:
+        if questions[0].state == Constants.COMPLETED:
             # Test is already completed
-            return HttpResponseRedirect("home.html")
+            return __brokenPage(request, info="Your test is already completed")
         testStartTime = questions[0].teststarttime
         if testStartTime > datetime.datetime.now():
             # Redirect to countdown page
@@ -146,26 +211,46 @@ def test(request):
                                         testId +
                                         "&testStartTime=" +
                                         str(utils.unix_time(testStartTime)))
-        context['questions'] = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
-                                              questions))
+        # Set user interaction parameters
+        for question in questions:
+            try:
+                interactions = UserQuestionInteraction.objects.\
+                    get(username=request.user.username,
+                        questionid=question.questionid).interaction
+            except DoesNotExist:
+                interactions = []
+            question.interactions = {'interactions': interactions}
+        context['questions'] = json.dumps(map(
+                                lambda x: DAOUtil.jsonReady(
+                                    x,
+                                    x.interactions),
+                                questions))
         return render(request, 'mocktest/test.html', context)
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def congrats(request):
     context = {}
     __setAuthInfo(request, context)
     if request.method == 'GET':
-        testId = request.GET.get('testId')
-        if not testId:
-            # 404 page
-            # Also check if this test is completed
-            return HttpResponseRedirect("/home.html")
+        try:
+            testId = uuid.UUID(request.GET.get('testId'))
+        except ValueError:
+            return __brokenPage(request, info="The test-id is broken. " +
+                                "Try to find your test under History ")
+        except TypeError:
+            return __brokenPage(request, info="The test-id is broken. " +
+                                "Try to find your test under History ")
+        testObj = Tests.objects.get(testid=testId,
+                                    questionnum=0)
+        if testObj.state != Constants.COMPLETED:
+            return __brokenPage(request, info="You haven't completed your " +
+                                "test. Try to find your test under Saved " +
+                                "Tests.")
         context['testId'] = testId
-        context['isAuthenticated'] = False
-        if request.user.is_authenticated():
-            context['username'] = request.user.username
-            context['isAuthenticated'] = True
         return render(request, 'mocktest/congrats.html', context)
     else:
         testId = request.POST["testId"]
@@ -175,6 +260,7 @@ def congrats(request):
         logger.debug("testId = " + str(testId) + " choice = " + str(choice))
         if (choice == 1):
             # Enter to the pendingEvaluation Database
+            testObj.pendingevaluation = True
             pendingEvalTests = PendingEvalTests()
             pendingEvalTests.companyname = testObj.companyname
             pendingEvalTests.positionname = testObj.positionname
@@ -185,34 +271,47 @@ def congrats(request):
             pendingEvalTests.teststarttime = testObj.teststarttime
             pendingEvalTests.testendtime = testObj.testendtime
             pendingEvalTests.save()
+            testObj.save()
             # Redirect to a success page that tells how
             # the user will be notified when the evaluation is done
         return HttpResponseRedirect("/home.html")
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def result(request):
     if request.method == 'GET':
         # Need to get the testID
-        testId = request.GET.get('testId')
+        try:
+            testId = uuid.UUID(request.GET.get('testId'))
+        except ValueError:
+            return __brokenPage(request, info="The test-id is broken. " +
+                                "Try to find your test under History ")
+        except TypeError:
+            return __brokenPage(request, info="The test-id is broken. " +
+                                "Try to find your test under History ")
         isCongrats = request.GET.get('congrats')
-        if not testId:
-            # Redirect to Invalid test page
-            return HttpResponseRedirect("home.html")
+        # Check if the test is evaluated
+        evaluations = MentorEvaluation.objects.filter(testid=testId)
         questions = Tests.objects.filter(testid=testId)
         if questions[0].username != request.user.username:
             # User not authorized to access the page
-            return HttpResponseRedirect("home.html")
+            return __brokenPage(request)
         context = {}
         if questions[0].state != 2:
             # Test is Not yet completed
-            return HttpResponseRedirect("home.html")
+            return __brokenPage(request, info="Your test isn't completed " +
+                                "yet. Please finish it before viewing results")
+        context['numTabs'] = questions[0].numevaluations
         context['fromCongrats'] = False
         if isCongrats:
             context['fromCongrats'] = True
-        # logger.debug("fromCongrats = " + str(contexfromCongrats))
         context['questions'] = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
                                               questions))
+        context['evaluations'] = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
+                                                evaluations))
         return render(request, 'mocktest/result.html', context)
 
 
@@ -228,7 +327,8 @@ def login(request):
         return render(request, 'mocktest/login.html', {})
     else:
         # POST
-
+        if request.user.is_authenticated():
+            return HttpResponse("no")
         username = request.POST["username"]
         password = request.POST.get("password", request.POST.get("fbid"))
         fbid = request.POST.get("fbid")
@@ -240,7 +340,7 @@ def login(request):
             return HttpResponse("ok")
         else:
             if (request.POST.get("redirect_url")):
-                return HttpResponseRedirect("login.html/invalid=1&" +
+                return HttpResponseRedirect("login.html?invalid=1&" +
                                             "redirect_url=" +
                                             request.POST.get("redirect_url"))
             return HttpResponse("no")
@@ -254,6 +354,9 @@ def logout(request):
 
 
 @login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def countDown(request):
     context = {}
     __setAuthInfo(request, context)
@@ -265,29 +368,14 @@ def signup(request):
         return render(request, 'mocktest/signup.html', {})
     elif (request.method == 'POST'):
         logger.debug(request.POST.dict())
-        newUser = Users()
-        newUser.username = request.POST["username"]
-        password = request.POST.get("password", request.POST.get("fbid", None))
-        newUser.password = password
-        newUser.firstname = request.POST["firstname"]
-        newUser.lastname = request.POST["lastname"]
-        newUser.email = request.POST["email"]
-        phonenumber = request.POST.get("phonenumber", None)
-        if (phonenumber and phonenumber.startswith("Phone")):
-            phonenumber = None
-        newUser.phone = phonenumber
-        newUser.fbid = request.POST.get("fbid", None)
-        newUser.rating = 1200
-        curtime = datetime.datetime.now()
-        newUser.ctime = curtime
-        newUser.mtime = curtime
-        newUser.save()
-        authUser = User(username=request.POST["username"],
-                        password='mockingsite')
-        authUser.is_staff = True
-        # Hack to make it work in openshift
-        authUser.last_login = datetime.datetime.now()
-        authUser.save()
+        DAOUtil.addUser(request.POST["username"],
+                        request.POST.get("password"),
+                        request.POST.get("fbid"),
+                        request.POST.get("firstname"),
+                        request.POST.get("lastname"),
+                        request.POST.get("email"),
+                        request.POST.get("phonenumber"),
+                        request.POST.get('ismentor') and True)
         if (request.POST.get("redirect_url")):
             return HttpResponseRedirect(request.POST.get("redirect_url"))
         return HttpResponse("ok")

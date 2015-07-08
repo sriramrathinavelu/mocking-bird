@@ -16,9 +16,79 @@ class DynamicChoiceField(forms.ChoiceField):
         return True
 
 
+class signUpForm (forms.Form):
+    username = forms.CharField(label='User Name')
+    password = forms.CharField(label='Password',
+                               widget=forms.PasswordInput)
+    firstName = forms.CharField(label='First Name')
+    lastName = forms.CharField(label='Last Name')
+    email = forms.CharField(label='Email')
+    phone = forms.CharField(label='Phone #', required=False)
+
+
+class loginForm (forms.Form):
+    username = forms.CharField(label='User Name')
+    password = forms.CharField(label='Password',
+                               widget=forms.PasswordInput)
+
+
 class addCompanyForm (forms.Form):
     companyName = forms.CharField(label='Company Name')
     positionName = forms.CharField(label='Position Name')
+    minQuestions = forms.CharField(label='Minimum Questions In Test',
+                                   initial='3')
+    minDuration = forms.CharField(label='Minimum Test Duration (in mins)',
+                                  initial='30')
+    minQPerPool = forms.CharField(label='Minimum Questions Per Pool',
+                                  initial='50')
+    maxPools = forms.CharField(label='Maximum Number of Pools',
+                               initial='6')
+    poolIncrementCount = forms.CharField(label='Pool Increment Count',
+                                         initial='50')
+
+
+class editPositionForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        companyPositionObj = None
+        if "companyPositionObj" in kwargs:
+            companyPositionObj = kwargs.pop("companyPositionObj")
+        super(editPositionForm, self).__init__(*args, **kwargs)
+        if companyPositionObj:
+            self.fields["companyName"].initial = companyPositionObj.\
+                companyname
+            self.fields["positionName"].initial = companyPositionObj.\
+                positionname
+            self.fields["minQuestions"].initial = companyPositionObj.\
+                minquestions
+            self.fields["minDuration"].initial = companyPositionObj.\
+                minduration
+            self.fields["minQPerPool"].initial = companyPositionObj.\
+                minqperpool
+            self.fields["maxPools"].initial = companyPositionObj.\
+                maxpools
+            self.fields["poolIncrementCount"].initial = companyPositionObj.\
+                poolincrementcount
+            self.fields["poolCount"].initial = companyPositionObj.\
+                poolcount
+            self.fields["currentPool"].initial = companyPositionObj.\
+                curpool
+
+    companyName = forms.CharField(
+        label='Company Name',
+        widget=forms.TextInput(attrs={'readonly': 'readonly'})
+    )
+    positionName = forms.CharField(
+        label='Position Name',
+        widget=forms.TextInput(attrs={'readonly': 'readonly'})
+    )
+    minQuestions = forms.CharField(label='Minimum Questions In Test')
+    minDuration = forms.CharField(label='Minimum Test Duration (in mins)')
+    minQPerPool = forms.CharField(label='Minimum Questions Per Pool')
+    maxPools = forms.CharField(label='Maximum Number of Pools')
+    poolIncrementCount = forms.CharField(label='Pool Increment Count')
+    poolCount = forms.CharField(label='Current pool count')
+    currentPool = forms.CharField(label='Current Active Pool')
 
 
 class addPositionForm (forms.Form):
@@ -37,6 +107,16 @@ class addPositionForm (forms.Form):
 
     companyName = DynamicChoiceField(label='Company Name')
     positionName = forms.CharField(label='Position Name')
+    minQuestions = forms.CharField(label='Minimum Questions In Test',
+                                   initial='3')
+    minDuration = forms.CharField(label='Minimum Test Duration (in mins)',
+                                  initial='30')
+    minQPerPool = forms.CharField(label='Minimum Questions Per Pool',
+                                  initial='50')
+    maxPools = forms.CharField(label='Maximum Number of Pools',
+                               initial='6')
+    poolIncrementCount = forms.CharField(label='Pool Increment Count',
+                                         initial='50')
 
 
 class addQuestionForm (forms.Form):

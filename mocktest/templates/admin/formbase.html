@@ -7,13 +7,91 @@
 </head>
 <script>
 $(function(){
-    {% block jquery %}
-    {% endblock %}
+  $("#li-logout-user").hide();
+  $("#li-login-user").hide();
+  $("#li-signup-user").hide();
+  $("#not-logged-in").hide();
+  $("#waiting-list").hide();
+  $("#verified-list").hide(); 
+  $("#only-superuser").hide();
+  $("#not-for-superuser").hide();
+  $("#staff").hide();
+
+  $(document).on("click", "#logout-user", function(){
+    $.get("/admin/logout.html", function(data, status){
+      if (data == "ok") {
+        $("li-logout-user").hide();
+        $("li-login-user").show();
+        $("li-signup-user").show();
+      }
+    });
+  });
+
+  $(document).on("click", "#login-user", function(){
+    $.get("/admin/logout.html", function(data, status){
+      if (data == "ok") {
+        $("li-logout-user").show();
+        $("li-login-user").hide();
+        $("li-signup-user").hide();
+      }
+    });
+  });
+
+  {% if isLoggedIn %}
+    $("#li-logout-user").show();
+    {% if isStaff %}
+      $("#staff").show();
+      {% if isSuperUser %}
+        $("#only-superuser").show();
+      {% else %}
+        $("#not-for-superuser").show();
+      {% endif %}
+    {% elif not isValidated %}
+      $("#waiting-list").show();
+    {% else %}
+      $("#verified-list").show();
+    {% endif %}
+  {% else %}
+    $("#li-login-user").show();
+    $("#li-signup-user").show();
+    $("#not-logged-in").show();
+  {% endif %}
 });
 </script>
-<body>    
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>   
+{% block jquery %}
+{% endblock %}
+
+<body> 
+  <!-- Need to be a horizontal menu-->   
+  <h4> Menu </h4>
+  <ul id="menu">
+  <li id="li-logout-user"><a id="logout-user" href="/admin/moderatorLogout.html"> LogOut </a> {{username}}</li>
+  <li id="li-login-user"><a href="/admin/moderatorLogin.html"> Login </a></li>
+  <li id="li-signup-user"><a href="/admin/moderatorSignUp.html"> Sign Up </a></li>
+  </ul>
+  <hr>
+  <div id="not-logged-in">
+        <h4> Welcome </h4>
+        <p> You need to log in to access the resources </p>
+        <p> If you have not signed up with us before please sign up first </p>
+  </div>  
+  <div id="waiting-list">
+    <h4> Welcome {{username}}</h4>
+    <p> Please activate your account by clicking the activation link sent to your e-mail address</p>
+  </div>
+  <div id="verified-list">
+    <h4> Welcome {{username}}</h4>
+    <p> You have not been authorized by the moderator yet</p>
+    <p> Please contact moderator at admin@hashincludetest.com </p>
+  </div>
+  <div id="staff">
+      {% block content %}{% endblock %}
+  </div>   
+  <div id="only-superuser">
+    {% block superuser %}{% endblock %}
+  </div>  
+  <div id="not-for-superuser">
+    {% block notsuperuser %}{% endblock %}
+  </div>  
 </body>
 </html>

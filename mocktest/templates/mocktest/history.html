@@ -5,15 +5,95 @@ History
 {% endblock %}
 
 {% block css_js %}
+  <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">    
   <link rel="stylesheet" href="/static/mocktest/styles/fancyDate.css">  
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  
+  <link rel="stylesheet" href="/static/bower_components/nprogress/nprogress.css">
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="/static/bower_components/nprogress/nprogress.js"></script>
+
 {% endblock %}  
 
 {% block jquery %}
   <script>    
   $(function(){
+
+        /*
+        $(document).on({
+          ajaxStart: function() { console.log("started"); $("body").addClass("loading"); },
+          ajaxStop: function() { console.log("ended"); $("body").removeClass("loading"); }    
+        });
+        */
+        $(document).on({
+          ajaxStart: function() { NProgress.start(); },
+          ajaxStop: function() { NProgress.done(); }    
+        });
+
+
+        $(document).on("click", "disabled", function(e){          
+          e.preventDefault();
+        })
+        var lastButton = null;
+
+        /*JQM*/
+        $(document).on("click", ".popup-source", function() {          
+   
+          console.log("Clicked!!");
+          //Getting the variable's value from a link 
+          var loginBox = $(this).attr('href');
+
+          lastButton = $(this);
+
+          $("#eval-test-id").val($(this).attr('data-testid'));
+
+          //Fade in the Popup
+          $(loginBox).fadeIn(300);
+          
+          //Set the center alignment padding + border see css style
+          var popMargTop = ($(loginBox).height() + 24) / 2; 
+          var popMargLeft = ($(loginBox).width() + 24) / 2; 
+          
+          $(loginBox).css({ 
+              'margin-top' : -popMargTop,
+              'margin-left' : -popMargLeft
+          });
+          
+          // Add the mask to body
+          $('body').append('<div id="mask"></div>');
+          $('#mask').fadeIn(300);
+          
+          return false;
+        });
+
+        // When clicking on the button close or the mask layer the popup closed
+        /*
+        $('a.close, #mask').live('click', function() { 
+          $('#mask , .login-popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+        return false;
+        });
+        */
+
+        $('body').on('click', '#mask', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+
+        $('body').on('click', 'a.close', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+        
+        /*JQM*/
+
+
+
     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
@@ -24,25 +104,47 @@ History
     
 
     function makeTestList(index, value, isSaved) {
+      console.log(value);
       var testDate = new Date(value['testdate']);
       var dateStr = testDate.getFullYear().toString() + "-" + testDate.getMonth().toString() + "-" + testDate.getDate();
       var markStr="";
       var badgeStr = "";
+      var evalStr = "";
       var brCount = 0
+      var buttonRow = "";
       if (value['isevaluated']){
         /*markStr="Marks Scored: " + value['scoredmarks'] +" / " + value['totalmarks'];*/
         if (value['iscleared']) {
-          markStr="Your mentor thinks you will crack it!"
+          markStr="Evaluation Result: you will crack it!"
           if ($(".mediachecker").css("float") == "left" ){
             badgeStr="<img class=\"history-badge\" left;\" src=\"static/mocktest/images/icons/pass_32.png\">"
           } else {
             badgeStr="<img class=\"history-badge\" src=\"static/mocktest/images/icons/pass_64.png\">"
           }
         } else {
-          markStr="Better luck next time"
+          markStr="Evaluation Result: Better luck next time"
+          if ($(".mediachecker").css("float") == "left" ){
+            badgeStr="<img class=\"history-badge\" left;\" src=\"static/mocktest/images/icons/fail_32.png\">"
+          } else {
+            badgeStr="<img class=\"history-badge\" src=\"static/mocktest/images/icons/fail_64.png\">"
+          }
+        }
+        if (value['pendingevaluation']) {
+          evalStr = " <a href=\"#\" class=\"button--mockingone small-button button-row disabled\">Re-Evaluate</a>"
+          buttonRow = " button-row "
+        } else {
+          evalStr = " <a href=\"#evaluation-confirmation\" class=\"button--mockingone small-button button-row popup-source\" data-testid=\""+value['testid']+"\">Re-Evaluate</a> "
+          buttonRow = " button-row "
         }
       } else {
         brCount += 1;
+        if (value['pendingevaluation']) {
+          evalStr = " <a href=\"#\" class=\"button--mockingone small-button button-row disabled\">Evaluate</a>"
+          buttonRow = " button-row "          
+        } else {
+          evalStr = " <a href=\"#evaluation-confirmation\" class=\"button--mockingone small-button button-row popup-source\" data-testid=\""+value['testid']+"\">Evaluate</a> "
+          buttonRow = " button-row "
+        }
       }
       var nameStr="";
       if (value['testname']) {
@@ -71,12 +173,9 @@ History
           }
       }
       $(".articles-list").append(
-      "<li class=\"articles-list__item custom-padding blurred-bg\" style=\"width: 100%;\"><time datetime=\"" + dateStr +"\" class=\"date-as-calendar position-em " + calendarSize + "\"><span class=\"weekday\">"+days[testDate.getDay()]+"</span><span class=\"day\">"+testDate.getDate()+"</span><span class=\"month\">"+months[testDate.getMonth()]+"</span><span class=\"year\">"+testDate.getFullYear()+"</span></time>" + badgeStr + "<h5 class=\"mobile-text-to-left\">"+value['companyname']+"</h5><h5 class=\"mobile-text-to-left\">"+value['positionname']+"</h5><h5 class=\"mobile-text-to-left\">"+nameStr+"</h5><h5 class=\"mobile-text-to-left\">Questions Answered: "+value['questionsanswered']+" / "+value['totalquestions']+"</h5><h5 class=\"mobile-text-to-left\">"+markStr+"</h5>" + brStr + "<a href=\""+ahref+"\" class=\"button--mockingone small-button\">"+buttonText+"</a></li>"
+      "<li class=\"articles-list__item custom-padding blurred-bg\" style=\"width: 100%;\"><time datetime=\"" + dateStr +"\" class=\"date-as-calendar position-em " + calendarSize + "\"><span class=\"weekday\">"+days[testDate.getDay()]+"</span><span class=\"day\">"+testDate.getDate()+"</span><span class=\"month\">"+months[testDate.getMonth()]+"</span><span class=\"year\">"+testDate.getFullYear()+"</span></time>" + badgeStr + "<h5 class=\"mobile-text-to-left\">"+value['companyname']+"</h5><h5 class=\"mobile-text-to-left\">"+value['positionname']+"</h5><h5 class=\"mobile-text-to-left\">"+nameStr+"</h5><h5 class=\"mobile-text-to-left\">Questions Answered: "+value['questionsanswered']+" / "+value['totalquestions']+"</h5><h5 class=\"mobile-text-to-left\">"+markStr+"</h5>" + brStr + "<div><a href=\""+ahref+"\" class=\"button--mockingone small-button" + buttonRow + "\">"+buttonText+"</a>" + evalStr + "</div></li>"
       );
     }
-
-    var companyMap = {{companyMap|safe}};
-    var positionMap = {{positionMap|safe}};
 
     $.getJSON("/ajaxUtil/userTests.html",function (data, status){
         if (status === "success") {              
@@ -92,7 +191,7 @@ History
     $("#positionName").autocomplete({
       source: {{positionNames|safe}},
       select: function(event, ui){
-        $.getJSON("/ajaxUtil/userPositionTests.html?positionName=" + positionMap[ui.item.value],function (data, status){
+        $.getJSON("/ajaxUtil/userPositionTests.html?positionName=" + ui.item.value,function (data, status){
           if (status === "success") {              
             $(".articles-list").html("");
             makeListTitle(data.length);
@@ -102,7 +201,7 @@ History
           }
         });
         /*Get the positions for the company*/
-        $.get("/ajaxUtil/userPositionCompany.html?positionName=" + positionMap[ui.item.value], function (data, status){
+        $.get("/ajaxUtil/userPositionCompany.html?positionName=" + ui.item.value, function (data, status){
           if (status === "success") {
             $("#company-select-1").html(data);
             if ($("#company-select-1 option").length > 0) {
@@ -119,7 +218,7 @@ History
     $("#companyName").autocomplete({
       source: {{companyNames|safe}},
       select: function(event, ui){
-        $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + companyMap[ui.item.value],function (data, status){
+        $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + ui.item.value,function (data, status){
           if (status === "success") {              
             $(".articles-count").html("");
             $(".articles-list").html("");
@@ -130,7 +229,7 @@ History
           }
         });
         /*Get the positions for the company*/
-        $.get("/ajaxUtil/userCompanyPosition.html?companyName=" + companyMap[ui.item.value], function(data, status){
+        $.get("/ajaxUtil/userCompanyPosition.html?companyName=" + ui.item.value, function(data, status){
           if (status === "success") {
             $("#position-select-1").html(data);
             if ($("#position-select-1 option").length > 0) {
@@ -169,7 +268,7 @@ History
     $("#position-select-1").change(function(){
       /*Load Test data based on the company and position*/
       if (!$("#position-select-1").val().match("^Please")) {
-        $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + companyMap[$("#companyName").val()] + "&positionName=" + $("#position-select-1").val(),function (data, status){
+        $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + $("#companyName").val() + "&positionName=" + $("#position-select-1").val(),function (data, status){
           if (status === "success") {              
             makeListTitle(data.length);
             $(".articles-list").html("");
@@ -183,7 +282,7 @@ History
     $("#company-select-1").change(function(){
       /*Load Test data based on the company and position*/
       if (!$("#company-select-1").val().match("^Please")) {
-        $.getJSON("/ajaxUtil/userPositionTests.html?companyName=" + $("#company-select-1").val() + "&positionName=" + positionMap[$("#positionName").val()],function (data, status){
+        $.getJSON("/ajaxUtil/userPositionTests.html?companyName=" + $("#company-select-1").val() + "&positionName=" + $("#positionName").val(),function (data, status){
           if (status === "success") {              
             makeListTitle(data.length);
             $(".articles-list").html("");
@@ -193,6 +292,19 @@ History
           }
         });
       }
+    });
+
+    $("#popup-eval-yes-button").click(function(){
+      $.get("ajaxUtil/evaluateTest.html?testId="+$("#eval-test-id").val(), function(data, status){
+        $(lastButton).addClass("disabled");
+        $(lastButton).removeClass("popup-source");
+        $("#mask").trigger("click");
+        if (data == "ok") {
+
+        } else {
+          alert ("Test not submitted for validation");
+        }
+      });
     });
     /*
     $("#saved-tests").click(function(){
@@ -237,6 +349,18 @@ History
               </ol>                
           </div>
       </div>
-    </section>      
+    </section> 
+    <input type="hidden" id="eval-test-id"/>
+    <div id="evaluation-confirmation" class="popup">
+      <a href="#" class="close">
+        <img src="/static/mocktest/images/icons/close.png" class="btn_close" title="Close Window" alt="Close" />
+      </a>
+        <div class="middle">
+          Are you sure you want to submit for evaluation?<br/>You could be charged $XX for this transaction.
+        </div>              
+        <div class="centered-div">
+          <button id="popup-eval-yes-button" class="submit button middle" type="button">Yes</button>
+        </div>
+    </div>
   </main> 
 {% endblock %}
