@@ -1,418 +1,410 @@
-[06/Jul/2015 13:14:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:14:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:15:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:15:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:16:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:16:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:17:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:17:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:18:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:18:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:19:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:19:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:20:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:20:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:21:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:21:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:22:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:22:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:23:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:23:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:24:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:24:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:25:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:25:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:26:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:26:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:27:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:27:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:28:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:28:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:29:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:29:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:30:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:30:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:31:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:31:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:32:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:32:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:33:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:33:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:34:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:34:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:35:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:35:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:36:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:36:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:37:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:37:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:38:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:38:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:39:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:39:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:40:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:40:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:41:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:41:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:42:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:42:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:43:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:43:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:44:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:44:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:45:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:45:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:46:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:46:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:47:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:47:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:48:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:48:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:49:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:49:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:50:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:50:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:51:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:51:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:52:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:52:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:53:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:53:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:54:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:54:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:55:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:55:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:56:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:56:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:57:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:57:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:58:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:58:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:59:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 13:59:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:00:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:00:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:01:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:01:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:02:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:02:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:03:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:03:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:04:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:04:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:05:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:05:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:06:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:06:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:07:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:07:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:08:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:08:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:09:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:09:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:10:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:10:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:11:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:11:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:12:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:12:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:13:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:13:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:14:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:14:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:15:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:15:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:16:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:16:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:17:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:17:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:18:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:18:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:19:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:19:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:20:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:20:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:21:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:21:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:22:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:22:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:23:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:23:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:24:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:24:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:25:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:25:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:26:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:26:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:27:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:27:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:28:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:28:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:29:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:29:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:30:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:30:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:31:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:31:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:32:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:32:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:33:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:33:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:34:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:34:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:35:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:35:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:36:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:36:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:37:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:37:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:38:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:38:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:39:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:39:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:40:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:40:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:41:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:41:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:42:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:42:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:43:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:43:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:44:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:44:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:45:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:45:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:46:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:46:40] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:47:11] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:47:37] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:48:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:48:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:49:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:49:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:50:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:50:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:51:10] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:51:39] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:52:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:52:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:53:07] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:53:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:54:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:54:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:55:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:55:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:56:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:56:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:57:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:57:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:58:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:58:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:59:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 14:59:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:00:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:00:36] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:01:06] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:05:50] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:06:08] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:06:10] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:06:40] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:06:56] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:06:57] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:07:10] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:07:13] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:07:14] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:07:22] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:07:23] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:07:29] DEBUG [mocktest.ajaxUtil:451] Answer: 
-[06/Jul/2015 15:28:01] DEBUG [mocktest.views:224] testId = 76545170-23f0-11e5-ba0d-4025c2cdc7f8 choice = 1
-[07/Jul/2015 12:41:45] DEBUG [mocktest.ajaxUtil:437] Answer: some answer 1
-[07/Jul/2015 12:41:51] DEBUG [mocktest.ajaxUtil:437] Answer: 
-[07/Jul/2015 12:41:58] DEBUG [mocktest.ajaxUtil:437] Answer: some-answer 2
-[07/Jul/2015 12:42:21] DEBUG [mocktest.ajaxUtil:437] Answer: some - answer - 3
-[07/Jul/2015 12:42:23] DEBUG [mocktest.ajaxUtil:437] Answer: some - answer - 3
-[07/Jul/2015 12:43:13] DEBUG [mocktest.views:224] testId = 77177fbd-24a5-11e5-acac-4025c2cdc7f8 choice = 1
-[07/Jul/2015 18:35:28] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:36:30] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:37:00] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:37:30] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:38:00] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:38:30] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:39:00] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:39:30] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:40:00] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:40:30] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:41:30] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:42:00] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:42:30] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:43:00] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:43:30] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:44:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:44:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:45:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:45:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:46:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:46:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:47:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:47:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:48:16] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:48:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:48:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:48:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:49:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:49:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:50:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:50:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:51:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:51:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:52:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:52:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:53:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:53:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:54:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:54:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:55:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:55:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:56:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:56:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:57:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:57:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:58:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:58:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:59:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 18:59:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:00:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:00:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:01:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:01:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:02:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:02:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:03:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:03:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:04:25] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:04:55] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:05:09] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:05:14] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[07/Jul/2015 19:05:18] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:05:25] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:05:27] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:05:29] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:05:33] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:05:39] DEBUG [mocktest.ajaxUtil:440] Answer: some-answer-3
-[07/Jul/2015 19:05:40] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:05:45] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:05:46] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:05:55] DEBUG [mocktest.ajaxUtil:440] Answer: some-answer-3
-[07/Jul/2015 19:05:56] DEBUG [mocktest.ajaxUtil:440] Answer: some-answer-3
-[07/Jul/2015 19:06:25] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:06:55] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:07:25] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:07:46] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:07:53] DEBUG [mocktest.ajaxUtil:440] Answer: some-answer-3
-[07/Jul/2015 19:07:58] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:08:01] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:08:12] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:08:23] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:08:31] DEBUG [mocktest.ajaxUtil:440] Answer: some-answer-3
-[07/Jul/2015 19:08:32] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:08:38] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:08:40] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:08:42] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:09:12] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:09:42] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:10:12] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:10:42] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:11:12] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:11:42] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:12:12] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:12:42] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:13:12] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:13:42] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:14:12] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:14:42] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:15:20] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:15:50] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:16:29] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:17:12] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:17:22] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:17:24] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:17:36] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:17:38] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:17:40] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:17:42] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:17:44] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:17:45] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:17:48] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:17:49] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 1
-[07/Jul/2015 19:17:52] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:17:53] DEBUG [mocktest.ajaxUtil:440] Answer: some-answer-3
-[07/Jul/2015 19:17:54] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:17:57] DEBUG [mocktest.ajaxUtil:440] Answer: some-answer-3
-[07/Jul/2015 19:17:58] DEBUG [mocktest.ajaxUtil:440] Answer: some - answer - 2
-[07/Jul/2015 19:18:11] DEBUG [mocktest.ajaxUtil:440] Answer: some-answer-3
-[07/Jul/2015 19:19:26] DEBUG [mocktest.views:224] testId = dcc16054-24d6-11e5-b818-4025c2cdc7f8 choice = 1
-[08/Jul/2015 20:31:15] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:31:45] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:32:15] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:32:45] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:33:15] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:33:45] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:34:15] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:34:45] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:35:15] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:35:45] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:36:15] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:36:45] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:37:15] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:37:45] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:38:15] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:38:45] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:39:06] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:39:07] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:39:16] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:39:16] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:39:34] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:39:35] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:39:37] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:39:52] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:40:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:40:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:41:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:41:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:42:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:42:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:43:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:43:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:44:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:44:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:45:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:45:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:46:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:46:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:47:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:47:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:48:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:48:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:49:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:49:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:50:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:50:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:51:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:51:35] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:52:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:52:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:53:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:53:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:54:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:54:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:55:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:55:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:56:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:56:35] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:57:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:57:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:58:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:58:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:59:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 20:59:33] DEBUG [mocktest.ajaxUtil:440] Answer: 
-[08/Jul/2015 21:00:03] DEBUG [mocktest.ajaxUtil:440] Answer: 
+[24/Jul/2015 03:18:26] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:18:56] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:19:26] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:19:56] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:20:26] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:20:56] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:21:26] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:21:56] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:22:26] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:22:56] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:23:26] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:23:56] DEBUG [mocktest.ajaxUtil:445] Answer: some - answer - 1
+[24/Jul/2015 03:24:48] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:25:18] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:25:48] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:26:18] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:26:48] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:27:18] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:27:48] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:28:18] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:28:48] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:09] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:28] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:28] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:29] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:29] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:31] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:31] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:31] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:31] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:29:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:30:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:30:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:31:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:31:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:32:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:32:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:33:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:33:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:34:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:34:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:35:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:35:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:36:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:36:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:37:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:37:55] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:38:25] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:38:50] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:38:50] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:38:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+
+[24/Jul/2015 03:39:00] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:00] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:02] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:39:02] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 03:39:07] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:10] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:39:10] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:39:16] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:16] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:39:28] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:39:28] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:39:33] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:33] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:50] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:39:53] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:39:53] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:39:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:58] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:39:58] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:00] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:40:00] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:40:00] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:00] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:01] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:40:01] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:40:02] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:02] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:04] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:40:04] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:40:06] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:06] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:40:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:40:14] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:14] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:40:29] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:40:29] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:40:30] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:30] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:40:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:41:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:41:42] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:41:42] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:41:50] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:41:51] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:41:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:41:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:41:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some 
+Answer 
+One
+[24/Jul/2015 03:41:58] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:41:58] DEBUG [mocktest.ajaxUtil:445] Answer: Some
+
+Answer
+
+Two
+[24/Jul/2015 03:42:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:42:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:43:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:43:36] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:50:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:50:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:51:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:51:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:52:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:52:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:53:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:53:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:54:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:54:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:55:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:55:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:56:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:56:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:57:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:57:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:58:08] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:58:38] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:59:00] DEBUG [mocktest.ajaxUtil:445] Answer: Some Answer
+     Three
+[24/Jul/2015 03:59:09] DEBUG [mocktest.views:281] testId = 2d1ff942-31b4-11e5-a1e0-4025c2cdc7f8 choice = 1
+[24/Jul/2015 04:03:02] DEBUG [mocktest.mentorViews:176] <QueryDict: {u'posCompCheckDict': [u'{"Software Developer":{"All Company":true}}'], u'compPosCheckDict': [u'{"All Company":{"Software Developer":true}}']}>
+[24/Jul/2015 04:03:02] DEBUG [mocktest.mentorViews:179] {u'All Company': {u'Software Developer': True}}
+[24/Jul/2015 04:03:02] DEBUG [mocktest.mentorViews:180] {u'Software Developer': {u'All Company': True}}
+[24/Jul/2015 04:19:46] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 04:19:46] DEBUG [mocktest.views:40] DB Name = history
+[24/Jul/2015 04:19:46] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 04:19:46] DEBUG [mocktest.views:40] DB Name = history
+[24/Jul/2015 04:19:53] DEBUG [mocktest.views:39] Page Name = history
+[24/Jul/2015 04:19:53] DEBUG [mocktest.views:40] DB Name = history
+[24/Jul/2015 07:38:42] DEBUG [mocktest.backend:26] Authenticating user: admin
+[24/Jul/2015 07:52:22] DEBUG [mocktest.views:415] {u'username': u'sriram', u'ismentor': u'True', u'firstname': u'Sriram', u'lastname': u'Rathinavelu', u'phonenumber': u'Phone Number (Optional)', u'redirect_url': u'home.html', u'timezone': u'America/Phoenix', u'csrfmiddlewaretoken': u'jK4yMlfrH7kOOgRSXUvdvOcX4rq1RhUj', u'password': u'password', u'email': u'mailmeboyzngals@gmail.com'}
+[24/Jul/2015 07:52:45] DEBUG [mocktest.backend:26] Authenticating user: sriram
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:39] Page Name = notVerified
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:39] Page Name = notVerified
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:39] Page Name = notVerified
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:39] Page Name = notVerified
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:39] Page Name = notVerified
+[24/Jul/2015 07:52:47] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:39] Page Name = history
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:39] Page Name = history
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:39] Page Name = history
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:39] Page Name = history
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:39] Page Name = history
+[24/Jul/2015 07:54:55] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 07:54:59] DEBUG [mocktest.views:40] DB Name = home
+[24/Jul/2015 07:59:24] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 07:59:54] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:00:24] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:00:54] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:01:24] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:01:54] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:02:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:02:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:03:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:03:46] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:03:47] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 08:03:50] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 08:03:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:04:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:04:43] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:04:44] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 08:04:51] DEBUG [mocktest.ajaxUtil:445] Answer: 
+[24/Jul/2015 08:04:55] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:05:25] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:05:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:06:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:06:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:07:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:07:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:08:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:08:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:09:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:09:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:10:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:10:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:11:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:11:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:12:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:12:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:13:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:13:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:14:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:14:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:15:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:15:56] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:16:14] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 1
+[24/Jul/2015 08:16:26] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 2
+[24/Jul/2015 08:16:28] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 2
+[24/Jul/2015 08:16:28] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 2
+[24/Jul/2015 08:16:52] DEBUG [mocktest.ajaxUtil:445] Answer: Some - Answer - 3
+[24/Jul/2015 08:19:23] DEBUG [mocktest.views:281] testId = d3c83699-31d9-11e5-96ea-4025c2cdc7f8 choice = 1
+[24/Jul/2015 08:21:47] DEBUG [mocktest.mentorViews:176] <QueryDict: {u'posCompCheckDict': [u'{"Software Developer":{"All Company":true}}'], u'compPosCheckDict': [u'{"All Company":{"Software Developer":true}}']}>
+[24/Jul/2015 08:21:47] DEBUG [mocktest.mentorViews:179] {u'All Company': {u'Software Developer': True}}
+[24/Jul/2015 08:21:47] DEBUG [mocktest.mentorViews:180] {u'Software Developer': {u'All Company': True}}
+[24/Jul/2015 08:25:27] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 08:25:27] DEBUG [mocktest.views:40] DB Name = history
+[24/Jul/2015 08:25:27] DEBUG [mocktest.views:39] Page Name = home
+[24/Jul/2015 08:25:27] DEBUG [mocktest.views:40] DB Name = history
+[24/Jul/2015 08:25:34] DEBUG [mocktest.views:39] Page Name = history
+[24/Jul/2015 08:25:34] DEBUG [mocktest.views:40] DB Name = history
+[24/Jul/2015 13:40:05] DEBUG [mocktest.backend:26] Authenticating user: admin
+[25/Jul/2015 02:41:12] DEBUG [mocktest.backend:26] Authenticating user: moderator1
+[25/Jul/2015 02:41:29] DEBUG [mocktest.backend:26] Authenticating user: admin
+[25/Jul/2015 02:46:07] DEBUG [mocktest.backend:26] Authenticating user: moderator1
+[25/Jul/2015 03:03:16] DEBUG [mocktest.DAOUtil:168] Editing company All Company and position Software Developer
+[25/Jul/2015 03:05:14] DEBUG [mocktest.DAOUtil:168] Editing company All Company and position Software Developer
+[25/Jul/2015 03:05:44] DEBUG [mocktest.backend:26] Authenticating user: admin
+[25/Jul/2015 03:05:52] DEBUG [mocktest.DAOUtil:168] Editing company All Company and position Software Developer
+[25/Jul/2015 06:35:07] DEBUG [mocktest.views:415] {u'username': u'vsrini10', u'firstname': u'Vishnuvardhan', u'lastname': u'Srinivasan', u'phonenumber': u'Phone Number (Optional)', u'redirect_url': u'home.html', u'timezone': u'America/Phoenix', u'csrfmiddlewaretoken': u'JSmB0Xfp7fadEsKHKftjF65p3whxAH5S', u'password': u'Vishnu2710', u'email': u'vsrini10@asu.edu'}
+[25/Jul/2015 06:35:40] DEBUG [mocktest.backend:26] Authenticating user: vsrini10
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:39] Page Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:40] DB Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:39] Page Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:40] DB Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:39] Page Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:40] DB Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:39] Page Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:40] DB Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:39] Page Name = home
+[25/Jul/2015 06:35:41] DEBUG [mocktest.views:40] DB Name = home
+[25/Jul/2015 06:42:36] DEBUG [mocktest.backend:26] Authenticating user: admin

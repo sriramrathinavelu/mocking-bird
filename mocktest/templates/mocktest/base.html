@@ -35,8 +35,10 @@
     <!-- Page styles -->
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
     <link rel="stylesheet" href="/static/mocktest/styles/main.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">    
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="/static/mocktest/scripts/jquery.cookie.js"></script>
+
 
     {% block css_js %}
     {% endblock %}
@@ -51,7 +53,122 @@
 
     $(function(){
 
+      /*JQM*/
+        $('.popup-source').click(function() {
+    
+          //Getting the variable's value from a link 
+          var loginBox = $(this).attr('href');
 
+          //Fade in the Popup
+          $(loginBox).fadeIn(300);
+          
+          //Set the center alignment padding + border see css style
+          var popMargTop = ($(loginBox).height() + 24) / 2; 
+          var popMargLeft = ($(loginBox).width() + 24) / 2; 
+          
+          $(loginBox).css({ 
+              'margin-top' : -popMargTop,
+              'margin-left' : -popMargLeft
+          });
+          
+          // Add the mask to body
+          $('body').append('<div id="mask"></div>');
+          $('#mask').fadeIn(300);
+          
+          return false;
+        });
+
+        // When clicking on the button close or the mask layer the popup closed
+        /*
+        $('a.close, #mask').live('click', function() { 
+          $('#mask , .login-popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+        return false;
+        });
+        */
+
+        $('body').on('click', '#mask', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+
+        $('body').on('click', 'a.close', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+        
+        /*JQM*/
+
+      {% for pageName, content in bubbleNotification.iteritems %}
+        $("#{{pageName}}-badge").show();
+        $("#{{pageName}}-badge").html("{{content}}");
+        $("#{{pageName}}-menu").click(function() {
+          $.get("/ajaxUtil/deleteNotifications.html?pageName={{pageName}}&notificationType=1",function (data, status) {
+              if (data === 'ok') {
+                $("#{{pageName}}-badge").html("");
+                $("#{{pageName}}-badge").hide();
+              }
+          });
+        });
+      {% endfor %}
+
+      {% if popupNotification %}
+        $("#popup-notification-content").html("{{popupNotification}}");
+          $("#popup-notification-trigger").trigger("click");          
+      {% endif %}
+
+      var wizardNotificationArray = [];
+      {% if wizardNotification %}
+        {% for notn in wizardNotification %}
+          wizardNotificationArray.push("{{notn}}");
+        {% endfor %}
+        $("#wizard-notification-content").html(wizardNotificationArray[0])
+        $("#wizard-notification-trigger").trigger("click");
+      {% endif %}
+
+
+
+      $("#popup-notification-yes-button").click(function(){
+        $.get("/ajaxUtil/deleteNotifications.html?pageName={{htmlPageName}}&notificationType=2",function (data, status) {
+              if (data === 'ok') {
+                $('#mask , .popup').fadeOut(300 , function() {
+                  $('#mask').remove();  
+                });                 
+              }
+          });
+      });
+
+      $("#wizard-notification-yes-button").click(function(){
+        if ($("#wizard-notification-yes-button").html() === 'Next') {
+          var curIndex = parseInt($("#wizard-notification-index").val()) + 1;
+          $("#wizard-notification-content").html(wizardNotificationArray[curIndex]);
+          $("#wizard-notification-index").val(curIndex.toString());
+          if (curIndex == wizardNotificationArray.length -1) {
+            $("#wizard-notification-yes-button").html("Ok! Got it");
+          }
+          //Set the center alignment padding + border see css style
+          var popMargTop = ($("#wizard-notification").height() + 24) / 2; 
+          var popMargLeft = ($("#wizard-notification").width() + 24) / 2; 
+
+          $("#wizard-notification").css({ 
+              'margin-top' : -popMargTop,
+              'margin-left' : -popMargLeft
+          });
+        } else {
+          $.get("/ajaxUtil/deleteNotifications.html?pageName={{htmlPageName}}&notificationType=3",function (data, status) {
+              if (data === 'ok') {
+                $('#mask , .popup').fadeOut(300 , function() {
+                  $('#mask').remove();  
+                });                 
+              }
+          });
+        }
+      });
 
       $.ajaxSetup({
         beforeSend: function(xhr, settings) {
@@ -72,6 +189,7 @@
             console.log(status)
             if (status == 'success') {
               $("#login-button-top").show();
+              $("#signup-button-top").show();
               $("#logout-button-top").hide();  
               window.location.reload(true);            
             }
@@ -79,7 +197,10 @@
       });      
       $(document).on('click', "#login-button-top", function(){
         window.location="login.html?redirect_url=home.html"
-      });      
+      });  
+      $(document).on('click', "#signup-button-top", function(){
+        window.location="signup.html?redirect_url=home.html"
+      });
     });
     </script>
 
@@ -191,21 +312,51 @@
             'Thanks for logging in, ' + response.name + '!';
         });
       }
+      {% block fb_login %}
+      {% endblock %}
     </script>
     <div class="mediachecker"></div>
     <header class="app-bar promote-layer">
       <div class="app-bar-container">
         <button class="menu"><img src="/static/mocktest/images/hamburger.png" alt="Menu"></button>
-        <h1 class="logo"><strong><i>#include</i>&lt;test&gt;</strong></h1>
+        <div class="not-mobile">
+          <h1 class="logo"><strong><i>#include</i>&lt;test&gt;</strong></h1>
+        </div>
         <section class="app-bar-actions"> 
         <!-- Put App Bar Buttons Here -->
         <!-- e.g <button><i class="icon icon-star"></i></button> -->        
         {% if isAuthenticated %}
-          <button id="logout-button-top"><i class="icon icon-star">Logout</i></button>
-          <button id="login-button-top" style="display:none;"><i class="icon icon-star">Login</i></button>
+          <button id="logout-button-top">
+            <img src="/static/mocktest/images/icons/logout.png"/> 
+            <br/>
+            Logout
+          </button>
+          <button id="login-button-top" style="display:none;">
+            <img src="/static/mocktest/images/icons/login.png"/> 
+            <br/>
+            Login
+          </button>
+          <button id="signup-button-top" style="display:none;">
+            <img src="/static/mocktest/images/icons/signup.png"/>
+            <br/>
+            SignUp
+          </button>
         {% else %}
-          <button id="logout-button-top" style="display:none;"><i class="icon icon-star">Logout</i></button>
-          <button id="login-button-top"><i class="icon icon-star">Login</i></button>          
+          <button id="logout-button-top" style="display:none;">
+            <img src="/static/mocktest/images/icons/logout.png"/> 
+            <br/>
+            Logout
+          </button>
+          <button id="login-button-top">
+            <img src="/static/mocktest/images/icons/login.png"/> 
+            <br/>
+            Login
+          </button>
+          <button id="signup-button-top">
+            <img src="/static/mocktest/images/icons/signup.png"/>
+            <br/>
+            SignUp
+          </button>
         {% endif %}
         </section>
       </div>
@@ -214,12 +365,18 @@
     <nav class="navdrawer-container promote-layer">
       <h4>Navigation</h4>
       <ul>      
-        <li><a href="/">Home</a></li>  
-        <li><a href="/history.html">History</a></li>
-        <li><a href="/savedTests.html">Saved Tests</a></li>
-        <li><a href="/schedTests.html">Scheduled Tests</a></li>
-        <li><a href="/favouriteQuestions.html">Favourites</a></li>
-        <li><a href="/mentor/home.html">Mentor view</a></li>        
+        <li><a id="home-menu" href="/home.html">Home</a>
+            <span id="home-badge" class="badge" style="display: none"></span></li>
+        <li><a id="history-menu" href="/history.html">History</a>
+            <span id="history-badge" class="badge" style="display: none"></span></li>
+        <li><a id="savedTests-menu" href="/savedTests.html">Saved Tests</a>
+            <span id="savedTests-badge" class="badge" style="display: none"></span></li>
+        <li><a id="schedTests-menu" href="/schedTests.html">Scheduled Tests</a>
+            <span id="schedTests-badge" class="badge" style="display: none"></span></li>
+        <li><a id="favouriteQuestions-menu" href="/favouriteQuestions.html">Favourites</a>
+            <span id="favouriteQuestions-badge" class="badge" style="display: none"></span></li>
+        <li><a id="mentor_home-menu" href="/mentor/home.html">Mentor view</a>
+            <span id="mentor_home-badge" class="badge" style="display: none"></span></li>
       </ul>
     </nav>
 
@@ -227,6 +384,33 @@
     {% block content %}
     {% endblock %}
 
+
+    <a id="popup-notification-trigger" href="#popup-notification" class="popup-source" style="visibility: hidden"></a>
+    <a id="wizard-notification-trigger" href="#wizard-notification" class="popup-source" style="visibility: hidden"></a>
+
+    <div id="popup-notification" class="popup">
+      <a href="#" class="close">
+        <img src="/static/mocktest/images/icons/close.png" class="btn_close" title="Close Window" alt="Close" />
+      </a>
+        <div id="popup-notification-content" class="middle">
+          
+        </div>              
+        <div class="centered-div">
+          <button id="popup-notification-yes-button" class="submit button middle" type="button">Ok! Got it</button>
+        </div>
+    </div>
+    <div id="wizard-notification" class="popup">
+      <a href="#" class="close">
+        <img src="/static/mocktest/images/icons/close.png" class="btn_close" title="Close Window" alt="Close" />
+      </a>
+        <div id="wizard-notification-content" class="middle">
+          
+        </div>              
+        <div class="centered-div">
+          <button id="wizard-notification-yes-button" class="submit button middle" type="button">Next</button>
+        </div>
+        <input id="wizard-notification-index" type="hidden" value="0"/>
+    </div>
     <div class="modal"><!-- Place at bottom of page --></div>
     
     <script src="/static/mocktest/scripts/main.js"></script>

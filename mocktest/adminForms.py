@@ -24,6 +24,7 @@ class signUpForm (forms.Form):
     lastName = forms.CharField(label='Last Name')
     email = forms.CharField(label='Email')
     phone = forms.CharField(label='Phone #', required=False)
+    ianatimezone = forms.CharField(label='IANA TimeZone')
 
 
 class loginForm (forms.Form):

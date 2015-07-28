@@ -145,6 +145,7 @@ Home
     });
     })( jQuery );
     $(function() {      
+      $( document ).tooltip();
       $("#companyinput").combobox({
         select: function(event, ui){        
                     console.log(ui);
@@ -234,9 +235,9 @@ Home
   	<select id="positionselect" name="position" style="display:none"></select>
     <div id="buttoncontrols">
   	  <a id="begintest" href="#" class="button--mockingone"
-      	style="display:none">Quick Test</a>
+      	style="display:none" title="Starts a test immediately with default settings">Quick Test</a>
       <a id="schedtest" href="#" class="button--mockingone"
-  	    style="display:none">Advanced Test</a>
+  	    style="display:none" title="Schedule a test with user controlled settings">Advanced Test</a>
     </div>
     </div>
 

@@ -35,6 +35,8 @@ def __wipeTable(tableName, cursor=None):
             DROP TABLE %s
         """ % tableName)
         print "Table %s wiped successfuly" % tableName
+        if tableName == "users":
+            __cleanAuthUsers()
     except Exception, e:
         print "Encountered Exception", str(e), "Proceeding"
     finally:
@@ -57,8 +59,15 @@ def wipeDatabase():
         __wipeTable(klass)
 
 
+def __cleanAuthUsers():
+    print "Clearing users used for authentication"
+    authUsers = User.objects.all()
+    for authUser in authUsers:
+        authUser.delete()
+
+
 def createAdmin():
-    print "Checkiing if admin User Exist"
+    print "Checking if admin User Exist"
     try:
         adminUser = mocktest.models.Users.objects.get(username='admin')
         if adminUser:
@@ -74,13 +83,14 @@ def createAdmin():
     adminUser.lastname = 'Administrator'
     adminUser.email = 'hashincludetest@gmail.com'
     adminUser.isinternal = True
+    adminUser.ianatimezone = 'America/Phoenix'
     adminUser.save()
     try:
         authUser = User.objects.get(username='admin',
                                     password='mockingsite')
     except User.DoesNotExist:
         authUser = User()
-        authUser.usernmae = 'admin'
+        authUser.username = 'admin'
         authUser.password = 'mockingsite'
         authUser.save()
     try:

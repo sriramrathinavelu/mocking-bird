@@ -112,6 +112,27 @@
         
         /*JQM*/
 
+        $(document).keydown(function(e) {
+          switch(e.which) {
+            case 37: // left
+            $("#prevq").trigger("click");
+            break;
+
+            case 38: // up
+            break;
+
+            case 39: // right
+            $("#nextq").trigger("click");
+            break;
+
+            case 40: // down            
+            break;
+
+            default: return; // exit this handler for other keys
+          }
+          // e.preventDefault(); // prevent the default action (scroll / move caret)
+        });      
+
         $("#answer-right-wrong").buttonset();
 
         /*Get the test id*/

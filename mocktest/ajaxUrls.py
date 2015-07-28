@@ -28,5 +28,6 @@ urlpatterns = [
     url(r'^saveEvaluationResult.html$', ajaxUtils.saveEvaluationResult),
     url(r'^cancelEvaluation.html$', ajaxUtils.cancelEvaluation),
     url(r'^vote.html$', ajaxUtils.updateUserQuestionInteraction),
-    url(r'^mentorRequest.html$', ajaxUtils.mentorRequest)
+    url(r'^mentorRequest.html$', ajaxUtils.mentorRequest),
+    url(r'^deleteNotifications.html$', ajaxUtils.deleteNotifications),
 ]

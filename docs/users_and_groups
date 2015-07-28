@@ -1,0 +1,64 @@
+## Users and Groups
+
+Hashincludetest at this point supports three types of users apart from one super admin. They are
+
+* Regular Users
+* Mentors
+* Moderators
+
+###### Regular Users:
+They are the users who take tests and submit their tests for evaluation
+
+###### Mentors:
+They are the users who evaluate the test taken by regular users
+
+###### Moderators:
+They are the internal users responsible for addition of questions, company and positions to the database.
+
+Each user is differentiated based on the Groups. For more information on django groups please visit https://docs.djangoproject.com/en/1.8/topics/auth/default/#groups.
+
+The different groups in our system are
+* UsersWaitingList 
+* UsersVerifiedList
+* ModeratorsWaitingList
+* ModeratorsVerifiedList
+* Moderators
+* MentorsWaitingList
+* MentorsVerifiedList
+* Mentors
+
+#### Life Cycle of Different Users
+
+###### Normal User
+
+1) A normal user signs up to the system
+2) The user is put in the group "UsersWaitingList"
+3) An email is sent to the user with the verification link
+4) When the user verifies his email, he is added to "UsersVerifiedList"
+5) Once he is in "UsersVerifiedList", he can perform all actions
+
+###### Mentor
+
+1) Mentor signs up a normal user but checks "I want to be a mentor" in the sign up page
+2) The user is put in "UsersWaitingList" and "UsersVerifiedList"
+3) An email is sent to the user with the verification link
+4) When the user verified his email, he is added to "UsersVerifiedList" and "MentorsVerifiedList"
+4) The superadmin can look at the list of all verified mentors and can add/reject their requests.
+5) When a mentor request is accepted, the user is added to the "Mentors" group
+6) Accepted mentors (in "Mentors" group) can start evaluating tests
+
+###### Moderators
+
+1) A moderator signs up not using the normal sign up page but uses the sign up in the admin domain
+2) He is put in the "ModeratorsWaitingList" and sent a verification mail
+3) On verification, the user is moved to "ModeratorsVerifiedList"
+4) The superadmin can look at the list of people in "ModeratorsVerifiedList" and add/reject their requests
+5) When a moderator request is accepted, the user is added to the "Moderators" group
+
+###### User wanting to be a mentor
+
+1) In some cases, the user is first registered as a normal user but want to become a mentor
+2) In such cases, the user is already in "UsersVerifiedList"
+3) When a user request to be mentor, he is put in "MentorsWaitingList" and a verification email is sent to the user
+4) Upon verification, he is added to the "MentorsVerifiedList".
+5) He finally becomes a mentor (and part of "Mentors" group) when the super admin accepts his request.

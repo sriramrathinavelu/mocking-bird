@@ -6,11 +6,13 @@ from models import CompanyPosition
 from django.http import HttpResponse
 from algo.score.glicko2 import Player
 from models import *
+from mailer import *
 from datetime import datetime
 from mocktest import DAOUtil
 import uuid
 import logging
 import json
+import pytz
 
 # Create your views here.
 
@@ -308,6 +310,9 @@ def saveTest(request):
     saveTest.testdate = testObj.teststarttime
     saveTest.totalquestions = testObj.totalquestions
     saveTest.questionsanswered = testObj.questionsanswered
+    if not testObj.isevaluated:
+        # Dealing with None values
+        testObj.isevaluated = False
     saveTest.isevaluated = testObj.isevaluated
     saveTest.totalmarks = testObj.totalmarks
     saveTest.scoredmarks = testObj.scoredmarks
@@ -562,15 +567,14 @@ def saveEvaluationResult(request):
     testId = uuid.UUID(request.GET.get('testId'))
     evalId = uuid.UUID(request.GET.get('evalId'))
     result = request.GET['result']
-    question = Tests.objects.get(testid=testId,
-                                 questionnum=0)
-    question.isevaluated = True
-    question.iscleared = result == "pass"
-    question.numevaluations += 1
-    question.save()
-    companyName = question.companyname
-    positionName = question.positionname
-    username = question.username
+    questions = Tests.objects.filter(testid=testId)
+    questions[0].isevaluated = True
+    questions[0].iscleared = result == "pass"
+    questions[0].numevaluations += 1
+    questions[0].save()
+    companyName = questions[0].companyname
+    positionName = questions[0].positionname
+    username = questions[0].username
     userTest = UserTests.get(
                 username=username,
                 testid=testId)
@@ -615,6 +619,9 @@ def saveEvaluationResult(request):
     evals = MentorTempEvaluation.objects.filter(
                 testid=testId,
                 evalid=evalId)
+    userObj = Users.objects.get(
+        username=request.user.username
+    )
     for _eval in evals:
         mentorEval = MentorEvaluation()
         mentorEval.testid = _eval.testid
@@ -623,8 +630,69 @@ def saveEvaluationResult(request):
         mentorEval.result = _eval.result
         mentorEval.mentorname = _eval.mentorname
         mentorEval.mentorcomment = _eval.mentorcomment
+        mentorEval.iscleared = result == "pass"
         mentorEval.save()
+        questionObj = QuestionBankMedium.objects.get(
+            companyname=questions[_eval.questionnum].companyname,
+            positionname=questions[_eval.questionnum].positionname,
+            classlabel=questions[_eval.questionnum].classlabel,
+            pool=questions[_eval.questionnum].pool,
+            questionid=questions[_eval.questionnum].questionid
+        )
+        userProfile = Player(userObj.rating,
+                             userObj.ratingdeviation,
+                             userObj.volatility)
+        userProfile.update_player(
+            [questionObj.rating],
+            [questionObj.ratingdeviation],
+            [(_eval.result-Constants.WRONG)/2.0]
+        )
+        questionProfile = Player(questionObj.rating,
+                                 questionObj.ratingdeviation,
+                                 questionObj.volatility)
+        questionProfile.update_player(
+            [userObj.rating],
+            [userObj.ratingdeviation],
+            [(Constants.CORRECT-_eval.result)/2.0]
+        )
+        userObj.rating = userProfile.rating
+        userObj.ratingdeviation = userProfile.rd
+        userObj.volatility = userProfile.vol
+        questionObj.rating = questionProfile.rating
+        questionObj.ratingdeviation = questionProfile.rd
+        questionObj.volatility = questionProfile.vol
+        questionObj.save()
         _eval.delete()
+    userObj.save()
+    # Add notification to the user
+    # Email Notification
+    # UI Notification
+    DAOUtil.addUserNotification(
+        username=request.user.username,
+        notificationType=Constants.BUBBLE_NOTIFICATION,
+        pageName='history',
+        content='1')
+    DAOUtil.addUserNotification(
+        username=request.user.username,
+        notificationType=Constants.POPUP_NOTIFICATION,
+        pageName='history',
+        content='Test ' + userCompTest.testname + ' has been evaluated')
+    userObj = Users.objects.get(
+        username=request.user.username
+    )
+    sendMail(
+        emailAddr=userObj.email,
+        code=PostOffice.EVALUATION_DONE,
+        _dict={
+            'username': request.user.username,
+            'startTime': pytz.timezone(userObj.ianatimezone).localize(
+                            userCompTest.testdate).strftime(
+                            "%d %B %Y at %H:%M"),
+            'companyName': userCompTest.companyname,
+            'positionName': userCompTest.positionname,
+            'resultURL': "www.crackit.com:8000/result.html?testId=" +
+            request.GET.get('testId')
+        })
     return HttpResponse("ok")
 
 
@@ -655,7 +723,16 @@ def isUsernameValid(request):
 def mentorRequest(request):
     username = request.user.username
     userObj = Users.objects.get(username=username)
+    userObj.mentorrequest = True
+    userObj.save()
     DAOUtil.addMentorRequest(userObj)
+    emailCode = PostOffice.NEW_MENTOR
+    sendMail(userObj.email,
+             emailCode,
+             {'username': userObj.username,
+              'verificationURL':
+              "http://crackit.com:8000/admin/verification.html?" +
+              "username=%s" % (username)})
     DAOUtil.updateAuthUserGroup(username, 'MentorsWaitingList')
     return HttpResponse("ok")
 
@@ -769,3 +846,18 @@ def updateUserQuestionInteraction(request):
         question.volatility = problem.vol
         question.save()
     return HttpResponse("add")
+
+
+@login_required
+def deleteNotifications(request):
+    username = request.user.username
+    pageName = request.GET['pageName']
+    notnType = request.GET['notificationType']
+    notifications = UserNotifications.objects.filter(
+                        username=username,
+                        pagename=pageName,
+                        notificationtype=notnType
+                    )
+    for notn in notifications:
+        notn.delete()
+    return HttpResponse("ok")

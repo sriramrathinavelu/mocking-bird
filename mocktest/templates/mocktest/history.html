@@ -5,7 +5,6 @@ History
 {% endblock %}
 
 {% block css_js %}
-  <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">    
   <link rel="stylesheet" href="/static/mocktest/styles/fancyDate.css">  
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
@@ -37,7 +36,7 @@ History
         var lastButton = null;
 
         /*JQM*/
-        $(document).on("click", ".popup-source", function() {          
+        $(document).on("click", ".popup-custom-source", function() {          
    
           console.log("Clicked!!");
           //Getting the variable's value from a link 
@@ -117,7 +116,7 @@ History
         if (value['iscleared']) {
           markStr="Evaluation Result: you will crack it!"
           if ($(".mediachecker").css("float") == "left" ){
-            badgeStr="<img class=\"history-badge\" left;\" src=\"static/mocktest/images/icons/pass_32.png\">"
+            badgeStr="<img class=\"history-badge\" src=\"static/mocktest/images/icons/pass_32.png\">"
           } else {
             badgeStr="<img class=\"history-badge\" src=\"static/mocktest/images/icons/pass_64.png\">"
           }
@@ -133,7 +132,7 @@ History
           evalStr = " <a href=\"#\" class=\"button--mockingone small-button button-row disabled\">Re-Evaluate</a>"
           buttonRow = " button-row "
         } else {
-          evalStr = " <a href=\"#evaluation-confirmation\" class=\"button--mockingone small-button button-row popup-source\" data-testid=\""+value['testid']+"\">Re-Evaluate</a> "
+          evalStr = " <a href=\"#evaluation-confirmation\" class=\"button--mockingone small-button button-row popup-custom-source\" data-testid=\""+value['testid']+"\">Re-Evaluate</a> "
           buttonRow = " button-row "
         }
       } else {
@@ -142,7 +141,7 @@ History
           evalStr = " <a href=\"#\" class=\"button--mockingone small-button button-row disabled\">Evaluate</a>"
           buttonRow = " button-row "          
         } else {
-          evalStr = " <a href=\"#evaluation-confirmation\" class=\"button--mockingone small-button button-row popup-source\" data-testid=\""+value['testid']+"\">Evaluate</a> "
+          evalStr = " <a href=\"#evaluation-confirmation\" class=\"button--mockingone small-button button-row popup-custom-source\" data-testid=\""+value['testid']+"\">Evaluate</a> "
           buttonRow = " button-row "
         }
       }

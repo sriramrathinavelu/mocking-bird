@@ -2,7 +2,9 @@
 
 from cassandra.cqlengine import columns
 from cassandra.cqlengine.models import Model
+from django.utils import timezone
 from datetime import datetime
+
 
 # Create your models here.
 
@@ -23,6 +25,9 @@ class Constants:
     EASY_RATING = 1200
     MEDIUM_RATING = 1500
     HARD_RATING = 1800
+    BUBBLE_NOTIFICATION = 1
+    POPUP_NOTIFICATION = 2
+    WIZARD_NOTIFICATION = 3
 
 
 class Users(Model):
@@ -33,14 +38,14 @@ class Users(Model):
     email = columns.Text(required=True)
     phone = columns.Text()
     fbid = columns.Text()
+    ianatimezone = columns.Text()
     isinternal = columns.Boolean(default=False)
     mentorrequest = columns.Boolean(default=False)
-    rating = columns.Integer(primary_key=True,
-                             clustering_order="DESC", default=1500)
-    ratingdeviation = columns.Integer(required=True, default=350)
+    rating = columns.Integer(default=Constants.MEDIUM_RATING)
+    ratingdeviation = columns.Integer(default=350)
     volatility = columns.Float(default=0.5)
-    ctime = columns.DateTime(default=datetime.now)
-    mtime = columns.DateTime(default=datetime.now)
+    ctime = columns.DateTime(default=timezone.now)
+    mtime = columns.DateTime(default=timezone.now)
 
 
 class MentorRequests(Model):
@@ -218,6 +223,14 @@ class UserTests(Model):
     iscleared = columns.Boolean(default=False)
 
 
+class UserNotifications(Model):
+    username = columns.Text(partition_key=True)
+    pagename = columns.Text(primary_key=True)
+    notificationtype = columns.Integer(primary_key=True)
+    notificationid = columns.TimeUUID(primary_key=True)
+    content = columns.Text(required=True)
+
+
 class PendingEvalTests(Model):
     companyname = columns.Text(partition_key=True)
     positionname = columns.Text(partition_key=True)
@@ -253,6 +266,7 @@ class MentorEvaluation(Model):
     result = columns.Integer(required=True)
     mentorname = columns.Text(required=True)
     mentorcomment = columns.Text()
+    iscleared = columns.Boolean()
 
 
 class MentorTempEvaluation(Model):
@@ -465,3 +479,11 @@ class RawQuestionBank(Model):
 
     def __str__(self):
         return self.question + "\n\n" + self.answer + "\n\n"
+
+
+class AuditLog(Model):
+    username = columns.Text(partition_key=True)
+    time = columns.DateTime(default=timezone.now, primary_key=True)
+    action = columns.Integer(primary_key=True)
+    args = columns.Map(columns.Text, columns.Text)
+    info = columns.Text()

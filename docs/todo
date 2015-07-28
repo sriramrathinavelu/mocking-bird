@@ -1,3 +1,56 @@
+Notification Engine:
+====================
+
+A way to pass notifications to the logged in user. Different notifications supported are
+
+1) Menu bubble notification
+
+2) Page popup notification
+
+3) Scrolling Side pane (Currently not supported. may or may not be included in future)
+
+Menu Bubble Notification
+------------------------
+
+Each (first level menu) menu item will have a bubble with number indicating number of notifications
+
+A tool tip explaining why there is a notification
+
+When the user visits that page, the notification disappears
+
+Page Popup Notification
+-----------------------
+
+A popup appears with a message and a "OK! got it" button. 
+
+Architecture
+------------
+
+We have a new table called CentralizedNotification with columns
+1) username
+2) page Name
+3) Notification Type
+4) Content
+5) 
+
+This data from the table is passed to all views as a part of context.
+
+context consists of a new variable "popup-notification", which if not empty, displays a pop up message with contents of that variable
+
+Content also consists of a dict (with name bubble-notif-dict) with each key being the menu name and value being the number to be displayed in the bubble
+
+The base.html has logic to check if there are any menu notifications and indicate a bubble in the appropriate menu
+
+Base.html checks the bubble-notif-dict and displays bubbles.
+
+Each page checks if there are any pop - up notifications for that particular page. if so it displays that notification and when user presses ok, it deletes that notification
+
+Any menu bubble notification is deleted from the database when the page loads. This can be acheived by a blind ajax call DelNotif everytime the page loads
+
+All deletions happens through ajax calls
+
+
+--------------------------------------------------------------------------------------------------------------
 1) Admin sign up page (sign up with isInternal) --> Done
 
 2) Admin Login page --> Done

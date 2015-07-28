@@ -9,6 +9,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from mocktest.algo.test import TestExceptions
+from collections import defaultdict
 import logging
 import DAOUtil
 import datetime
@@ -27,6 +28,26 @@ def __setAuthInfo(request, context={}):
     if request.user.is_authenticated():
         context['username'] = request.user.username
         context['isAuthenticated'] = True
+        context['bubbleNotification'] = {}
+        context['popupNotification'] = ""
+        context['wizardNotification'] = []
+        pageName = request.path[1:-5].replace('/', '_')
+        notifications = UserNotifications.objects.filter(
+                            username=request.user.username
+                        )
+        for notn in notifications:
+            logger.debug("Page Name = " + pageName)
+            logger.debug("DB Name = " + notn.pagename)
+            if notn.notificationtype == Constants.BUBBLE_NOTIFICATION and \
+                    notn.pagename != pageName:
+                context['bubbleNotification'][notn.pagename] = notn.content
+            elif notn.notificationtype == Constants.POPUP_NOTIFICATION and \
+                    notn.pagename == pageName:
+                    context['popupNotification'] = notn.content
+            elif notn.notificationtype == Constants.WIZARD_NOTIFICATION and \
+                    notn.pagename == pageName:
+                context['wizardNotification'].append(notn.content)
+        context['htmlPageName'] = request.path[1:-5].replace('/', '_')
     return context
 
 
@@ -281,6 +302,30 @@ def congrats(request):
 @user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
                   count() == 1,
                   '/notVerified.html')
+def viewFavouriteQuestion(request):
+    context = __setAuthInfo(request)
+    username = request.user.username
+    try:
+        companyName = request.GET['companyName']
+        positionName = request.GET['positionName']
+        questionId = request.GET['questionId']
+    except Exception:
+        return __brokenPage(request, info="The requested page could not " +
+                            "be loaded because URL is broken. Please " +
+                            "try again.")
+    favQuestion = UserCompanyFavourites.objects.get(
+        username=username,
+        companyname=companyName,
+        positionname=positionName,
+        questionid=questionId)
+    context['favQuestion'] = favQuestion
+    return render(request, 'mocktest/favQuestion.html', context)
+
+
+@login_required(redirect_field_name='redirect_url')
+@user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
+                  count() == 1,
+                  '/notVerified.html')
 def result(request):
     if request.method == 'GET':
         # Need to get the testID
@@ -321,7 +366,7 @@ def login(request):
             logger.debug("User already authenticated.Redirect url is",
                          request.GET.get("redirect_url"))
             if request.GET.get("redirect_url"):
-                return render(request, request.GET.get("redirect_url"), {})
+                return HttpResponseRedirect(request.GET.get("redirect_url"))
             else:
                 return HttpResponseRedirect("home.html")
         return render(request, 'mocktest/login.html', {})
@@ -375,6 +420,7 @@ def signup(request):
                         request.POST.get("lastname"),
                         request.POST.get("email"),
                         request.POST.get("phonenumber"),
+                        request.POST.get("timezone"),
                         request.POST.get('ismentor') and True)
         if (request.POST.get("redirect_url")):
             return HttpResponseRedirect(request.POST.get("redirect_url"))

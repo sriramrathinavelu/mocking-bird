@@ -21,6 +21,8 @@ from django.db import connections
 from . import adminForms
 import logging
 import DAOUtil
+import auditor
+import mailer
 
 logger = logging.getLogger(__name__)
 
@@ -168,6 +170,7 @@ def signup(request):
                                        form.cleaned_data['lastName'],
                                        form.cleaned_data['email'],
                                        form.cleaned_data['phone'],
+                                       form.cleaned_data['ianatimezone'],
                                        isMentor=False,
                                        isInternal=True)
             except Exception, e:
@@ -207,6 +210,16 @@ def addCompany(request):
                                    form.cleaned_data['maxPools'],
                                    form.cleaned_data['poolIncrementCount'])
             if done:
+                auditor.audit(
+                    username=request.user.username,
+                    action=auditor.AuditingActions.ADDCOMPANY,
+                    args={
+                        'Company Name': form.cleaned_data['companyName'],
+                        'Position Name': form.cleaned_data['positionName'],
+                        'Min Questions': form.cleaned_data['minQuestions'],
+                        'Min Duration': form.cleaned_data['minDuration'],
+                    }
+                )
                 return HttpResponseRedirect('/admin/home.html')
             else:
                 return HttpResponseRedirect('/admin/error.html')
@@ -235,6 +248,16 @@ def addPosition(request):
                                    form.cleaned_data['maxPools'],
                                    form.cleaned_data['poolIncrementCount'])
             if done:
+                auditor.audit(
+                    username=request.user.username,
+                    action=auditor.AuditingActions.ADDPOSITION,
+                    args={
+                        'Company Name': form.cleaned_data['companyName'],
+                        'Position Name': form.cleaned_data['positionName'],
+                        'Min Questions': form.cleaned_data['minQuestions'],
+                        'Min Duration': form.cleaned_data['minDuration'],
+                    }
+                )
                 return HttpResponseRedirect('/admin/home.html')
             else:
                 return HttpResponseRedirect('/admin/error.html')
@@ -273,6 +296,16 @@ def editPosition(request):
                                     form.cleaned_data['poolCount'],
                                     form.cleaned_data['currentPool'])
             if done:
+                auditor.audit(
+                    username=request.user.username,
+                    action=auditor.AuditingActions.EDITPOSITION,
+                    args={
+                        'Company Name': form.cleaned_data['companyName'],
+                        'Position Name': form.cleaned_data['positionName'],
+                        'Min Questions': form.cleaned_data['minQuestions'],
+                        'Min Duration': form.cleaned_data['minDuration'],
+                    }
+                )
                 return HttpResponseRedirect('/admin/home.html')
             else:
                 return HttpResponseRedirect('/admin/error.html')
@@ -301,15 +334,27 @@ def addQuestion(request):
                 timeToSolve = int(form.cleaned_data['timeToSolve'])
             else:
                 timeToSolve = None
-            DAOUtil.addQuestion(form.cleaned_data['companyName'],
-                                form.cleaned_data['positionName'],
-                                form.cleaned_data['question'],
-                                form.cleaned_data['answer'],
-                                int(form.cleaned_data['questionType']),
-                                choices,
-                                form.cleaned_data['input'],
-                                form.cleaned_data['key'],
-                                timeToSolve)
+            questionObj = DAOUtil.\
+                addQuestion(form.cleaned_data['companyName'],
+                            form.cleaned_data['positionName'],
+                            form.cleaned_data['question'],
+                            form.cleaned_data['answer'],
+                            int(form.cleaned_data['questionType']),
+                            choices,
+                            form.cleaned_data['input'],
+                            form.cleaned_data['key'],
+                            timeToSolve)
+            auditor.audit(
+                username=request.user.username,
+                action=auditor.AuditingActions.ADDQUESTION,
+                args={
+                    'Company Name': form.cleaned_data['companyName'],
+                    'Position Name': form.cleaned_data['positionName'],
+                    'Class Label': questionObj.classlabel,
+                    'Pool': str(questionObj.pool),
+                    'Question Id': str(questionObj.questionid),
+                }
+            )
             return HttpResponseRedirect('/admin/home.html')
     context['form'] = form
     return render(request, 'admin/genericForm.html', context)
@@ -350,9 +395,9 @@ def verification(request):
             except Group.DoesNotExist:
                 moderatorVerGrp = Group(name='ModeratorsVerifiedList')
                 moderatorVerGrp.save()
-                authUser.groups.remove(
-                    authUser.groups.get(name='ModeratorsWaitingList')
-                )
+            authUser.groups.remove(
+                authUser.groups.get(name='ModeratorsWaitingList')
+            )
             authUser.groups.add(moderatorVerGrp)
             authUser.save()
     if user.mentorrequest:
@@ -374,9 +419,9 @@ def verification(request):
             except Group.DoesNotExist:
                 mentorVerGrp = Group(name='MentorsVerifiedList')
                 mentorVerGrp.save()
-                authUser.groups.remove(
-                    authUser.groups.get(name='MentorsWaitingList')
-                )
+            authUser.groups.remove(
+                authUser.groups.get(name='MentorsWaitingList')
+            )
             authUser.groups.add(mentorVerGrp)
             authUser.save()
     # Redirect to some pretty thank you page
@@ -437,8 +482,25 @@ def acceptMentor(request):
     )
     authUser.groups.add(mentorGrp)
     authUser.save()
+    # Auditing the action
+    auditor.audit(
+        username=request.user.username,
+        action=auditor.AuditingActions.MODERATEMENTOR,
+        args={
+            'User Name': mentorVerReq.username,
+            'First Name': mentorVerReq.firstname,
+            'Last Name': mentorVerReq.lastname,
+        }
+    )
     # Trigger an E-mail response to the mentor
-
+    mailer.sendMail(
+        emailAddr=mentorVerReq.email,
+        code=mailer.PostOffice.MENTOR_APPROVED,
+        _dict={
+            'username': mentorVerReq.username,
+            'mentorURL': 'http://crackit.com:8000/mentor/home.html',
+        }
+    )
     return HttpResponseRedirect('/admin/moderateMentorsTable.html')
 
 
@@ -506,8 +568,25 @@ def addModerator(request):
     authUser.groups.add(moderatorGrp)
     authUser.is_staff = True
     authUser.save()
+    # Auditing the action
+    auditor.audit(
+        username=request.user.username,
+        action=auditor.AuditingActions.MODERATEMENTOR,
+        args={
+            'User Name': moderatorVerReq.username,
+            'First Name': moderatorVerReq.firstname,
+            'Last Name': moderatorVerReq.lastname,
+        }
+    )
     # Trigger an E-mail response to the mentor
-
+    mailer.sendMail(
+        emailAddr=moderatorVerReq.email,
+        code=mailer.PostOffice.MODERATOR_APPROVED,
+        _dict={
+            'username': moderatorVerReq.username,
+            'mentorURL': 'http://crackit.com:8000/admin/home.html',
+        }
+    )
     return HttpResponseRedirect('/admin/moderateMentorsTable.html')
 
 
@@ -610,23 +689,37 @@ def editQuestion(request):
         positionName = request.POST['positionName']
         questionId = request.POST['questionId']
         if form.is_valid():
-            question = QuestionBankMedium.objects.get(companyname=companyName,
-                                                      positionname=positionName,
-                                                      questionid=questionId)
+            question = QuestionBankMedium.objects.get(
+                companyname=companyName,
+                positionname=positionName,
+                questionid=questionId
+            )
             choices = []
             if form.cleaned_data['choices']:
                 choices = form.cleaned_data['choices'].split(',')
             timeToSolve = 20
             if form.cleaned_data['timeToSolve']:
                 timeToSolve = int(form.cleaned_data['timeToSolve'])
-            DAOUtil.editQuestion(companyName,
-                                 positionName,
-                                 questionId,
-                                 form.cleaned_data['question'],
-                                 form.cleaned_data['answer'],
-                                 form.cleaned_data['questionType'],
-                                 choices,
-                                 form.cleaned_data['input'],
-                                 form.cleaned_data['key'],
-                                 timeToSolve)
+            questionObj = DAOUtil.\
+                editQuestion(companyName,
+                             positionName,
+                             questionId,
+                             form.cleaned_data['question'],
+                             form.cleaned_data['answer'],
+                             form.cleaned_data['questionType'],
+                             choices,
+                             form.cleaned_data['input'],
+                             form.cleaned_data['key'],
+                             timeToSolve)
+            auditor.audit(
+                username=request.user.username,
+                action=auditor.AuditingActions.EDITQUESTION,
+                args={
+                    'Company Name': form.cleaned_data['companyName'],
+                    'Position Name': form.cleaned_data['positionName'],
+                    'Class Label': questionObj.classlabel,
+                    'Pool': questionObj.pool,
+                    'Question Id': str(questionObj.questionid),
+                }
+            )
         return HttpResponseRedirect("/admin/home.html")

@@ -91,8 +91,8 @@ class LinearByTime(BaseTest):
                                        classlabel=classLabel,
                                        pool=activeQPool).\
                                 limit(needed)
-                questionsList = [q for q in questions]
-                for question in questionsList:
+                for question in questions:
+                    questionsList.append(question)
                     DAOUtil.addUserQuestion(
                         self.username,
                         self.companyName,

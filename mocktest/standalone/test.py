@@ -1,3 +1,9 @@
+import os
+import django 
+
+os.environ["DJANGO_SETTINGS_MODULE"] = "mockingsite.settings"
+django.setup()
+
 import scrapQuestions
 scrapQuestions.main()
 

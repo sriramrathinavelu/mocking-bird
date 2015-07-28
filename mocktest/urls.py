@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^advancedtest.html', views.advancedTest, name='advancedTest'),
     url(r'^history.html', views.viewHistory, name='viewHistory'),
     url(r'^favouriteQuestions.html', views.viewFavouriteQuestions, name='viewFavouriteQuestions'),
+    url(r'^favQuestion.html', views.viewFavouriteQuestion, name='viewFavouriteQuestion'),
     url(r'^schedTests.html', views.schedTests, name='scheduledTest'),
     url(r'^countdown.html', views.countDown, name='countdown'),
     url(r'^congrats.html', views.congrats, name='congrats'),

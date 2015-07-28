@@ -5,6 +5,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from models import *
+from mailer import *
 from django.db import connections
 from models import UserScheduledTests
 from datetime import datetime
@@ -231,6 +232,51 @@ def addUserTempFavourites(username,
     userTempFav.rating = rating
     userTempFav.reputation = reputation
     userTempFav.save()
+
+
+def addUserNotification(username,
+                        notificationType,
+                        pageName,
+                        content):
+    # Optional add validation on page name (if needed)
+    if notificationType in (Constants.BUBBLE_NOTIFICATION,
+                            Constants.POPUP_NOTIFICATION):
+        try:
+            userNotification = UserNotifications.objects.get(
+                    username=username,
+                    pagename=pageName,
+                    notificationtype=notificationType)
+            if notificationType == Constants.BUBBLE_NOTIFICATION:
+                userNotification.content = str(int(userNotification.content) +
+                                               int(content))
+            else:
+                userNotification.content = userNotification.content + \
+                                           "\\n\\n" + \
+                                           content
+        except DoesNotExist:
+            userNotification = UserNotifications()
+            userNotification.username = username
+            userNotification.notificationtype = notificationType
+            userNotification.pagename = pageName
+            userNotification.notificationid = TimeUUID.from_datetime(
+                datetime.now()
+            )
+            userNotification.content = content
+        userNotification.save()
+    elif notificationType == Constants.WIZARD_NOTIFICATION and \
+            isinstance(content, list):
+        for msg in content:
+            userNotification = UserNotifications()
+            userNotification.username = username
+            userNotification.notificationtype = notificationType
+            userNotification.pagename = pageName
+            userNotification.notificationid = TimeUUID.from_datetime(
+                datetime.now()
+            )
+            userNotification.content = msg
+            userNotification.save()
+    else:
+        raise Exception("Invalid notification type")
 
 
 def addUserFavourites(username, testId):
@@ -468,7 +514,6 @@ def addQuestion(companyName,
         questionObj = QuestionBankMedium()
         questionObj.companyname = companyName
         questionObj.positionname = positionName
-        questionObj.difficulty = Constants.MEDIUM
         questionObj.classLabel = 'all'
         questionObj.pool = activePool
         questionObj.questionid = TimeUUID.from_datetime(datetime.now())
@@ -480,6 +525,7 @@ def addQuestion(companyName,
         questionObj.key = key
         questionObj.timetosolve = timeToSolve
         questionObj.save()
+        return questionObj
     else:
         raise Exception("Invalid company and position")
 
@@ -552,6 +598,7 @@ def editQuestion(companyName,
         questionObj.key = key
         questionObj.timetosolve = timeToSolve
         questionObj.save()
+        return questionObj
     else:
         raise Exception("Invalid company and/or position and/or question")
 
@@ -605,8 +652,10 @@ def addScheduledTest(username,
 
 
 def __addAuthUser(username, isMentor, isInternal=False):
-    authUser = User(username=username,
-                    password='mockingsite')
+    authUser, created = User.objects.get_or_create(
+                            username=username,
+                            password='mockingsite'
+                        )
     authUser.save()
     try:
         userWL = Group.objects.get(name='UsersWaitingList')
@@ -640,11 +689,6 @@ def updateAuthUserGroup(username, grpName):
     except Group.DoesNotExist:
         newGrp = Group(name=grpName)
         newGrp.save()
-    # User can be in only one group at a time
-    # TODO: Deleting all user groups without
-    # checking is a bug and needs to be fixed
-    for grp in authUser.groups.all():
-        authUser.groups.remove(grp)
     authUser.groups.add(newGrp)
 
 
@@ -665,6 +709,7 @@ def addUser(username,
             lastName,
             email,
             phone,
+            timezone,
             isMentor=False,
             isInternal=False):
     newUser = Users()
@@ -683,27 +728,35 @@ def addUser(username,
         phonenumber = None
     newUser.phone = phonenumber
     newUser.fbid = fbid
+    newUser.ianatimezone = timezone
     newUser.save()
-    emailMsg = "\n\n Thanks for signing up with us"
+    emailCode = PostOffice.NEW_USER
     if isMentor:
         addMentorRequest(newUser)
-        emailMsg = "\n\nAfter verification, please give us " +\
-            "three to five business days to verify your account" +\
-            "\n\n We will get in touch with you soon"
+        emailCode = PostOffice.NEW_USER_MENTOR
     if isInternal:
-        emailMsg = "\n\nAfter verification, please give us " +\
-            "three to five business days to verify your account" +\
-            "\n\n We will get in touch with you soon"
+        emailCode = PostOffice.NEW_MODERATOR
     __addAuthUser(username, isMentor, isInternal)
-    email = EmailMessage(
-        'Verification',
-        "Please click the following link to " +
-        """verify your email account.
-        http://crackit.com:8000/admin/verification.html""" +
-        "?username=%s" % (username) +
-        emailMsg,
-        to=[email])
-    email.send()
+    sendMail(email, emailCode, {
+                'username': username,
+                'verificationURL':
+                "http://crackit.com:8000/admin/verification.html?" +
+                "username=%s" % (username)
+        })
+    addUserNotification(
+        username=username,
+        notificationType=Constants.WIZARD_NOTIFICATION,
+        pageName="home",
+        content=[
+            "This is the first time you login. Please let us walk through",
+            "Please select a company or All company to get questions " +
+            " from all companies",
+            "Please then select a position you are applying",
+            "Click \"Quick Test\" to launch a test immediately or choose " +
+            " advanced test and schedule a test with advanced settings",
+            "Enjoy your test\\n\\n We wish you all the best"
+        ]
+    )
     return True
 
 

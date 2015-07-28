@@ -57,6 +57,27 @@
 
       $(function () {
 
+
+        $(document).keydown(function(e) {
+          switch(e.which) {
+            case 37: // left
+            $("#prevq").trigger("click");
+            break;
+
+            case 38: // up
+            break;
+
+            case 39: // right
+            $("#nextq").trigger("click");
+            break;
+
+            case 40: // down            
+            break;
+
+            default: return; // exit this handler for other keys
+          }
+          // e.preventDefault(); // prevent the default action (scroll / move caret)
+        });
       
         /*Get the test id*/
         $("#testId").val(getURLParameter("testId"));
@@ -67,14 +88,22 @@
           );
         {% endif %}
 
+        var questions={{questions|safe}};
+        var evaluations={{evaluations|safe}};
+
         {% if numTabs %}
           $("#mentor-comments").show();
           var i = 0;
           $("#mentor-comments-tabs").append("<ul>")
           while (i<{{numTabs}}) {
             var index = i+1;
-            $("#mentor-comments-tabs ul").append("<li><a href=\"#mentor-comments-tabs-"+i+
-              "\">Evaluation-" + index.toString() + "</a></li>");
+            if (evaluations[i*questions[0]['totalquestions']]['iscleared']) {
+              $("#mentor-comments-tabs ul").append("<li><a href=\"#mentor-comments-tabs-"+i+
+              "\"><img src=\"static/mocktest/images/icons/pass_32.png\">&nbsp;Evaluation-" + index.toString() + " (PASS)</a></li>");
+            } else {
+              $("#mentor-comments-tabs ul").append("<li><a href=\"#mentor-comments-tabs-"+i+
+              "\"><img src=\"static/mocktest/images/icons/fail_32.png\">&nbsp;Evaluation-" + index.toString() + " (FAIL)</a></li>");
+            }
             $("#mentor-comments-tabs").append("<div id=\"mentor-comments-tabs-"+i+"\"></div>");
             i++;
           }
@@ -82,8 +111,6 @@
           $("#mentor-comments").hide();
         {% endif %}
 
-        var questions={{questions|safe}};
-        var evaluations={{evaluations|safe}};
         console.log(questions)
         /* Get the current question */
         var currentQ=0;
@@ -94,7 +121,15 @@
           $("#mentor-comments-tabs").tabs();
           var i = 0;
           while (i<{{numTabs}}) {
-            $("#mentor-comments-tabs-"+i.toString()).html("<p>" + evaluations[currentQ+(i*questions[0]['totalquestions'])]['mentorcomment'] + "</p>");
+            $("#mentor-comments-tabs-"+i.toString()).html("");
+            if (evaluations[currentQ+(i*questions[0]['totalquestions'])]['result'] == 4) {
+              $("#mentor-comments-tabs-"+i.toString()).append("<span><img src=\"static/mocktest/images/icons/cross_32.png\"/>&nbsp;&nbsp;Your answer is wrong</span>");
+            } else if (evaluations[currentQ+(i*questions[0]['totalquestions'])]['result'] == 5) {
+              $("#mentor-comments-tabs-"+i.toString()).append("<span><img src=\"static/mocktest/images/icons/partially-correct_32.png\"/>&nbsp;&nbsp;Your answer is partially correct</span>");
+            } else {
+              $("#mentor-comments-tabs-"+i.toString()).append("<span><img src=\"static/mocktest/images/icons/tick_32.png\"/>&nbsp;&nbsp;Your answer is right</span>");
+            }
+            $("#mentor-comments-tabs-"+i.toString()).append("<p>" + evaluations[currentQ+(i*questions[0]['totalquestions'])]['mentorcomment'] + "</p>");
             i++;            
           }
         {% endif %}
@@ -213,8 +248,16 @@
             {% if numTabs %}
               var i = 0;
               while (i<{{numTabs}}) {
-                $("#mentor-comments-tabs-"+i.toString()).html("<p>" + evaluations[index-1+(i*questions[0]['totalquestions'])]['mentorcomment'] + "</p>");
-                i++;
+                $("#mentor-comments-tabs-"+i.toString()).html("");
+                if (evaluations[index-1+(i*questions[0]['totalquestions'])]['result'] == 4) {
+                  $("#mentor-comments-tabs-"+i.toString()).append("<span><img src=\"static/mocktest/images/icons/cross_32.png\"/>&nbsp;&nbsp;Your answer is wrong</span>");
+                } else if (evaluations[index-1+(i*questions[0]['totalquestions'])]['result'] == 5) {
+                  $("#mentor-comments-tabs-"+i.toString()).append("<span><img src=\"static/mocktest/images/icons/partially-correct_32.png\"/>&nbsp;&nbsp;Your answer is partially correct</span>");
+                } else {
+                  $("#mentor-comments-tabs-"+i.toString()).append("<span><img src=\"static/mocktest/images/icons/tick_32.png\"/>&nbsp;&nbsp;Your answer is right</span>");
+                }
+                $("#mentor-comments-tabs-"+i.toString()).append("<p>" + evaluations[index-1+(i*questions[0]['totalquestions'])]['mentorcomment'] + "</p>");
+                i++;                        
               }
             {% endif %}
           });                              
