@@ -1,0 +1,4 @@
+screenlog*
+*.pyc
+*.pyo
+logfile*
