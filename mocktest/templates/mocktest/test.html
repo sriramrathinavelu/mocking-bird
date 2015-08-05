@@ -33,24 +33,26 @@
     -->
 
     <!-- Page styles -->
+    <!-- build:css /static/mocktest/styles/test.min.css -->
     <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">    
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
     <link rel="stylesheet" href="/static/mocktest/styles/main.css">
-    
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery.countdown.css">
     <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.css">
     <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.structure.css">
     <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.theme.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
+    <!-- endbuild -->
     <!--
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     -->
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!--
     <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
-    
+    -->
     <!--Jquery counter -->
-    <link rel="stylesheet" href="/static/mocktest/styles/jquery.countdown.css">
-    <script src="/static/mocktest/scripts/jquery.plugin.min.js"></script>
-    <script src="/static/mocktest/scripts/jquery.countdown.js"></script>
+    
     <!--Jquery counter -->
 
     <script>
@@ -707,12 +709,12 @@
           <form method="post" class="popup-body" action="#">
                 <fieldset class="textbox">
                 <div class="middle">
-                Please name your test. All saved tests can be retrieved from Saved Tests tab in your home page.
+                Please name your test. <br> All saved tests can be retrieved from Saved Tests tab in your home page.
                 </div>
                 <label class="username">
-                <input id="testName" name="testName" value="" type="text" autocomplete="on" placeholder="testName">
+                <input class="middle" id="testName" name="testName" value="" type="text" autocomplete="on" placeholder="testName">
                 </label>                
-                <button id="popup-save-button" class="submit button" type="button">Save</button>
+                <button id="popup-save-button" class="submit button middle" type="button">Save</button>
                 </fieldset>
           </form>
         </div>      
@@ -770,7 +772,11 @@
       </div>   
     </div> 
 
+    <!-- build:js static/mocktest/scripts/test.min.js -->
     <script src="/static/mocktest/scripts/testmain.js"></script>
+    <script src="/static/mocktest/scripts/jquery.plugin.min.js"></script>
+    <script src="/static/mocktest/scripts/jquery.countdown.js"></script>    
+    <!-- endbuild -->    
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 	<!--

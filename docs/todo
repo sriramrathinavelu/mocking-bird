@@ -131,3 +131,39 @@ Test defaults:
             c) If we get no questions change the status to Used-(QT/AT), move to the next pool, even if it's Used and repeat b
             d) Repeat c unless we get questions (i.e a pool) or return NoQuestionsException if we had searched all pools. At this point an alert must be raised to the super moderator
 
+---------------------------------------------------------------------------------------------------------------All Javascript files used by mocktest - base
+
+<script src="/static/mocktest/scripts/DateTimePicker.js"></script>
+<script src="/static/mocktest/scripts/moment.js"></script>
+<script src="static/mocktest/scripts/main.js"></script>
+<script src="static/mocktest/scripts/jquery.cookie.js"></script>
+<script src="/static/mocktest/scripts/jquery.flipcountdown.js"></script>
+<script src="/static/mocktest/scripts/jquery.plugin.min.js"></script>
+<script src="/static/mocktest/scripts/jquery.countdown.js"></script>
+<script src="/static/bower_components/nprogress/nprogress.js"></script>
+
+All javascript files used by mocktest - test
+
+All css files used by mocktest - base
+<link rel="stylesheet" href="/static/mocktest/styles/DateTimePicker.css">
+<link rel="stylesheet" href="/static/mocktest/styles/jquery.flipcountdown.css">
+<link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
+<link rel="stylesheet" href="/static/mocktest/styles/jquery.countdown.css">
+<link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">
+<link rel="stylesheet" href="/static/mocktest/styles/fancyDate.css">
+<link rel="stylesheet" href="/static/bower_components/nprogress/nprogress.css">
+
+Regarding inline minification:
+
+mocktest:
+base.html -> ok
+advancedTest.html -> ok
+congrats -> ok
+countdown -> ok
+favourite -> ok
+favquestion -> ok
+history -> ok
+index -> ok
+result-> got to check
+test -> got to check
+

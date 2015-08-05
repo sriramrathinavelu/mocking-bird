@@ -32,17 +32,26 @@
     <link rel="canonical" href="http://www.example.com/">
     -->
 
+    
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+
     <!-- Page styles -->
+    <!-- build:css /static/mocktest/styles/base.min.css -->
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
     <link rel="stylesheet" href="/static/mocktest/styles/main.css">
-    <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">    
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="/static/mocktest/scripts/jquery.cookie.js"></script>
-
+    <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/DateTimePicker.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery.flipcountdown.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/jquery.countdown.css">
+    <link rel="stylesheet" href="/static/mocktest/styles/fancyDate.css">
+    <link rel="stylesheet" href="/static/bower_components/nprogress/nprogress.css">        
+    <!-- endbuild -->
 
     {% block css_js %}
     {% endblock %}
-    
+    {% load compress %}
+    {% compress js inline %}
     <script type="text/javascript">
 
     function csrfSafeMethod(method) {
@@ -104,6 +113,7 @@
         
         /*JQM*/
 
+      
       {% for pageName, content in bubbleNotification.iteritems %}
         $("#{{pageName}}-badge").show();
         $("#{{pageName}}-badge").html("{{content}}");
@@ -172,7 +182,6 @@
 
       $.ajaxSetup({
         beforeSend: function(xhr, settings) {
-          console.log("Done!");
           if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
             xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
           }
@@ -204,11 +213,13 @@
     });
     </script>
 
+
     {% block jquery %}
     {% endblock %}
-
+    {% endcompress %}
   </head>
   <body>
+    {% compress js inline %}
     <script>
       function statusChangeCallback(response) {
         console.log('statusChangeCallback');
@@ -315,6 +326,7 @@
       {% block fb_login %}
       {% endblock %}
     </script>
+    {% endcompress %}
     <div class="mediachecker"></div>
     <header class="app-bar promote-layer">
       <div class="app-bar-container">
@@ -413,8 +425,19 @@
     </div>
     <div class="modal"><!-- Place at bottom of page --></div>
     
-    <script src="/static/mocktest/scripts/main.js"></script>
+    <!-- build:js static/mocktest/scripts/base.min.js -->
+    <script src="/static/mocktest/scripts/DateTimePicker.js"></script>
+    <script src="/static/mocktest/scripts/moment.js"></script>
+    <script src="static/mocktest/scripts/main.js"></script>
+    <script src="static/mocktest/scripts/jquery.cookie.js"></script>
+    <script src="/static/mocktest/scripts/jquery.flipcountdown.js"></script>
+    <script src="/static/mocktest/scripts/jquery.plugin.min.js"></script>
+    <script src="/static/mocktest/scripts/jquery.countdown.js"></script>
+    <script src="/static/bower_components/nprogress/nprogress.js"></script>
+    <!-- endbuild -->    
 
+    {% block just_js %}
+    {% endblock %}
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 	<!--

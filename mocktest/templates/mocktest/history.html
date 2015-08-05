@@ -5,14 +5,12 @@ History
 {% endblock %}
 
 {% block css_js %}
-  <link rel="stylesheet" href="/static/mocktest/styles/fancyDate.css">  
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
-  <link rel="stylesheet" href="/static/bower_components/nprogress/nprogress.css">
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="/static/bower_components/nprogress/nprogress.js"></script>
+{% endblock %} 
 
-{% endblock %}  
+{% block just_js%}
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  
+{% endblock %}
 
 {% block jquery %}
   <script>    
@@ -24,11 +22,12 @@ History
           ajaxStop: function() { console.log("ended"); $("body").removeClass("loading"); }    
         });
         */
+        
         $(document).on({
           ajaxStart: function() { NProgress.start(); },
           ajaxStop: function() { NProgress.done(); }    
         });
-
+        
 
         $(document).on("click", "disabled", function(e){          
           e.preventDefault();
@@ -188,7 +187,7 @@ History
     
 
     $("#positionName").autocomplete({
-      source: {{positionNames|safe}},
+      source: eval('{{positionNames|safe}}'),
       select: function(event, ui){
         $.getJSON("/ajaxUtil/userPositionTests.html?positionName=" + ui.item.value,function (data, status){
           if (status === "success") {              
@@ -215,7 +214,7 @@ History
 
 
     $("#companyName").autocomplete({
-      source: {{companyNames|safe}},
+      source: eval('{{companyNames|safe}}'),
       select: function(event, ui){
         $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + ui.item.value,function (data, status){
           if (status === "success") {              

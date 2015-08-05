@@ -1,0 +1,48 @@
+{% extends "mocktest/base.html" %} {% block title %} Scheduled Tests {% endblock %} {% block css_js %} {% endblock %} {% block jquery %}<script>    
+    $(function(){
+      var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    
+      function makeListTitle(count){
+        $(".articles-count").html("We found " + count + " tests matching your criteria");
+      }
+    
+
+      function makeTestList(index, value, isSched) {
+        var testDate = new Date(value['teststarttime']);
+        var testEndDate = new Date(value['testendtime']);
+        var dateStr = testDate.getFullYear().toString() + "-" + testDate.getMonth().toString() + "-" + testDate.getDate();
+        var timeStr = testDate.toTimeString().split(" ")[0] + " to " + testEndDate.toTimeString().split(" ")[0]
+        var nameStr=""; 
+        if (value['testname']) {
+          nameStr="Name: " + value['testname'];
+        }           
+        var buttonText = "View Result";
+        var ahref = "result.html?testId="+value['testid'];
+        if (isSched) {
+          buttonText = "Start Test";
+          ahref = "test.html?testId="+value['testid']+"&testName="+
+                  value['testname'];
+        }
+        var calendarSize = "size1_5x";        
+        if ($(".mediachecker").css("float") == "left" ){
+            // Small Screen
+            calendarSize = "size1x";
+        }        
+        $(".articles-list").append(
+        "<li class=\"articles-list__item custom-padding blurred-bg\"><time datetime=\"" + dateStr +"\" class=\"date-as-calendar position-em " + calendarSize + "\"><span class=\"weekday\">"+days[testDate.getDay()]+"</span><span class=\"day\">"+testDate.getDate()+"</span><span class=\"month\">"+months[testDate.getMonth()]+"</span><span class=\"year\">"+testDate.getFullYear()+"</span></time><h5 class=\"mobile-text-to-left\">"+value['companyname']+"</h5><h5 class=\"mobile-text-to-left\">"+value['positionname']+"</h5><h5 class=\"mobile-text-to-left\">"+nameStr+"</h5><h5 class=\"mobile-text-to-left\">Total Questions: "+value['totalquestions']+"</h5><h5 class=\"mobile-text-to-left\">"+timeStr+"</h5><a href=\""+ahref+"\" class=\"button--mockingone small-button\">"+buttonText+"</a></li>"
+        );
+      }
+
+      $.getJSON("/ajaxUtil/userSchedTests.html",function (data, status){
+        if (status === "success") {              
+          $(".articles-list").html("");
+          makeListTitle(data.length);
+          $.each(data, function(index, value){
+            makeTestList(index, value, true);
+         }); 
+        }
+      });
+    });
+  </script>{% endblock %} {% block content %}<main><section class=styleguide__articles-section><div class=articles-section><div class=container><p class=articles-count></p><ol class=articles-list></ol></div></div></section></main>{% endblock %}

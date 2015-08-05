@@ -1,0 +1,65 @@
+{% extends "mocktest/base.html" %} {% block title %} Countdown {% endblock %} {% block css_js %}<link rel=stylesheet href=//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css>{% endblock %} {% block just_js %}<script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script>{% endblock %} {% block jquery %}<script>
+  function getURLParameter(name) {
+      return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,''])[1].replace(/\+/g, '%20'))||null;
+    }
+    
+    $(function() {
+      var startDateTime = moment.unix(getURLParameter("testStartTime"));
+      var now = moment();
+      console.log(startDateTime.toDate())
+      if (now > startDateTime) {
+        window.location = "/test.html?testId=" +
+            getURLParameter("testId");
+      }
+      var testId = getURLParameter("testId");
+      var cdFormat = null;
+      var diff = moment.utc(startDateTime.diff(now));
+      console.log(startDateTime.diff(now)); 
+      console.log(diff);
+      if (startDateTime.unix() < 24*60*60*1000) {
+        cdFormat = "hh:mm:ss";
+        startTime = diff.format("HH:mm:ss");          
+      } else {
+        cdFormat = "dd:hh:mm:ss";
+        var d = moment.duration(diff);
+        var numDays = startDateTime.diff(now, 'days', true);
+        console.log(numDays);
+        var hours = Math.floor(d.asHours()) < 10 ? "0" + Math.floor(d.asHours()) : Math.floor(d.asHours())
+        var days = Math.floor(numDays) < 10 ? "0" + Math.floor(numDays) : Math.floor(numDays)
+        startTime = days + ":" + hours + diff.format(":mm:ss");
+      }
+      console.log(startTime);
+      console.log(cdFormat);
+      startDateTime.subtract(now);
+      if ($(".mediachecker").css("float") == "right" ){
+        // Large Screen
+        $("#smallCountDown").hide();
+        $("#digits").flipcountdown({
+          image: "/static/mocktest/images/digits.png",
+          format: cdFormat,
+          startTime: startTime,
+          timerEnd: function() { 
+            window.location = "/test.html?testId=" +
+              getURLParameter("testId");
+          }
+        });                
+        $("#digits").append(
+          "<div id='cntsep_8' class='cntSeparator' style='float: left;'> SS </div>"
+        );
+        $("#cntsep_2").html(" Days ");
+        $("#cntsep_4").html(" HH: ");
+        $("#cntsep_6").html(" MM: ");
+      } else {
+        // Small and Mid sized Screens
+        $("#digits").hide();
+        var startDateTime = moment.unix(getURLParameter("testStartTime"));
+        $('#smallCountDown').countdown({
+          until: startDateTime.toDate(),
+          onExpiry: function() { 
+            window.location = "/test.html?testId=" +
+              getURLParameter("testId");
+          }
+      }); 
+      }
+    });
+  </script>{% endblock %} {% block content %}<main><h1>Scheduled!</h1><p>Your test will begin in</p><div id=digits class=centered-flip-clock style="margin-bottom: 100px; margin-top: 10px;"></div><div id=smallCountDown style="width: 300px; margin-bottom: 50px; margin-top: 10px;"></div><p>Team <i>#inclue</i>&lt;test&gt; wishes you all the best.<br><br>Tip: You can find this test and all the other scheduled tests under "Scheduled Tests" tab.<br><br></p></main>{% endblock %}

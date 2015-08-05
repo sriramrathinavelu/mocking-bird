@@ -1,0 +1,183 @@
+{% extends "mocktest/base.html" %} {% block title %} Advanced Test {% endblock %} {% block css_js %}<link rel=stylesheet href=//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css>{% endblock %} {% block just_js %}<script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script>{% endblock %} {% block jquery %}<script>
+    function getURLParameter(name) {
+      return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,''])[1].replace(/\+/g, '%20'))||null;
+    }
+    
+    $(function(){        
+      
+      $( "#slider" ).slider({
+        value:3,
+        min: 1,
+        max: 5,
+        step: 1,
+        slide: function(event, ui){
+          console.log(ui.value);
+          document.getElementById("testquestions").innerHTML = ui.value;
+        }
+      });
+
+      
+    });
+  </script>{% endblock %} {% block content %}<main><div class=centered-small-div><div class=centered-div><div class="centered-input form-label">1) When do you like to start the test?</div><button class=image-button><img class=centered-icon src=/static/mocktest/images/icons/clock.png data-field=datetime id=teststarttimeparent title="Click to schedule"></button><div id=teststarttime class="centered-input form-error"></div><div id=dtBoxStart></div><script type=text/javascript>
+        $(function(){
+
+          function isFormValid(){
+            console.log("Validating");
+            if (!($("#teststarttime").hasClass("form-error") ||
+              $("#testendtime").hasClass("form-error"))) {
+              $("#advancedtest-button").removeClass("disabled");
+            } else {
+              if (!$("advancedtest-button").hasClass("disabled")) {
+                $("#advancedtest-button").addClass("disabled");          
+              }
+            }
+          };
+          isFormValid();
+          var now = new Date();
+          var day = now.getDate().toString();
+          day = day.length > 1 ? day : '0' + day;
+          var month = (now.getMonth() + 1).toString();
+          month = month.length > 1 ? month : '0' + month;
+          var startEpoch = null;
+          var endEpoch = null;
+
+          var nowStr = month + "-" +
+                       day + "-" +
+                       now.getFullYear() + " " +
+                       now.getHours() + ":" +
+                       now.getMinutes();
+
+
+          popup = true;
+          if ($(".mediachecker").css("float") == "left" ){
+            // Small Screen
+            popup = true;
+          }   
+
+          console.log(nowStr);
+
+          $("#dtBoxStart").DateTimePicker({
+            isPopup: popup,
+            minDateTime: nowStr,
+            clearButtonContent: "Close",
+            dateTimeFormat: "MM-dd-yyyy HH:mm:ss",
+            buttonClicked: function(buttonType, inputElement) {
+              var dtPickerObj = this;
+              if (buttonType == 'SET') {                    
+                dtPickerObj.setDateTimeStringInInputField(
+                  $(inputElement)
+                );
+                var valval = $(inputElement).val(); 
+                console.log("Time:" + valval);
+                var startMoment = null;
+                var endMoment = null;
+                if ($(inputElement).attr("id") == "testendtimeparent") {                    
+                  endMoment = moment(valval, "MM-DD-yyyy HH:mm:ss");
+                  endEpoch = endMoment.utc().unix();  
+                  endMoment.local();
+                  if (document.getElementById("teststarttime").innerHTML != "") {
+                    startMoment = moment(document.getElementById("teststarttime").innerHTML,
+                                         "ddd, MMM Do, YYYY HH:mm");
+                    if (endMoment < startMoment) {
+                      document.getElementById("testendtime").innerHTML = 
+                        "Are you planning to completing your test before it starts?";
+                      $("#testendtime").addClass("form-error");
+                    } else {
+                      $("#testendtime").removeClass("form-error");
+                      document.getElementById("testendtime").innerHTML = endMoment.format(
+                        "ddd, MMM Do, YYYY HH:mm"
+                      );
+                    }
+                  } else {
+                    $("#testendtime").removeClass("form-error");
+                    document.getElementById("testendtime").innerHTML = endMoment.format(
+                      "ddd, MMM Do, YYYY HH:mm"
+                    );
+                  }
+                } else {
+                  startMoment = moment(valval, "MM-DD-yyyy HH:mm:ss");
+                  startEpoch = startMoment.utc().unix();
+                  startMoment.local();                    
+                  if (document.getElementById("testendtime").innerHTML != "") {
+                    endMoment = moment(document.getElementById("testendtime").innerHTML,"ddd, MMM Do, YYYY HH:mm");
+                    if (endMoment.isValid()) {
+                      if (endMoment < startMoment) {
+                        document.getElementById("teststarttime").innerHTML = 
+                          "Are you planning to start your test after it ends?";
+                        $("#teststarttime").addClass("form-error");
+                      } else {
+                        $("#teststarttime").removeClass("form-error");
+                        document.getElementById("teststarttime").innerHTML = startMoment.format(
+                          "ddd, MMM Do, YYYY HH:mm"
+                        );
+                      }
+                    }
+                  } else {
+                    $("#teststarttime").removeClass("form-error");
+                    document.getElementById("teststarttime").innerHTML = startMoment.format(
+                      "ddd, MMM Do, YYYY HH:mm"
+                    );
+                  }
+                }
+              }
+              isFormValid();
+            },
+            afterShow: function(ipElem) {      
+              var dtPickerObj = this; 
+              if ($(ipElem).attr("id") == "teststarttimeparent") {
+                if (document.getElementById("teststarttime").innerHTML != "") {
+                  var startMoment = moment(document.getElementById("teststarttime").innerHTML,
+                                         "ddd, MMM Do, YYYY HH:mm");
+                  if (startMoment.isValid()) {
+                    dtPickerObj.dataObject.dCurrentDate = startMoment.toDate();
+                    dtPickerObj.dataObject.iCurrentDay = startMoment.date();
+                    dtPickerObj.dataObject.iCurrentMonth = startMoment.month();
+                    dtPickerObj.dataObject.iCurrentYear = startMoment.year();
+                    dtPickerObj.dataObject.iCurrentHour = startMoment.hour();
+                    dtPickerObj.dataObject.iCurrentMinutes = startMoment.minute();
+                  }
+                }
+              } else {
+                if (document.getElementById("teststarttime").innerHTML != "") {
+                  var startMoment = moment(document.getElementById("teststarttime").innerHTML,
+                                         "ddd, MMM Do, YYYY HH:mm");
+                  if (startMoment.isValid()) {
+                    dtPickerObj.dataObject.dCurrentDate = startMoment.toDate();
+                    dtPickerObj.dataObject.iCurrentDay = startMoment.date();
+                    dtPickerObj.dataObject.iCurrentMonth = startMoment.month();
+                    dtPickerObj.dataObject.iCurrentYear = startMoment.year();
+                    dtPickerObj.dataObject.iCurrentHour = startMoment.hour();
+                    dtPickerObj.dataObject.iCurrentMinutes = startMoment.minute();
+                  }
+                }
+                if (document.getElementById("testendtime").innerHTML != "") {                    
+                  var endMoment = moment(document.getElementById("testendtime").innerHTML,
+                                         "ddd, MMM Do, YYYY HH:mm");
+                  if (endMoment.isValid()) {
+                    console.log("enna aachu");
+                    dtPickerObj.dataObject.dCurrentDate = endMoment.toDate(); 
+                    dtPickerObj.dataObject.dCurrentDate = endMoment.toDate();
+                    dtPickerObj.dataObject.iCurrentDay = endMoment.date();
+                    dtPickerObj.dataObject.iCurrentMonth = endMoment.month();
+                    dtPickerObj.dataObject.iCurrentYear = endMoment.year();
+                    dtPickerObj.dataObject.iCurrentHour = endMoment.hour();
+                    dtPickerObj.dataObject.iCurrentMinutes = endMoment.minute();
+                  }
+                }
+              }
+              dtPickerObj._setCurrentDate();          
+            }
+          });
+
+
+          $("#advancedtest-button").click (function(e){
+            if ($("#advancedtest-button").hasClass("disabled")) {
+              console.log("Suppressed");
+              e.preventDefault();
+            } else {
+              window.location="createtest.html?companyName=" +
+              getURLParameter("companyName") + "&positionName=" + getURLParameter("positionName") + "&numQ=" + $("#testquestions").html() + "&startTime=" + startEpoch + "&endTime=" + endEpoch;
+            }
+          });
+        });
+      </script><div class="centered-input form-label">2) When do you like to end the test?</div><button class=image-button><img class=centered-icon src=/static/mocktest/images/icons/clock.png data-field=datetime id=testendtimeparent title="Click to schedule"></button><div id=testendtime class="centered-input form-error"></div><div id=dtBoxEnd></div><div class="centered-input form-label">3) How many questions you want to take on?</div><div id=slider class=centered-input></div><div id=testquestions class=centered-input>3</div></div><div class=centered-div><a id=advancedtest-button href=# class="button--mockingone centered-button">Create Test</a></div></div></main>{% endblock %}

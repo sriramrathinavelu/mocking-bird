@@ -1,22 +1,16 @@
 {% extends "mocktest/base.html" %}  
 
 {% block title %}
-Home
+Countdown
 {% endblock %}
 
 {% block css_js %}
-  <link rel="stylesheet" href="/static/mocktest/styles/jquery.flipcountdown.css">
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-  <script src="/static/mocktest/scripts/jquery.flipcountdown.js"></script>
-  <script src="/static/bower_components/moment/min/moment.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
+{% endblock %}
 
-  <!--Jquery counter -->    
-  <link rel="stylesheet" href="/static/mocktest/styles/jquery.countdown.css">
-  <script src="/static/mocktest/scripts/jquery.plugin.min.js"></script>
-  <script src="/static/mocktest/scripts/jquery.countdown.js"></script>
-  <!--Jquery counter -->
+
+{% block just_js %}
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 {% endblock %}
 
 {% block jquery %}

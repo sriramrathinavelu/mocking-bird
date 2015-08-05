@@ -1,0 +1,53 @@
+{
+  "name": "mockingsite",
+  "version": "1.0.0",
+  "description": "Framework to host mock interviews",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sriramrathinavelu/mocking-bird.git"
+  },
+  "keywords": [
+    "mock-test"
+  ],
+  "author": "Sriram",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sriramrathinavelu/mocking-bird/issues"
+  },
+  "homepage": "https://github.com/sriramrathinavelu/mocking-bird#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-cache": "^0.2.10",
+    "gulp-changed": "^1.2.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-csso": "^1.0.0",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-minify-html": "^1.0.4",
+    "gulp-minify-inline": "^0.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.3",
+    "gulp-sass": "^2.0.4",
+    "gulp-size": "^1.2.3",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-uglify-inline": "^0.1.0",
+    "gulp-uncss": "^1.0.2",
+    "gulp-useref": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "jshint-stylish": "^1.0.2",
+    "main-bower-files": "^2.9.0",
+    "run-sequence": "^1.1.2"
+  },
+  "dependencies": {
+    "del": "^1.2.0",
+    "streamqueue": "^1.1.0"
+  }
+}

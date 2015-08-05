@@ -139,7 +139,7 @@ def createTables():
 
 
 def main():
-    os.environ["DJANGO_SETTINGS_MODULE"] = "mockingsite.settings"
+    #os.environ["DJANGO_SETTINGS_MODULE"] = "mockingsite.settings"
     django.setup()
 
 

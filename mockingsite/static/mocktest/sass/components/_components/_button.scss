@@ -1,0 +1,82 @@
+/**
+*
+* Button
+*
+**/
+
+.button {
+  display: inline-block;
+  padding: (($lineHeight / 2) - 1) 32px;
+  margin-bottom: $lineHeight / 2;
+  margin-top: $lineHeight / 2;
+  min-height: $lineHeight;
+
+  text-align: center;
+
+  font-family: $fontHighlight;
+  font-weight: 600;
+  text-decoration: none;
+
+  outline: 0;
+
+  transition: none;
+
+  &:hover {
+    background: #4d4d4d;
+    color: #ffffff;
+    border: 1px solid #4d4d4d;
+    text-decoration: none;
+  }
+}
+
+// Mixin to create buttons
+@mixin style-button($color, $textColor, $isInverted: false) {
+
+  background: $color;
+  color: $textColor;
+  border: 1px solid darken($color, 10%);
+
+  @if $isInverted { border-color: transparent;}
+}
+
+@mixin hover-behavior($color, $textColor) {
+  &:hover {
+    background: $color;
+    color: $textColor;
+    border: 1px solid darken($color, 10%);  
+  }
+}
+
+@mixin visited-behavior($textColor) {
+  &:visited {
+    color: $textColor;
+  }
+}
+
+.button--primary {
+  @extend .button;
+  @include style-button(#4285f4, #ffffff);
+}
+
+.button--secondary {
+  @extend .button;
+  @include style-button(#ffffff, $colorBlue);
+}
+
+.button--secondary-variation {
+  @extend .button;
+  @include style-button(#ffffff, $colorBlue, true);
+}
+
+.button--mockingone {
+  @extend .button;
+  border-radius: 15px;
+  /*@include style-button(#F29E25, #FFFFFF);*/
+  /*@include style-button(#E25D33, #FFFFFF);*/
+  /*@include style-button(#FB520F, #FFFFFF);*/  
+  /*@include style-button(#FF6700, #FFFFFF);*/
+  @include style-button(#D14D28, #FFFFFF);
+  /*@include hover-behavior(#FF5D1D, #4d4d4d);*/
+  @include hover-behavior(#CB5A39, #4d4d4d);
+  @include visited-behavior(#FFFFFF);
+}

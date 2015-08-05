@@ -6,9 +6,12 @@ Home
 
 {% block css_js %}
   <!-- Needed for autocomplete -->
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  
+{% endblock %}
+
+{% block just_js%}
+  
 {% endblock %}
 
 {% block jquery %}
@@ -229,7 +232,7 @@ Home
     <!--<input id="companyinput" type="text" name="company" value="Enter Company Name"/>-->
     <select id="companyinput" name="company">
       {% for comp in companies %}
-        <option value="{{comp}}">{{comp}}</option>
+        <option value="{{ comp }}">{{comp}}</option>
       {% endfor %}      
     </select>
   	<select id="positionselect" name="position" style="display:none"></select>

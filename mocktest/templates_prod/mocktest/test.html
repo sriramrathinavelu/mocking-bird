@@ -1,0 +1,532 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=description content="Framework to help prepare for interviews with mock tests"><meta name=viewport content="width=device-width, initial-scale=1"><title>Interview</title><link rel=manifest href=manifest.json><meta name=mobile-web-app-capable content=yes><meta name=application-name content="Web Starter Kit"><link rel=icon sizes=192x192 href=images/touch/chrome-touch-icon-192x192.png><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=apple-mobile-web-app-title content="Web Starter Kit"><link rel=apple-touch-icon href=images/touch/apple-touch-icon.png><meta name=msapplication-TileImage content=images/touch/ms-touch-icon-144x144-precomposed.png><meta name=msapplication-TileColor content=#3372DF><meta name=theme-color content=#3372DF><link rel=stylesheet href=/static/mocktest/styles/test.min.css><script src=//code.jquery.com/jquery-1.10.2.js></script><script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script><script>
+      function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,''])[1].replace(/\+/g, '%20'))||null;
+      }
+
+      /* jquery preserves line break */
+        $.valHooks.textarea = {
+          get: function( elem ) {            
+            return elem.value.replace( /\r?\n/g, "\r\n" );
+          }
+        };
+
+
+
+
+      $(function () {
+
+        /*JQM*/
+        $('.popup-source').click(function() {
+    
+          //Getting the variable's value from a link 
+          var loginBox = $(this).attr('href');
+
+          //Fade in the Popup
+          $(loginBox).fadeIn(300);
+          
+          //Set the center alignment padding + border see css style
+          var popMargTop = ($(loginBox).height() + 24) / 2; 
+          var popMargLeft = ($(loginBox).width() + 24) / 2; 
+          
+          $(loginBox).css({ 
+              'margin-top' : -popMargTop,
+              'margin-left' : -popMargLeft
+          });
+          
+          // Add the mask to body
+          $('body').append('<div id="mask"></div>');
+          $('#mask').fadeIn(300);
+          
+          return false;
+        });
+
+        // When clicking on the button close or the mask layer the popup closed
+        /*
+        $('a.close, #mask').live('click', function() { 
+          $('#mask , .login-popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+        return false;
+        });
+        */
+
+        $('body').on('click', '#mask', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+
+        $('body').on('click', 'a.close', function() { 
+          $('#mask , .popup').fadeOut(300 , function() {
+            $('#mask').remove();  
+          }); 
+          return false;
+        });
+        
+        /*JQM*/
+
+        $(document).keydown(function(e) {
+          switch(e.which) {
+            case 37: // left
+            $("#prevq").trigger("click");
+            break;
+
+            case 38: // up
+            break;
+
+            case 39: // right
+            $("#nextq").trigger("click");
+            break;
+
+            case 40: // down            
+            break;
+
+            default: return; // exit this handler for other keys
+          }
+          // e.preventDefault(); // prevent the default action (scroll / move caret)
+        });      
+
+        $("#difficulty-radio").buttonset();
+
+        /*Get the test id*/
+        $("#testId").val(getURLParameter("testId"));
+        $("#testName").val(getURLParameter("testName"));
+        $("#testName-submit").val(getURLParameter("testName"));
+        var questions={{questions|safe}};
+        /*Update the test status*/
+        $.get("ajaxUtil/notifyTestStart.html?testId=" + $("#testId").val(), function(data,success){
+            if (data != "ok") {
+              alert("Error: Test status not updated");
+            }
+        });
+        /* Save the test - in case user session is lost*/
+        $.get("ajaxUtil/saveTest.html?testId=" +
+        $("#testId").val() + "&testName=auto-save", function(data, status){
+            if (data != "ok") {
+              alert ("Error! submit test failed");
+            } else {
+              /*Replace with test saved and follow up page*/              
+            }
+        });
+        /* Get the current question */
+        var enddate = new Date(questions[0]['testendtime']);
+        $('#defaultCountdown').countdown({
+          until: enddate,
+          format: 'HMS',
+          compact: true,
+          onExpiry: timeOver 
+        });        
+        function timeOver(){
+          $("#timeover-anchor").trigger("click");
+        }
+        var currentQ=questions[0]['currentquestion'];
+        /* Set the current question */
+        $("#currentQ").val(currentQ);
+        /* Load the current question */
+        $("#question").html(
+          "<pre style=\"white-space: pre-wrap;\">" +
+          parseInt(currentQ + 1).toString() + ") " +
+          questions[currentQ]['question'] +
+          "</pre>"
+        );
+        /* Load the current answer */
+        $("#answer-space").val(
+          questions[currentQ]['givenanswer']
+        );
+        /* Display the voting Panel*/
+        var interactions = questions[currentQ]['interactions']
+        console.log(interactions);
+        $("#voting-panel-upvote").removeClass("disabled");
+        $("#voting-panel-downvote").removeClass("disabled");
+        $("#voting-panel-favourite").removeClass("disabled");
+        $("#radio_easy").next().removeClass("ui-state-active");
+        $("#radio_medium").next().removeClass("ui-state-active");
+        $("#radio_hard").next().removeClass("ui-state-active");
+        $("#rate-text").show();
+        $("#thank-you").hide();
+        if (interactions.indexOf(1) > -1) {
+          $("#voting-panel-upvote").addClass("disabled");
+          $("#voting-panel-downvote").addClass("disabled");
+        } 
+        if (interactions.indexOf(2) > -1) {
+          $("#voting-panel-favourite").addClass("disabled");
+        } 
+        if (interactions.indexOf(3) > -1) {
+          $("#voting-panel-upvote").addClass("disabled");
+          $("#voting-panel-downvote").addClass("disabled");
+        }
+        if (interactions.indexOf(4) > -1) {
+          $("#rate-text").hide();
+          $("#thank-you").show();
+          $("#radio_easy").next().addClass("ui-state-active");
+          $("#radio_medium").next().removeClass("ui-state-active");
+          $("#radio_hard").next().removeClass("ui-state-active");
+        } 
+        if (interactions.indexOf(5) > -1) {
+          $("#rate-text").hide();
+          $("#thank-you").show();
+          $("#radio_easy").next().removeClass("ui-state-active");
+          $("#radio_medium").next().addClass("ui-state-active");
+          $("#radio_hard").next().removeClass("ui-state-active");
+        } 
+        if (interactions.indexOf(6) > -1) {
+          $("#rate-text").hide();
+          $("#thank-you").show();
+          $("#radio_easy").next().removeClass("ui-state-active");
+          $("#radio_medium").next().removeClass("ui-state-active");
+          $("#radio_hard").next().addClass("ui-state-active");
+        } 
+        /* Functionality for previous question */
+        $("#prevq").click(function(e){              
+          if($("#prevq").hasClass("disabled")) {           
+            e.preventDefault();
+          } else {
+            /*Save the answer*/      
+            /* DB */      
+            $.get("ajaxUtil/saveAnswer.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&answer=" + 
+              escape($("#answer-space").val()) + 
+              "&oprn=prev", function(data, status){
+                if (data === 'ok') {
+
+                } else {
+                  alert("Error answer not saved!");
+                }
+            });
+            /* Locally */
+            var curQ = parseInt($("#currentQ").val());
+            questions[curQ]['givenanswer']=$("#answer-space").val();
+            /*Update the next Question*/
+            /*Update the hidden currentQ*/
+            var prevQ = curQ;
+            $("#navbarQuestion"+prevQ).trigger("click");
+          }
+        });
+
+        var autoSave = function(){
+          $.get("ajaxUtil/saveAnswer.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&answer=" + 
+              escape($("#answer-space").val()), function(data, status){
+                if (data === 'ok') {
+
+                } else {
+                  /*Need a provision to display errors*/
+                  /*on page*/
+                  alert("Error answer not saved!");
+                }
+            });
+        };
+
+        var interval = 1000 * 30;
+
+        setInterval(autoSave, interval);
+
+        /* Functionality for next question */
+        $("#nextq").click(function(e){              
+          if($("#nextq").hasClass("disabled")) {           
+            e.preventDefault();
+          } else {
+            console.log($("#answer-space").val())
+            /*Save the answer*/            
+            $.get("ajaxUtil/saveAnswer.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&answer=" + 
+              escape($("#answer-space").val()) + 
+              "&oprn=next", function(data, status){
+                if (data === 'ok') {
+
+                } else {
+                  /*Need a provision to display errors*/
+                  /*on page*/
+                  alert("Error answer not saved!");
+                }
+            });            
+            /* Locally */
+            var curQ = parseInt($("#currentQ").val());
+            questions[curQ]['givenanswer']=$("#answer-space").val();
+            /*Update the next Question*/
+            /*Update the hidden currentQ*/
+            var nextQ = curQ+2;
+            $("#navbarQuestion"+nextQ).trigger("click"); 
+          }
+        });
+        /* Previous question display control */
+        $("#prevqNum").change(function(){
+          if (parseInt(
+                $("#prevqNum").html())<1) {            
+            $("#prevq").addClass("disabled");            
+            $("#prevqNum").html("--");
+          } else {
+            $("#prevq").removeClass("disabled");
+          }
+        });
+        /* Next question display control */
+        $("#nextqNum").change(function(){
+          if (parseInt(
+                $("#nextqNum").html()
+                )>questions.length) {
+            $("#nextq").addClass("disabled");            
+            $("#nextqNum").html("--");
+          } else {            
+            $("#nextq").removeClass("disabled");
+          }
+        });
+        /* Update previous question number */
+        $("#prevqNum").html(          
+          currentQ
+        );
+        $("#prevqNum").trigger("change");
+        /* Update next question number */
+        $("#nextqNum").html(          
+          currentQ+2
+        );
+        $("#nextqNum").trigger("change");
+        /* submit test after pop-up */
+        /* Replace with a save and submit page*/
+        $("#popup-submit-button").click(function(){
+          $.get("ajaxUtil/saveAnswer.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&answer=" + 
+              escape($("#answer-space").val()), function(data, status){
+                if (data === 'ok') {
+                  $.get("ajaxUtil/submitTest.html?testId=" +
+                  $("#testId").val() + "&testName=" + 
+                  $("#testName-submit").val(), function(data, status){
+                    if (data != "ok") {
+                      alert ("Error! submit test failed");
+                    } else {
+                      /*Replace with congratulations and follow up page*/
+                      window.location="/congrats.html?testId=" + $("#testId").val()
+                    }
+                  });
+                } else {
+                  alert("Error answer not saved!");
+                }
+            });          
+        });
+
+        $("#popup-submit-button-1").click(function(){
+          $.get("ajaxUtil/saveAnswer.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&answer=" + 
+              escape($("#answer-space").val()), function(data, status){
+                if (data === 'ok') {
+                  $.get("ajaxUtil/submitTest.html?testId=" +
+                  $("#testId").val() + "&testName=" + 
+                  $("#testName-submit").val(), function(data, status){
+                    if (data != "ok") {
+                      alert ("Error! submit test failed");
+                    } else {
+                      /*Replace with congratulations and follow up page*/
+                      window.location="/congrats.html?testId=" + $("#testId").val()
+                    }
+                  });
+                } else {
+                  alert("Error answer not saved!");
+                }
+            });          
+        });
+        /* save test after pop up */
+        $("#popup-save-button").click(function(){
+          $.get("ajaxUtil/saveAnswer.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&answer=" + 
+              escape($("#answer-space").val()), function(data, status){
+                if (data === 'ok') {
+                  $.get("ajaxUtil/saveTest.html?testId=" +
+                  $("#testId").val() + "&testName=" +
+                  $("#testName").val(), function(data, status){
+                    if (data != "ok") {
+                      alert ("Error! submit test failed");
+                    } else {
+                      /*Replace with test saved and follow up page*/
+                      window.location="home.html"
+                    }
+                  });
+                } else {
+                  alert("Error answer not saved!");
+                }
+            });          
+        });
+        /*exit test after pop up */
+        $("#popup-exit-button").click(function(){          
+          $.get("ajaxUtil/exitTest.html?testId=" +
+            $("#testId").val(), function(data, status){
+              if (data != "ok") {
+                alert ("Error! submit test failed");
+              } else {
+                /*Replace with congratulations and follow up page*/
+                window.location="home.html"
+              }
+          });
+        });
+        var voteFunction = function (interaction) {
+          var curQ = parseInt($("#currentQ").val());
+          var companyName = questions[curQ]['companyname']
+          var positionName = questions[curQ]['positionname']
+          var questionId = questions[curQ]['questionid']
+          var pool = questions[curQ]['pool']
+          var classLabel = questions[curQ]['classlabel']
+          $.get("ajaxUtil/vote.html?questionId=" + questionId +
+            "&companyName=" + companyName + "&positionName=" +
+            positionName + "&pool=" + pool + "&classlabel=" +
+            classLabel + "&interaction=" + interaction + "&testId=" +
+            $("#testId").val(), function (data, status) {
+              if (data === "ok") {
+                console.log("ok");                
+              } else if (data === "add") {
+                if (interaction >= 4) {
+                  var i = 0;
+                  console.log(questions[curQ]['interactions']);
+                  for (i = 0; i < questions[curQ]['interactions'].length; i++) {
+                    if (questions[curQ]['interactions'][i] >= 4)
+                      questions[curQ]['interactions'].splice(i,1);
+                  }
+                }
+                questions[curQ]['interactions'].push(parseInt(interaction));                
+              }
+          });
+        }
+        /* Voting Panel*/
+        $("#voting-panel-upvote").click(function(e){
+          if ($("#voting-panel-upvote").hasClass("disabled")) {
+            console.log("suppressed");
+            e.preventDefault();
+          } else {
+            voteFunction('1');
+            $("#voting-panel-downvote").addClass("disabled")
+            $("#voting-panel-upvote").addClass("disabled")
+          }
+        });
+        $("#voting-panel-favourite").click(function(e){
+          if ($("#voting-panel-favourite").hasClass("disabled")) {
+            console.log("suppressed");
+            e.preventDefault();
+          } else {
+            voteFunction('2');
+            $("#voting-panel-favourite").addClass("disabled")
+          }
+        });
+        $("#voting-panel-downvote").click(function(e){
+          if ($("#voting-panel-downvote").hasClass("disabled")) {
+            console.log("suppressed");
+            e.preventDefault();
+          } else {
+            voteFunction('3');
+            $("#voting-panel-upvote").addClass("disabled")
+            $("#voting-panel-downvote").addClass("disabled")
+          }
+        });
+        /* Difficulty Feedback */
+        $("#radio_easy").click(function(e){
+          voteFunction('4');
+          $("#rate-text").hide();
+          $("#thank-you").show();          
+        });
+        $("#radio_medium").click(function(e){
+          voteFunction('5');
+          $("#rate-text").hide();
+          $("#thank-you").show();                    
+        });
+        $("#radio_hard").click(function(e){
+          voteFunction('6');
+          $("#rate-text").hide();
+          $("#thank-you").show();
+        });
+        /* Logic for questions in navbar */
+        $.each(questions, function(index, value){
+          index = index+1;
+          $("#questionsList").append(
+            "<li id=\"navbarLi" + index + "\"><a href=\"#\" id=\"navbarQuestion" +
+            index +
+            "\">Question " + 
+            index +
+            "</a></li>"
+          );
+          $("#navbarQuestion"+index).click(function(){
+            /* Save the current answer*/
+            /* DB */      
+            $.get("ajaxUtil/saveAnswer.html?testId=" +
+              $("#testId").val() + "&currentQ=" +
+              $("#currentQ").val() + "&answer=" + 
+              escape($("#answer-space").val()), 
+              function(data, status){
+                if (data === 'ok') {
+
+                } else {
+                  alert("Error answer not saved!");
+                }
+            });
+            /* Locally */
+            var curQ = parseInt($("#currentQ").val());
+            questions[curQ]['givenanswer']=$("#answer-space").val();
+            /* Update question number*/
+            $("#currentQ").val(index-1);
+            /* Fetch question */
+            $("#question").html(
+              "<pre style=\"white-space: pre-wrap;\">" + 
+              parseInt(index).toString() + ") " +
+              questions[index-1]['question'] +
+              "</pre>"
+            );
+            /* Load answer*/
+            $("#answer-space").val(
+              questions[index-1]['givenanswer']
+            );
+            $("#prevqNum").html(
+              index-1
+            );
+            $("#prevqNum").trigger("change");
+            $("#nextqNum").html(          
+              index+1
+            );
+            $("#nextqNum").trigger("change");
+            $("#voting-panel-upvote").removeClass("disabled");
+            $("#voting-panel-downvote").removeClass("disabled");
+            $("#voting-panel-favourite").removeClass("disabled");
+            $("#radio_easy").next().removeClass("ui-state-active");
+            $("#radio_medium").next().removeClass("ui-state-active");
+            $("#radio_hard").next().removeClass("ui-state-active"); 
+            var interactions = questions[index-1]['interactions']   
+            console.log(interactions);
+            $("#rate-text").show();
+            $("#thank-you").hide();
+            if (interactions.indexOf(1) > -1) {              
+              $("#voting-panel-upvote").addClass("disabled");
+              $("#voting-panel-downvote").addClass("disabled");
+            } 
+            if (interactions.indexOf(2) > -1) {
+              $("#voting-panel-favourite").addClass("disabled");
+            } 
+            if (interactions.indexOf(3) > -1) {
+              $("#voting-panel-upvote").addClass("disabled");
+              $("#voting-panel-downvote").addClass("disabled");
+            } 
+            if (interactions.indexOf(4) > -1) {
+              $("#rate-text").hide();
+              $("#thank-you").show();
+              $("#radio_easy").next().addClass("ui-state-active");
+              $("#radio_medium").next().removeClass("ui-state-active");
+              $("#radio_hard").next().removeClass("ui-state-active");
+            } 
+            if (interactions.indexOf(5) > -1) {              
+              $("#rate-text").hide();
+              $("#thank-you").show();
+              $("#radio_easy").next().removeClass("ui-state-active");
+              $("#radio_medium").next().addClass("ui-state-active");
+              $("#radio_hard").next().removeClass("ui-state-active");
+            } 
+            if (interactions.indexOf(6) > -1) {
+              $("#rate-text").hide();
+              $("#thank-you").show();
+              $("#radio_easy").next().removeClass("ui-state-active");
+              $("#radio_medium").next().removeClass("ui-state-active");
+              $("#radio_hard").next().addClass("ui-state-active");
+            } 
+          });                              
+        });        
+      });
+    </script></head><body class=test-screen><div class=mediachecker></div><div class="roboto-font full-screen"><div class=offcanvas-container><h4>Questions</h4><ul id=questionsList></ul></div><div class=top><img class=menu src=/static/mocktest/images/icons/questions-list1.png alt="Questions List" style="margin-left: 10px"><div id=time class=right-align><div id=defaultCountdown></div></div></div><div class=acting-main><hr id=linesep-1 class=mobile><div class=middle-item><div id=voting-panel style="float:left; display: flex; flex-direction: column"><button id=voting-panel-upvote class=image-button-column><img src=/static/mocktest/images/icons/upvote_32.png title="Up vote"></button> <button id=voting-panel-favourite class=image-button-column><img src=/static/mocktest/images/icons/favourite_32.png title=Favourite></button> <button id=voting-panel-downvote class=image-button-column><img src=/static/mocktest/images/icons/downvote_32.png title=Downvote></button></div><div class=middle-item id=question></div><div class=centered-div id=difficulty-radio><div id=rate-text style="display: none">Please take a moment to rate this question</div><div id=thank-you style="display: none">Thank you for rating</div><input type=radio id=radio_easy name=difficulty><label for=radio_easy>Easy</label> <input type=radio id=radio_medium name=difficulty><label for=radio_medium>Moderate</label> <input type=radio id=radio_hard name=difficulty><label for=radio_hard>Hard</label></div><textarea id=answer-space class="full-width middle-item answer-space" style="font-family: sans-serif;"></textarea><div class=footerbar><section class=styleguide__article-nav><div class=container-medium><nav class=article-nav><a id=prevq href=# class="article-nav-link article-nav-link--prev"><p id=prevqNum class="article-nav-count color-orange-bg-before">01</p></a> <a id=nextq href=# class="article-nav-link article-nav-link--next"><p id=nextqNum class="article-nav-count color-orange-bg-before">03</p></a></nav></div></section></div><div id=test-control-buttons><a id=submit-button href=#submit-confirmation class="button--mockingone centered-button popup-source">Submit Test</a><a id=save-button href=#login-box class="button--mockingone centered-button popup-source">Resume Later</a><a id=exit-button href=#exit-confirmation class="button--mockingone centered-button popup-source">Exit Test</a></div></div><input type=hidden id=currentQ> <input type=hidden id=testId><div id=login-box class=popup><a href=# class=close><img src=/static/mocktest/images/icons/close.png class=btn_close title="Close Window" alt=Close></a><form method=post class=popup-body action=#><fieldset class=textbox><div class=middle>Please name your test.<br>All saved tests can be retrieved from Saved Tests tab in your home page.</div><label class=username><input class=middle id=testName name=testName type=text autocomplete=on placeholder=testName></label> <button id=popup-save-button class="submit button middle" type=button>Save</button></fieldset></form></div><div id=submit-confirmation class=popup><a href=# class=close><img src=/static/mocktest/images/icons/close.png class=btn_close title="Close Window" alt=Close></a><form method=post class=popup-body action=#><fieldset class=textbox><div class=middle>Are you sure you want to submit? You cannot edit the answers once submitted.<br>Optionally you can name your test, so that you can refer to it easily later on</div><input class=middle id=testName-submit name=testName type=text autocomplete=on placeholder=testName> <button id=popup-submit-button class="submit button middle" type=button>Submit</button></fieldset></form></div><div id=exit-confirmation class=popup><a href=# class=close><img src=/static/mocktest/images/icons/close.png class=btn_close title="Close Window" alt=Close></a><form method=post class=popup-body action=#><fieldset class=textbox><div class=middle>Are you sure you want to exit? You lose access to this test when you exit</div><button id=popup-exit-button class="submit button middle" type=button>Yes! Exit</button></fieldset></form></div><div id=timeover-confirmation class=popup><a href=# class=close><img src=/static/mocktest/images/icons/close.png class=btn_close title="Close Window" alt=Close></a><form method=post class=popup-body action=#><fieldset class=textbox><div class=middle>Your test timings are over. Click Submit to finish the test or feel free to continue at your pace</div><button id=popup-submit-button-1 class="submit button middle" type=button>Submit</button></fieldset></form></div><a href=#timeover-confirmation style=display:none id=timeover-anchor class=popup-source></a></div></div><script src=static/mocktest/scripts/test.min.js></script></body></html>

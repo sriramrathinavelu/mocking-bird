@@ -1,0 +1,10 @@
+{% extends "mocktest/base.html" %} {% block title %} Congratulations {% endblock %} {% block css_js %}<script src=//code.jquery.com/jquery-1.10.2.js></script>{% endblock %} {% block just_js %} {% endblock %} {% block jquery %}<script>
+    function getURLParameter(name) {
+      return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,''])[1].replace(/\+/g, '%20'))||null;
+    }
+
+
+  $(function(){
+    $("#answersheet-anchor").attr("href", "/result.html?testId=" + getURLParameter("testId")+"&congrats=1");
+  });
+  </script>{% endblock %} {% block content %}<main><div id=content><h1 id=hello>Congratulations! {{firstName}}</h1><p>You have succesfully completed your test. You can check out your answer sheet <a id=answersheet-anchor href=#>here</a>. A copy of it is also available under the history tab.</p><p>You can also take advantage of <i>#include&lt;test&gt;</i> mentors to evaluate your answer sheet and give their esteemed comments on where you went wrong and what more you should do to get that dream job of yours.<br>To do so please check one of the boxes below</p><br><br><form id=evaluation-form action=congrats.html method=post>{% csrf_token %}<div class=left-div><input type=radio name=evaluation value=1> Evaluation by #include&lt;test&gt; certified evaluator ($XX.00)<br><br><input type=radio name=evaluation value=2 checked> I think I will evaluate myself this time <input type=hidden value={{testId}} name=testId></div></form><div class=left-div><br><a id="evalution-submit-button centered-button" href=# class=button--mockingone onclick="document.getElementById('evaluation-form').submit();">Submit</a></div></div></main>{% endblock %}

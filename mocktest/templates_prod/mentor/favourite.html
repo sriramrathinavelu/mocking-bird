@@ -1,0 +1,200 @@
+{% extends "mentor/mentor_base.html" %} {% block css_js %} {% endblock %} {% block jquery %}<script>    
+    $(function(){
+
+        function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                console.log("Done!");
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+                }
+            }   
+        });
+
+
+        // We have to build the tree
+        var comList = {{comList|safe}};
+        var compPosDict = {{compPosDict|safe}};
+        var compPosCheckDict = {{compPosCheckDict|safe}};
+        var posList = {{posList|safe}}        
+        var posCompDict = {{posCompDict|safe}};        
+        var posCompCheckDict = {{posCompCheckDict|safe}};
+
+        function setInitialState (){
+          for (var company in compPosCheckDict) {
+            if (compPosCheckDict.hasOwnProperty(company)) {
+              for (var position in compPosCheckDict[company]) {
+                if (compPosCheckDict[company].hasOwnProperty(position)) {
+                  if (compPosCheckDict[company][position]) {
+                    $("#"+company.replace(' ', '_')+"-"+position.replace(' ', '_')).trigger('click');
+                  }
+                }
+              }
+            }
+          }          
+        }
+        function makeCompPosTree (){            
+            var parentIndex = null;
+            var parentValue = "";
+            $("#compPosTree").html("");
+            $("#compPosTree").append("<ul>");                
+            $.each(comList, function(index, value){              
+                $("#compPosTree > ul").append("<li id=\"root-"+index+"\" class=\"collapsed\">");
+                console.log(value);
+                $("#compPosTree > ul > li#root-"+index).append("<input type=\"checkbox\"/><span>" + value + "</span>");
+                $("#compPosTree > ul > li#root-"+index).append("<ul>");
+                parentIndex = index;
+                parentValue = value.replace(" ", "_");
+                $.each(compPosDict[value], function(index, value){
+                    console.log(value);
+                    $("#compPosTree > ul > li#root-"+parentIndex+" > ul").append("<li id=\"li-tree-"+parentIndex+"-"+index+"\">");
+                    $("#compPosTree > ul > li#root-"+parentIndex+" > ul > li#li-tree-"+parentIndex+"-"+index).append("<input type=\"checkbox\" id=\""+parentValue+"-"+value.replace(" ", "_")+"\"/><span>" + value + "</span>");            
+                });            
+            });      
+            $("#compPosTree").tree({
+                onCheck: {
+                    ancestors: 'checkIfFull',
+                    node: 'expand',
+                    descendants: 'check'
+                },
+                onUncheck: {
+                    node: 'collapse',
+                    ancestors: 'uncheck'
+                },
+                collapseUiIcon: 'icon-plus',
+                expandUiIcon: 'icon-minus',
+                dnd: false,            
+                selectable: false
+            });
+        }
+        function makePosCompTree() {        
+            var parentIndex = null;        
+            var parentValue = "";
+            $("#posCompTree").html("");
+            $("#posCompTree").append("<ul>");        
+            $.each(posList, function(index, value){
+                $("#posCompTree > ul").append("<li id=\"root-"+index+"\" class=\"collapsed\">");
+                console.log(value);
+                $("#posCompTree > ul > li#root-"+index).append("<input type=\"checkbox\"/><span>" + value + "</span>");
+                $("#posCompTree > ul > li#root-"+index).append("<ul>");
+                parentIndex = index;
+                parentValue = value.replace(" ", "_");
+                $.each(posCompDict[value], function(index, value){
+                    console.log(value);
+                    $("#posCompTree > ul > li#root-"+parentIndex+" > ul").append("<li id=\"li-tree-"+parentIndex+"-"+index+"\">");
+                    $("#posCompTree > ul > li#root-"+parentIndex+" > ul > li#li-tree-"+parentIndex+"-"+index).append("<input type=\"checkbox\" id=\""+parentValue+"-"+value.replace(" ", "_")+"\"/><span>" + value + "</span>");            
+                });            
+            });
+            $("#posCompTree").tree({
+                onCheck: {
+                    ancestors: 'checkIfFull',
+                    node: 'expand',
+                    descendants: 'check'
+                },
+                onUncheck: {
+                    node: 'collapse',
+                    ancestors: 'uncheck'
+                },
+                collapseUiIcon: 'icon-plus',
+                expandUiIcon: 'icon-minus',
+                dnd: false,            
+                selectable: false
+            });
+        }
+        makeCompPosTree();
+        makePosCompTree();
+        $("#tree-view-select").change(function(){            
+            value = $("#tree-view-select").val();
+            if (value == "pcv"){
+              $("#compPosTree").hide();
+              $("#posCompTree").show();
+              $("#content").hide();
+            } else if (value === "ccv") {
+              $("#compPosTree").show();
+              $("#posCompTree").hide();
+              $("#content").hide();
+            } else {
+              $("#compPosTree").hide();
+              $("#posCompTree").hide();
+              $("#content").show();
+            }
+        });
+        $("#compPosTree input[type=checkbox]").change(function(){
+            var cbox = $(this);
+            var company = "";
+            var position = "";
+            var parent = cbox.parent();
+            if (parent.hasClass("leaf")) {
+                position = parent.find(".daredevel-tree-label:first").html();   
+                company = parent.parent().parent().find(".daredevel-tree-label:first").html();                   
+                if (cbox.prop('checked')) {
+                    console.log("Checked " + company + "/" + position);
+                    compPosCheckDict[company][position] = true;
+                    position = position.replace(' ', '_');
+                    company = company.replace(' ', '_');
+                    if (!$("#"+position+"-"+company).prop("checked")) {
+                        $("#"+position+"-"+company).trigger('click');
+                    }
+                } else {
+                    console.log("Unchecked " + company + "/" + position);
+                    compPosCheckDict[company][position] = false;                
+                    position = position.replace(' ', '_');
+                    company = company.replace(' ', '_');
+                    if ($("#"+position+"-"+company).prop("checked")) {
+                        $("#"+position+"-"+company).trigger('click');
+                    }
+                }
+            }            
+        });
+        $("#posCompTree input[type=checkbox]").change(function(){
+            var cbox = $(this);
+            var company = "";
+            var position = "";
+            var parent = cbox.parent();
+            if (parent.hasClass("leaf")) {
+                company = parent.find(".daredevel-tree-label:first").html();   
+                position = parent.parent().parent().find(".daredevel-tree-label:first").html();
+                if (cbox.prop('checked')) {
+                    console.log("Checked " + company + "/" + position);
+                    posCompCheckDict[position][company] = true;                    
+                    position = position.replace(' ', '_');
+                    company = company.replace(' ', '_');
+                    if (!$("#"+company+"-"+position).prop("checked")) {
+                        $("#"+company+"-"+position).trigger('click');
+                    }
+                } else {
+                    console.log("Unchecked " + company + "/" + position);                    
+                    posCompCheckDict[position][company] = false;
+                    position = position.replace(' ', '_');
+                    company = company.replace(' ', '_');
+                    if ($("#"+company+"-"+position).prop("checked")) {
+                        $("#"+company+"-"+position).trigger('click');
+                    }
+                }
+            }            
+        });        
+        setInitialState();        
+        $("#compPosTree").hide();
+        $("#posCompTree").hide();
+        $("#favourites-done").click(function(){
+            var csrftoken = $.cookie('csrftoken');
+            $.ajax({
+                type: "POST",
+                url: "/mentor/favourite.html",
+                data: {
+                    'compPosCheckDict': JSON.stringify(compPosCheckDict),
+                    'posCompCheckDict': JSON.stringify(posCompCheckDict)
+                },
+                success: function(data, status, jqxhr) {
+                    if (data === 'ok') {
+                        window.location='/mentor/home.html';
+                    }
+                }
+            });
+        });
+    });
+</script>{% endblock %} {% block content %}<main><div class=centered-div><select id=tree-view-select class=centered-input style="width: 250px;"><option value=def>Select a view</option><option value=ccv>Company Centric View</option><option value=pcv>Position Centric View</option></select></div><div id=content><p>Choose one of the below views from the above selection box</p><ul><li>Company Centric View</li><li>Position Centric View</li></ul><p>and select the companies and positions you want to be notified when a submission is available for evaluation</p><p>You can always change these settings, so don't worry about getting it right the first time</p></div><div id=compPosTree></div><div id=posCompTree></div><div class=centered-small-div><a id=favourites-done href=# class="button--mockingone centered-button" style="width: 200px;">Done</a></div></main>{% endblock %}

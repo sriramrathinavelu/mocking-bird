@@ -5,11 +5,12 @@ History
 {% endblock %}
 
 {% block css_js %}
-  <link rel="stylesheet" href="/static/mocktest/styles/jquerymobile.css">    
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">    
-  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>  
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
 {% endblock %}  
+
+{% block just_js %}
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{% endblock %}
 
 {% block jquery %}
   <script>    
@@ -99,7 +100,7 @@ History
     
 
     $("#positionName").autocomplete({
-      source: {{positionNames|safe}},
+      source: eval('{{positionNames|safe}}'),
       select: function(event, ui){
         $.getJSON("/ajaxUtil/userPositionFavourites.html?positionName=" + ui.item.value,function (data, status){
           if (status === "success") {
@@ -127,7 +128,7 @@ History
 
 
     $("#companyName").autocomplete({
-      source: {{companyNames|safe}},
+      source: eval('{{companyNames|safe}}'),
       select: function(event, ui){
         $.getJSON("/ajaxUtil/userCompanyFavourites.html?companyName=" + ui.item.value,function (data, status){
           $(".articles-count").html("");

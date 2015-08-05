@@ -1,0 +1,1 @@
+{% extends "admin/formbase.html" %} {% block content %}<form method=POST action={{action}}>{% csrf_token %}<div class=fieldWrapper>{{ form.question.errors }} {{ form.question.label_tag }} {{ form.question }}</div><input type=Submit value={{submitValue}}></form><a href=/admin/home.html>Home</a> {% endblock %}

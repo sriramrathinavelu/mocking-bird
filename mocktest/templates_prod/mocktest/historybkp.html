@@ -1,0 +1,185 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=description content="Framework to help prepare for interviews with mock tests"><meta name=viewport content="width=device-width, initial-scale=1"><title>Base</title><link rel=manifest href=manifest.json><meta name=mobile-web-app-capable content=yes><meta name=application-name content="Web Starter Kit"><link rel=icon sizes=192x192 href=images/touch/chrome-touch-icon-192x192.png><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=apple-mobile-web-app-title content="Web Starter Kit"><link rel=apple-touch-icon href=images/touch/apple-touch-icon.png><meta name=msapplication-TileImage content=images/touch/ms-touch-icon-144x144-precomposed.png><meta name=msapplication-TileColor content=#3372DF><meta name=theme-color content=#3372DF><link rel=stylesheet href=/static/mocktest/styles/components.css><link rel=stylesheet href=/static/mocktest/styles/main.css><link rel=stylesheet href=/static/mocktest/styles/fancyDate.css><link rel=stylesheet href=//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css><link rel=stylesheet href=/static/mocktest/styles/autocomplete.css><script src=//code.jquery.com/jquery-1.10.2.js></script><script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script><script>    
+    $(function(){
+      var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+      
+      function makeListTitle(count){
+        $(".articles-count").html("We found " + count + " tests matching your criteria");
+      }
+      
+
+      function makeTestList(index, value, isSaved) {
+        var testDate = new Date(value['testdate']);
+        var dateStr = testDate.getFullYear().toString() + "-" + testDate.getMonth().toString() + "-" + testDate.getDate();
+        var markStr="";
+        if (value['isevaluated']){
+          markStr="Marks Scored: " + value['scoredmarks'] +" / " + value['totalmarks'];
+        }
+        var nameStr="";
+        if (value['testname']) {
+          nameStr="Name: " + value['testname'];
+        }           
+        var buttonText = "View Result";
+        var ahref = "result.html?testId="+value['testid'];
+        if (isSaved) {
+          buttonText = "Resume Test";
+          ahref = "test.html?testId="+value['testid']+"&testName="+
+                  value['testname'];
+        }
+        var calendarSize = "size1_5x";        
+        if ($(".mediachecker").css("float") == "left" ){
+            // Small Screen
+            calendarSize = "size1x";
+        }        
+        $(".articles-list").append(
+        "<li class=\"articles-list__item custom-padding blurred-bg\"><time datetime=\"" + dateStr +"\" class=\"date-as-calendar position-em " + calendarSize + "\"><span class=\"weekday\">"+days[testDate.getDay()]+"</span><span class=\"day\">"+testDate.getDate()+"</span><span class=\"month\">"+months[testDate.getMonth()]+"</span><span class=\"year\">"+testDate.getFullYear()+"</span></time><h5 class=\"mobile-text-to-left\">"+value['companyname']+"</h5><h5 class=\"mobile-text-to-left\">"+value['positionname']+"</h5><h5>"+nameStr+"</h5><h5 class=\"mobile-text-to-left\">Questions Answered: "+value['questionsanswered']+" / "+value['totalquestions']+"</h5><h5 class=\"mobile-text-to-left\">"+markStr+"</h5><a href=\""+ahref+"\" class=\"button--mockingone small-button\">"+buttonText+"</a></li>"
+        );
+      }
+
+
+
+
+      $("#by-company").click(function(){
+        /*Clear by-position view*/
+        $("#position-select").hide();
+        $("#company-select-1").hide();
+        $(".articles-count").html("");
+        $(".articles-list").html("");
+        /* Get the companies history*/
+        $.get("/ajaxUtil/userCompany.html", function(data, status){
+          if (status === "success") {
+            $("#company-select").html(data);
+            if ($("#company-select option").length > 0) {
+              /* Display the select element*/
+              $("#company-select").show();              
+            } else {
+              /*Say there is no data to show*/
+            }
+          }
+        });        
+      });
+      $("#by-position").click(function(){
+        $("#company-select").hide();
+        $("#position-select-1").hide();
+        $(".articles-count").html("");
+        $(".articles-list").html("");
+        /* Get the companies history*/
+        $.get("/ajaxUtil/userPosition.html", function(data, status){
+          if (status === "success") {
+            $("#position-select").html(data);
+            if ($("#position-select option").length > 0) {
+              /* Display the select element*/
+              $("#position-select").show();              
+            } else {
+              /*Say there is no data to show*/
+            }
+          }
+        });        
+      });
+      $("#position-select-1").change(function(){
+        /*Load Test data based on the company and position*/
+        if (!$("#position-select-1").val().match("^Please")) {
+          $.getJSON("/ajaxUtil/userCompanyTests.html?companyId=" + $("#company-select").val() + "&positionId=" + $("#position-select-1").val(),function (data, status){
+            if (status === "success") {              
+              makeListTitle(data.length);
+              $(".articles-list").html("");
+              $.each(data, function(index, value){
+                makeTestList(index, value, false);
+              }); 
+            }
+          });
+        }
+      });
+      $("#company-select-1").change(function(){
+        /*Load Test data based on the company and position*/
+        if (!$("#company-select-1").val().match("^Please")) {
+          $.getJSON("/ajaxUtil/userPositionTests.html?companyId=" + $("#company-select-1").val() + "&positionId=" + $("#position-select").val(),function (data, status){
+            if (status === "success") {              
+              makeListTitle(data.length);
+              $(".articles-list").html("");
+              $.each(data, function(index, value){
+                makeTestList(index, value, false);
+              }); 
+            }
+          });
+        }
+      });
+      $("#company-select").change(function(){
+        /*Get the user tests*/
+        if (!$("#company-select").val().match("^Please")) {
+          $.getJSON("/ajaxUtil/userCompanyTests.html?companyId=" + $("#company-select").val(),function (data, status){
+            if (status === "success") {              
+              $(".articles-list").html("");
+              makeListTitle(data.length);
+              $.each(data, function(index, value){
+                makeTestList(index, value, false);
+             });             
+            }
+          });
+          /*Get the positions for the company*/
+          $.get("/ajaxUtil/userCompanyPosition.html?companyId=" + $("#company-select").val(), function(data, status){
+            if (status === "success") {
+              $("#position-select-1").html(data);
+              if ($("#position-select-1 option").length > 0) {
+                $("#position-select-1").show();
+              }
+            }
+          });
+        }
+      });
+      $("#position-select").change(function(){
+        /*Get the user tests*/
+        if (!$("#position-select").val().match("^Please")) {
+          $.getJSON("/ajaxUtil/userPositionTests.html?positionId=" + $("#position-select").val(),function (data, status){
+            if (status === "success") {              
+              $(".articles-list").html("");
+              makeListTitle(data.length);
+              $.each(data, function(index, value){
+                makeTestList(index, value, false);
+             }); 
+            }
+          });
+          /*Get the positions for the company*/
+          $.get("/ajaxUtil/userPositionCompany.html?positionId=" + $("#position-select").val(), function(data, status){
+            if (status === "success") {
+              $("#company-select-1").html(data);
+              if ($("#company-select-1 option").length > 0) {
+                $("#company-select-1").show();
+              }
+            }
+          });
+        }
+      });
+      $("#all-tests").click(function(){
+        $("#company-select").hide();
+        $("#position-select-1").hide();
+        $("#position-select").hide();
+        $("#company-select-1").hide();
+        $.getJSON("/ajaxUtil/userTests.html",function (data, status){
+          if (status === "success") {              
+            $(".articles-list").html("");
+            makeListTitle(data.length);
+            $.each(data, function(index, value){
+              makeTestList(index, value, false);
+           }); 
+          }
+        });
+      });
+      $("#saved-tests").click(function(){
+        $("#company-select").hide();
+        $("#position-select-1").hide();
+        $("#position-select").hide();
+        $("#company-select-1").hide();
+        $.getJSON("/ajaxUtil/userSavedTests.html",function (data, status){
+          if (status === "success") {              
+            $(".articles-list").html("");
+            makeListTitle(data.length);
+            $.each(data, function(index, value){
+              makeTestList(index, value, true);
+           }); 
+          }
+        });
+      });
+    });
+    </script></head><body><div class=mediachecker></div><header class="app-bar promote-layer"><div class=app-bar-container><button class=menu><img src=/static/mocktest/images/hamburger.png alt=Menu></button><h1 class=logo><strong>Crack It!</strong></h1><section class=app-bar-actions></section></div></header><nav class="navdrawer-container promote-layer"><h4>Navigation</h4><ul><li><a href="/">Home</a></li><li><a href=/history.html>History</a></li><li><a href=#hello>About Us</a></li><li><a href=#getstarted>Contact Us</a></li></ul></nav><main><div id=test-control-buttons><a id=by-company href=# class="button--mockingone centered-button">Company-wise</a> <a id=by-position href=# class="button--mockingone centered-button">Position-wise</a> <a id=all-tests href=# class="button--mockingone centered-button">All Tests</a> <a id=saved-tests href=# class="button--mockingone centered-button">Saved Tests</a></div><div id=controls class=middle-item><select id=position-select name=position-select class=wide-select style=display:none></select><select id=company-select name=company-select class=wide-select style=display:none></select><select id=position-select-1 name=position-select-1 class=wide-select style=display:none></select><select id=company-select-1 name=company-select-1 class=wide-select style=display:none></select></div><section class=styleguide__articles-section><div class=articles-section><div class=container><p class=articles-count></p><ol class=articles-list></ol></div></div></section></main><script src=/static/mocktest/scripts/main.js></script></body></html>
