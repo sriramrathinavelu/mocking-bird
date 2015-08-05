@@ -1,477 +1,0 @@
-python
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python
-2Python 2.7.3 (default, Apr 10 2013, 06:20:15) 
-[GCC 4.6.3] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>> 259*39
-10101
->>> _*23
-232323
->>> 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ logout
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python
-Python 2.7.3 (default, Apr 10 2013, 06:20:15) 
-[GCC 4.6.3] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>> 343/67
-5
->>> 343/67.0
-5.119402985074627
->>> sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ cd noc[K[K[Kmocktest/
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ ls
-adminForms.py   adminUrls.py    ajaxUrls.py    [0m[01;34malgo[0m         DAOUtil.py    [01;34mmigrations[0m  [01;34mstandalone[0m  urls.pyc   views.pyc
-adminForms.pyc  adminUrls.pyc   ajaxUrls.pyc   auth.py      DAOUtil.pyc   models.py   [01;34mtemplates[0m   utils.py
-admin.py        adminViews.py   ajaxUtils.py   backend.py   __init__.py   models.pyc  tests.py    utils.pyc
-admin.pyc       adminViews.pyc  ajaxUtils.pyc  backend.pyc  __init__.pyc  mysite.log  urls.py     views.py
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ vi ajaxUrls.py
-[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"ajaxUrls.py" 20L, 943C[1;1H[35mfrom[0m django.conf.urls [35mimport[0m url
-[35mfrom[0m . [35mimport[0m ajaxUtils
-
-urlpatterns = [
-    url([31mr'^getPositions.html$'[0m, ajaxUtils.getPositions),
-    url([31mr'^isUsernameValid.html$'[0m, ajaxUtils.isUsernameValid),
-    url([31mr'^saveAnswer.html$'[0m, ajaxUtils.saveAnswer),
-    url([31mr'^changeTestState.html$'[0m, ajaxUtils.changeTestState),
-    url([31mr'^submitTest.html$'[0m, ajaxUtils.submitTest),
-    url([31mr'^saveTest.html$'[0m, ajaxUtils.saveTest),
-    url([31mr'^exitTest.html$'[0m, ajaxUtils.exitTest),
-    url([31mr'^userTests.html$'[0m, ajaxUtils.getUserTests),
-    url([31mr'^userSavedTests.html$'[0m, ajaxUtils.getUserSavedTests),
-    url([31mr'^userCompany.html$'[0m, ajaxUtils.getUserCompany),
-    url([31mr'^userPosition.html$'[0m, ajaxUtils.getUserPosition),
-    url([31mr'^userCompanyTests.html$'[0m, ajaxUtils.getUserCompanyTests),
-    url([31mr'^userPositionTests.html$'[0m, ajaxUtils.getUserPositionTests),
-    url([31mr'^userCompanyPosition.html$'[0m, ajaxUtils.getUserCompanyPosition),
-    url([31mr'^userPositionCompany.html$'[0m, ajaxUtils.getUserPositionCompany),
-]
-[1m[34m~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H1,1[11CAll[1;1H[34h[?25h[?25l[38;126H2[2;1H[34h[?25h[?25l[38;126H3,0-1[3;1H[34h[?25h[?25l[38;126H4,1  [4;1H[34h[?25h[?25l[38;126H5[5;1H[34h[?25h[?25l[38;126H6,1-4[6;4H[34h[?25h[?25l[38;126H7[7;4H[34h[?25h[?25l[38;126H8[8;4H[34h[?25h[?25l[38;126H9[9;4H[34h[?25h[?25l[38;126H10,1-4[10;4H[34h[?25h[?25l[38;127H1[11;4H[34h[?25h[?25l[38;129H2-5[11;5H[34h[?25h[?25l[38;129H3-6[11;6H[34h[?25h[?25l[38;129H4-7[11;7H[34h[?25h[?25ll[46m([38C)[0m[38;129H5-8[11;8H[34h[?25h[?25l([38C)[38;129H6-9[11;9H[34h[?25h[?25l[38;129H7-10[11;10H[34h[?25h[?25l[38;129H8-11[11;11H[34h[?25h[?25l[38;129H9-12[11;12H[34h[?25h[?25l[38;129H10-13[11;13H[34h[?25h[?25l[38;130H1-14[11;14H[34h[?25h[?25l[38;130H2-15[11;15H[34h[?25h[?25l[38;130H3-16[11;16H[34h[?25h[?25l[38;130H4-17[11;17H[34h[?25h[?25l[38;130H5-18[11;18H[34h[?25h[?25l[38;130H6-19[11;19H[34h[?25h[?25l[38;130H7-20[11;20H[34h[?25h[?25l[38;130H8-21[11;21H[34h[?25h[?25l[38;130H9-22[11;22H[34h[?25h[?25l[38;129H20-23[11;23H[34h[?25h[?25l[38;127H0[10;23H[34h[?25h[?25l[38;126H9,20-23 [9;23H[34h[?25h[?25l[38;126H8[8;23H[34h[?25h[?25l[38;128H19-22[8;22H[34h[?25h[?25l[38;129H8-21[8;21H[34h[?25h[?25l[38;129H7-20[8;20H[34h[?25h[?25l[38;129H6-19[8;19H[34h[?25h[?25l[38;129H5-18[8;18H[34h[?25h[?25l[38;129H4-17[8;17H[34h[?25h[?25l[38;129H3-16[8;16H[34h[?25h[?25l[38;129H2-15[8;15H[34h[?25h[?25l[38;129H1-14[8;14H[34h[?25h[?25l[38;129H0-13[8;13H[34h[?25h[?25l[38;128H9-12 [8;12H[34h[?25h[?25l[31m^hangeTestState.html$'[0m, ajaxUtils.changeTestState),[8;62H[K[8;12H[34h[?25h[?25l[31m^angeTestState.html$'[0m, ajaxUtils.changeTestState),[8;61H[K[8;12H[34h[?25h[?25l[31m^ngeTestState.html$'[0m, ajaxUtils.changeTestState),[8;60H[K[8;12H[34h[?25h[?25l[31m^geTestState.html$'[0m, ajaxUtils.changeTestState),[8;59H[K[8;12H[34h[?25h[?25l[31m^eTestState.html$'[0m, ajaxUtils.changeTestState),[8;58H[K[8;12H[34h[?25h[?25l[31m^TestState.html$'[0m, ajaxUtils.changeTestState),[8;57H[K[8;12H[34h[?25h[?25l[31m^estState.html$'[0m, ajaxUtils.changeTestState),[8;56H[K[8;12H[34h[?25h[?25l[31m^stState.html$'[0m, ajaxUtils.changeTestState),[8;55H[K[8;12H[34h[?25h[?25l[31m^tState.html$'[0m, ajaxUtils.changeTestState),[8;54H[K[8;12H[34h[?25h[?25l[31m^State.html$'[0m, ajaxUtils.changeTestState),[8;53H[K[8;12H[34h[?25h[?25l[31m^tate.html$'[0m, ajaxUtils.changeTestState),[8;52H[K[8;12H[34h[?25h[?25l[31m^ate.html$'[0m, ajaxUtils.changeTestState),[8;51H[K[8;12H[34h[?25h[?25l[31m^te.html$'[0m, ajaxUtils.changeTestState),[8;50H[K[8;12H[34h[?25h[?25l[31m^e.html$'[0m, ajaxUtils.changeTestState),[8;49H[K[8;12H[34h[?25h[?25l[31m^.html$'[0m, ajaxUtils.changeTestState),[8;48H[K[8;12H[34h[?25h[?25l[38;1H[1m-- INSERT --[0m[38;13H[K[38;126H8,9-12[8CAll[8;12H[34h[?25h[?25l[31m^n.html$'[0m, ajaxUtils.changeTestState),[38;128H10-13[8;13H[34h[?25h[?25l[31mno.html$'[0m, ajaxUtils.changeTestState),[38;129H1-14[8;14H[34h[?25h[?25l[31mot.html$'[0m, ajaxUtils.changeTestState),[38;129H2-15[8;15H[34h[?25h[?25l[31mti.html$'[0m, ajaxUtils.changeTestState),[38;129H3-16[8;16H[34h[?25h[?25l[31mif.html$'[0m, ajaxUtils.changeTestState),[38;129H4-17[8;17H[34h[?25h[?25l[31mfy.html$'[0m, ajaxUtils.changeTestState),[38;129H5-18[8;18H[34h[?25h[?25l[31myT.html$'[0m, ajaxUtils.changeTestState),[38;129H6-19[8;19H[34h[?25h[?25l[31mTe.html$'[0m, ajaxUtils.changeTestState),[38;129H7-20[8;20H[34h[?25h[?25l[31mes.html$'[0m, ajaxUtils.changeTestState),[38;129H8-21[8;21H[34h[?25h[?25l[31mst.html$'[0m, ajaxUtils.changeTestState),[38;129H9-22[8;22H[34h[?25h[?25l[31mtS.html$'[0m, ajaxUtils.changeTestState),[38;128H20-23[8;23H[34h[?25h[?25l[31mSt.html$'[0m, ajaxUtils.changeTestState),[38;129H1-24[8;24H[34h[?25h[?25l[31mta.html$'[0m, ajaxUtils.changeTestState),[38;129H2-25[8;25H[34h[?25h[?25l[31mar.html$'[0m, ajaxUtils.changeTestState),[38;129H3-26[8;26H[34h[?25h[?25l[31mrt.html$'[0m, ajaxUtils.changeTestState),[38;129H4-27[8;27H[34h[?25h[?25l[38;129H5-28[8;28H[34h[?25h[?25l[38;129H6-29[8;29H[34h[?25h[?25l[38;129H7-30[8;30H[34h[?25h[?25l[38;129H8-31[8;31H[34h[?25h[?25l[38;129H9-32[8;32H[34h[?25h[?25l[38;128H30-33[8;33H[34h[?25h[?25l[38;129H1-34[8;34H[34h[?25h[?25l[38;129H2-35[8;35H[34h[?25h[?25l[38;129H3-36[8;36H[34h[?25h[?25l[38;129H4-37[8;37H[34h[?25h[?25l[38;129H5-38[8;38H[34h[?25h[?25l[38;129H6-39[8;39H[34h[?25h[?25l[38;129H7-40[8;40H[34h[?25h[?25l[38;129H8-41[8;41H[34h[?25h[?25l[38;129H9-42[8;42H[34h[?25h[?25l[38;128H40-43[8;43H[34h[?25h[?25l[38;129H1-44[8;44H[34h[?25h[?25l[38;129H2-45[8;45H[34h[?25h[?25l[38;129H3-46[8;46H[34h[?25h[?25l.hangeTestState),[8;62H[K[8;46H[34h[?25h[?25l.angeTestState),[8;61H[K[8;46H[34h[?25h[?25l.ngeTestState),[8;60H[K[8;46H[34h[?25h[?25l.geTestState),[8;59H[K[8;46H[34h[?25h[?25l.eTestState),[8;58H[K[8;46H[34h[?25h[?25l.TestState),[8;57H[K[8;46H[34h[?25h[?25l.nTestState),[38;129H4-47[8;47H[34h[?25h[?25lnoTestState),[38;129H5-48[8;48H[34h[?25h[?25lotTestState),[38;129H6-49[8;49H[34h[?25h[?25ltiTestState),[38;129H7-50[8;50H[34h[?25h[?25lifTestState),[38;129H8-51[8;51H[34h[?25h[?25lfyTestState),[38;129H9-52[8;52H[34h[?25h[?25l[38;128H50-53[8;53H[34h[?25h[?25l[38;129H1-54[8;54H[34h[?25h[?25l[38;129H2-55[8;55H[34h[?25h[?25l[38;129H3-56[8;56H[34h[?25h[?25l[38;129H4-57[8;57H[34h[?25h[?25l[38;129H5-58[8;58H[34h[?25h[?25ltte),[8;62H[K[8;58H[34h[?25h[?25lte),[8;61H[K[8;58H[34h[?25h[?25lt),[8;60H[K[8;8H[46m([49C)[34h[?25h[?25l[0mt[46ma[0m),a[46m)[0m[38;129H6-59[8;59H[34h[?25h[?25la[46mr[0m),r[46m)[0m[38;129H7-60[8;60H[34h[?25h[?25lr[46mt[0m),t[46m)[0m[38;129H8-61[8;61H[34h[?25h[38;1H[K[?25l[8;8H([52C)[38;126H8,57-60[7CAll[8;60H[34h[?25h[?25l[38;126H[K[38;1H:[34h[?25hw[?25l[34h[?25h[?25l"ajaxUrls.py" 20L, 943C written[94C8,57-60[7CAll[38;126H[K[38;126H8,57-60[7CAll[8;60H[34h[?25h[?25l[38;126H9,49-52[9;52H[34h[?25h[?25l[38;126H10,45-48[10;48H[34h[?25h[?25l[38;127H1[11;48H[34h[?25h[?25l[38;127H2,50-53[12;53H[34h[?25h[?25l[38;127H3,57-60[13;60H[34h[?25h[?25l[38;127H4,54-57[14;57H[34h[?25h[?25l[38;127H5,56-59[15;59H[34h[?25h[?25l[38;127H6,57-60[16;60H[34h[?25h[?25l[38;127H7[17;60H[34h[?25h[?25l[38;127H8[18;60H[34h[?25h[?25l[38;127H9[19;60H[34h[?25h[?25l[4;15H[46m[[20;1H][0m[38;126H20,1    [20;1H[34h[?25h[?25l[4;15H[[20;1H][38;126H19,57-60[19;60H[34h[?25h[?25l[38;127H8[18;60H[34h[?25h[?25l[38;127H7[17;60H[34h[?25h[?25l[38;127H6[16;60H[34h[?25h[?25l[38;127H5,56-59[15;59H[34h[?25h[?25l[38;127H4,54-57[14;57H[34h[?25h[?25l[38;127H3,57-60[13;60H[34h[?25h[?25l[38;127H2,50-53[12;53H[34h[?25h[?25l[38;127H1,45-48[11;48H[34h[?25h[?25l[38;127H0[10;48H[34h[?25h[?25l[38;126H9,49-52 [9;52H[34h[?25h[?25l[38;126H8,57-60[8;60H[34h[?25h[?25l[38;126H7,49-52[7;52H[34h[?25h[?25l[38;1H[K[38;1H:[34h[?25hq[?25l[34h[?25h![?25l[34h[?25h[?25l[38;1H[K[38;1H[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ vi urls.py
-[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"urls.py" 17L, 776C[1;1H[35mfrom[0m django.conf.urls [35mimport[0m url
-[35mfrom[0m . [35mimport[0m views, ajaxUtils
-
-urlpatterns = [
-    url([31mr'^$'[0m, views.home, name=[31m'home'[0m),
-    url([31mr'^home.html$'[0m, views.home, name=[31m'home'[0m),
-    url([31mr'^login.html'[0m, views.login, name=[31m'login'[0m),
-    url([31mr'^logout.html'[0m, views.logout, name=[31m'logout'[0m),
-    url([31mr'^signup.html'[0m, views.signup, name=[31m'signup'[0m),
-    url([31mr'^test.html'[0m, views.test, name=[31m'test'[0m),
-    url([31mr'^savedTests.html'[0m, views.savedTests, name=[31m'savedTest'[0m),
-    url([31mr'^result.html'[0m, views.result, name=[31m'result'[0m),
-    url([31mr'^createtest.html'[0m, views.createTest, name=[31m'createTest'[0m),
-    url([31mr'^advancedtest.html'[0m, views.advancedTest, name=[31m'advancedTest'[0m),
-    url([31mr'^history.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),
-    url([31mr'^countdown.html'[0m, views.countDown, name=[31m'countdown'[0m),
-]
-[1m[34m~                                                                                                                                              [19;1H~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H16,1[10CAll[16;1H[34h[?25h[?25l[38;127H5[15;1H[34h[?25h[?25l[38;129H2[15;2H[34h[?25h[?25l[38;129H3[15;3H[34h[?25h[?25l[38;129H4[15;4H[34h[?25h[?25l[38;129H5[15;5H[34h[?25h[?25l[38;129H6[15;6H[34h[?25h[?25l[38;129H7[15;7H[34h[?25h[?25ll[46m([55C)[0m[38;129H8[15;8H[34h[?25h[?25l([55C)[38;129H9[15;9H[34h[?25h[?25l[38;129H10[15;10H[34h[?25h[?25l[38;130H1[15;11H[34h[?25h[?25l[38;130H2[15;12H[34h[?25h[?25l[38;130H3[15;13H[34h[?25h[?25l[38;130H4[15;14H[34h[?25h[?25l[16;37r[16;1H[L[1;38r[16;4H url([31mr'^history.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;1H[K[38;126H16,5[10CAll[16;5H[34h[?25h[?25l[38;129H6[16;6H[34h[?25h[?25l[38;129H7[16;7H[34h[?25h[?25ll[46m([55C)[0m[38;129H8[16;8H[34h[?25h[?25l([55C)[38;129H9[16;9H[34h[?25h[?25l[38;129H10[16;10H[34h[?25h[?25l[38;130H1[16;11H[34h[?25h[?25l[38;130H2[16;12H[34h[?25h[?25l[31m^istory.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[16;65H[K[16;12H[34h[?25h[?25l[31m^story.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[16;64H[K[16;12H[34h[?25h[?25l[31m^tory.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[16;63H[K[16;12H[34h[?25h[?25l[31m^ory.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[16;62H[K[16;12H[34h[?25h[?25l[31m^ry.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[16;61H[K[16;12H[34h[?25h[?25l[31m^y.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[16;60H[K[16;12H[34h[?25h[?25l[31m^.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[16;59H[K[16;12H[34h[?25h[?25l[38;1H[1m-- INSERT --[0m[38;126H[K[38;126H16,12[9CAll[16;12H[34h[?25h[?25l[31m^s.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H3[16;13H[34h[?25h[?25l[31msc.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H4[16;14H[34h[?25h[?25l[31mch.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H5[16;15H[34h[?25h[?25l[31mhe.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H6[16;16H[34h[?25h[?25l[31med.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H7[16;17H[34h[?25h[?25l[31mdT.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H8[16;18H[34h[?25h[?25l[31mTe.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H9[16;19H[34h[?25h[?25l[31mes.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;129H20[16;20H[34h[?25h[?25l[31mst.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H1[16;21H[34h[?25h[?25l[31mts.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),[38;130H2[16;22H[34h[?25h[?25l[38;130H3[16;23H[34h[?25h[?25l[38;130H4[16;24H[34h[?25h[?25l[38;130H5[16;25H[34h[?25h[?25l[38;130H6[16;26H[34h[?25h[?25l[38;130H7[16;27H[34h[?25h[?25l[38;130H8[16;28H[34h[?25h[?25l[38;130H9[16;29H[34h[?25h[?25l[38;129H30[16;30H[34h[?25h[?25l[38;130H1[16;31H[34h[?25h[?25l[38;130H2[16;32H[34h[?25h[?25l[38;130H3[16;33H[34h[?25h[?25l[38;130H4[16;34H[34h[?25h[?25l[38;130H5[16;35H[34h[?25h[?25l[38;130H6[16;36H[34h[?25h[?25l[38;130H7[16;37H[34h[?25h[?25l[38;130H8[16;38H[34h[?25h[?25l[38;130H9[16;39H[34h[?25h[?25l[38;129H40[16;40H[34h[?25h[?25l[38;130H1[16;41H[34h[?25h[?25l[38;130H2[16;42H[34h[?25h[?25l[38;130H3[16;43H[34h[?25h[?25l[38;130H4[16;44H[34h[?25h[?25l[38;130H5[16;45H[34h[?25h[?25l[38;130H6[16;46H[34h[?25h[?25l[38;130H7[16;47H[34h[?25h[?25l[38;130H8[16;48H[34h[?25h[?25l[38;130H9[16;49H[34h[?25h[?25l[38;129H50[16;50H[34h[?25h[?25l[38;130H1[16;51H[34h[?25h[?25l[38;130H2[16;52H[34h[?25h[?25l[38;130H3[16;53H[34h[?25h[?25l[38;130H4[16;54H[34h[?25h[?25l[38;130H5[16;55H[34h[?25h[?25l[38;130H6[16;56H[34h[?25h[?25l[38;130H7[16;57H[34h[?25h[?25l[38;130H8[16;58H[34h[?25h[?25l[38;130H9[16;59H[34h[?25h[?25l[38;129H60[16;60H[34h[?25h[?25l[38;129H59[16;59H[34h[?25h[?25l[38;130H8[16;58H[34h[?25h[?25l[38;130H7[16;57H[34h[?25h[?25l[38;130H6[16;56H[34h[?25h[?25l[38;130H5[16;55H[34h[?25h[?25l[31m'iewHistory'[0m),[16;68H[K[16;55H[34h[?25h[?25l[31m'ewHistory'[0m),[16;67H[K[16;55H[34h[?25h[?25l[31m'wHistory'[0m),[16;66H[K[16;55H[34h[?25h[?25l[31m'History'[0m),[16;65H[K[16;55H[34h[?25h[?25l[31m'istory'[0m),[16;64H[K[16;55H[34h[?25h[?25l[31m'story'[0m),[16;63H[K[16;55H[34h[?25h[?25l[31m'tory'[0m),[16;62H[K[16;55H[34h[?25h[?25l[31m'ory'[0m),[16;61H[K[16;55H[34h[?25h[?25l[31m'ry'[0m),[16;60H[K[16;55H[34h[?25h[?25l[31m'y'[0m),[16;59H[K[16;55H[34h[?25h[?25l[31m''[0m),[16;58H[K[16;55H[34h[?25h[?25l[31m'c'[0m),[38;130H6[16;56H[34h[?25h[?25l[31mch'[0m),[38;130H7[16;57H[34h[?25h[?25l[31mhe'[0m),[38;130H8[16;58H[34h[?25h[?25l[31med'[0m),[38;130H9[16;59H[34h[?25h[?25l[31me'[0m),[16;61H[K[38;130H8[16;58H[34h[?25h[?25l[31mh'[0m),[16;60H[K[38;130H7[16;57H[34h[?25h[?25l[31mc'[0m),[16;59H[K[38;130H6[16;56H[34h[?25h[?25l[31m''[0m),[16;58H[K[38;130H5[16;55H[34h[?25h[?25l[31m's'[0m),[38;130H6[16;56H[34h[?25h[?25l[31msc'[0m),[38;130H7[16;57H[34h[?25h[?25l[31mch'[0m),[38;130H8[16;58H[34h[?25h[?25l[31mhe'[0m),[38;130H9[16;59H[34h[?25h[?25l[31med'[0m),[38;129H60[16;60H[34h[?25h[?25l[31mdu'[0m),[38;130H1[16;61H[34h[?25h[?25l[31mul'[0m),[38;130H2[16;62H[34h[?25h[?25l[31mle'[0m),[38;130H3[16;63H[34h[?25h[?25l[31med'[0m),[38;130H4[16;64H[34h[?25h[?25l[31mdT'[0m),[38;130H5[16;65H[34h[?25h[?25l[31mTe'[0m),[38;130H6[16;66H[34h[?25h[?25l[31mes'[0m),[38;130H7[16;67H[34h[?25h[?25l[31mst'[0m),[38;130H8[16;68H[34h[?25h[?25l[31mts'[0m),[38;130H9[16;69H[34h[?25h[?25l[31mt'[0m),[16;71H[K[38;130H8[16;68H[34h[?25h[?25l[38;130H7[16;67H[34h[?25h[?25l[38;130H6[16;66H[34h[?25h[?25l[38;130H5[16;65H[34h[?25h[?25l[38;130H4[16;64H[34h[?25h[?25l[38;130H3[16;63H[34h[?25h[?25l[38;130H2[16;62H[34h[?25h[?25l[38;130H1[16;61H[34h[?25h[?25l[38;130H0[16;60H[34h[?25h[?25l[38;129H59[16;59H[34h[?25h[?25l[38;130H8[16;58H[34h[?25h[?25l[38;130H7[16;57H[34h[?25h[?25l[38;130H6[16;56H[34h[?25h[?25l[38;130H5[16;55H[34h[?25h[?25l[38;130H4[16;54H[34h[?25h[?25l[38;130H3[16;53H[34h[?25h[?25l[38;130H2[16;52H[34h[?25h[?25l[38;130H1[16;51H[34h[?25h[?25l[38;130H0[16;50H[34h[?25h[?25l[38;129H49[16;49H[34h[?25h[?25l[38;130H8[16;48H[34h[?25h[?25l[38;130H7[16;47H[34h[?25h[?25l[38;130H6[16;46H[34h[?25h[?25l[38;130H5[16;45H[34h[?25h[?25l[38;130H4[16;44H[34h[?25h[?25l[38;130H3[16;43H[34h[?25h[?25l[38;130H2[16;42H[34h[?25h[?25l[38;130H1[16;41H[34h[?25h[?25l[38;130H0[16;40H[34h[?25h[?25l[38;129H39[16;39H[34h[?25h[?25l[38;130H8[16;38H[34h[?25h[?25l[38;130H7[16;37H[34h[?25h[?25l[38;130H6[16;36H[34h[?25h[?25l.iewHistory, name=[31m'scheduledTest'[0m),[16;70H[K[16;36H[34h[?25h[?25l.ewHistory, name=[31m'scheduledTest'[0m),[16;69H[K[16;36H[34h[?25h[?25l.wHistory, name=[31m'scheduledTest'[0m),[16;68H[K[16;36H[34h[?25h[?25l.History, name=[31m'scheduledTest'[0m),[16;67H[K[16;36H[34h[?25h[?25l.istory, name=[31m'scheduledTest'[0m),[16;66H[K[16;36H[34h[?25h[?25l.story, name=[31m'scheduledTest'[0m),[16;65H[K[16;36H[34h[?25h[?25l.tory, name=[31m'scheduledTest'[0m),[16;64H[K[16;36H[34h[?25h[?25l.ory, name=[31m'scheduledTest'[0m),[16;63H[K[16;36H[34h[?25h[?25l.ry, name=[31m'scheduledTest'[0m),[16;62H[K[16;36H[34h[?25h[?25l.y, name=[31m'scheduledTest'[0m),[16;61H[K[16;36H[34h[?25h[?25l., name=[31m'scheduledTest'[0m),[16;60H[K[16;36H[34h[?25h[?25l.s, name=[31m'scheduledTest'[0m),[38;130H7[16;37H[34h[?25h[?25lsc, name=[31m'scheduledTest'[0m),[38;130H8[16;38H[34h[?25h[?25lch, name=[31m'scheduledTest'[0m),[38;130H9[16;39H[34h[?25h[?25lhe, name=[31m'scheduledTest'[0m),[38;129H40[16;40H[34h[?25h[?25led, name=[31m'scheduledTest'[0m),[38;130H1[16;41H[34h[?25h[?25ldT, name=[31m'scheduledTest'[0m),[38;130H2[16;42H[34h[?25h[?25lTe, name=[31m'scheduledTest'[0m),[38;130H3[16;43H[34h[?25h[?25les, name=[31m'scheduledTest'[0m),[38;130H4[16;44H[34h[?25h[?25lst, name=[31m'scheduledTest'[0m),[38;130H5[16;45H[34h[?25h[?25lts, name=[31m'scheduledTest'[0m),[38;130H6[16;46H[34h[?25h[38;1H[K[?25l[38;126H16,45[9CAll[16;45H[34h[?25h[?25l[38;126H[K[38;1H:[34h[?25hw[?25l[34h[?25h[?25l"urls.py" 18L, 846C written[98C16,45[9CAll[38;126H[K[38;126H16,45[9CAll[16;45H[34h[?25h[?25l[34h[?25h[?25l[38;1H[K[38;1H:[34h[?25hw[?25l[34h[?25hq[?25l[34h[?25h[?25l"urls.py" 18L, 846C written
-[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ cd templates/
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates$ ls
-[0m[01;34madmin[0m  [01;34mmocktest[0m
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates$ cd mocktest/
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ ls
-advancedTest.html  base.html   countdown.html   history.html  indexold.html  login.html   savedTests.html  styleguide.html  test.html
-[0m[01;34majaxUtil[0m           basic.html  historybkp.html  index.html    loginfb.html   result.html  signup.html      testbkp.html
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ cp sch[K[KavedTests.html schedTests.html
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ cp savedTests.html schedTests.html[Kcd ..
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates$ cd ..
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ vi ajaxUrls.py
-
-[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"ajaxUrls.py" 20L, 943C[1;1H[35mfrom[0m django.conf.urls [35mimport[0m url
-[35mfrom[0m . [35mimport[0m ajaxUtils
-
-urlpatterns = [
-    url([31mr'^getPositions.html$'[0m, ajaxUtils.getPositions),
-    url([31mr'^isUsernameValid.html$'[0m, ajaxUtils.isUsernameValid),
-    url([31mr'^saveAnswer.html$'[0m, ajaxUtils.saveAnswer),
-    url([31mr'^notifyTestStart.html$'[0m, ajaxUtils.notifyTestStart),
-    url([31mr'^submitTest.html$'[0m, ajaxUtils.submitTest),
-    url([31mr'^saveTest.html$'[0m, ajaxUtils.saveTest),
-    url([31mr'^exitTest.html$'[0m, ajaxUtils.exitTest),
-    url([31mr'^userTests.html$'[0m, ajaxUtils.getUserTests),
-    url([31mr'^userSavedTests.html$'[0m, ajaxUtils.getUserSavedTests),
-    url([31mr'^userCompany.html$'[0m, ajaxUtils.getUserCompany),
-    url([31mr'^userPosition.html$'[0m, ajaxUtils.getUserPosition),
-    url([31mr'^userCompanyTests.html$'[0m, ajaxUtils.getUserCompanyTests),
-    url([31mr'^userPositionTests.html$'[0m, ajaxUtils.getUserPositionTests),
-    url([31mr'^userCompanyPosition.html$'[0m, ajaxUtils.getUserCompanyPosition),
-    url([31mr'^userPositionCompany.html$'[0m, ajaxUtils.getUserPositionCompany),
-]
-[1m[34m~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H7,49-52[7CAll[7;52H[34h[?25h[?25l[38;126H8[8;52H[34h[?25h[?25l[38;126H9[9;52H[34h[?25h[?25l[38;126H10,45-48[10;48H[34h[?25h[?25l[38;127H1[11;48H[34h[?25h[?25l[12;8H[46m([43C)[0m[38;127H2,49-52[12;52H[34h[?25h[?25l[12;8H([43C)[38;127H3[13;52H[34h[?25h[?25l[38;127H4[14;52H[34h[?25h[?25l[38;127H5[15;52H[34h[?25h[?25l[38;127H6[16;52H[34h[?25h[?25l[38;127H7[17;52H[34h[?25h[?25l[38;127H8[18;52H[34h[?25h[?25l[38;127H7[17;52H[34h[?25h[?25l[38;127H6[16;52H[34h[?25h[?25l[38;127H5[15;52H[34h[?25h[?25l[38;127H4[14;52H[34h[?25h[?25l[38;127H3[13;52H[34h[?25h[?25l[14;37r[14;1H[L[1;38r[14;4H url([31mr'^userSavedTests.html$'[0m, ajaxUtils.getUserSavedTests),[38;1H[K[38;126H14,2-5[8CAll[14;5H[34h[?25h[?25l[38;129H3-6[14;6H[34h[?25h[?25l[38;129H4-7[14;7H[34h[?25h[?25ll[46m([53C)[0m[38;129H5-8[14;8H[34h[?25h[?25l([53C)[38;129H6-9[14;9H[34h[?25h[?25l[38;129H7-10[14;10H[34h[?25h[?25l[38;129H8-11[14;11H[34h[?25h[?25l[38;129H9-12[14;12H[34h[?25h[?25l[38;129H10-13[14;13H[34h[?25h[?25l[38;130H1-14[14;14H[34h[?25h[?25l[38;130H2-15[14;15H[34h[?25h[?25l[38;130H3-16[14;16H[34h[?25h[?25l[38;130H4-17[14;17H[34h[?25h[?25l[38;130H5-18[14;18H[34h[?25h[?25l[38;130H4-17[14;17H[34h[?25h[?25l[31mSvedTests.html$'[0m, ajaxUtils.getUserSavedTests),[14;63H[K[14;17H[34h[?25h[?25l[31mSedTests.html$'[0m, ajaxUtils.getUserSavedTests),[14;62H[K[14;17H[34h[?25h[?25l[38;1H[1m-- INSERT --[0m[38;126H[K[38;126H14,14-17      All[14;17H[34h[?25h[?25l[31mScedTests.html$'[0m, ajaxUtils.getUserSavedTests),[38;130H5-18[14;18H[34h[?25h[?25l[31mchedTests.html$'[0m, ajaxUtils.getUserSavedTests),[38;130H6-19[14;19H[34h[?25h[?25l[38;130H7-20[14;20H[34h[?25h[?25l[38;130H8-21[14;21H[34h[?25h[?25l[38;130H9-22[14;22H[34h[?25h[?25l[38;129H20-23[14;23H[34h[?25h[?25l[38;130H1-24[14;24H[34h[?25h[?25l[38;130H2-25[14;25H[34h[?25h[?25l[38;130H3-26[14;26H[34h[?25h[?25l[38;130H4-27[14;27H[34h[?25h[?25l[38;130H5-28[14;28H[34h[?25h[?25l[38;130H6-29[14;29H[34h[?25h[?25l[38;130H7-30[14;30H[34h[?25h[?25l[38;130H8-31[14;31H[34h[?25h[?25l[38;130H9-32[14;32H[34h[?25h[?25l[38;129H30-33[14;33H[34h[?25h[?25l[38;130H1-34[14;34H[34h[?25h[?25l[38;130H2-35[14;35H[34h[?25h[?25l[38;130H3-36[14;36H[34h[?25h[?25l[38;130H4-37[14;37H[34h[?25h[?25l[38;130H5-38[14;38H[34h[?25h[?25l[38;130H6-39[14;39H[34h[?25h[?25l[38;130H7-40[14;40H[34h[?25h[?25l[38;130H8-41[14;41H[34h[?25h[?25l[38;130H9-42[14;42H[34h[?25h[?25l[38;129H40-43[14;43H[34h[?25h[?25l[38;130H1-44[14;44H[34h[?25h[?25l[38;130H2-45[14;45H[34h[?25h[?25l[38;130H3-46[14;46H[34h[?25h[?25l[38;130H4-47[14;47H[34h[?25h[?25l[38;130H5-48[14;48H[34h[?25h[?25l[38;130H6-49[14;49H[34h[?25h[?25l[38;130H7-50[14;50H[34h[?25h[?25l[38;130H8-51[14;51H[34h[?25h[?25l[38;129H50-53[14;53H[34h[?25h[?25l[38;130H1-54[14;54H[34h[?25h[?25l[38;130H0-53[14;53H[34h[?25h[?25lSvedTests),[14;63H[K[14;53H[34h[?25h[?25lSedTests),[14;62H[K[14;53H[34h[?25h[?25lScedTests),[38;130H1-54[14;54H[34h[?25h[?25lchedTests),[38;130H2-55[14;55H[34h[?25h:e[38;1H[K[?25l[38;126H14,51-54      All[14;54H[34h[?25h[?25l[38;126H[K[38;1H:w[34h[?25hq[?25l[34h[?25h[?25l"ajaxUrls.py" 21L, 1004C written
-[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ cd templates/mocktest/
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ ls
-advancedTest.html  base.html   countdown.html   history.html  indexold.html  login.html   savedTests.html  signup.html      testbkp.html
-[0m[01;34majaxUtil[0m           basic.html  historybkp.html  index.html    loginfb.html   result.html  schedTests.html  styleguide.html  test.html
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ cp base.html [K[K[K[K[K[K[K[K[K[K[K[K[Kcp base.html congrats.html
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates/mocktest$ cd ..
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest/templates$ cd ..
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ ls forms.py 
-forms.py
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ rm forms.py 
-sriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ vi urls.py
-[?1049h[?1h=[1;38r[34l[34h[?25h[23m[24m[0m[H[J[?25l[38;1H"urls.py" 18L, 846C[1;1H[35mfrom[0m django.conf.urls [35mimport[0m url
-[35mfrom[0m . [35mimport[0m views, ajaxUtils
-
-urlpatterns = [
-    url([31mr'^$'[0m, views.home, name=[31m'home'[0m),
-    url([31mr'^home.html$'[0m, views.home, name=[31m'home'[0m),
-    url([31mr'^login.html'[0m, views.login, name=[31m'login'[0m),
-    url([31mr'^logout.html'[0m, views.logout, name=[31m'logout'[0m),
-    url([31mr'^signup.html'[0m, views.signup, name=[31m'signup'[0m),
-    url([31mr'^test.html'[0m, views.test, name=[31m'test'[0m),
-    url([31mr'^savedTests.html'[0m, views.savedTests, name=[31m'savedTest'[0m),
-    url([31mr'^result.html'[0m, views.result, name=[31m'result'[0m),
-    url([31mr'^createtest.html'[0m, views.createTest, name=[31m'createTest'[0m),
-    url([31mr'^advancedtest.html'[0m, views.advancedTest, name=[31m'advancedTest'[0m),
-    url([31mr'^history.html'[0m, views.viewHistory, name=[31m'viewHistory'[0m),
-    url([31mr'^schedTests.html'[0m, views.schedTests, name=[31m'scheduledTest'[0m),
-    url([31mr'^countdown.html'[0m, views.countDown, name=[31m'countdown'[0m),
-]
-[1m[34m~                                                                                                                                              [20;1H~                                                                                                                                              [21;1H~                                                                                                                                              [22;1H~                                                                                                                                              [23;1H~                                                                                                                                              [24;1H~                                                                                                                                              [25;1H~                                                                                                                                              [26;1H~                                                                                                                                              [27;1H~                                                                                                                                              [28;1H~                                                                                                                                              [29;1H~                                                                                                                                              [30;1H~                                                                                                                                              [31;1H~                                                                                                                                              [32;1H~                                                                                                                                              [33;1H~                                                                                                                                              [34;1H~                                                                                                                                              [35;1H~                                                                                                                                              [36;1H~                                                                                                                                              [37;1H~                                                                                                                                              [0m[38;126H16,45[9CAll[16;45H[34h[?25h[?25l[38;127H7[17;45H[34h[?25h[?25l[38;129H63[17;63H[34h[?25h[?25l[38;1H[1m-- INSERT --[0m[38;13H[K[38;126H17,63[9CAll[17;63H[34h[?25h[?25l[38;130H4[17;64H[34h[?25h[?25l[18;37r[18;1H[L[1;38r[38;126H[K[38;126H18,2-5[8CAll[18;5H[34h[?25h[?25l u[38;129H3-6[18;6H[34h[?25h[?25lur[38;129H4-7[18;7H[34h[?25h[?25lrl[38;129H5-8[18;8H[34h[?25h[?25ll([38;129H6-9[18;9H[34h[?25h[?25l()[46m()[0m[38;129H7-10[18;10H[34h[?25h[?25l[38;129H6-9 [18;9H[34h[?25h[?25l[46m(r[0m)r[46m)[0m[38;129H7-10[18;10H[34h[?25h[?25l[31mr[0m[31m[46m'[0m[31m)
-][18;10H'[0m[31m[46m)[0m[38;129H8-11[18;11H[34h[?25h[?25l[31m'[0m[31m[46m'[0m)
-][18;11H[31m'[0m[46m)[0m[38;129H9-12[18;12H[34h[?25h[?25l([3C)[38;129H8-11[18;11H[34h[?25h[?25l[31m'^'[0m)[38;129H9-12[18;12H[34h[?25h[?25l[31m^c'[0m)[38;129H10-13[18;13H[34h[?25h[?25l[31mco'[0m)[38;130H1-14[18;14H[34h[?25h[?25l[31mon'[0m)[38;130H2-15[18;15H[34h[?25h[?25l[31mng'[0m)[38;130H3-16[18;16H[34h[?25h[?25l[31mgr'[0m)[38;130H4-17[18;17H[34h[?25h[?25l[31mra'[0m)[38;130H5-18[18;18H[34h[?25h[?25l[31mat'[0m)[38;130H6-19[18;19H[34h[?25h[?25l[31mts'[0m)[38;130H7-20[18;20H[34h[?25h[?25l[31ms.'[0m)[38;130H8-21[18;21H[34h[?25h[?25l[31m.h'[0m)[38;130H9-22[18;22H[34h[?25h[?25l[31mht'[0m)[38;129H20-23[18;23H[34h[?25h[?25l[31mtm'[0m)[38;130H1-24[18;24H[34h[?25h[?25l[31mml'[0m)[38;130H2-25[18;25H[34h[?25h[?25l[18;8H[46m([17C)[0m[38;130H3-26[18;26H[34h[?25h[?25l[31m'[0m[46m,[0m),[46m)[0m[38;130H4-27[18;27H[34h[?25h[?25l,[46m [0m) [46m)[0m[38;130H5-28[18;28H[34h[?25h[?25l [46mv[0m)v[46m)[0m[38;130H6-29[18;29H[34h[?25h[?25lv[46mi[0m)i[46m)[0m[38;130H7-30[18;30H[34h[?25h[?25li[46me[0m)e[46m)[0m[38;130H8-31[18;31H[34h[?25h[?25le[46mw[0m)w[46m)[0m[38;130H9-32[18;32H[34h[?25h[?25lw[46ms[0m)s[46m)[0m[38;129H30-33[18;33H[34h[?25h[?25ls[46m.[0m).[46m)[0m[38;130H1-34[18;34H[34h[?25h[?25l.[46mc[0m)c[46m)[0m[38;130H2-35[18;35H[34h[?25h[?25lc[46mo[0m)o[46m)[0m[38;130H3-36[18;36H[34h[?25h[?25lo[46mn[0m)n[46m)[0m[38;130H4-37[18;37H[34h[?25h[?25ln[46mg[0m)g[46m)[0m[38;130H5-38[18;38H[34h[?25h[?25lg[46mr[0m)r[46m)[0m[38;130H6-39[18;39H[34h[?25h[?25lr[46ma[0m)a[46m)[0m[38;130H7-40[18;40H[34h[?25h[?25la[46mt[0m)t[46m)[0m[38;130H8-41[18;41H[34h[?25h[?25lt[46ms[0m)s[46m)[0m[38;130H9-42[18;42H[34h[?25h[?25lt)[46m )[0m[18;42H[K[38;130H8-41[18;41H[34h[?25h[?25la)[46m )[0m[18;41H[K[38;130H7-40[18;40H[34h[?25h[?25lr)[46m )[0m[18;40H[K[38;130H6-39[18;39H[34h[?25h[?25lg)[46m )[0m[18;39H[K[38;130H5-38[18;38H[34h[?25h[?25ln)[46m )[0m[18;38H[K[38;130H4-37[18;37H[34h[?25h[?25lo)[46m )[0m[18;37H[K[38;130H3-36[18;36H[34h[?25h[?25lc)[46m )[0m[18;36H[K[38;130H2-35[18;35H[34h[?25h[?25l.)[46m )[0m[18;35H[K[38;130H1-34[18;34H[34h[?25h[?25l.[46mc[0m)c[46m)[0m[38;130H2-35[18;35H[34h[?25h[?25lc[46mo[0m)o[46m)[0m[38;130H3-36[18;36H[34h[?25h[?25lo[46mn[0m)n[46m)[0m[38;130H4-37[18;37H[34h[?25h[?25ln[46mg[0m)g[46m)[0m[38;130H5-38[18;38H[34h[?25h[?25lg[46mr[0m)r[46m)[0m[38;130H6-39[18;39H[34h[?25h[?25lr[46ma[0m)a[46m)[0m[38;130H7-40[18;40H[34h[?25h[?25la[46mt[0m)t[46m)[0m[38;130H8-41[18;41H[34h[?25h[?25lt[46ms[0m)s[46m)[0m[38;130H9-42[18;42H[34h[?25h[?25ls[46m,[0m),[46m)[0m[38;129H40-43[18;43H[34h[?25h[?25l,[46m [0m) [46m)[0m[38;130H1-44[18;44H[34h[?25h[?25l [46mn[0m)n[46m)[0m[38;130H2-45[18;45H[34h[?25h[?25ln[46ma[0m)a[46m)[0m[38;130H3-46[18;46H[34h[?25h[?25la[46mm[0m)m[46m)[0m[38;130H4-47[18;47H[34h[?25h[?25lm[46me[0m)e[46m)[0m[38;130H5-48[18;48H[34h[?25h[?25le[46m=[0m)=[46m)[0m[38;130H6-49[18;49H[34h[?25h[?25l=[31m[46m'[0m[31m)
-][18;49H'[0m[31m[46m)[0m[38;130H7-50[18;50H[34h[?25h[?25l[31m'[0m[31m[46mc[0m[31m)c[0m[31m[46m)[0m[38;130H8-51[18;51H[34h[?25h[?25l[31mc[0m[31m[46mo[0m[31m)o[0m[31m[46m)[0m[38;130H9-52[18;52H[34h[?25h[?25l[31mo[0m[31m[46mn[0m[31m)n[0m[31m[46m)[0m[38;129H50-53[18;53H[34h[?25h[?25l[31mn[0m[31m[46mg[0m[31m)g[0m[31m[46m)[0m[38;130H1-54[18;54H[34h[?25h[?25l[31mg[0m[31m[46mr[0m[31m)r[0m[31m[46m)[0m[38;130H2-55[18;55H[34h[?25h[?25l[31mr[0m[31m[46ma[0m[31m)a[0m[31m[46m)[0m[38;130H3-56[18;56H[34h[?25h[?25l[31ma[0m[31m[46mt[0m[31m)t[0m[31m[46m)[0m[38;130H4-57[18;57H[34h[?25h[?25l[31mt[0m[31m[46ms[0m[31m)s[0m[31m[46m)[0m[38;130H5-58[18;58H[34h[?25h[?25l[31ms[0m[31m[46m'[0m)
-][18;58H[31m'[0m[46m)[0m[38;130H6-59[18;59H[34h[?25h[?25l[38;130H7-60[18;60H[34h[?25h[?25l[46m)[0m.[18;8H([50C)[38;130H8-61[18;61H[34h[?25h[?25l[18;60H[K[18;8H[46m([50C)[0m[38;130H7-60[18;60H[34h[?25h[?25l[46m)[0m,[18;8H([50C)[38;130H8-61[18;61H[34h[?25h[38;1H[K[?25l[38;126H18,57-60      All[18;60H[34h[?25h[?25l[38;126H[K[38;1H:[34h[?25hw[?25l[34h[?25h[?25l"urls.py" 19L, 904C written[98C18,57-60      All[38;126H[K[38;126H18,57-60      All[18;60H[34h[?25h[?25l[34h[?25h[?25l[38;1H[K[38;1H:[34h[?25hw[?25l[34h[?25hq[?25l[34h[?25h[?25l"urls.py" 19L, 904C written
-[?1l>[34h[?25h[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird/mocktest$ sriram@ubuntu:/space/hashincludetest/mocking-bird$ cd /space/hashincludetest/mocking-bird 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ [29P(reverse-i-search)`':[C[40@s': cd /space/hashincludetest/mocking-bird[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[7Py': python manage.py sync_cassandra[1@n[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@c[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[25@sriram@ubuntu:/space/hashincludetest/mocking-bird$[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ git statuis[K[Ks | less
-[?1049h[?1h=# On branch master
-# Changes not staged for commit:
-#   (use "git add/rm <file>..." to update what will be committed)
-#   (use "git checkout -- <file>..." to discard changes in working directory)
-#
-#       modified:   mockingsite/logfile
-#       modified:   mockingsite/static/mocktest/scripts/jquery.flipcountdown.js
-#       modified:   mockingsite/static/mocktest/styles/jquery.countdown.css
-#       modified:   mockingsite/static/mocktest/styles/jquery.flipcountdown.css
-#       modified:   mockingsite/static/mocktest/styles/main.css
-#       deleted:    mocktest/.urls.py.swp
-#       modified:   mocktest/DAOUtil.py
-#       modified:   mocktest/DAOUtil.pyc
-#       modified:   mocktest/adminForms.py
-#       modified:   mocktest/adminForms.pyc
-#       modified:   mocktest/adminUrls.py
-#       modified:   mocktest/adminUrls.pyc
-#       modified:   mocktest/adminViews.py
-#       modified:   mocktest/adminViews.pyc
-#       modified:   mocktest/ajaxUtils.py
-#       modified:   mocktest/ajaxUtils.pyc
-#       modified:   mocktest/algo/test/BaseTest.py
-#       modified:   mocktest/algo/test/BaseTest.pyc
-#       modified:   mocktest/algo/test/LinearByTime.py
-#       modified:   mocktest/algo/test/LinearByTime.pyc
-#       modified:   mocktest/mentorViews.py
-#       modified:   mocktest/mentorViews.pyc
-#       modified:   mocktest/models.py
-#       modified:   mocktest/models.pyc
-#       modified:   mocktest/standalone/Scrapper.py
-#       modified:   mocktest/standalone/Scrapper.pyc
-#       modified:   mocktest/standalone/careerCupScrapper.py
-#       modified:   mocktest/standalone/careerCupScrapper.pyc
-#       modified:   mocktest/standalone/scrapQuestions.pyc
-#       modified:   mocktest/standalone/test.py
-#       modified:   mocktest/templates/admin/home.html
-#       modified:   mocktest/templates/admin/moderateQuestion.html
-:[K[K[?1l>[?1049lsriram@ubuntu:/space/hashincludetest/mocking-bird$ git status | less[K[29P(reverse-i-search)`':[Cg': git status | less[1@i[C[C[C[1@t[C[C[C[1@ [C[C[C[7Pa': git add .[1@d[C[C[C[1@d[C[C[C[22@sriram@ubuntu:/space/hashincludetest/mocking-bird$[C[C[C[C[C[C[C[C[C[C
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ [29P(reverse-i-search)`':[Cg': git add .[1@i[C[C[C[1@t[C[C[C[1@ [C[C[Cc': git commit -m 'Fixed few bugs in admin console'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@o[C[C[C[1@m[C[C[C[1@m[C[C[C[21@sriram@ubuntu:/space/hashincludetest/mocking-bird$[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C'[K'[K'[K'[K'[K[KR'e'm'o'v'e'd' 'c'o'm'p'a'n'y'i'd' 'a'n'd' 'p'o's'i't'i'o'n' 'i'o'f'[1P'[1P'd' 'a'n'd' '[1P' 'f'i'z'[1P'x'e'd' 'c'o'u'n't'd'o'w'n'
-> ^C
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ git commit -m Removed companyid and position id and fixed countdown'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@'
-[master 1bfa452] Removed companyid and position id and fixed countdown
- Committer: sriram <sriram@ubuntu.(none)>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 46 files changed, 3829 insertions(+), 452 deletions(-)
- rewrite mocktest/DAOUtil.pyc (82%)
- rewrite mocktest/adminForms.pyc (67%)
- rewrite mocktest/adminUrls.pyc (65%)
- rewrite mocktest/adminViews.pyc (73%)
- rewrite mocktest/ajaxUtils.pyc (79%)
- rewrite mocktest/algo/test/BaseTest.pyc (63%)
- rewrite mocktest/mentorViews.pyc (88%)
- rewrite mocktest/models.pyc (85%)
- rewrite mocktest/standalone/Scrapper.pyc (66%)
- create mode 100644 mocktest/templates/admin/error.html
- rewrite mocktest/views.pyc (78%)
- create mode 100644 screenlog.5
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ [29P(reverse-i-search)`':[Cp': git commit -m 'Removed companyid and position id and fixed countdown'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cu': pulseaudio -start[K[8Ps': git push[1@h[C[C[C[C[C[C[C[25@sriram@ubuntu:/space/hashincludetest/mocking-bird$[C[C[C[C[C[C[C[C[C origin master
-Counting objects: 125, done.
-Delta compression using up to 4 threads.
-Compressing objects:   1% (1/64)   Compressing objects:   3% (2/64)   Compressing objects:   4% (3/64)   Compressing objects:   6% (4/64)   Compressing objects:   7% (5/64)   Compressing objects:   9% (6/64)   Compressing objects:  10% (7/64)   Compressing objects:  12% (8/64)   Compressing objects:  14% (9/64)   Compressing objects:  15% (10/64)   Compressing objects:  17% (11/64)   Compressing objects:  18% (12/64)   Compressing objects:  20% (13/64)   Compressing objects:  21% (14/64)   Compressing objects:  23% (15/64)   Compressing objects:  25% (16/64)   Compressing objects:  26% (17/64)   Compressing objects:  28% (18/64)   Compressing objects:  29% (19/64)   Compressing objects:  31% (20/64)   Compressing objects:  32% (21/64)   Compressing objects:  34% (22/64)   Compressing objects:  35% (23/64)   Compressing objects:  37% (24/64)   Compressing objects:  39% (25/64)   Compressing objects:  40% (26/64)   Compressing objects:  42% (27/64)   Compressing objects:  43% (28/64)   Compressing objects:  45% (29/64)   Compressing objects:  46% (30/64)   Compressing objects:  48% (31/64)   Compressing objects:  50% (32/64)   Compressing objects:  51% (33/64)   Compressing objects:  53% (34/64)   Compressing objects:  54% (35/64)   Compressing objects:  56% (36/64)   Compressing objects:  57% (37/64)   Compressing objects:  59% (38/64)   Compressing objects:  60% (39/64)   Compressing objects:  62% (40/64)   Compressing objects:  64% (41/64)   Compressing objects:  65% (42/64)   Compressing objects:  67% (43/64)   Compressing objects:  68% (44/64)   Compressing objects:  70% (45/64)   Compressing objects:  71% (46/64)   Compressing objects:  73% (47/64)   Compressing objects:  75% (48/64)   Compressing objects:  76% (49/64)   Compressing objects:  78% (50/64)   Compressing objects:  79% (51/64)   Compressing objects:  81% (52/64)   Compressing objects:  82% (53/64)   Compressing objects:  84% (54/64)   Compressing objects:  85% (55/64)   Compressing objects:  87% (56/64)   Compressing objects:  89% (57/64)   Compressing objects:  90% (58/64)   Compressing objects:  92% (59/64)   Compressing objects:  93% (60/64)   Compressing objects:  95% (61/64)   Compressing objects:  96% (62/64)   Compressing objects:  98% (63/64)   Compressing objects: 100% (64/64)   Compressing objects: 100% (64/64), done.
-Writing objects:   1% (1/65)   Writing objects:   3% (2/65)   Writing objects:   4% (3/65)   Writing objects:   6% (4/65)   Writing objects:   7% (5/65)   Writing objects:   9% (6/65)   Writing objects:  10% (7/65)   Writing objects:  12% (8/65)   Writing objects:  13% (9/65)   Writing objects:  15% (10/65)   Writing objects:  16% (11/65)   Writing objects:  18% (12/65)   Writing objects:  20% (13/65)   Writing objects:  21% (14/65)   Writing objects:  23% (15/65)   Writing objects:  24% (16/65)   Writing objects:  26% (17/65)   Writing objects:  27% (18/65)   Writing objects:  29% (19/65)   Writing objects:  30% (20/65)   Writing objects:  32% (21/65)   Writing objects:  33% (22/65)   Writing objects:  35% (23/65)   Writing objects:  36% (24/65)   Writing objects:  38% (25/65)   Writing objects:  40% (26/65)   Writing objects:  41% (27/65)   Writing objects:  43% (28/65)   Writing objects:  44% (29/65)   Writing objects:  46% (30/65)   Writing objects:  47% (31/65)   Writing objects:  49% (32/65)   Writing objects:  50% (33/65)   Writing objects:  52% (34/65)   Writing objects:  53% (35/65)   Writing objects:  55% (36/65)   Writing objects:  56% (37/65)   Writing objects:  58% (38/65)   Writing objects:  60% (39/65)   Writing objects:  61% (40/65)   Writing objects:  63% (41/65)   Writing objects:  64% (42/65)   Writing objects:  66% (43/65)   Writing objects:  67% (44/65)   Writing objects:  69% (45/65)   Writing objects:  70% (46/65)   Writing objects:  72% (47/65)   Writing objects:  73% (48/65)   Writing objects:  75% (49/65)   Writing objects:  76% (50/65)   Writing objects:  78% (51/65)   Writing objects:  80% (52/65)   Writing objects:  81% (53/65)   Writing objects:  83% (54/65)   Writing objects:  84% (55/65)   Writing objects:  86% (56/65)   Writing objects:  87% (57/65)   Writing objects:  89% (58/65)   Writing objects:  90% (59/65)   Writing objects:  92% (60/65)   Writing objects:  93% (61/65)   Writing objects:  95% (62/65)   Writing objects:  96% (63/65)   Writing objects:  98% (64/65)   Writing objects: 100% (65/65)   Writing objects: 100% (65/65), 57.06 KiB, done.
-Total 65 (delta 53), reused 0 (delta 0)
-To git@github.com:sriramrathinavelu/mocking-bird.git
-   0062767..1bfa452  master -> master
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ [29P(reverse-i-search)`':[Cs': git push origin mastery': python manage.py sync_cassandra[1@n[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[26@sriram@ubuntu:/space/hashincludetest/mocking-bird$[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.MentorPositionCompany
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra[9Pgit push origin mastercommit -m 'Removed companyid and position id and fixed countdown'[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpush origin master[Kcommit -m 'Removed companyid and position id and fixed countdown'[1P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cadd .[K
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ git add .python manage.py sync_cassandra[9Pgit push origin mastercommit -m 'Removed companyid and position id and fixed countdown'[C'[K'[K'[K'[K'[K'[K'[K[K;'[1P'[C'C'o'm'p'l'e't'e'd' 'f'a'v'o'u'r'i't'e's' 'f'o'r' 'm'e'n't'o'e's'[1P'[1P'r's'[C
-[master e0a7608] Completed favourites for mentors
- Committer: sriram <sriram@ubuntu.(none)>
-Your name and email address were configured automatically based
-on your username and hostname. Please check that they are accurate.
-You can suppress this message by setting them explicitly:
-
-    git config --global user.name "Your Name"
-    git config --global user.email you@example.com
-
-After doing this, you may fix the identity used for this commit with:
-
-    git commit --amend --reset-author
-
- 44 files changed, 11057 insertions(+), 86 deletions(-)
- create mode 100644 mockingsite/static/mocktest/images/icons/anchor.gif
- create mode 100644 mockingsite/static/mocktest/images/icons/anchor.xcf
- create mode 100755 mockingsite/static/mocktest/scripts/jquery.tree.js
- create mode 100644 mockingsite/static/mocktest/scripts/jquery.tree.min.js
- create mode 100755 mockingsite/static/mocktest/styles/jquery.tree.css
- rewrite mocktest/mentorUrls.pyc (68%)
- rewrite mocktest/mentorViews.pyc (99%)
- create mode 100644 plugins/jquery-tree-master.zip
- create mode 100644 plugins/jquery-tree-master/README.md
- create mode 100644 plugins/jquery-tree-master/demo/lazy.json
- create mode 100755 plugins/jquery-tree-master/index.html
- create mode 100644 plugins/jquery-tree-master/minified/images/anchor.gif
- create mode 100644 plugins/jquery-tree-master/minified/jquery.tree.min.css
- create mode 100644 plugins/jquery-tree-master/minified/jquery.tree.min.js
- create mode 100755 plugins/jquery-tree-master/minify.sh
- create mode 100644 plugins/jquery-tree-master/src/css/_jquery.treednd.css
- create mode 100644 plugins/jquery-tree-master/src/css/images/anchor.gif
- create mode 100644 plugins/jquery-tree-master/src/css/images/anchor.xcf
- create mode 100755 plugins/jquery-tree-master/src/css/jquery.tree.css
- create mode 100644 plugins/jquery-tree-master/src/js/.jquery.tree.js.swp
- create mode 100755 plugins/jquery-tree-master/src/js/jquery.tree.js
- create mode 100644 plugins/jquery-tree-master/src/js/jquery.treeajax.js
- create mode 100644 plugins/jquery-tree-master/src/js/jquery.treecheckbox.js
- create mode 100644 plugins/jquery-tree-master/src/js/jquery.treecollapse.js
- create mode 100644 plugins/jquery-tree-master/src/js/jquery.treednd.js
- create mode 100644 screenlog.6
- create mode 100644 screenlog.7
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ git push[K[K[K[K[K[K[K[Kgit commit -m 'Completed favourites for mentors'add .[Kpython manage.py sync_cassandra[9Pgit push origin mastercommit -m 'Removed companyid and position id and fixed countdown'[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpush origin master[K
-Counting objects: 100, done.
-Delta compression using up to 4 threads.
-Compressing objects:   1% (1/63)   Compressing objects:   3% (2/63)   Compressing objects:   4% (3/63)   Compressing objects:   6% (4/63)   Compressing objects:   7% (5/63)   Compressing objects:   9% (6/63)   Compressing objects:  11% (7/63)   Compressing objects:  12% (8/63)   Compressing objects:  14% (9/63)   Compressing objects:  15% (10/63)   Compressing objects:  17% (11/63)   Compressing objects:  19% (12/63)   Compressing objects:  20% (13/63)   Compressing objects:  22% (14/63)   Compressing objects:  23% (15/63)   Compressing objects:  25% (16/63)   Compressing objects:  26% (17/63)   Compressing objects:  28% (18/63)   Compressing objects:  30% (19/63)   Compressing objects:  31% (20/63)   Compressing objects:  33% (21/63)   Compressing objects:  34% (22/63)   Compressing objects:  36% (23/63)   Compressing objects:  38% (24/63)   Compressing objects:  39% (25/63)   Compressing objects:  41% (26/63)   Compressing objects:  42% (27/63)   Compressing objects:  44% (28/63)   Compressing objects:  46% (29/63)   Compressing objects:  47% (30/63)   Compressing objects:  49% (31/63)   Compressing objects:  50% (32/63)   Compressing objects:  52% (33/63)   Compressing objects:  53% (34/63)   Compressing objects:  55% (35/63)   Compressing objects:  57% (36/63)   Compressing objects:  58% (37/63)   Compressing objects:  60% (38/63)   Compressing objects:  61% (39/63)   Compressing objects:  63% (40/63)   Compressing objects:  65% (41/63)   Compressing objects:  66% (42/63)   Compressing objects:  68% (43/63)   Compressing objects:  69% (44/63)   Compressing objects:  71% (45/63)   Compressing objects:  73% (46/63)   Compressing objects:  74% (47/63)   Compressing objects:  76% (48/63)   Compressing objects:  77% (49/63)   Compressing objects:  79% (50/63)   Compressing objects:  80% (51/63)   Compressing objects:  82% (52/63)   Compressing objects:  84% (53/63)   Compressing objects:  85% (54/63)   Compressing objects:  87% (55/63)   Compressing objects:  88% (56/63)   Compressing objects:  90% (57/63)   Compressing objects:  92% (58/63)   Compressing objects:  93% (59/63)   Compressing objects:  95% (60/63)   Compressing objects:  96% (61/63)   Compressing objects:  98% (62/63)   Compressing objects: 100% (63/63)   Compressing objects: 100% (63/63), done.
-Writing objects:   1% (1/66)   Writing objects:   3% (2/66)   Writing objects:   4% (3/66)   Writing objects:   6% (4/66)   Writing objects:   7% (5/66)   Writing objects:   9% (6/66)   Writing objects:  10% (7/66)   Writing objects:  12% (8/66)   Writing objects:  13% (9/66)   Writing objects:  15% (10/66)   Writing objects:  16% (11/66)   Writing objects:  18% (12/66)   Writing objects:  19% (13/66)   Writing objects:  21% (14/66)   Writing objects:  22% (15/66)   Writing objects:  24% (16/66)   Writing objects:  25% (17/66)   Writing objects:  27% (18/66)   Writing objects:  28% (19/66)   Writing objects:  30% (20/66)   Writing objects:  31% (21/66)   Writing objects:  33% (22/66)   Writing objects:  34% (23/66)   Writing objects:  36% (24/66)   Writing objects:  37% (25/66)   Writing objects:  39% (26/66)   Writing objects:  40% (27/66)   Writing objects:  42% (28/66)   Writing objects:  43% (29/66)   Writing objects:  45% (30/66)   Writing objects:  46% (31/66)   Writing objects:  48% (32/66)   Writing objects:  50% (33/66)   Writing objects:  51% (34/66)   Writing objects:  53% (35/66)   Writing objects:  54% (36/66)   Writing objects:  56% (37/66)   Writing objects:  57% (38/66)   Writing objects:  59% (39/66)   Writing objects:  60% (40/66)   Writing objects:  62% (41/66)   Writing objects:  63% (42/66)   Writing objects:  65% (43/66)   Writing objects:  66% (44/66)   Writing objects:  68% (45/66)   Writing objects:  69% (46/66)   Writing objects:  71% (47/66)   Writing objects:  72% (48/66)   Writing objects:  74% (49/66)   Writing objects:  75% (50/66)   Writing objects:  77% (51/66)   Writing objects:  78% (52/66)   Writing objects:  80% (53/66)   Writing objects:  81% (54/66)   Writing objects:  83% (55/66)   Writing objects:  84% (56/66)   Writing objects:  86% (57/66)   Writing objects:  87% (58/66)   Writing objects:  89% (59/66)   Writing objects:  90% (60/66)   Writing objects:  92% (61/66)   Writing objects:  93% (62/66)   Writing objects:  95% (63/66)   Writing objects:  96% (64/66)   Writing objects:  98% (65/66)   Writing objects: 100% (66/66)   Writing objects: 100% (66/66), 111.38 KiB, done.
-Total 66 (delta 26), reused 0 (delta 0)
-To git@github.com:sriramrathinavelu/mocking-bird.git
-   1bfa452..e0a7608  master -> master
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ git push origin mastercommit -m 'Completed favourites for mentors'add .[Kpython manage.py sync_cassandra[9Pgit push origin masterpython manage.py sync_cassandra
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.MentorPositionCompany
-Syncing mocktest.models.PendingEvalCompTests
-Syncing mocktest.models.PendingEvalPosTests
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.MentorPositionCompany
-Syncing mocktest.models.PendingEvalCompTests
-Syncing mocktest.models.PendingEvalPosTests
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompany
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.MentorPosition
-Syncing mocktest.models.MentorPositionCompany
-Syncing mocktest.models.PendingEvalCompTests
-Syncing mocktest.models.PendingEvalPosTests
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompany
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.MentorPosition
-Syncing mocktest.models.MentorPositionCompany
-Syncing mocktest.models.PendingEvalTests
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompany
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.MentorPosition
-Syncing mocktest.models.MentorPositionCompany
-Syncing mocktest.models.PendingEvalTests
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompany
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.MentorPosition
-Syncing mocktest.models.MentorPositionCompany
-Syncing mocktest.models.PendingEvalTests
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ python manage.py sync_cassandra
-Creating keyspace mocking_db..
-Syncing mocktest.models.CompanyPosition
-Syncing mocktest.models.MentorCompany
-Syncing mocktest.models.MentorCompanyPosition
-Syncing mocktest.models.MentorPosition
-Syncing mocktest.models.MentorPositionCompany
-Syncing mocktest.models.PendingEvalTests
-Syncing mocktest.models.PositionCompany
-Syncing mocktest.models.QuestionBank
-Syncing mocktest.models.RawQuestionBank
-Syncing mocktest.models.Tests
-Syncing mocktest.models.UserCompany
-Syncing mocktest.models.UserCompanyTests
-Syncing mocktest.models.UserPosition
-Syncing mocktest.models.UserPositionTests
-Syncing mocktest.models.UserQuestion
-Syncing mocktest.models.UserSavedTests
-Syncing mocktest.models.UserScheduledTests
-Syncing mocktest.models.UserTests
-Syncing mocktest.models.Users
-sriram@ubuntu:/space/hashincludetest/mocking-bird$ 
-Broadcast message from sriram@ubuntu
-	(/dev/tty2) at 16:26 ...
-
-The system is going down for reboot NOW!
