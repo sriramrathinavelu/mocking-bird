@@ -1,4 +1,4 @@
-{% extends "mentor/mentor_base.html" %} {% block css_js %} {% endblock %} {% block jquery%}<script>    
+{% extends "mentor/mentor_base.html" %} {% block css_js %}<script src=/static/mocktest/scripts/ws4redis.js></script>{% endblock %} {% block jquery%}<script>    
     $(function(){
       var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -25,6 +25,28 @@
         );
       }
 
+      var ws4redis = WS4Redis({
+        uri: 'ws://localhost:8000/ws/mentorTests?subscribe-user',
+        receive_message: receiveMessage,
+        heartbeat_msg: '--heartbeat--'//{{ WS4REDIS_HEARTBEAT }}
+      });
+
+      function receiveMessage (data){
+        console.log("Message Received" + data);
+        //$(".articles-list").html("");
+        //$(".articles-count").html("");
+        data = eval(data);
+        makeListTitle(data.length);
+        $.each(data, function(index, value){
+          makeTestList(index, value, false);
+        }); 
+      }
+
+      $.get("/ajaxUtil/mentorTests.html",function(data, success){
+
+      })
+
+      /*
       $.getJSON("/ajaxUtil/mentorTests.html",function (data, status){          
           if (status === "success") {              
             makeListTitle(data.length);
@@ -33,7 +55,7 @@
            }); 
           }
         });
-      
+      */
 
       $("#positionName").autocomplete({
         source: {{posList|safe}},
@@ -139,23 +161,6 @@
             }
           });
         }
-      });
-      /*
-      $("#saved-tests").click(function(){
-        $("#company-select").hide();
-        $("#position-select-1").hide();
-        $("#position-select").hide();
-        $("#company-select-1").hide();
-        $.getJSON("/ajaxUtil/userSavedTests.html",function (data, status){
-          if (status === "success") {              
-            $(".articles-list").html("");
-            makeListTitle(data.length);
-            $.each(data, function(index, value){
-              makeTestList(index, value, true);
-           }); 
-          }
-        });
-      });
-      */
+      });      
     });
     </script>{% endblock %} {% block content %}<main><div class="centered-div block-or-flex"><input class=centered-input type=text id=companyName placeholder="Enter Company Name"><select id=company-select-1 name=company-select-1 class=centered-input style=display:none></select><input class=centered-input type=text id=positionName placeholder="Enter Position Name"><select id=position-select-1 name=position-select-1 class=centered-input style=display:none></select></div><div class=middle-item><a id=clearSearch href=# class="button--mockingone middle" style="width: 100px; display: none;">Clear</a></div><section class=styleguide__articles-section><div class=articles-section><div class=container><p class=articles-count></p><ol class=articles-list></ol></div></div></section></main>{% endblock %}

@@ -1,5 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from cassandra.cqlengine.query import DoesNotExist
+from django.views.generic.base import TemplateView
+from ws4redis.redis_store import RedisMessage
+from ws4redis.publisher import RedisPublisher
 from django.shortcuts import render
 from collections import OrderedDict
 from models import CompanyPosition
@@ -13,6 +16,7 @@ import uuid
 import logging
 import json
 import pytz
+import math
 
 # Create your views here.
 
@@ -78,7 +82,7 @@ def getUserPositionCompany(request):
 
 
 @login_required
-def getUserCompanyFavourites(request):
+def getUserCompanyFavourites1(request):
     username = request.user.username
     companyName = request.GET.get('companyName')
     positionName = request.GET.get('positionName')
@@ -114,26 +118,95 @@ def getUserCompanyFavourites(request):
 
 
 @login_required
+def getUserCompanyFavourites(request):
+    username = request.user.username
+    companyName = request.GET.get('companyName')
+    positionName = request.GET.get('positionName')
+    pageNum = int(request.GET.get('pageNum', 1))
+    numItems = int(request.GET.get('numItems', 25))
+    ajaxDict = {}
+    ajaxDict['pageNum'] = DAOUtil.jsonReady(pageNum)
+    ajaxDict['numItems'] = DAOUtil.jsonReady(numItems)
+    startIndex = (pageNum-1)*numItems
+    endIndex = startIndex+numItems
+    objects = None
+    ajaxDict['objects'] = []
+    ajaxDict['positions'] = []
+    totalItems = 0
+    if companyName:
+        if positionName:
+            totalItems = UserCompanyFavourites.objects.filter(
+                        username=username,
+                        companyname=companyName,
+                        positionname=positionName).count()
+            objects = UserCompanyFavourites.objects.filter(
+                        username=username,
+                        companyname=companyName,
+                        positionname=positionName)[startIndex:endIndex]
+            for obj in objects:
+                ajaxDict['objects'].append(DAOUtil.jsonReady(obj))
+        else:
+            totalItems = UserCompanyFavourites.objects.filter(
+                        username=username,
+                        companyname=companyName).count()
+            objects = UserCompanyFavourites.objects.filter(
+                        username=username,
+                        companyname=companyName)[startIndex:endIndex]
+            for obj in objects:
+                ajaxDict['objects'].append(DAOUtil.jsonReady(obj))
+                ajaxDict['positions'].append(
+                    DAOUtil.jsonReady(obj.positionname)
+                )
+            ajaxDict['positions'] = list(set(ajaxDict['positions']))
+    else:
+        totalItems = UserCompanyFavourites.objects.filter(
+                    username=username).count()
+        objects = UserCompanyFavourites.objects.filter(
+                    username=username)[startIndex:endIndex]
+        for obj in objects:
+            ajaxDict['objects'].append(DAOUtil.jsonReady(obj))
+    ajaxDict['totalItems'] = DAOUtil.jsonReady(totalItems)
+    numPages = int(math.ceil(totalItems/float(numItems)))
+    ajaxDict['numPages'] = DAOUtil.jsonReady(numPages)
+    jsonObjects = json.dumps(ajaxDict)
+    return HttpResponse(jsonObjects)
+
+
+@login_required
 def getUserPositionFavourites(request):
     username = request.user.username
     companyName = request.GET.get('companyName')
     positionName = request.GET.get('positionName')
-    objects = None
+    pageNum = int(request.GET.get('pageNum', 1))
+    numItems = int(request.GET.get('numItems', 25))
     ajaxDict = {}
+    ajaxDict['pageNum'] = DAOUtil.jsonReady(pageNum)
+    ajaxDict['numItems'] = DAOUtil.jsonReady(numItems)
+    startIndex = (pageNum-1)*numItems
+    endIndex = startIndex+numItems
+    objects = None
     ajaxDict['objects'] = []
     ajaxDict['companies'] = []
+    totalItems = 0
     if positionName:
         if companyName:
+            totalItems = UserPositionFavourites.objects.filter(
+                        username=username,
+                        positionname=positionName,
+                        companyname=companyName).count()
             objects = UserPositionFavourites.objects.filter(
                         username=username,
                         positionname=positionName,
-                        companyname=companyName)
+                        companyname=companyName)[startIndex:endIndex]
             for obj in objects:
                 ajaxDict['objects'].append(DAOUtil.jsonReady(obj))
         else:
+            totalItems = UserPositionFavourites.objects.filter(
+                        username=username,
+                        positionname=positionName).count()
             objects = UserPositionFavourites.objects.filter(
                         username=username,
-                        positionname=positionName)
+                        positionname=positionName)[startIndex:endIndex]
             for obj in objects:
                 ajaxDict['objects'].append(DAOUtil.jsonReady(obj))
                 ajaxDict['companies'].append(
@@ -141,14 +214,21 @@ def getUserPositionFavourites(request):
                 )
             ajaxDict['companies'] = list(set(ajaxDict['companies']))
     else:
+        totalItems = UserPositionFavourites.objects.filter(
+                    username=username).count()
         objects = UserPositionFavourites.objects.filter(
-                    username=username)
+                    username=username)[startIndex:endIndex]
+        for obj in objects:
+                ajaxDict['objects'].append(DAOUtil.jsonReady(obj))
+    ajaxDict['totalItems'] = DAOUtil.jsonReady(totalItems)
+    numPages = int(math.ceil(totalItems/float(numItems)))
+    ajaxDict['numPages'] = DAOUtil.jsonReady(numPages)
     jsonObjects = json.dumps(ajaxDict)
     return HttpResponse(jsonObjects)
 
 
 @login_required
-def getUserTests(request):
+def getUserTests1(request):
     username = request.user.username
     userTests = UserTests.objects.filter(username=username)
     tests = json.dumps(map(lambda x: DAOUtil.jsonReady(x),
@@ -229,7 +309,112 @@ def getMentorTests(request):
 
 
 @login_required
+def getUserTests(request):
+    username = request.user.username
+    pageNum = int(request.GET.get('pageNum', 1))
+    numItems = int(request.GET.get('numItems', 25))
+    totalItems = UserTests.objects.filter(username=username).count()
+    numPages = int(math.ceil(totalItems/float(numItems)))
+    ajaxDict = {}
+    ajaxDict['numPages'] = DAOUtil.jsonReady(numPages)
+    ajaxDict['pageNum'] = DAOUtil.jsonReady(pageNum)
+    ajaxDict['numItems'] = DAOUtil.jsonReady(numItems)
+    ajaxDict['totalItems'] = DAOUtil.jsonReady(totalItems)
+    userTests = None
+    startIndex = (pageNum-1)*numItems
+    endIndex = startIndex+numItems
+    userTests = UserTests.objects.\
+        filter(username=username)[startIndex:endIndex]
+    ajaxDict['tests'] = map(lambda x: DAOUtil.jsonReady(x),
+                            userTests)
+    jsonObjects = json.dumps(ajaxDict)
+    return HttpResponse(jsonObjects)
+
+
+@login_required
 def getUserCompanyTests(request):
+    username = request.user.username
+    companyName = request.GET['companyName']
+    positionName = request.GET.get('positionName')
+    pageNum = int(request.GET.get('pageNum', 1))
+    numItems = int(request.GET.get('numItems', 25))
+    totalItems = 0
+    if not positionName:
+        totalItems = UserCompanyTests.objects.\
+            filter(username=username,
+                   companyname=companyName).count()
+    else:
+        totalItems = UserCompanyTests.objects.\
+            filter(username=username,
+                   companyname=companyName,
+                   positionname=positionName).count()
+    numPages = int(math.ceil(totalItems/float(numItems)))
+    ajaxDict = {}
+    ajaxDict['numPages'] = DAOUtil.jsonReady(numPages)
+    ajaxDict['pageNum'] = DAOUtil.jsonReady(pageNum)
+    ajaxDict['numItems'] = DAOUtil.jsonReady(numItems)
+    ajaxDict['totalItems'] = DAOUtil.jsonReady(totalItems)
+    userCompTests = None
+    startIndex = (pageNum-1)*numItems
+    endIndex = startIndex+numItems
+    if not positionName:
+        userCompTests = UserCompanyTests.objects.\
+            filter(username=username,
+                   companyname=companyName)[startIndex:endIndex]
+    else:
+        userCompTests = UserCompanyTests.objects.\
+            filter(username=username,
+                   companyname=companyName,
+                   positionname=positionName)[startIndex:endIndex]
+    ajaxDict['tests'] = map(lambda x: DAOUtil.jsonReady(x),
+                            userCompTests)
+    jsonObjects = json.dumps(ajaxDict)
+    return HttpResponse(jsonObjects)
+
+
+@login_required
+def getUserPositionTests(request):
+    username = request.user.username
+    positionName = request.GET['positionName']
+    companyName = request.GET.get('companyName')
+    pageNum = int(request.GET.get('pageNum', 1))
+    numItems = int(request.GET.get('numItems', 25))
+    totalItems = 0
+    if not companyName:
+        totalItems = UserPositionTests.objects.\
+            filter(username=username,
+                   positionname=positionName).count()
+    else:
+        totalItems = UserPositionTests.objects.\
+            filter(username=username,
+                   positionname=positionName,
+                   companyname=companyName).count()
+    numPages = int(math.ceil(totalItems/float(numItems)))
+    ajaxDict = {}
+    ajaxDict['numPages'] = DAOUtil.jsonReady(numPages)
+    ajaxDict['pageNum'] = DAOUtil.jsonReady(pageNum)
+    ajaxDict['numItems'] = DAOUtil.jsonReady(numItems)
+    ajaxDict['totalItems'] = DAOUtil.jsonReady(totalItems)
+    userPosTests = None
+    startIndex = (pageNum-1)*numItems
+    endIndex = startIndex+numItems
+    if not companyName:
+        userPosTests = UserPositionTests.objects.\
+            filter(username=username,
+                   positionname=positionName)[startIndex:endIndex]
+    else:
+        userPosTests = UserPositionTests.objects.\
+            filter(username=username,
+                   positionname=positionName,
+                   companyname=companyName)[startIndex:endIndex]
+    ajaxDict['tests'] = map(lambda x: DAOUtil.jsonReady(x),
+                            userPosTests)
+    jsonObjects = json.dumps(ajaxDict)
+    return HttpResponse(jsonObjects)
+
+
+@login_required
+def getUserCompanyTests1(request):
     username = request.user.username
     companyName = request.GET['companyName']
     positionName = request.GET.get('positionName')
@@ -248,7 +433,7 @@ def getUserCompanyTests(request):
 
 
 @login_required
-def getUserPositionTests(request):
+def getUserPositionTests1(request):
     username = request.user.username
     positionName = request.GET['positionName']
     companyName = request.GET.get('companyName')
@@ -344,8 +529,9 @@ def submitTest(request):
     # usercompanytests, userpositiontests and
     # usertests
     try:
-        userCompanyObj = UserCompany.objects.get(username=username,
-                                                 companyname=testObj.companyname)
+        userCompanyObj = UserCompany.objects.\
+                            get(username=username,
+                                companyname=testObj.companyname)
     except DoesNotExist:
         userCompanyObj = UserCompany()
         userCompanyObj.username = username
@@ -554,11 +740,16 @@ def cancelEvaluation(request):
                         testid=testId)
     pendingEvalTest.islocked = False
     pendingEvalTest.save()
-    mentorPendingEvalTest = MentorPendingEvalTests.objects.get(
-        mentorname=request.user.username,
-        testid=testId,
-        evalid=evalId)
-    mentorPendingEvalTest.delete()
+    try:
+        mentorPendingEvalTest = MentorPendingEvalTests.objects.get(
+            mentorname=request.user.username,
+            testid=testId,
+            evalid=evalId)
+        mentorPendingEvalTest.delete()
+    except DoesNotExist:
+        # Ideally shouldn't happen but we don't want this to fail
+        # cos we just want it gone
+        pass
     return HttpResponse("ok")
 
 
@@ -738,6 +929,25 @@ def mentorRequest(request):
 
 
 @login_required
+def resendEmail(request):
+    grp = request.GET.get('grp', 'UsersVerifiedList')
+    username = request.user.username
+    emailCode = PostOffice.NEW_USER
+    if grp.startswith("Moderator"):
+        emailCode = PostOffice.NEW_MODERATOR
+    if grp.startswith("Mentor"):
+        emailCode = PostOffice.NEW_MENTOR
+    email = Users.objects.get(username=username).email
+    sendMail(email,
+             emailCode,
+             {'username': username,
+              'verificationURL':
+              "http://crackit.com:8000/admin/verification.html?" +
+              "username=%s" % (username)})
+    return HttpResponse("ok")
+
+
+@login_required
 def updateUserQuestionInteraction(request):
     username = request.user.username
     questionId = request.GET.get("questionId")
@@ -861,3 +1071,74 @@ def deleteNotifications(request):
     for notn in notifications:
         notn.delete()
     return HttpResponse("ok")
+
+# Websockets Trigger
+
+
+class MentorTests(TemplateView):
+    template_name = 'mentor/search.html'
+
+    def get(self, request, *args, **kwds):
+        username = request.user.username
+        companyName = request.GET.get('companyName')
+        positionName = request.GET.get('positionName')
+        objects = []
+        redisPub = RedisPublisher(facility='mentorTests', users=[username])
+        if companyName:
+            if positionName:
+                objects = PendingEvalTests.objects.filter(
+                            companyname=companyName,
+                            positionname=positionName)
+                objectsJson = json.dumps(
+                    map(lambda x: DAOUtil.jsonReady(x),
+                        filter(lambda x: not x.islocked,
+                               objects))
+                )
+                logger.debug("Publishing to server...")
+                redisPub.publish_message(RedisMessage(objectsJson))
+            else:
+                positions = MentorCompanyPosition.objects.filter(
+                                username=username,
+                                companyname=companyName)
+                for position in positions:
+                    objects = PendingEvalTests.objects.filter(
+                                    companyname=companyName,
+                                    positionname=position.positionname)
+                    objectsJson = json.dumps(
+                        map(lambda x: DAOUtil.jsonReady(x),
+                            filter(lambda x: not x.islocked,
+                                   objects))
+                    )
+                    logger.debug("Publishing to server...")
+                    redisPub.publish_message(RedisMessage(objectsJson))
+        elif positionName:
+            companies = MentorPositionCompany.objects.filter(
+                            username=username,
+                            positionname=positionName)
+            for company in companies:
+                objects = PendingEvalTests.objects.filter(
+                                companyname=company.companyname,
+                                positionname=positionName)
+                objectsJson = json.dumps(
+                    map(lambda x: DAOUtil.jsonReady(x),
+                        filter(lambda x: not x.islocked,
+                               objects))
+                )
+                logger.debug("Publishing to server...")
+                redisPub.publish_message(RedisMessage(objectsJson))
+        else:
+            compPos = MentorCompanyPosition.objects.filter(
+                        username=username)
+            for obj in compPos:
+                objects = PendingEvalTests.objects.filter(
+                                    companyname=obj.companyname,
+                                    positionname=obj.positionname)
+                objectsJson = json.dumps(
+                    map(lambda x: DAOUtil.jsonReady(x),
+                        filter(lambda x: not x.islocked,
+                               objects))
+                )
+                logger.debug("Publishing to server...")
+                redisPub.publish_message(RedisMessage(objectsJson))
+        return HttpResponse('WS')
+        # return super(MentorTests, self).get(request, *args, **kwds)

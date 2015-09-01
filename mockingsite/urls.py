@@ -22,4 +22,5 @@ urlpatterns = [
     url('^ajaxUtil/', include('mocktest.ajaxUrls')),
     url(r'^admin/', include('mocktest.adminUrls')),
     url(r'^mentor/', include('mocktest.mentorUrls'))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

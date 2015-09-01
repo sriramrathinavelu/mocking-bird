@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=description content="A front-end template that helps you build fast, modern mobile web apps."><meta name=viewport content="width=device-width, initial-scale=1"><title>Verfication</title><link rel=manifest href=manifest.json><meta name=mobile-web-app-capable content=yes><meta name=application-name content="Web Starter Kit"><link rel=icon sizes=192x192 href=/static/mocktest/images/touch/chrome-touch-icon-192x192.png><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=apple-mobile-web-app-title content="Web Starter Kit"><link rel=apple-touch-icon href=/static/mocktest/images/touch/apple-touch-icon.png><meta name=msapplication-TileImage content=/static/mocktest/images/touch/ms-touch-icon-144x144-precomposed.png><meta name=msapplication-TileColor content=#3372DF><meta name=theme-color content=#3372DF><script src=//code.jquery.com/jquery-1.10.2.js></script><link rel=stylesheet href=/static/mocktest/styles/base.min.css>{% block css_js %} {% endblock %} {% load compress %} {% compress js inline %}<script type=text/javascript>
+
+    $(function(){
+
+      var val = 5;
+      $("#countdown").html(val);      
+      setInterval(function(){
+        val =val -  1;
+        if (val <= 0) {
+          window.location="/home.html";
+        }
+        $("#countdown").html(val);
+      }, 1000);      
+    }) 
+    </script>{% block jquery %} {% endblock %} {% endcompress %}</head><body><div class=mediachecker></div><header class="app-bar promote-layer"><div class=app-bar-container><button class=menu><img src=/static/mocktest/images/hamburger.png alt=Menu></button><div class=not-mobile><h1 class=logo><strong><i>#include</i>&lt;test&gt;</strong></h1></div><section class=app-bar-actions></section></div></header><div id=nprogress-div style="z-index: 1000;"></div><main><div id=content><h1 id=hello>Dear {{username}},</h1><p>Thanks for verifying your email.</p><p>We are redirecting to the home page in <span id=countdown></span> seconds</p></div></main><script src=static/mocktest/scripts/base.min.js></script>{% block just_js %} {% endblock %}</body></html>

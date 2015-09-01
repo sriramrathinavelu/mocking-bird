@@ -1,2 +1,38 @@
 {% extends "mocktest/base.html" %} {% block title %} Verification Required {% endblock %} {% block jquery %}<script>    
-  </script>{% endblock %} {% block content %}<main><div id=content><h1 id=hello>Dear {{username}},</h1><p>Before we can proceed, we need you to activate your account by clicking the activation link we sent to you in your email</p><p>Thanks for signing up with us.</p><p>We look forward to seeing you soon</p></div></main>{% endblock %}
+    $(function(){
+
+      function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,''])[1].replace(/\+/g, '%20'))||null;
+      }
+
+      $(document).on({
+        ajaxStart: function() { NProgress.start(); },
+        ajaxStop: function() { NProgress.done(); }    
+      });
+
+
+      $("#refresh-anchor").click(function(){
+        location.reload();
+      });
+
+      $("#email-anchor").click(function(){
+        var grp = getURLParameter("grp");
+        if (grp == null) {
+         grp = 'UsersVerifiedList';
+        }
+        $.get("ajaxUtil/resendEmail.html?grp=" + grp, function(data, source) {
+          if (data != "ok") {
+            alert("Sending Email Failed");
+          } else {
+            $("#email-sent-notification-trigger").trigger("click");
+          }
+        });
+      });
+
+      $("#email-sent-yes-button").click(function(){
+        $('#mask , .popup').fadeOut(300 , function() {
+          $('#mask').remove();  
+        });
+      });
+    });
+  </script>{% endblock %} {% block content %}<main><div id=content><h1 id=hello>Dear {{username}},</h1><p>Before we can proceed, we need you to activate your account by clicking the activation link we sent to your email</p><br><p>If you have already done so please try clicking <a id=refresh-anchor href=#>refresh</a> or <a id=email-anchor href=#>click here</a> to resend you the email.</p><p>Thanks for signing up with us.</p><p>We look forward to seeing you soon</p></div></main><a id=email-sent-notification-trigger href=#email-sent-notification class=popup-source style="visibility: hidden"></a><div id=email-sent-notification class=popup><a href=# class=close><img src=/static/mocktest/images/icons/close.png class=btn_close title="Close Window" alt=Close></a><div id=popup-notification-content class=middle>Email sent successfully!</div><div class=centered-div><button id=email-sent-yes-button class="submit button middle" type=button>ok</button></div></div>{% endblock %}

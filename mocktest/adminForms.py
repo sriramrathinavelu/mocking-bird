@@ -1,9 +1,6 @@
-from models import RawQuestionBank
 from models import CompanyPosition
-from django.forms import ModelForm
 from django.db import connections
 from django import forms
-import collections
 import logging
 
 logger = logging.getLogger(__name__)
@@ -138,6 +135,9 @@ class addQuestionForm (forms.Form):
     companyName = forms.CharField(widget=forms.HiddenInput)
     positionName = DynamicChoiceField(label='Position Name')
     question = forms.CharField(label='Question', widget=forms.Textarea)
+    imageFile = forms.ImageField(
+                    label='Image',
+                    required=False)
     questionType = forms.ChoiceField(label='Question Type',
                                      choices=[
                                       ('1', 'Multiple Choice Single Answer'),

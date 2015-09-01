@@ -1,6 +1,7 @@
 {% extends "mentor/mentor_base.html" %}
 
 {% block css_js %}      
+  <script src="/static/mocktest/scripts/ws4redis.js"></script>
 {% endblock %}
   
 
@@ -10,6 +11,8 @@
       var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+      var wsStr = "Ws";
+      var count = 0;
       
       function makeListTitle(count){
         $(".articles-count").html("We found " + count + " tests matching your criteria");
@@ -32,6 +35,41 @@
         );
       }
 
+      function webSocketConnected() {
+        $.get("/ajaxUtil/mentorTestsWs.html",function(data, success){
+        })
+      }
+
+      function webSocketFailed() {
+        wsStr = "";
+        $.get("/ajaxUtil/mentorTests.html",function(data, success){
+          makeListTitle(data.length);
+          $.each(data, function(index, value){
+            makeTestList(index, value, false);
+          }); 
+        })
+      }
+
+
+      var ws4redis = WS4Redis({
+        uri: 'ws://localhost:8000/ws/mentorTests?subscribe-user',
+        receive_message: receiveMessage,
+        heartbeat_msg: '--heartbeat--',//{{ WS4REDIS_HEARTBEAT }}
+        onSuccess: webSocketConnected,
+        onFailure: webSocketFailed
+      });
+
+      function receiveMessage (data){
+        console.log("Message Received");
+        data = eval(data);
+        count += data.length;
+        makeListTitle(count);
+        $.each(data, function(index, value){
+          makeTestList(index, value, false);
+        }); 
+      }
+
+      /*
       $.getJSON("/ajaxUtil/mentorTests.html",function (data, status){          
           if (status === "success") {              
             makeListTitle(data.length);
@@ -40,13 +78,15 @@
            }); 
           }
         });
-      
+      */
 
       $("#positionName").autocomplete({
         source: {{posList|safe}},
         select: function(event, ui){
-          $.getJSON("/ajaxUtil/mentorTests.html?positionName=" + ui.item.value,function (data, status){
-            if (status === "success") {                          
+          $(".articles-list").html("");
+          count = 0;
+          $.get("/ajaxUtil/mentorTests"+wsStr+".html?positionName=" + ui.item.value,function (data, status){
+            if (data === "success" && data != "WS") {                          
               $(".articles-list").html("");
               makeListTitle(data.length);
               $.each(data, function(index, value){
@@ -72,8 +112,10 @@
       $("#companyName").autocomplete({
         source: {{compList|safe}},
         select: function(event, ui){
-          $.getJSON("/ajaxUtil/mentorTests.html?companyName=" + ui.item.value,function (data, status){
-            if (status === "success") {              
+          $(".articles-list").html("");
+          count = 0;
+          $.get("/ajaxUtil/mentorTests"+wsStr+".html?companyName=" + ui.item.value,function (data, status){
+            if (data === "success" && data != "WS") {              
               $(".articles-count").html("");
               $(".articles-list").html("");
               makeListTitle(data.length);
@@ -105,9 +147,9 @@
         $("#positionName").show();
         $("#companyName").val("");
         $("#positionName").val("");
-        $(".articles-list").html("");
-        $(".articles-count").html("");
-        $.getJSON("/ajaxUtil/mentorTests.html",function (data, status){
+        $(".articles-list").html("");        
+        count = 0
+        $.getJSON("/ajaxUtil/mentorTests"+wsStr+".html",function (data, status){
           if (status === "success") {     
             $(".articles-list").html("");
             makeListTitle(data.length);
@@ -122,8 +164,10 @@
       $("#position-select-1").change(function(){
         /*Load Test data based on the company and position*/
         if (!$("#position-select-1").val().match("^Please")) {
-          $.getJSON("/ajaxUtil/mentorTests.html?companyName=" + $("#companyName").val() + "&positionName=" + $("#position-select-1").val(),function (data, status){
-            if (status === "success") {              
+          $(".articles-list").html("");
+          count = 0;
+          $.get("/ajaxUtil/mentorTests"+wsStr+".html?companyName=" + $("#companyName").val() + "&positionName=" + $("#position-select-1").val(),function (data, status){
+            if (data === "success" && data != "WS") {
               makeListTitle(data.length);
               $(".articles-list").html("");
               $.each(data, function(index, value){
@@ -136,8 +180,10 @@
       $("#company-select-1").change(function(){
         /*Load Test data based on the company and position*/
         if (!$("#company-select-1").val().match("^Please")) {
-          $.getJSON("/ajaxUtil/mentorTests.html?companyName=" + $("#company-select-1").val() + "&positionName=" + $("#positionName").val(),function (data, status){
-            if (status === "success") {              
+          $(".articles-list").html("");
+          count = 0;
+          $.getJSON("/ajaxUtil/mentorTests"+wsStr+".html?companyName=" + $("#company-select-1").val() + "&positionName=" + $("#positionName").val(),function (data, status){
+            if (data === "success" && data != "WS") {
               makeListTitle(data.length);
               $(".articles-list").html("");
               $.each(data, function(index, value){
@@ -146,24 +192,7 @@
             }
           });
         }
-      });
-      /*
-      $("#saved-tests").click(function(){
-        $("#company-select").hide();
-        $("#position-select-1").hide();
-        $("#position-select").hide();
-        $("#company-select-1").hide();
-        $.getJSON("/ajaxUtil/userSavedTests.html",function (data, status){
-          if (status === "success") {              
-            $(".articles-list").html("");
-            makeListTitle(data.length);
-            $.each(data, function(index, value){
-              makeTestList(index, value, true);
-           }); 
-          }
-        });
-      });
-      */
+      });      
     });
     </script>
 {% endblock %}

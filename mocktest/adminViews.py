@@ -18,13 +18,25 @@ from models import Users
 from collections import OrderedDict
 from django.shortcuts import render
 from django.db import connections
+from django.conf import settings
 from . import adminForms
 import logging
 import DAOUtil
 import auditor
 import mailer
+import os
 
 logger = logging.getLogger(__name__)
+
+
+def saveQuestionImageFile(fileName, fileData):
+    with open(os.path.join(
+                settings.MEDIA_ROOT,
+                'images',
+                'questions',
+                fileName), 'wb+') as openedFile:
+        for chunk in fileData.chunks():
+            openedFile.write(chunk)
 
 
 def adminChecks(func):
@@ -355,6 +367,11 @@ def addQuestion(request):
                     'Question Id': str(questionObj.questionid),
                 }
             )
+            if request.FILES.get('imageFile'):
+                saveQuestionImageFile(
+                    str(questionObj.questionid),
+                    request.FILES.get('imageFile')
+                )
             return HttpResponseRedirect('/admin/home.html')
     context['form'] = form
     return render(request, 'admin/genericForm.html', context)
@@ -426,7 +443,11 @@ def verification(request):
             authUser.save()
     # Redirect to some pretty thank you page
 
-    return HttpResponse("Thanks for verifying!")
+    context = {}
+    context['username'] = username
+    context['isAuthenticated'] = False
+    return render(request, 'mocktest/verification.html', context)
+    # return HttpResponse("Thanks for verifying!")
 
 
 @login_required(redirect_field_name="redirect_url",

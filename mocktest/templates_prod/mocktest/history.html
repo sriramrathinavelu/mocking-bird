@@ -1,4 +1,4 @@
-{% extends "mocktest/base.html" %} {% block title %} History {% endblock %} {% block css_js %}<link rel=stylesheet href=//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css>{% endblock %} {% block just_js%}<script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script>{% endblock %} {% block jquery %}<script>    
+{% extends "mocktest/base.html" %} {% block title %} History {% endblock %} {% block css_js %}<link rel=stylesheet href=//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css><link rel=stylesheet href=/static/mocktest/styles/pagination-style.css>{% endblock %} {% block just_js%}<script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script>{% endblock %} {% block jquery %}<script>    
   $(function(){
 
         /*
@@ -84,7 +84,143 @@
     function makeListTitle(count){
       $(".articles-count").html("We found " + count + " tests matching your criteria");
     }
-    
+
+    function populateTests(pageNum, numItems){
+      $.getJSON("/ajaxUtil/userTests.html?pageNum="+pageNum+"&numItems="+numItems,function (data, status){
+        if (status === "success") {   
+          tests=data['tests'];
+          $(".articles-list").html("");
+          makeListTitle(parseInt(data['totalItems']));
+          $.each(tests, function(index, value){
+            makeTestList(index, value, false);
+          }); 
+          makePagination(parseInt(data['pageNum']),parseInt(data['numPages']),"populateTests");
+        }
+      });
+    }
+
+    function populateCompanyTests(companyName, positionName, pageNum, numItems){
+      if (positionName.lastIndexOf("DEFAULT", 0) === 0) {
+        positionName="";
+      }
+      $.getJSON("/ajaxUtil/userCompanyTests.html?companyName="+companyName+"&positionName="+positionName+"&pageNum="+pageNum+"&numItems="+numItems,function (data, status){
+        if (status === "success") {              
+          tests=data['tests'];
+          $(".articles-list").html("");
+          makeListTitle(parseInt(data['totalItems']));
+          $.each(tests, function(index, value){
+            makeTestList(index, value, false);
+          }); 
+          makePagination(parseInt(data['pageNum']),parseInt(data['numPages']),"populateCompanyTests");
+        }
+      });
+    }
+
+    function populatePositionTests(positionName, companyName, pageNum, numItems){
+      if (companyName.lastIndexOf("DEFAULT", 0) === 0) {
+        companyName="";
+      }
+      $.getJSON("/ajaxUtil/userPositionTests.html?positionName="+positionName+"&companyName="+companyName+"&pageNum="+pageNum+"&numItems="+numItems,function (data, status){
+        if (status === "success") {              
+          tests=data['tests'];
+          $(".articles-list").html("");
+          makeListTitle(parseInt(data['totalItems']));
+          $.each(tests, function(index, value){
+            makeTestList(index, value, false);
+          }); 
+          makePagination(parseInt(data['pageNum']),parseInt(data['numPages']),"populatePositionTests");
+        }
+      });
+    }
+
+    var mode = "";
+
+    $("#pagination-list").click(function(e){
+      if (e.target.nodeName == "A") {
+        e.preventDefault();
+        console.log(e.target);
+        var elem = $(e.target);
+        console.log(elem.attr("id"));
+        if (mode == "populateTests") {
+          populateTests(parseInt(elem.attr("id")), 1);
+        } else if (mode == "populateCompanyTests") {
+          populateCompanyTests($("#companyName").val(),$("#position-select-1").val(),elem.attr("id"),1);
+        } else {
+          populatePositionTests($("#positionName").val(), $("#company-select-1").val(),elem.attr("id"),1);
+        }
+      }
+    });
+
+    function makePagination(pageNum, totalPages, _mode) {
+      $("#pagination-list").empty();
+      mode = _mode;
+      var index = 0;
+      var disabled=" ";
+      var numBlks = 7
+      index = pageNum-1;
+      if (pageNum == 1)
+        disabled=" class=\"disabled\" ";
+      $("#pagination-list").append("<li class=\"button\"><a id=\""+index+"\""+disabled+"href=\"#\">Prev</a></li>");      
+      if (totalPages <= numBlks) {
+        for (i = 0; i < totalPages; i++) {
+          index = i+1; 
+          if (index == pageNum) {
+            $("#pagination-list").append("<li class=\"current\"><a id=\""+pageNum+"\" href=\"#\">"+index+"</a></li>");
+          } else {
+            $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+          }
+        }
+      }
+      else {
+        if (pageNum <= numBlks-3) {
+          for (i = 0; i < numBlks-2; i++) {
+            index = i+1; 
+            if (index == pageNum) {
+              $("#pagination-list").append("<li class=\"current\"><a id=\""+pageNum+"\" href=\"#\">"+index+"</a></li>");
+            } else {
+              $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+            }
+          }
+          $("#pagination-list").append("<li><span>...</span></li>");
+          $("#pagination-list").append("<li><a id=\""+totalPages+"\" href=\"#\">"+totalPages+"</a></li>");
+        } else if (pageNum >= (totalPages-3)) {
+          $("#pagination-list").append("<li><a id=\"1\" href=\"#\">"+1+"</a></li>");
+          $("#pagination-list").append("<li><span>...</span></li>");
+          for (i = 0; i < numBlks-2; i++) {
+            index = i+1+pageNum-1; 
+            if (index == pageNum) {
+              $("#pagination-list").append("<li class=\"current\"><a href=\"#\">"+index+"</a></li>");
+            } else {
+              $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+            }
+          }
+        } else {
+          $("#pagination-list").append("<li><a id=\"1\" href=\"#\">1</a></li>");
+          if (pageNum - 2 == 2) {
+            $("#pagination-list").append("<li><a id=\"2\" href=\"#\">2</a></li>");
+          } else {
+            $("#pagination-list").append("<li><span>...</span></li>");
+          }
+          index = pageNum-1;
+          $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+          $("#pagination-list").append("<li class=\"current\"><a href=\"#\">"+pageNum+"</a></li>");
+          index = pageNum+1;
+          $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+          if (pageNum + 2 == totalPages-1) {
+            index=pageNum+2;
+            $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+          } else {
+            $("#pagination-list").append("<li><span>...</span></li>");
+          }
+          $("#pagination-list").append("<li><a id=\"totalPages\" href=\"#\">"+totalPages+"</a></li>");
+        }        
+      }
+      var disabled=" ";
+      index = pageNum+1;
+      if (pageNum == totalPages)
+        disabled=" class=\"disabled\" ";
+      $("#pagination-list").append("<li class=\"button\"><a id=\""+index+"\""+disabled+"href=\"#\">Next</a></li>");
+    }
 
     function makeTestList(index, value, isSaved) {
       console.log(value);
@@ -160,20 +296,14 @@
       );
     }
 
-    $.getJSON("/ajaxUtil/userTests.html",function (data, status){
-        if (status === "success") {              
-          $(".articles-list").html("");
-          makeListTitle(data.length);
-          $.each(data, function(index, value){
-            makeTestList(index, value, false);
-         }); 
-        }
-      });
+    populateTests(1,1);
     
 
     $("#positionName").autocomplete({
       source: eval('{{positionNames|safe}}'),
       select: function(event, ui){
+        populatePositionTests(ui.item.value,"",1,1);
+        /*
         $.getJSON("/ajaxUtil/userPositionTests.html?positionName=" + ui.item.value,function (data, status){
           if (status === "success") {              
             $(".articles-list").html("");
@@ -183,6 +313,7 @@
            }); 
           }
         });
+        */
         /*Get the positions for the company*/
         $.get("/ajaxUtil/userPositionCompany.html?positionName=" + ui.item.value, function (data, status){
           if (status === "success") {
@@ -201,6 +332,8 @@
     $("#companyName").autocomplete({
       source: eval('{{companyNames|safe}}'),
       select: function(event, ui){
+        populateCompanyTests(ui.item.value,"",1,1);
+        /*
         $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + ui.item.value,function (data, status){
           if (status === "success") {              
             $(".articles-count").html("");
@@ -211,6 +344,7 @@
            });             
           }
         });
+        */
         /*Get the positions for the company*/
         $.get("/ajaxUtil/userCompanyPosition.html?companyName=" + ui.item.value, function(data, status){
           if (status === "success") {
@@ -236,21 +370,14 @@
       $("#positionName").val("");
       $(".articles-list").html("");
       $(".articles-count").html("");
-      $.getJSON("/ajaxUtil/userTests.html",function (data, status){
-        if (status === "success") {              
-          $(".articles-list").html("");
-          makeListTitle(data.length);
-          $.each(data, function(index, value){
-            makeTestList(index, value, false);
-         }); 
-        }
-      });
+      populateTests(1,1);
     });
 
 
     $("#position-select-1").change(function(){
       /*Load Test data based on the company and position*/
       if (!$("#position-select-1").val().match("^Please")) {
+        /*
         $.getJSON("/ajaxUtil/userCompanyTests.html?companyName=" + $("#companyName").val() + "&positionName=" + $("#position-select-1").val(),function (data, status){
           if (status === "success") {              
             makeListTitle(data.length);
@@ -260,11 +387,14 @@
             }); 
           }
         });
+        */
+        populateCompanyTests($("#companyName").val(),$("#position-select-1").val(),1,1);
       }
     });
     $("#company-select-1").change(function(){
       /*Load Test data based on the company and position*/
       if (!$("#company-select-1").val().match("^Please")) {
+        /*
         $.getJSON("/ajaxUtil/userPositionTests.html?companyName=" + $("#company-select-1").val() + "&positionName=" + $("#positionName").val(),function (data, status){
           if (status === "success") {              
             makeListTitle(data.length);
@@ -274,6 +404,8 @@
             }); 
           }
         });
+        */
+        populatePositionTests($("#positionName").val(),$("#company-select-1").val(),1,1);
       }
     });
 
@@ -307,4 +439,4 @@
     });
     */
   });
-  </script>{% endblock %} {% block content %}<main><div class="centered-div block-or-flex"><input class=centered-input type=text id=companyName placeholder="Enter Company Name"><select id=company-select-1 name=company-select-1 class=centered-input style=display:none></select><input class=centered-input type=text id=positionName placeholder="Enter Position Name"><select id=position-select-1 name=position-select-1 class=centered-input style=display:none></select></div><div class=middle-item><a id=clearSearch href=# class="button--mockingone middle" style="width: 100px; display: none;">Clear</a></div><section class=styleguide__articles-section><div class=articles-section><div class=container><p class=articles-count></p><ol class=articles-list></ol></div></div></section><input type=hidden id=eval-test-id><div id=evaluation-confirmation class=popup><a href=# class=close><img src=/static/mocktest/images/icons/close.png class=btn_close title="Close Window" alt=Close></a><div class=middle>Are you sure you want to submit for evaluation?<br>You could be charged $XX for this transaction.</div><div class=centered-div><button id=popup-eval-yes-button class="submit button middle" type=button>Yes</button></div></div></main>{% endblock %}
+  </script>{% endblock %} {% block content %}<main><div class="centered-div block-or-flex"><input class=centered-input type=text id=companyName placeholder="Enter Company Name"><select id=company-select-1 name=company-select-1 class=centered-input style=display:none></select><input class=centered-input type=text id=positionName placeholder="Enter Position Name"><select id=position-select-1 name=position-select-1 class=centered-input style=display:none></select></div><div class=middle-item><a id=clearSearch href=# class="button--mockingone middle" style="width: 100px; display: none;">Clear</a></div><section class=styleguide__articles-section><div class=articles-section><div class=container><p class=articles-count></p><ol class=articles-list></ol></div></div></section><nav role=navigation><ul id=pagination-list class=cd-pagination></ul></nav><input type=hidden id=eval-test-id><div id=evaluation-confirmation class=popup><a href=# class=close><img src=/static/mocktest/images/icons/close.png class=btn_close title="Close Window" alt=Close></a><div class=middle>Are you sure you want to submit for evaluation?<br>You could be charged $XX for this transaction.</div><div class=centered-div><button id=popup-eval-yes-button class="submit button middle" type=button>Yes</button></div></div></main>{% endblock %}

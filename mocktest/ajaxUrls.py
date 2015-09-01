@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^userPositionFavourites.html$', ajaxUtils.getUserPositionFavourites),
     url(r'^userCompanyPosition.html$', ajaxUtils.getUserCompanyPosition),
     url(r'^userPositionCompany.html$', ajaxUtils.getUserPositionCompany),
+    url(r'^mentorTestsWs.html$', ajaxUtils.MentorTests.as_view()),
     url(r'^mentorTests.html$', ajaxUtils.getMentorTests),
     url(r'^mentorCompanyPosition.html$', ajaxUtils.getMentorCompanyPosition),
     url(r'^mentorPositionCompany.html$', ajaxUtils.getMentorPositionCompany),
@@ -30,4 +31,5 @@ urlpatterns = [
     url(r'^vote.html$', ajaxUtils.updateUserQuestionInteraction),
     url(r'^mentorRequest.html$', ajaxUtils.mentorRequest),
     url(r'^deleteNotifications.html$', ajaxUtils.deleteNotifications),
+    url(r'^resendEmail.html$', ajaxUtils.resendEmail),
 ]

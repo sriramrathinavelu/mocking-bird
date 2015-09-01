@@ -35,6 +35,9 @@
     
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 
+
+    <!-- If we need to reset the css behavior -->
+    <!-- <link rel="stylesheet" href="/static/mocktest/styles/reset.css"> -->
     <!-- Page styles -->
     <!-- build:css /static/mocktest/styles/base.min.css -->
     <link rel="stylesheet" href="/static/mocktest/styles/components.css">
@@ -63,7 +66,7 @@
     $(function(){
 
       /*JQM*/
-        $('.popup-source').click(function() {
+        $(document).on("click", ".popup-custom-source", function() {
     
           //Getting the variable's value from a link 
           var loginBox = $(this).attr('href');

@@ -1,7 +1,7 @@
 {% extends "admin/formbase.html" %}
 
 {% block content %}
-<form method="POST" action={{action}} class="pure-form pure-form-aligned">
+<form enctype="multipart/form-data" method="POST" action={{action}} class="pure-form pure-form-aligned">
 {% csrf_token %}
 {% block message %}
 {% endblock %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'compressor',
+	'ws4redis',
 	'mocktest',
 )
 
@@ -76,6 +77,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+				'django.core.context_processors.static',
+				'ws4redis.context_processors.default',
             ],
         },
     },
@@ -130,6 +133,8 @@ USE_TZ = True
 PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, '../static')
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(PROJECT_ROOT, '../media')
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
 )
@@ -199,3 +204,13 @@ EMAIL_PORT = 587
 COMPRESS_ENABLED = True
 
 COMPRESS_OFFLINE = False
+
+# websockets
+
+WEBSOCKET_URL = '/ws/'
+
+WSGI_APPLICATION = 'ws4redis.django_runserver.application'
+
+WS4REDIS_HEARTBEAT = '--heartbeat--'
+
+WS4REDIS_EXPIRE = 0

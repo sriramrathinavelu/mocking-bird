@@ -70,6 +70,10 @@ def __brokenPage(request,
 @login_required(redirect_field_name='redirect_url')
 def notVerified(request):
     context = __setAuthInfo(request)
+    group = request.GET.get('grp')
+    if group and request.user.groups. \
+            filter(name=group).count() == 1:
+        return HttpResponseRedirect(request.GET.get("next"))
     return render(request, 'mocktest/notVerified.html', context)
 
 
@@ -149,7 +153,7 @@ def createTest(request):
 @login_required(redirect_field_name='redirect_url')
 @user_passes_test(lambda u: u.groups.filter(name='UsersVerifiedList').
                   count() == 1,
-                  '/notVerified.html')
+                  '/notVerified.html?grp=UsersVerifiedList')
 def savedTests(request):
     context = {}
     __setAuthInfo(request, context)

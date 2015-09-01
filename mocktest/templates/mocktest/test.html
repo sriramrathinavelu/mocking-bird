@@ -145,7 +145,15 @@
         });      
 
         $("#difficulty-radio").buttonset();
+        $("#question-image").error(function(){
+          $(this).hide();
+        });
+        $("#question-image").load(function(){
+          $(this).show();
+        });
 
+        
+              
         /*Get the test id*/
         $("#testId").val(getURLParameter("testId"));
         $("#testName").val(getURLParameter("testName"));
@@ -187,6 +195,7 @@
           questions[currentQ]['question'] +
           "</pre>"
         );
+        $("#question-image").attr("src", "/media/images/questions/" + questions[currentQ]['questionid']);
         /* Load the current answer */
         $("#answer-space").val(
           questions[currentQ]['givenanswer']
@@ -529,6 +538,7 @@
               questions[index-1]['question'] +
               "</pre>"
             );
+            $("#question-image").attr("src", "/media/images/questions/" + questions[index-1]['questionid']);
             /* Load answer*/
             $("#answer-space").val(
               questions[index-1]['givenanswer']
@@ -659,7 +669,10 @@
           </div>
           <!-- Question -->
           <div class="middle-item" id="question">            
-          </div>          
+          </div>         
+          <div class="middle-item">
+            <img id="question-image"/>
+          </div>
           <div class="centered-div" id="difficulty-radio">
             <div id="rate-text" style="display: none">Please take a moment to rate this question</div>
             <div id="thank-you" style="display: none">Thank you for rating</div>
