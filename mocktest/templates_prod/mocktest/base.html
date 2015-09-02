@@ -9,7 +9,7 @@
     $(function(){
 
       /*JQM*/
-        $('.popup-source').click(function() {
+        $(document).on("click", ".popup-custom-source", function() {
     
           //Getting the variable's value from a link 
           var loginBox = $(this).attr('href');

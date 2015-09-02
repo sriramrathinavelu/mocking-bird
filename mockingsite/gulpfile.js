@@ -101,7 +101,6 @@ gulp.task('html', function () {
 //      ]
 //    })))
     // Concatenate and minify styles
-    // In case you are still using useref build blocks -- we are not using it!
     .pipe($.if('*.css', $.csso()))
     .pipe(assets.restore())
     .pipe($.useref())
@@ -166,9 +165,11 @@ gulp.task('clean', del.bind(null, [
 					cssDevDestPath,
 					cssProdDestPath,
 					imgDestPath,
-					fontDestPath
-					//templateProdDestPath,
-					], {dot: true}));
+					fontDestPath,
+					templateProdDestPath,
+					scriptsProdSrcPath,
+					stylesProdSrcPath
+					], {dot: true, force: true}));
 
 
 

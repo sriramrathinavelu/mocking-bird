@@ -98,3 +98,18 @@
 [30/Aug/2015 01:05:32] DEBUG [mocktest.ajaxUtil:1141] Publishing to server...
 [30/Aug/2015 01:07:35] DEBUG [mocktest.ajaxUtil:1141] Publishing to server...
 [30/Aug/2015 01:08:30] DEBUG [mocktest.ajaxUtil:1141] Publishing to server...
+[01/Sep/2015 10:35:34] DEBUG [mocktest.backend:26] Authenticating user: sriram
+[01/Sep/2015 10:36:19] DEBUG [mocktest.ajaxUtil:631] Answer: 
+[01/Sep/2015 10:36:49] DEBUG [mocktest.ajaxUtil:631] Answer: 
+[01/Sep/2015 10:37:19] DEBUG [mocktest.ajaxUtil:631] Answer: 
+[01/Sep/2015 10:37:49] DEBUG [mocktest.ajaxUtil:631] Answer: 
+[01/Sep/2015 10:38:19] DEBUG [mocktest.ajaxUtil:631] Answer: 
+[01/Sep/2015 10:38:49] DEBUG [mocktest.ajaxUtil:631] Answer: 
+[01/Sep/2015 10:39:20] DEBUG [mocktest.ajaxUtil:631] Answer: 
+[01/Sep/2015 10:39:50] DEBUG [mocktest.ajaxUtil:631] Answer: 
+[01/Sep/2015 10:45:55] DEBUG [mocktest.ajaxUtil:631] Answer: asasdasd
+[01/Sep/2015 10:46:25] DEBUG [mocktest.ajaxUtil:631] Answer: asasdasd
+[01/Sep/2015 10:46:55] DEBUG [mocktest.ajaxUtil:631] Answer: asasdasd
+[01/Sep/2015 10:47:25] DEBUG [mocktest.ajaxUtil:631] Answer: asasdasd
+[01/Sep/2015 10:48:17] DEBUG [mocktest.ajaxUtil:631] Answer: asasdasd
+[01/Sep/2015 10:48:23] DEBUG [mocktest.ajaxUtil:631] Answer: asasdasd

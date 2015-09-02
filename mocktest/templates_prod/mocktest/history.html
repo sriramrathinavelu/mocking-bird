@@ -1,4 +1,4 @@
-{% extends "mocktest/base.html" %} {% block title %} History {% endblock %} {% block css_js %}<link rel=stylesheet href=//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css><link rel=stylesheet href=/static/mocktest/styles/pagination-style.css>{% endblock %} {% block just_js%}<script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script>{% endblock %} {% block jquery %}<script>    
+{% extends "mocktest/base.html" %} {% block title %} History {% endblock %} {% block css_js %}<link rel=stylesheet href=//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css>{% endblock %} {% block just_js%}<script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script>{% endblock %} {% block jquery %}<script>    
   $(function(){
 
         /*
@@ -167,7 +167,7 @@
           if (index == pageNum) {
             $("#pagination-list").append("<li class=\"current\"><a id=\""+pageNum+"\" href=\"#\">"+index+"</a></li>");
           } else {
-            $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+            $("#pagination-list").append("<li class=\"button\"><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
           }
         }
       }
@@ -178,41 +178,41 @@
             if (index == pageNum) {
               $("#pagination-list").append("<li class=\"current\"><a id=\""+pageNum+"\" href=\"#\">"+index+"</a></li>");
             } else {
-              $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+              $("#pagination-list").append("<li class=\"button\"><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
             }
           }
           $("#pagination-list").append("<li><span>...</span></li>");
-          $("#pagination-list").append("<li><a id=\""+totalPages+"\" href=\"#\">"+totalPages+"</a></li>");
+          $("#pagination-list").append("<li class=\"button\"><a id=\""+totalPages+"\" href=\"#\">"+totalPages+"</a></li>");
         } else if (pageNum >= (totalPages-3)) {
-          $("#pagination-list").append("<li><a id=\"1\" href=\"#\">"+1+"</a></li>");
+          $("#pagination-list").append("<li class=\"button\"><a id=\"1\" href=\"#\">"+1+"</a></li>");
           $("#pagination-list").append("<li><span>...</span></li>");
           for (i = 0; i < numBlks-2; i++) {
             index = i+1+pageNum-1; 
             if (index == pageNum) {
               $("#pagination-list").append("<li class=\"current\"><a href=\"#\">"+index+"</a></li>");
             } else {
-              $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+              $("#pagination-list").append("<li class=\"button\"><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
             }
           }
         } else {
-          $("#pagination-list").append("<li><a id=\"1\" href=\"#\">1</a></li>");
+          $("#pagination-list").append("<li class=\"button\"><a id=\"1\" href=\"#\">1</a></li>");
           if (pageNum - 2 == 2) {
-            $("#pagination-list").append("<li><a id=\"2\" href=\"#\">2</a></li>");
+            $("#pagination-list").append("<li class=\"button\"><a id=\"2\" href=\"#\">2</a></li>");
           } else {
             $("#pagination-list").append("<li><span>...</span></li>");
           }
           index = pageNum-1;
-          $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+          $("#pagination-list").append("<li class=\"button\"><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
           $("#pagination-list").append("<li class=\"current\"><a href=\"#\">"+pageNum+"</a></li>");
           index = pageNum+1;
-          $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+          $("#pagination-list").append("<li class=\"button\"><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
           if (pageNum + 2 == totalPages-1) {
             index=pageNum+2;
-            $("#pagination-list").append("<li><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
+            $("#pagination-list").append("<li class=\"button\"><a id=\""+index+"\" href=\"#\">"+index+"</a></li>");
           } else {
             $("#pagination-list").append("<li><span>...</span></li>");
           }
-          $("#pagination-list").append("<li><a id=\"totalPages\" href=\"#\">"+totalPages+"</a></li>");
+          $("#pagination-list").append("<li class=\"button\"><a id=\"totalPages\" href=\"#\">"+totalPages+"</a></li>");
         }        
       }
       var disabled=" ";
