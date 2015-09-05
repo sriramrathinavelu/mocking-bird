@@ -3,6 +3,7 @@ screenlog*
 *.pyo
 *.swp
 db.sqlite3
+bashenv.inc
 mockingsite/logfile*
 mockingsite/settings/logfile*
 mockingsite/mockingsite_nginx.conf
