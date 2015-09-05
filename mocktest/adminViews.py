@@ -675,14 +675,14 @@ def moderateQuestion(request):
             if nextRawQuestion:
                 nextRawQuestion = nextRawQuestion[0]
                 return HttpResponseRedirect(
-                    'admin/moderateQuestion.html?' +
+                    '/admin/moderateQuestion.html?' +
                     'companyName=' + companyName +
                     '&positionName=' + positionName +
                     '&questionId=' + str(nextRawQuestion.questionid) +
                     '&page=' + page)
             else:
                 return HttpResponseRedirect(
-                    'admin/moderateQuestionTable.html?' +
+                    '/admin/moderateQuestionTable.html?' +
                     'companyName=' + companyName +
                     '&positionName=' + positionName +
                     '&questionId=' + questionId +

@@ -2,6 +2,8 @@
 
 
 {% block jquery %}
+<script>
+$(function(){
     $("#advancedFields").hide()
     $("#hideAdvanced").hide()
     $("#showAdvanced").click(function(){
@@ -14,6 +16,8 @@
         $("#hideAdvanced").hide();
         $("#showAdvanced").show();
     });
+});
+</script>
 {% endblock %}
 
 {% block content %}
@@ -58,9 +62,9 @@
     {{ form.key }}
 </div>
 <div class="pure-control-group">
-    {{ form.timetosolve.errors }}
-    {{ form.timetosolve.label_tag }}
-    {{ form.timetosolve }}
+    {{ form.timeToSolve.errors }}
+    {{ form.timeToSolve.label_tag }}
+    {{ form.timeToSolve }}
 </div>
 </div>
 <div id="showAdvanced" style="color:blue">Show Advanced Fields</div>
