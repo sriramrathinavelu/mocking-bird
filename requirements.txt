@@ -1,4 +1,4 @@
-BeautifulSoup==3.2.1
+beautifulsoup4==4.4.0
 cassandra-driver==2.7.1
 cffi==1.2.1
 characteristic==14.3.0
