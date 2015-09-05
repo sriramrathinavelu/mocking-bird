@@ -23,6 +23,7 @@ from . import adminForms
 import logging
 import DAOUtil
 import auditor
+import urllib2
 import mailer
 import os
 
@@ -133,7 +134,8 @@ def home(request):
         FROM company_position
         """)
     for company in companies:
-        companyNames[company["companyname"]] = company["companyname"]
+        companyNames[urllib2.quote(company["companyname"])] = \
+            company["companyname"]
     moderateIds = {}
     results = cursor.execute("""
         SELECT DISTINCT companyname, positionname
@@ -142,7 +144,9 @@ def home(request):
         companyName = result["companyname"]
         positionName = result["positionname"]
         moderateIds[
-            "companyName=%s&positionName=%s" % (companyName, positionName)
+            "companyName=%s&positionName=%s" % (
+                urllib2.quote(companyName),
+                urllib2.quote(positionName))
         ] = companyName + "/" + positionName
     companyPositions = cursor.execute("""
         SELECT companyname, positionname
@@ -153,7 +157,9 @@ def home(request):
         companyName = companyPosition["companyname"]
         positionName = companyPosition["positionname"]
         companyPositionsDict[
-            "companyName=%s&positionName=%s" % (companyName, positionName)
+            "companyName=%s&positionName=%s" % (
+                urllib2.quote(companyName),
+                urllib2.quote(positionName))
         ] = companyName + "/" + positionName
     context['companyNames'] = companyNames
     context['title'] = 'Home'
