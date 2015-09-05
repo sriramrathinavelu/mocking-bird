@@ -25,6 +25,10 @@ echo "export VIRTUALENVPATH=\"$VIRTUALENVPATH\"" >> $MOCKINGBIRDPATH/$BASHPARTIA
 
 grep --quiet "source $MOCKINGBIRDPATH/$BASHPARTIAL" ~/.bashrc || printf "\n%s\n%s\n" "# Setting up the MockingBird environment" "source $MOCKINGBIRDPATH/$BASHPARTIAL" >> ~/.bashrc
 
+CASSANDRA_HOST=`(ls /etc/cassandra/cassandra.yaml>/dev/null 2>&1 && grep listen_address: /etc/cassandra/cassandra.yaml | cut -f2 -d:) || (ls /etc/dse/cassandra/cassandra.yaml>/dev/null 2>&1 && grep listen_address: /etc/dse/cassandra/cassandra.yaml | cut -f2 -d:)`
+CASSANDRA_HOST=$(echo $CASSANDRA_HOST | tr -d ' ')
+echo "export CASSANDRA_HOST=$CASSANDRA_HOST" >> $MOCKINGBIRDPATH/$BASHPARTIAL
+
 source ~/.bashrc
 
 # Generating uwsgi and nginx templates
