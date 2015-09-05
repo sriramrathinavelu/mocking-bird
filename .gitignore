@@ -1,5 +1,11 @@
 screenlog*
 *.pyc
 *.pyo
-mockingsite/logfile*
 *.swp
+db.sqlite3
+mockingsite/logfile*
+mockingsite/settings/logfile*
+mockingsite/mockingsite_nginx.conf
+mockingsite/mockingsite_uwsgi.ini
+mockingsite/supervisord.conf
+mockingsite/logs/*

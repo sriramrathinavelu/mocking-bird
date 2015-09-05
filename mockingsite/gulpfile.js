@@ -175,7 +175,7 @@ gulp.task('clean', del.bind(null, [
 
 gulp.task ('run', ['styles', 'fetchStyles'], function() {
 	browserSync.init ({
-		proxy: 'crackit.com:8000',
+		proxy: '0.0.0.0:8000',
 		logPrefix: 'HIT'
 	});
 
@@ -189,14 +189,14 @@ gulp.task ('run', ['styles', 'fetchStyles'], function() {
 
 gulp.task ('deploy', ['default'], function() {
 	browserSync.init ({
-		proxy: 'crackit.com:8000',
+		proxy: '0.0.0.0:8000',
 		logPrefix: 'HIT'
 	});
 });
 
 gulp.task ('quick-deploy', [], function() {
 	browserSync.init ({
-		proxy: 'crackit.com:8000',
+		proxy: '0.0.0.0:8000',
 		logPrefix: 'HIT'
 	});
 });

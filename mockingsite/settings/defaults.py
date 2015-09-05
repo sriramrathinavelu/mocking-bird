@@ -101,7 +101,7 @@ DATABASES = {
 	'cassandra': {
 	'ENGINE': 'django_cassandra_engine',
 	'NAME': 'mocking_db',
-	'HOST': 'localhost',
+	'HOST': '10.240.61.90',
 	'TEST_NAME': 'test_db',
 	'OPTIONS': {
 		'replication': {
