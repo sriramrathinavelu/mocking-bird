@@ -3234,7 +3234,8 @@ ol {
 
 .offcanvas-container {
   /*background-color: #121617;*/
-  background-color: #272822; }
+  background-color: #272822;
+  z-index: 1000; }
 
 .navdrawer-container.open,
 .offcanvas-container.open {
@@ -3388,7 +3389,8 @@ main,
   padding-right: 16px;
   padding-bottom: 10px;
   /*background-color: #121617;*/
-  background-color: #272822; }
+  background-color: #272822;
+  z-index: 100; }
 
 .middle {
   margin-left: auto;
@@ -3403,7 +3405,8 @@ main,
   left: 0px;
   right: 0px;
   /*background-color: #121617;*/
-  background-color: #272822; }
+  background-color: #272822;
+  z-index: 100; }
 
 .bordered-div {
   border-style: solid;
@@ -3431,6 +3434,9 @@ main,
 
 a:visited {
   color: #3372DF; }
+
+table tbody {
+  background: #272822; }
 
 .color-orange-fg {
   color: #FF6700; }
@@ -3476,7 +3482,8 @@ ul.ui-autocomplete {
   height: 150px;
   color: white;
   /*background-color: #121617;  */
-  background-color: #272822; }
+  background-color: #272822;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.75); }
 
 #my-fb-login {
   background-color: #3b5998;
@@ -3520,6 +3527,12 @@ ul.ui-autocomplete {
   background-color: #fff;
   color: #000;
   width: 100%;
+  height: 40px; }
+
+.narrow-select {
+  margin: inherit;
+  background-color: #fff;
+  color: #000;
   height: 40px; }
 
 #buttoncontrols {
@@ -3787,7 +3800,7 @@ body.loading .modal {
     position: relative; }
   .top {
     /*height: 100%;*/
-    z-index: -1;
+    z-index: 100;
     height: 60px;
     /*background-color: #121617; */
     background-color: #272822; }

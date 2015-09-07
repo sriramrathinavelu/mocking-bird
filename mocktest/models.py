@@ -132,6 +132,8 @@ class Tests(Model):
     question = columns.Text(required=True)
     questiontype = columns.Integer(required=True, default=3)
     givenanswer = columns.Text()
+    code = columns.Text()
+    language = columns.Text(default="c_cpp")
     correctanswer = columns.Text(required=True)
     choices = columns.List(columns.Text, default=[])
     input = columns.Text()

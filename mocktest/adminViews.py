@@ -380,7 +380,7 @@ def addQuestion(request):
                 )
             return HttpResponseRedirect('/admin/home.html')
     context['form'] = form
-    return render(request, 'admin/genericForm.html', context)
+    return render(request, 'admin/addQuestion.html', context)
 
 
 def verification(request):

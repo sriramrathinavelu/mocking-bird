@@ -1,0 +1,124 @@
+{% extends "admin/formbase.html" %}
+
+
+{% block jquery %}
+<script src="/static/mocktest/scripts/tinymce/tinymce.min.js"></script>
+<script>
+$(function(){
+
+    $("#id_question").addClass("dummy1");
+    $("#id_answer").addClass("dummy2");
+
+    tinyMCE.init({
+        mode : "textareas",
+        theme : "modern",
+        editor_selector : "dummy1",
+        width: 800,
+        fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 36pt",
+        plugins: [
+         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+         "save table contextmenu directionality emoticons template paste textcolor"
+        ],
+        //content_css: ["/static/mocktest/styles/components.css","/static/mocktest/styles/main.css"],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor code | fontsizeselect",
+    });
+
+    tinyMCE.init({
+        mode : "textareas",
+        theme : "modern",
+        editor_selector : "dummy2",
+        width: 800,
+        fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 36pt",
+        plugins: [
+         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+         "save table contextmenu directionality emoticons template paste textcolor"
+        ],
+        //content_css: ["/static/mocktest/styles/components.css","/static/mocktest/styles/main.css"],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor code | fontsizeselect",
+    });
+
+    $("#advancedFields").hide()
+    $("#hideAdvanced").hide()
+    $("#showAdvanced").click(function(){
+        $("#advancedFields").show();
+        $("#hideAdvanced").show();
+        $("#showAdvanced").hide();
+    });
+    $("#hideAdvanced").click(function(){
+        $("#advancedFields").hide();
+        $("#hideAdvanced").hide();
+        $("#showAdvanced").show();
+    });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+
+<form method="POST" action={{action}} class="pure-form pure-form-stacked">
+{% csrf_token %}
+<div class="pure-control-group">
+    {{ form.companyName.errors }}
+    {{ form.companyName.label_tag }}
+    {{ form.companyName }}
+</div>
+<div class="pure-control-group">
+    {{ form.positionName.errors }}
+    {{ form.positionName.label_tag }}
+    {{ form.positionName }}
+</div>
+<div class="pure-control-group">
+    {{ form.question.errors }}
+    {{ form.question.label_tag }}
+    {{ form.question }}
+</div>
+<div class="pure-control-group">
+    {{ form.answer.errors }}
+    {{ form.answer.label_tag }}
+    {{ form.answer }}
+</div>
+<div class="pure-control-group">
+    {{ form.imageFile.errors }}
+    {{ form.imageFile.label_tag }}
+    {{ form.imageFile }}
+</div>
+<div class="pure-control-group">
+    {{ form.timeToSolve.errors }}
+    {{ form.timeToSolve.label_tag }}
+    {{ form.timeToSolve }}
+</div>
+<div id="advancedFields">
+<div class="pure-control-group">
+    {{ form.questionType.errors }}
+    {{ form.questionType.label_tag }}
+    {{ form.questionType }}
+</div>
+<div class="pure-control-group">
+    {{ form.choices.errors }}
+    {{ form.choices.label_tag }}
+    {{ form.choices }}
+</div>
+<div class="pure-control-group">
+    {{ form.input.errors }}
+    {{ form.input.label_tag }}
+    {{ form.input }}
+</div>
+<div class="pure-control-group">
+    {{ form.key.errors }}
+    {{ form.key.label_tag }}
+    {{ form.key }}
+</div>
+</div>
+<div id="showAdvanced" style="color:blue">Show Advanced Fields</div>
+<div id="hideAdvanced" style="color:blue">Hide Advanced Fields</div>
+{% for hidden in form.hidden_fields %}
+    {{ hidden }}
+{% endfor %}
+<br/>
+<input type="Submit" value={{submitValue}}>
+</input>
+</form>
+<a href="/admin/home.html"> Home </a>
+{% endblock %}

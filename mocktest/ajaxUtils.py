@@ -627,15 +627,22 @@ def saveAnswer(request):
     testId = uuid.UUID(request.GET.get('testId'))
     currentQ = int(request.GET.get('currentQ'))
     answer = request.GET.get('answer')
+    code = request.GET.get('code')
+    lang = request.GET.get('lang')
     oprn = request.GET.get('oprn')
-    logger.debug("Answer: " + str(answer))
     question = Tests.objects.get(testid=testId,
                                  questionnum=currentQ)
-    if (question.givenanswer.strip() == "" and answer.strip() != ""):
+    if (question.givenanswer.strip() == "" and
+        (not question.code or question.code.strip() == "") and (
+            answer.strip() != "" or code.strip() != "")):
         question.questionsanswered += 1
-    if (question.givenanswer.strip() != "" and answer.strip() == ""):
+    if ((question.givenanswer.strip() != "" or (
+        question.code and question.code.strip() != ""))
+       and (answer.strip() == "" and code.strip() == "")):
         question.questionsanswered -= 1
     question.givenanswer = answer
+    question.code = code
+    question.language = lang
     if oprn == 'next':
         currentQ += 1
     elif oprn == 'prev':

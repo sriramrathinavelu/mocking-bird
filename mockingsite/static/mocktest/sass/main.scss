@@ -209,6 +209,7 @@ ol {
 .offcanvas-container {
   /*background-color: #121617;*/
   background-color: #272822;
+  z-index: 1000;
 }
 
 
@@ -291,6 +292,12 @@ main,
 .mediachecker {  
   opacity: 0;
   float:left;
+}
+
+.dummy1 {
+}
+
+.dummy2 {
 }
 
 #contentcollapser {
@@ -386,6 +393,7 @@ main,
   padding-bottom: 10px;
   /*background-color: #121617;*/
   background-color: #272822;
+  z-index: 100;
 }
 
 .middle {  
@@ -403,6 +411,7 @@ main,
     right:0px; 
     /*background-color: #121617;*/
     background-color: #272822;
+    z-index: 100;
 }
 
 
@@ -439,6 +448,10 @@ main,
 
 a:visited {
   color: #3372DF;
+}
+
+table tbody{
+  background: #272822;
 }
 
 
@@ -499,6 +512,7 @@ ul.ui-autocomplete {
   color: white;
   /*background-color: #121617;  */
   background-color: #272822;
+  box-shadow: 0 0 10px rgba(0,0,0,.75);
 }
 
 
@@ -554,6 +568,13 @@ ul.ui-autocomplete {
   color: #000;
   width: 100%;
   height:40px;
+}
+
+.narrow-select {
+  margin: inherit;
+  background-color: #fff;
+  color: #000;  
+  height:40px; 
 }
 
 #buttoncontrols{
@@ -845,7 +866,6 @@ body.loading .modal {
 /** Larger Screens - desktops and tablets **/
 @media all and (min-width: 990px) {
 
-
   .centered-flip-clock {
     margin-left: auto;
     margin-right: auto;
@@ -900,7 +920,7 @@ body.loading .modal {
   
   .top {
     /*height: 100%;*/
-    z-index: -1;
+    z-index: 100;
     height: 60px;   
     /*background-color: #121617; */
     background-color: #272822;

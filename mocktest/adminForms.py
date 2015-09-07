@@ -132,7 +132,9 @@ class addQuestionForm (forms.Form):
             self.fields['companyName'].initial = companyName
             self.fields['positionName'].choices = positions
 
-    companyName = forms.CharField(widget=forms.HiddenInput)
+    companyName = forms.CharField(
+        widget=forms.TextInput(attrs={'readonly': 'readonly'})
+    )
     positionName = DynamicChoiceField(label='Position Name')
     question = forms.CharField(label='Question', widget=forms.Textarea)
     imageFile = forms.ImageField(
@@ -140,9 +142,9 @@ class addQuestionForm (forms.Form):
                     required=False)
     questionType = forms.ChoiceField(label='Question Type',
                                      choices=[
+                                      ('3', 'Descriptive Answer'),
                                       ('1', 'Multiple Choice Single Answer'),
                                       ('2', 'Multiple Choice Multiple Answer'),
-                                      ('3', 'Descriptive Answer'),
                                       ('4', 'Program')])
     answer = forms.CharField(label='Answer', widget=forms.Textarea)
     choices = forms.CharField(label='Choices', required=False)
@@ -264,9 +266,9 @@ class moderateQuestionForm(forms.Form):
                                                             'cols': 140}))
     questionType = forms.ChoiceField(label='Question Type',
                                      choices=[
+                                      ('3', 'Descriptive Answer'),
                                       ('1', 'Multiple Choice Single Answer'),
                                       ('2', 'Multiple Choice Multiple Answer'),
-                                      ('3', 'Descriptive Answer'),
                                       ('4', 'Program')])
     url = forms.CharField(widget=forms.URLInput(attrs={'size': 120}))
     answer = forms.CharField(label='Answer',

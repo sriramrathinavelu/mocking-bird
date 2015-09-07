@@ -59,8 +59,152 @@
       }
 
 
-      $(function () {
+      
+    </script>
 
+  </head>
+  <body class="test-screen">
+    <div class="mediachecker"></div>
+
+    <!--
+    <header class="app-bar promote-layer">
+      <div class="app-bar-container">
+        <button class="menu"><img src="/static/mocktest/images/hamburger.png" alt="Menu"></button>
+        <h1 class="logo"><strong>Crack It!</strong></h1>
+        <section class="app-bar-actions">     
+        </section>
+      </div>
+    </header>
+    -->
+
+    <!-- Icon to reveal questions in mobile -->
+
+    <!--
+    <header class="app-bar promote-layer">
+    <div class="app-bar-container">
+    <button class="menu"><img src="/static/mocktest/images/icons/questions-list1.png" alt="Questions List"></button>    
+    </div>
+    </header>
+    -->
+
+
+
+    <!--<div style="display: flex;">-->
+    <div class="roboto-font full-screen">
+      <div class="offcanvas-container">
+        <h4>Questions</h4>
+        <ul id="questionsList">                  
+        </ul>        
+      </div>
+
+    <!--
+    <nav class="navdrawer-container promote-layer">
+      <h4>Navigation</h4>
+      <ul>        
+        <li><a href="/">Home</a></li>
+        <li><a href="#hello">About Us</a></li>
+        <li><a href="#getstarted">Contact Us</a></li>        
+      </ul>
+    </nav>
+    -->    
+     
+     <div class="top">
+        <img class="menu" src="/static/mocktest/images/icons/questions-list1.png" alt="Questions List" style="margin-left: 10px"/>
+        <div id="time" class="right-align">
+          <div id="defaultCountdown"></div>          
+        </div>
+      </div>    
+       
+
+      <div class="acting-main">            
+        <hr id="linesep-1" class="mobile">
+        <div class="middle-item">      
+          <!-- Question -->
+          <div class="middle-item" id="question">            
+          </div>
+          <div>
+            Given Answer
+          </div>          
+          <!-- Given Answer -->
+          <!--
+          <div id="answer-space" class="full-width middle-item bordered-div" style="font-family: sans-serif;"></div>
+          -->
+          <div id="answer-space" class="full-width middle-item answer-space">
+          </div>
+          <div> Code </div>
+          <div id="code-space" class="full-width middle-item answer-space">
+          </div>
+          <div>
+            Correct Answer
+          </div>
+          <div id="correct-answer" class="full-width middle-item bordered-div"></div>
+          <div id="mentor-comments">
+            Mentor Comments
+          </div>
+          <div id="mentor-comments-tabs">
+          </div>
+          <div class="footerbar">
+          <!-- Prev Next Save and Navigation -->
+          <section class="styleguide__article-nav">
+            <div class="container-medium">
+            <nav class="article-nav">
+            <a id = "prevq" href="#" class="article-nav-link article-nav-link--prev">
+                <p id="prevqNum" class="article-nav-count color-orange-bg-before">01</p>                
+            </a>
+            <a id = "nextq" href="#" class="article-nav-link article-nav-link--next">
+                <p id="nextqNum" class="article-nav-count color-orange-bg-before">03</p>                
+            </a>
+            </nav>
+            </div>
+          </section>
+          </div>
+        </div>
+        <input type="hidden" id="currentQ"/>
+        <input type="hidden" id="testId"/>
+        <div style="display:flex;">
+        {% if fromCongrats %}
+          <a href="#" id="anchor-back" class="button--mockingone centered-button" style="width: 200px;">Back</a>
+        {% else %}
+          <a href="/home.html" class="button--mockingone centered-button">Home</a>
+          <a href="/history.html" class="button--mockingone centered-button">History</a>
+        {% endif %}
+        </div>
+        <!-- Pop ups-->
+
+      </div>   
+    </div> 
+
+    <!-- build:js static/mocktest/scripts/test.min.js -->
+    <script src="/static/mocktest/scripts/testmain.js"></script>
+    <script src="/static/mocktest/scripts/jquery.plugin.min.js"></script>
+    <script src="/static/mocktest/scripts/jquery.countdown.js"></script>        
+    <!-- endbuild -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/theme-monokai.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-c_cpp.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/monokai.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+    <script>      
+
+
+    $(function () {
+
+        var editor1 = ace.edit("answer-space");
+        editor1.setTheme("ace/theme/monokai");
+        editor1.getSession().setMode("ace/mode/text");
+        document.getElementById('answer-space').style.fontSize='20px';
+        editor1.getSession().setUseWrapMode(true);
+        editor1.setShowPrintMargin(false);
+        editor1.setReadOnly(true);
+        var editor2 = ace.edit("code-space");
+        editor2.setTheme("ace/theme/monokai");
+        editor2.getSession().setMode("ace/mode/c_cpp");
+        document.getElementById('code-space').style.fontSize='20px';
+        editor2.getSession().setUseWrapMode(true);
+        editor2.setShowPrintMargin(false);
+        editor2.setReadOnly(true);
+
+        
 
         $(document).keydown(function(e) {
           switch(e.which) {
@@ -138,23 +282,40 @@
           }
         {% endif %}
         $("#question").html(
-          "<pre style=\"white-space: pre-wrap;\">" +
+          //"<pre style=\"white-space: pre-wrap;\">" +
           parseInt(currentQ + 1).toString() + ") " +
-          questions[currentQ]['question'] +
-          "</pre>"
+          questions[currentQ]['question']
+          //"</pre>"
         );
         /* Load the current answer */
+        /*
         $("#answer-space").html(
           "<pre style=\"white-space: pre-wrap;\">" +
           questions[currentQ]['givenanswer'] +
           "</pre>"
 
         );
+        */
+        editor1.setValue(questions[currentQ]['givenanswer'],1);
+        editor2.setValue(questions[currentQ]['code'],1);
+
+        if (questions[currentQ]['language'] != null) {
+          $.getScript("https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-"+questions[currentQ]['language'], function(data, status, jqxhr){
+            if (status==='success') {
+              editor2.getSession().setMode("ace/mode/"+questions[currentQ]['language'].slice(0, -3));
+              console.log("Mode changed");
+            }
+          });
+        }
+
         $("#correct-answer").html(
-          "<pre style=\"white-space: pre-wrap;\">" +
-          questions[currentQ]['correctanswer'] +
-          "</pre>"
+          //"<pre style=\"white-space: pre-wrap;\">" +
+          questions[currentQ]['correctanswer']
+          //"</pre>"
         );
+        $('pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
         /* Functionality for previous question */
         $("#prevq").click(function(e){              
           if($("#prevq").hasClass("disabled")) {           
@@ -225,22 +386,40 @@
             $("#currentQ").val(index-1);
             /* Fetch question */
             $("#question").html(
-              "<pre style=\"white-space: pre-wrap;\">" + 
+              //"<pre style=\"white-space: pre-wrap;\">" + 
               parseInt(index).toString() + ") " +
-              questions[index-1]['question'] +
-              "</pre>"
+              questions[index-1]['question'] 
+              //"</pre>"
             );
             /* Load answer*/
+            /*
             $("#answer-space").html(
               "<pre style=\"white-space: pre-wrap;\">" +
               questions[index-1]['givenanswer'] +
               "</pre>"
             );
+            */
+            editor1.setValue(questions[index-1]['givenanswer'],1);
+            editor2.setValue(questions[index-1]['code'],1);
+
+            if (questions[index-1]['language'] != null) {
+              $.getScript("https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-"+questions[index-1]['language'], function(data, status, jqxhr){
+                if (status==='success') {
+                  editor2.getSession().setMode("ace/mode/"+questions[index-1]['language'].slice(0, -3));
+                  console.log("Mode changed");
+                }
+              });
+            }
+
+
             $("#correct-answer").html(
-              "<pre style=\"white-space: pre-wrap;\">" +
-              questions[index-1]['correctanswer'] +
-              "</pre>"
+              //"<pre style=\"white-space: pre-wrap;\">" +
+              questions[index-1]['correctanswer']
+              //"</pre>"
             );
+            $('pre code').each(function(i, block) {
+              hljs.highlightBlock(block);
+            });
             $("#prevqNum").html(
               index-1
             );
@@ -268,117 +447,6 @@
         });        
       });
     </script>
-
-  </head>
-  <body class="test-screen">
-    <div class="mediachecker"></div>
-
-    <!--
-    <header class="app-bar promote-layer">
-      <div class="app-bar-container">
-        <button class="menu"><img src="/static/mocktest/images/hamburger.png" alt="Menu"></button>
-        <h1 class="logo"><strong>Crack It!</strong></h1>
-        <section class="app-bar-actions">     
-        </section>
-      </div>
-    </header>
-    -->
-
-    <!-- Icon to reveal questions in mobile -->
-
-    <!--
-    <header class="app-bar promote-layer">
-    <div class="app-bar-container">
-    <button class="menu"><img src="/static/mocktest/images/icons/questions-list1.png" alt="Questions List"></button>    
-    </div>
-    </header>
-    -->
-
-
-
-    <!--<div style="display: flex;">-->
-    <div class="roboto-font full-screen">
-      <div class="offcanvas-container">
-        <h4>Questions</h4>
-        <ul id="questionsList">                  
-        </ul>        
-      </div>
-
-    <!--
-    <nav class="navdrawer-container promote-layer">
-      <h4>Navigation</h4>
-      <ul>        
-        <li><a href="/">Home</a></li>
-        <li><a href="#hello">About Us</a></li>
-        <li><a href="#getstarted">Contact Us</a></li>        
-      </ul>
-    </nav>
-    -->    
-     
-     <div class="top">
-        <img class="menu" src="/static/mocktest/images/icons/questions-list1.png" alt="Questions List" style="margin-left: 10px"/>
-        <div id="time" class="right-align">
-          <div id="defaultCountdown"></div>          
-        </div>
-      </div>    
-       
-
-      <div class="acting-main">            
-        <hr id="linesep-1" class="mobile">
-        <div class="middle-item">      
-          <!-- Question -->
-          <div class="middle-item" id="question">            
-          </div>
-          <div>
-            Given Answer
-          </div>
-          <!-- Given Answer -->
-          <div id="answer-space" class="full-width middle-item bordered-div" style="font-family: sans-serif;"></div>
-          <div>
-            Correct Answer
-          </div>
-          <div id="correct-answer" class="full-width middle-item bordered-div" style="font-family: sans-serif;"></div>
-          <div id="mentor-comments">
-            Mentor Comments
-          </div>
-          <div id="mentor-comments-tabs">
-          </div>
-          <div class="footerbar">
-          <!-- Prev Next Save and Navigation -->
-          <section class="styleguide__article-nav">
-            <div class="container-medium">
-            <nav class="article-nav">
-            <a id = "prevq" href="#" class="article-nav-link article-nav-link--prev">
-                <p id="prevqNum" class="article-nav-count color-orange-bg-before">01</p>                
-            </a>
-            <a id = "nextq" href="#" class="article-nav-link article-nav-link--next">
-                <p id="nextqNum" class="article-nav-count color-orange-bg-before">03</p>                
-            </a>
-            </nav>
-            </div>
-          </section>
-          </div>
-        </div>
-        <input type="hidden" id="currentQ"/>
-        <input type="hidden" id="testId"/>
-        <div style="display:flex;">
-        {% if fromCongrats %}
-          <a href="#" id="anchor-back" class="button--mockingone centered-button" style="width: 200px;">Back</a>
-        {% else %}
-          <a href="/home.html" class="button--mockingone centered-button">Home</a>
-          <a href="/history.html" class="button--mockingone centered-button">History</a>
-        {% endif %}
-        </div>
-        <!-- Pop ups-->
-
-      </div>   
-    </div> 
-
-    <!-- build:js static/mocktest/scripts/test.min.js -->
-    <script src="/static/mocktest/scripts/testmain.js"></script>
-    <script src="/static/mocktest/scripts/jquery.plugin.min.js"></script>
-    <script src="/static/mocktest/scripts/jquery.countdown.js"></script>    
-    <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 	<!--

@@ -2,8 +2,42 @@
 
 
 {% block jquery %}
+<script src="/static/mocktest/scripts/tinymce/tinymce.min.js"></script>
 <script>
 $(function(){
+    $("#id_question").addClass("dummy1");
+    $("#id_answer").addClass("dummy2");
+
+    tinyMCE.init({
+        mode : "textareas",
+        theme : "modern",
+        editor_selector : "dummy1",
+        width: 800,
+        fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 36pt",
+        plugins: [
+         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+         "save table contextmenu directionality emoticons template paste textcolor"
+        ],
+        content_css: ["/static/mocktest/styles/components.css","/static/mocktest/styles/main.css"],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor code | fontsizeselect",
+    });
+
+    tinyMCE.init({
+        mode : "textareas",
+        theme : "modern",
+        editor_selector : "dummy2",
+        width: 800,
+        fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 36pt",
+        plugins: [
+         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+         "save table contextmenu directionality emoticons template paste textcolor"
+        ],
+        content_css: ["/static/mocktest/styles/components.css","/static/mocktest/styles/main.css"],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor code | fontsizeselect",
+    });
+
     $("#advancedFields").hide()
     $("#hideAdvanced").hide()
     $("#showAdvanced").click(function(){
