@@ -74,7 +74,7 @@ function WS4Redis(options, $) {
 	}
 
 	function on_message(evt) {
-		console.log(evt);
+		//console.log(evt);
 		if (opts.heartbeat_msg && evt.data === opts.heartbeat_msg) {
 			// reset the counter for missed heartbeats
 			missed_heartbeats = 0;

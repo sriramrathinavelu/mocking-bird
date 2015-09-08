@@ -3406,7 +3406,7 @@ main,
   right: 0px;
   /*background-color: #121617;*/
   background-color: #272822;
-  z-index: 100; }
+  z-index: 2000; }
 
 .bordered-div {
   border-style: solid;
@@ -3875,7 +3875,7 @@ body.loading .modal {
   .acting-main {
     width: 100%;
     max-width: 764px;
-    padding-top: 30px;
+    padding-top: 60px;
     min-height: initial;
     margin-left: 210px;
     margin-right: 10px; }

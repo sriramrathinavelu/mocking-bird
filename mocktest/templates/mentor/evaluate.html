@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="/static/mocktest/styles/jquery-ui.theme.css">      
     <link rel="stylesheet" href="/static/mocktest/styles/autocomplete.css">
     <!-- endbuild -->
+    <link rel="stylesheet" href="/static/bower_components/nprogress/nprogress.css">
 
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
@@ -123,7 +124,11 @@
         <hr id="linesep-1" class="mobile">
         <div class="middle-item">      
           <!-- Question -->
+          <div>
+            Question
+          </div>
           <div class="middle-item" id="question">            
+          <br/>
           </div>
           <div>
             Given Answer
@@ -134,26 +139,32 @@
           -->
           <div id="answer-space" class="full-width middle-item answer-space">
           </div>
+          <br/>
           <div> Code </div>
           <div id="code-space" class="full-width middle-item answer-space">
           </div>
           <div>
+          <br/>
           <div>
             Correct Answer
           </div>
-          <div id="correct-answer" class="full-width middle-item bordered-div" style="font-family: sans-serif;"></div>
+          <div id="correct-answer" class="full-width middle-item bordered-div"></div>
+          <br/>
           <!-- comments -->
           <div>
             Your comment
           </div>
-          <textarea id="mentor-comment" class="full-width middle-item answer-space" style="font-family: sans-serif;"></textarea>
-          
+          <textarea id="mentor-comment" class="full-width middle-item answer-space"></textarea>
+          <div>
+          <br/>
+            Please mark the solution as one of the following
+          </div> 
           <div class="centered-div" id="answer-right-wrong">
             <input type="radio" id="radio-correct" name="radio-right-wrong"><label for="radio-correct">Correct</label>
             <input type="radio" id="radio-partially-correct" name="radio-right-wrong"><label for="radio-partially-correct">Partially Correct</label>
             <input type="radio" id="radio-wrong" name="radio-right-wrong"><label for="radio-wrong">Incorrect</label>
           </div>
-
+          <br/>
           <div class="footerbar">
           <!-- Prev Next Save and Navigation -->
           <section class="styleguide__article-nav">
@@ -227,8 +238,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/theme-monokai.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-c_cpp.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/monokai.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+    <script src="/static/mocktest/scripts/tinymce/tinymce.min.js"></script>
+    <script src="/static/bower_components/nprogress/nprogress.js"></script>
     <script>
       $(function () {
+
+        /*
+        $(document).on({
+          ajaxStart: function() { NProgress.start(); },
+          ajaxStop: function() { NProgress.done(); }    
+        });
+        */
+        
         var editor1 = ace.edit("answer-space");
         editor1.setTheme("ace/theme/monokai");
         editor1.getSession().setMode("ace/mode/text");
@@ -244,6 +267,19 @@
         editor2.setShowPrintMargin(false);
         editor2.setReadOnly(true);
 
+        tinymce.init({
+            selector: "#mentor-comment",
+            them: "modern",
+            fontsize_formats: "8pt 10pt 12pt 14pt 16pt 18pt 36pt",
+        plugins: [
+         "advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+         "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+         "save table contextmenu directionality emoticons template paste textcolor"
+        ],
+        content_css: ["/static/mocktest/styles/components.css","/static/mocktest/styles/main.css"],
+        body_class: "test-screen",
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | l      ink image | print preview media fullpage | forecolor backcolor code | fontsizeselect",
+        });
 
         /*JQM*/
         $(document).on('click', '.popup-source', function() {
@@ -325,7 +361,8 @@
 
         var questions={{questions|safe}};
         /* Get the current question */
-        var currentQ=questions[0]['currentquestion'];
+        //var currentQ=questions[0]['currentquestion'];
+        var currentQ=0;
         /* Set the current question */
         $("#currentQ").val(currentQ);
         $("#companyName").val(questions[0]['companyname']);
@@ -349,10 +386,10 @@
         }
         /* Load the current question */
         $("#question").html(
-          "<pre style=\"white-space: pre-wrap;\">" +
-          parseInt(currentQ + 1).toString() + ") " +
-          questions[currentQ]['question'] +
-          "</pre>"
+          //"<pre style=\"white-space: pre-wrap;\">" +
+          "<div>" + parseInt(currentQ + 1).toString() + ") </div>" +
+          questions[currentQ]['question']
+          //"</pre>"
         );
         /* Load the current answer */
         /*
@@ -376,13 +413,21 @@
         }
 
         $("#correct-answer").html(
-          "<pre style=\"white-space: pre-wrap;\">" +
-          questions[currentQ]['correctanswer'] +
-          "</pre>"
+          //"<pre style=\"white-space: pre-wrap;\">" +
+          questions[currentQ]['correctanswer']
+          //"</pre>"
         );
+        $('pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+        /*
         $("#mentor-comment").val(          
           questions[currentQ]['mentorcomment']
         );
+        */
+        if (questions[currentQ]['mentorcomment']) {
+          tinymce.activeEditor.setContent(questions[currentQ]['mentorcomment']);
+        }
         /* Functionality for previous question */
         $("#prevq").click(function(e){              
           if($("#prevq").hasClass("disabled")) {           
@@ -392,7 +437,8 @@
             autoSave();
             /* Update Locally*/
             var curQ = parseInt($("#currentQ").val());
-            questions[curQ]['mentorcomment']=$('#mentor-comment').val();            
+            questions[curQ]['mentorcomment']=tinymce.activeEditor.getContent();
+            //$('#mentor-comment').val();            
             /*Update the next Question*/
             /*Update the hidden currentQ*/
             var prevQ = curQ;
@@ -408,7 +454,8 @@
             autoSave();
             /* Update Locally*/
             var curQ = parseInt($("#currentQ").val());            
-            questions[curQ]['mentorcomment']=$('#mentor-comment').val();            
+            questions[curQ]['mentorcomment']=tinymce.activeEditor.getContent();
+            //$('#mentor-comment').val();            
             /*Update the next Question*/
             /*Update the hidden currentQ*/
             var nextQ = curQ+2;
@@ -474,7 +521,7 @@
           $.get("/ajaxUtil/saveComment.html?testId=" +
               $("#testId").val() + "&evalId=" + $("#evalId").val() + 
               "&currentQ=" + $("#currentQ").val() + "&comment=" + 
-              escape($("#mentor-comment").val()) + "&totalQuestions=" +
+              tinymce.activeEditor.getContent() + "&totalQuestions=" +
               $("#totalQuestions").val() + "&result=" + result, function(data, status){
                 if (data === 'done') {
                   $("#evaluate-evaluate").removeClass("disabled");
@@ -507,14 +554,17 @@
             "</a></li>"
           );
           $("#navbarQuestion"+index).click(function(){
+            autoSave();
+            var curQ = parseInt($("#currentQ").val());
+            questions[curQ]['mentorcomment']=tinymce.activeEditor.getContent();
             /* Update question number*/
-            $("#currentQ").val(index-1);
+            $("#currentQ").val(index-1);            
             /* Fetch question */
             $("#question").html(
-              "<pre style=\"white-space: pre-wrap;\">" + 
-              parseInt(index).toString() + ") " +
-              questions[index-1]['question'] +
-              "</pre>"
+              //"<pre style=\"white-space: pre-wrap;\">" + 
+              "<div>" + parseInt(index).toString() + ") </div>" +
+              questions[index-1]['question']
+              //"</pre>"
             );
             /* Load answer*/
             /*
@@ -536,13 +586,23 @@
               });
             }
             $("#correct-answer").html(
-              "<pre style=\"white-space: pre-wrap;\">" +
-              questions[index-1]['correctanswer'] +
-              "</pre>"
+              //"<pre style=\"white-space: pre-wrap;\">" +
+              questions[index-1]['correctanswer']
+              //"</pre>"
             );
+            $('pre code').each(function(i, block) {
+              hljs.highlightBlock(block);
+            });
+            /*
             $("#mentor-comment").val(
               questions[index-1]['mentorcomment']              
             );
+            */
+            if (questions[index-1]['mentorcomment']) {
+              tinymce.activeEditor.setContent(questions[index-1]['mentorcomment']);
+            } else {
+              tinymce.activeEditor.setContent("");
+            }
             $("#prevqNum").html(
               index-1
             );

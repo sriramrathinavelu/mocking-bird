@@ -43,7 +43,7 @@ def __setAuthInfo(request, context={}):
                 context['bubbleNotification'][notn.pagename] = notn.content
             elif notn.notificationtype == Constants.POPUP_NOTIFICATION and \
                     notn.pagename == pageName:
-                    context['popupNotification'] = notn.content
+                context['popupNotification'] = notn.content
             elif notn.notificationtype == Constants.WIZARD_NOTIFICATION and \
                     notn.pagename == pageName:
                 context['wizardNotification'].append(notn.content)

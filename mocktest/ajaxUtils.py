@@ -722,10 +722,10 @@ def saveComment(request):
     mentorEval.result = result
     mentorEval.save()
     # Check if all answers are evaluated
-    numEntries = MentorTempEvaluation.objects.filter(
+    allEntries = MentorTempEvaluation.objects.filter(
         testid=testId,
-        evalid=evalId).count()
-    if numEntries == totalQuestions:
+        evalid=evalId)
+    if len(filter(lambda x: x.result >= 4, allEntries)) == totalQuestions:
         return HttpResponse("done")
     return HttpResponse("ok")
 
@@ -1090,6 +1090,7 @@ class MentorTests(TemplateView):
         companyName = request.GET.get('companyName')
         positionName = request.GET.get('positionName')
         objects = []
+        objectsJson = ""
         redisPub = RedisPublisher(facility='mentorTests', users=[username])
         if companyName:
             if positionName:

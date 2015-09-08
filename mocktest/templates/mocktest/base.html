@@ -49,7 +49,7 @@
     <link rel="stylesheet" href="/static/mocktest/styles/jquery.countdown.css">
     <link rel="stylesheet" href="/static/mocktest/styles/fancyDate.css">
     <link rel="stylesheet" href="/static/bower_components/nprogress/nprogress.css">
-	<link rel="stylesheet" href="/static/mocktest/styles/pagination-style.css">
+	  <link rel="stylesheet" href="/static/mocktest/styles/pagination-style.css">
     <!-- endbuild -->
 
     {% block css_js %}
@@ -133,7 +133,7 @@
 
       {% if popupNotification %}
         $("#popup-notification-content").html("{{popupNotification}}");
-          $("#popup-notification-trigger").trigger("click");          
+        $("#popup-notification-trigger").trigger("click");          
       {% endif %}
 
       var wizardNotificationArray = [];
@@ -401,8 +401,8 @@
     {% endblock %}
 
 
-    <a id="popup-notification-trigger" href="#popup-notification" class="popup-source" style="visibility: hidden"></a>
-    <a id="wizard-notification-trigger" href="#wizard-notification" class="popup-source" style="visibility: hidden"></a>
+    <a id="popup-notification-trigger" href="#popup-notification" class="popup-custom-source" style="visibility: hidden"></a>
+    <a id="wizard-notification-trigger" href="#wizard-notification" class="popup-custom-source" style="visibility: hidden"></a>
 
     <div id="popup-notification" class="popup">
       <a href="#" class="close">
