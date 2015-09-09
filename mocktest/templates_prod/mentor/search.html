@@ -1,4 +1,4 @@
-{% extends "mentor/mentor_base.html" %} {% block css_js %}<script src=/static/mocktest/scripts/ws4redis.js></script>{% endblock %} {% block jquery%}<script>    
+{% extends "mentor/mentor_base.html" %} {% block css_js %}<script src=/static/mocktest/scripts/ws4redis.min.js></script>{% endblock %} {% block jquery%}<script>    
     $(function(){
       var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -28,6 +28,7 @@
       }
 
       function webSocketConnected() {
+        console.log("Entry-point");
         $.get("/ajaxUtil/mentorTestsWs.html",function(data, success){
         })
       }
@@ -44,16 +45,16 @@
 
 
       var ws4redis = WS4Redis({
-        uri: 'ws://localhost:8000/ws/mentorTests?subscribe-user',
+        uri: 'ws://{{DOMAIN_NAME}}:{{PORT}}/ws/mentorTests?subscribe-user',
         receive_message: receiveMessage,
         heartbeat_msg: '--heartbeat--',//{{ WS4REDIS_HEARTBEAT }}
         onSuccess: webSocketConnected,
         onFailure: webSocketFailed
       });
 
-      function receiveMessage (data){
-        console.log("Message Received");
+      function receiveMessage (data){        
         data = eval(data);
+        console.log("Message Received. count: " + data.length);
         count += data.length;
         makeListTitle(count);
         $.each(data, function(index, value){
@@ -77,8 +78,9 @@
         select: function(event, ui){
           $(".articles-list").html("");
           count = 0;
+          makeListTitle(count);
           $.get("/ajaxUtil/mentorTests"+wsStr+".html?positionName=" + ui.item.value,function (data, status){
-            if (data === "success" && data != "WS") {                          
+            if (status === "success" && wsStr != "Ws") {                          
               $(".articles-list").html("");
               makeListTitle(data.length);
               $.each(data, function(index, value){
@@ -106,8 +108,9 @@
         select: function(event, ui){
           $(".articles-list").html("");
           count = 0;
+          makeListTitle(count);
           $.get("/ajaxUtil/mentorTests"+wsStr+".html?companyName=" + ui.item.value,function (data, status){
-            if (data === "success" && data != "WS") {              
+            if (status === "success" && wsStr != "Ws") {              
               $(".articles-count").html("");
               $(".articles-list").html("");
               makeListTitle(data.length);
@@ -141,15 +144,18 @@
         $("#positionName").val("");
         $(".articles-list").html("");        
         count = 0
-        $.getJSON("/ajaxUtil/mentorTests"+wsStr+".html",function (data, status){
-          if (status === "success") {     
-            $(".articles-list").html("");
-            makeListTitle(data.length);
-            $.each(data, function(index, value){
-              makeTestList(index, value, false);
-           }); 
+        makeListTitle(count);        
+        $.getJSON("/ajaxUtil/mentorTests"+wsStr+".html",function (data, status) {        
+          if (status === "success" && wsStr != "Ws") {
+              console.log("NO WS PARTY TONIGHT!");
+              $(".articles-count").html("");
+              $(".articles-list").html("");
+              makeListTitle(data.length);
+              $.each(data, function(index, value){
+                makeTestList(index, value, false);
+              });             
           }
-        });
+        });      
       });
 
 
@@ -158,8 +164,9 @@
         if (!$("#position-select-1").val().match("^Please")) {
           $(".articles-list").html("");
           count = 0;
+          makeListTitle(count);
           $.get("/ajaxUtil/mentorTests"+wsStr+".html?companyName=" + $("#companyName").val() + "&positionName=" + $("#position-select-1").val(),function (data, status){
-            if (data === "success" && data != "WS") {
+            if (status === "success" && wsStr != "Ws") {
               makeListTitle(data.length);
               $(".articles-list").html("");
               $.each(data, function(index, value){
@@ -174,8 +181,9 @@
         if (!$("#company-select-1").val().match("^Please")) {
           $(".articles-list").html("");
           count = 0;
+          makeListTitle(count);
           $.getJSON("/ajaxUtil/mentorTests"+wsStr+".html?companyName=" + $("#company-select-1").val() + "&positionName=" + $("#positionName").val(),function (data, status){
-            if (data === "success" && data != "WS") {
+            if (status === "success" && wsStr != "Ws") {
               makeListTitle(data.length);
               $(".articles-list").html("");
               $.each(data, function(index, value){

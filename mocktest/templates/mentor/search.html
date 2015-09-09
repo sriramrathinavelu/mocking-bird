@@ -1,7 +1,9 @@
 {% extends "mentor/mentor_base.html" %}
 
 {% block css_js %}      
+  <!-- build:js /static/mocktest/scripts/ws4redis.min.js -->
   <script src="/static/mocktest/scripts/ws4redis.js"></script>
+  <!-- endbuild -->
 {% endblock %}
   
 
@@ -53,7 +55,7 @@
 
 
       var ws4redis = WS4Redis({
-        uri: 'ws://localhost:8000/ws/mentorTests?subscribe-user',
+        uri: 'ws://{{DOMAIN_NAME}}:{{PORT}}/ws/mentorTests?subscribe-user',
         receive_message: receiveMessage,
         heartbeat_msg: '--heartbeat--',//{{ WS4REDIS_HEARTBEAT }}
         onSuccess: webSocketConnected,

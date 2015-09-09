@@ -11,6 +11,7 @@ from datetime import datetime
 import logging
 import json
 import cgi
+import os
 
 
 logger = logging.getLogger(__name__)
@@ -61,6 +62,8 @@ def search(request):
                     username=request.user.username)
     context['compList'] = json.dumps(map(lambda x: x.companyname, companies))
     context['posList'] = json.dumps(map(lambda x: x.positionname, positions))
+    context['DOMAIN_NAME'] = os.environ.get('DOMAIN_NAME', 'localhost')
+    context['PORT'] = os.environ.get('PORT', '8000')
     return render(request,
                   'mentor/search.html',
                   context)

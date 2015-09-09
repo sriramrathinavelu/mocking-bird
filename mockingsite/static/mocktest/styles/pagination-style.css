@@ -56,7 +56,7 @@ nav[role="navigation"] {
 
 .cd-pagination {
   width: 90%;
-  max-width: 550px;
+  max-width: 750px;
   margin: 0 auto 0 auto;
   padding: 0;
   text-align: center; }
@@ -106,7 +106,7 @@ nav[role="navigation"] {
     border-color: #D14D28;
     color: #ffffff;
     pointer-events: none; }
-  @media only screen and (min-width: 550px) {
+  @media only screen and (min-width: 750px) {
     .cd-pagination li {
       display: inline-block; } }
 
@@ -159,7 +159,7 @@ move buttons - move prev and next buttons to the sides
 
 .cd-pagination.no-space.move-buttons {
   width: 90%;
-  max-width: 550px;
+  max-width: 750px;
   display: block;
   overflow: hidden; }
   .cd-pagination.no-space.move-buttons li {

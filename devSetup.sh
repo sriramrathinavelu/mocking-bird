@@ -25,6 +25,9 @@ CASSANDRA_HOST=$(echo $CASSANDRA_HOST | tr -d ' ')
 echo "export CASSANDRA_HOST=$CASSANDRA_HOST" >> $MOCKINGBIRDPATH/$BASHPARTIAL
 
 
+echo "export DOMIAN_NAME=localhost" >> $MOCKINGBIRDPATH/$BASHPARTIAL
+echo "export PORT=8000" >> $MOCKINGBIRDPATH/$BASHPARTIAL
+
 grep --quiet "source $MOCKINGBIRDPATH/$BASHPARTIAL" ~/.bashrc || printf "\n%s\n%s\n" "# Setting up the MockingBird environment" "source $MOCKINGBIRDPATH/$BASHPARTIAL" >> ~/.bashrc
 
 source ~/.bashrc

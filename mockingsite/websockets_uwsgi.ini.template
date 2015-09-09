@@ -1,0 +1,26 @@
+# mysite_uwsgi.ini file
+[uwsgi]
+
+# Django-related settings
+# the base directory (full path)
+chdir           = $MOCKINGBIRDPATH 
+# Django's wsgi file
+module          = mockingsite.wsgi_websocket
+# the virtualenv (full path)
+home            = $VIRTUALENVPATH
+
+gevent			= 1000
+
+http-websockets = true
+
+# process-related settings
+# master
+master          = true
+# maximum number of worker processes
+processes       = 2
+# the socket (use the full path to be safe
+http-socket     = $MOCKINGBIRDPATH/mockingsite/websocket.sock
+# ... with appropriate permissions - may be needed
+chmod-socket    = 666
+# clear environment on exit
+vacuum          = true

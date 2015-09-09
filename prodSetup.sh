@@ -29,9 +29,14 @@ CASSANDRA_HOST=`(ls /etc/cassandra/cassandra.yaml>/dev/null 2>&1 && grep listen_
 CASSANDRA_HOST=$(echo $CASSANDRA_HOST | tr -d ' ')
 echo "export CASSANDRA_HOST=$CASSANDRA_HOST" >> $MOCKINGBIRDPATH/$BASHPARTIAL
 
+echo "export DOMAIN_NAME=localhost" >> $MOCKINGBIRDPATH/$BASHPARTIAL
+echo "export PORT=8000" >> $MOCKINGBIRDPATH/$BASHPARTIAL
+
+
 source ~/.bashrc
 
 # Generating uwsgi and nginx templates
-python $MOCKINGBIRDPATH/mockingsite/config_gen.py $MOCKINGBIRDPATH/mockingsite/mockingsite_uwsgi.ini.template $MOCKINGBIRDPATH/mockingsite/mockingsite_uwsgi
+python $MOCKINGBIRDPATH/mockingsite/config_gen.py $MOCKINGBIRDPATH/mockingsite/mockingsite_uwsgi.ini.template $MOCKINGBIRDPATH/mockingsite/mockingsite_uwsgi.ini
+python $MOCKINGBIRDPATH/mockingsite/config_gen.py $MOCKINGBIRDPATH/mockingsite/websockets_uwsgi.ini.template $MOCKINGBIRDPATH/mockingsite/websockets_uwsgi.ini
 python $MOCKINGBIRDPATH/mockingsite/config_gen.py $MOCKINGBIRDPATH/mockingsite/mockingsite_nginx.conf.template $MOCKINGBIRDPATH/mockingsite/mockingsite_nginx.conf
 python $MOCKINGBIRDPATH/mockingsite/config_gen.py $MOCKINGBIRDPATH/mockingsite/supervisord.conf.template $MOCKINGBIRDPATH/mockingsite/supervisord.conf

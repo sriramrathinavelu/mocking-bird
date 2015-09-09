@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=description content="Framework to help prepare for interviews with mock tests"><meta name=viewport content="width=device-width, initial-scale=1"><title>{% block title %}Title{% endblock %}</title><link rel=manifest href=manifest.json><meta name=mobile-web-app-capable content=yes><meta name=application-name content="Web Starter Kit"><link rel=icon sizes=192x192 href=images/touch/chrome-touch-icon-192x192.png><meta name=apple-mobile-web-app-capable content=yes><meta name=apple-mobile-web-app-status-bar-style content=black><meta name=apple-mobile-web-app-title content="Web Starter Kit"><link rel=apple-touch-icon href=images/touch/apple-touch-icon.png><meta name=msapplication-TileImage content=images/touch/ms-touch-icon-144x144-precomposed.png><meta name=msapplication-TileColor content=#3372DF><meta name=theme-color content=#3372DF><link rel=stylesheet href=/static/mocktest/styles/test.min.css><link rel=stylesheet href=//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/monokai.min.css><script src=//code.jquery.com/jquery-1.10.2.js></script><script src=//code.jquery.com/ui/1.11.4/jquery-ui.js></script>{% block css_js %}<script src=/static/mocktest/scripts/tinymce/tinymce.min.js></script>{% endblock %}<script src=https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.min.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/theme-monokai.js></script><script src=https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/mode-c_cpp.js></script><script>
+      function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,''])[1].replace(/\+/g, '%20'))||null;
+      }
+
+      /* jquery preserves line break */
+      $.valHooks.textarea = {
+        get: function( elem ) {            
+          return elem.value.replace( /\r?\n/g, "\r\n" );
+        }
+      };
+
+      
+
+
+      
+    </script></head><body class=test-screen><div class=mediachecker></div><div id=nprogress-div style="z-index: 1000;"></div>{% block testContent %} {% endblock %}<script src=/static/mocktest/scripts/test.min.js></script><script src=//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js></script>{% load compress %} {% compress js inline %}<script>
+      $(function(){
+        $(document).on({
+          ajaxStart: function() { NProgress.start(); },
+          ajaxStop: function() { NProgress.done(); }    
+        });
+      });
+    </script>{% block jquery %} {% endblock %} {% endcompress %}</body></html>

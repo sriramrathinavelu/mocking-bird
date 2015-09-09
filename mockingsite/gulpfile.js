@@ -39,6 +39,11 @@ var scriptsDestPath = 'static_prod/mocktest/scripts/'
 var cssSrcPath = 'static/mocktest/css/*.css'
 var cssDevDestPath = 'static/mocktest/styles/'
 var cssProdDestPath = 'static_prod/mocktest/styles/'
+var tinyMceSrcPath = 'static/mocktest/scripts/tinymce/**'
+var tinyMceProdPath = 'static_prod/mocktest/scripts/tinymce/'
+var tinyMceCssSrcPath = ['static/mocktest/styles/main.css', 'static/mocktest/styles/components.css']
+var tinyMceCssProdPath = 'static_prod/mocktest/styles'
+
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -123,6 +128,20 @@ gulp.task('moveScripts', function() {
 gulp.task('moveStyles', function() {
 	return gulp.src(stylesProdSrcPath)
 		.pipe(gulp.dest(cssProdDestPath));
+});
+
+
+gulp.task('tinyMce', ['moveTinyMce', 'copyTinyMceCss'], function(){
+});
+
+gulp.task('moveTinyMce', function() {
+	return gulp.src(tinyMceSrcPath)
+		.pipe(gulp.dest(tinyMceProdPath));
+});
+
+gulp.task('copyTinyMceCss', function() {
+	return gulp.src(tinyMceCssSrcPath)
+		.pipe(gulp.dest(tinyMceCssProdPath));
 });
 
 
@@ -218,5 +237,5 @@ gulp.task ('quick-deploy', [], function() {
 
 // Default Task -- Build Production files
 gulp.task('default', ['clean'], function(cb) {
-	runSequence(['styles', 'fetchStyles'], ['html', 'images', 'fonts'], ['moveScripts', 'moveStyles'], cb);
+	runSequence(['styles', 'fetchStyles'], ['html', 'images', 'fonts'], ['moveScripts', 'moveStyles', 'tinyMce'], cb);
 });
